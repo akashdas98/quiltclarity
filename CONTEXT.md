@@ -66,6 +66,9 @@ new work. Routed owners retain detailed evidence.
   registrar, purchase date, and canonical apex/www choice are not recorded.
 - Source identity replacement and purchased-origin configuration are complete.
   Cloudflare + Astro is the owner-selected hosting stack, reaffirmed 2026-10-01.
+  Assets-only Wrangler config and dry run are ready; domain NS already points
+  to Cloudflare. Account authorization awaits explicit OAuth scope approval
+  after automatic review rejected persistent account-write access.
   Establish Cloudflare account/project, deployment, and Search Console state. Previous pending
   labels are not evidence that external owner work remains undone.
 - Public GitHub repository `akashdas98/quiltclarity` is created and connected.
@@ -133,7 +136,7 @@ new work. Routed owners retain detailed evidence.
 
 ## Next Recommended Steps
 
-1. Connect the public GitHub repository to selected Cloudflare hosting for the activated
+1. Complete Cloudflare OAuth scope consent, then connect the public GitHub repository to selected Cloudflare hosting for the activated
    `quiltclarity.com` / `QuiltClarity` identity; provider selection and source activation are complete.
 2. Complete DNS/redirects, Search Console and public-origin acceptance once
    hosting is configured. Do not repeat search or purchase.
@@ -151,7 +154,8 @@ summary changes, retaining unresolved work, approvals and evidence limits.
   migration. Verify (215 tests) and installed Chrome/Edge print/browser gate pass.
   Owner reaffirmed Cloudflare + Astro; recorded the hosting decision and removed
   the stale provider-selection task. Public GitHub repo created and pushed;
-  hosted CI passes. Cloudflare account/project setup remains.
+  hosted CI passes. Cloudflare config/dry run is ready; deployment awaits
+  explicit account-permission consent. Cloudflare account/project setup remains.
 
 - 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
   recorded Feedback System as a planned V2 milestone, and removed the V1.1

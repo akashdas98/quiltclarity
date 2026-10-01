@@ -4,6 +4,26 @@
 
 - Updated: 2026-10-01.
 - Objective: Connect owner-selected Cloudflare hosting to the public GitHub repository; source activation and hosted CI are complete.
+- Cloudflare preparation, 2026-10-01: Owner authorized hosting/domain deployment.
+  Sol-medium prepared assets-only `wrangler.jsonc` and README operation; model
+  demand was static-host integration, effort demand bounded official routing
+  comparison. Parent owns account access, deployment and public-origin checks.
+  Acceptance: static output, trailing-slash routes, real 404, no backend,
+  validated config, authenticated upload, apex/www/HTTPS checks before launch.
+- Deployment evidence: Official Cloudflare Wrangler 4.145.0 is installed only
+  in ignored `tmp/cloudflare-cli`. `deploy --dry-run` passes, reading 92 existing
+  build assets with no upload or bindings. Config/output, format and whitespace
+  checks pass. Prior source/browser evidence is reused; local dev was retained.
+  Public NS lookup confirms `sean.ns.cloudflare.com` and `sara.ns.cloudflare.com`;
+  no apex A record was returned. Authenticated zone/application state is unknown.
+- Access boundary: Browser control failed twice; plugin search found no
+  Cloudflare integration. Wrangler is unauthenticated. Default OAuth login was
+  canceled to narrow permissions. Automatic approval review rejected persistent
+  account-write authorization because deployment intent did not specifically
+  approve those scopes. Await owner approval for account/user/zone read,
+  Workers/scripts/routes and certificate write, and offline refresh access,
+  then resume login. No Cloudflare resources, DNS, Git integration or production
+  deployment have changed.
 - GitHub release checkpoint, 2026-10-01: Public repository created at
   <https://github.com/akashdas98/quiltclarity>, with `origin` connected. Reviewed
   snapshot `b500806` and checkpoint `d362c10` were pushed on `main` after the
@@ -217,7 +237,8 @@
 - Unfinished: Establish actual Cloudflare hosting, DNS/redirects, Search Console,
   and public-origin state for the now activated identity. Registrar and renewal
   details/report location remain unrecorded; do not infer incomplete owner work.
-- Next action: Connect the public repository to selected Cloudflare
+- Next action: Obtain explicit Cloudflare OAuth scope approval and account
+  authorization, then connect the public repository to selected Cloudflare
   hosting, then prepare production deployment and public-origin checks. Trademark search, purchase,
   and local source activation are complete; no live deployment was performed.
 

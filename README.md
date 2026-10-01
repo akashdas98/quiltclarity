@@ -79,14 +79,18 @@ passes. The Cloudflare account/application still needs to be connected. The
 | Preview indexing     | `PUBLIC_ROBOTS_NOINDEX=true` on preview builds |
 | Production indexing  | `PUBLIC_ROBOTS_NOINDEX=false`                  |
 
-Cloudflare's current recommended route for a new project is Workers Static
-Assets. Its Astro guide includes an assets-only configuration pointing at
-`./dist`; retain static output. Follow the
-[official Astro deployment instructions](https://docs.astro.build/en/guides/deploy/cloudflare/)
-once account/project access is established. Cloudflare Pages also supports
-the existing build and `dist` output through its
-[Astro deployment settings](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/).
-The provider choice does not establish that either application already exists.
+`wrangler.jsonc` configures a Workers Static Assets deployment of `./dist`.
+Build with `npm run build`, then deploy after connecting the Cloudflare account:
+
+```powershell
+npm exec --yes --package=wrangler@4.145.0 -- wrangler deploy
+```
+
+Wrangler is pinned for reproducibility and is deployment tooling only. Cloudflare's
+[Astro deployment guide](https://docs.astro.build/en/guides/deploy/cloudflare/)
+documents this assets-only flow. Directory routes retain their trailing slash,
+and unknown routes serve Astro's `404.html` with a 404 status under Cloudflare's
+[static asset routing](https://developers.cloudflare.com/workers/static-assets/routing/static-site-generation/).
 
 After the repository release gate passes, configure the Cloudflare application
 and purchased domain, verify apex/www redirects and HTTPS, then complete

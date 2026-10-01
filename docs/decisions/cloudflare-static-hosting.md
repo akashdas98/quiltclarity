@@ -21,6 +21,13 @@ checkpoint. It preserves the locked static architecture and the purchased
 
 ## Consequences
 
+The deployment implementation uses Workers Static Assets via `wrangler.jsonc`,
+with automatic trailing-slash routing and the built `404.html` returned with
+404 status. It contains no Worker script, SSR adapter or application bindings.
+Wrangler 4.145.0 local dry run passes on 2026-10-01; account authorization and
+actual deployment remain pending. Local Wrangler output and secret variable
+files are ignored by Git.
+
 README owns deployment operation; launch readiness owns outstanding account,
 repository, DNS and public-origin checks. Source activation and local release
 verification are already complete. No account, remote, DNS, external application,

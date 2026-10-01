@@ -4,6 +4,7 @@ node_modules/
 # Astro and build output
 .astro/
 dist/
+.wrangler/
 
 # Test and tooling output
 coverage/
@@ -15,6 +16,8 @@ coverage/
 .env
 .env.*
 !.env.example
+.dev.vars
+.dev.vars.*
 
 # Logs
 *.log
