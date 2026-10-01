@@ -1,0 +1,82 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  { name: 'quiltWidth', label: 'Quilt width', value: 60, unit: 'length' },
+  { name: 'quiltLength', label: 'Quilt length', value: 72, unit: 'length' },
+  {
+    name: 'stripWidth',
+    label: 'Binding strip width',
+    value: 2.5,
+    unit: 'length',
+  },
+  {
+    name: 'usableWidth',
+    label: 'Usable fabric width',
+    value: 40,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'joiningAllowance',
+    label: 'Joining and finishing allowance',
+    value: 12,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'safetyAllowancePercent',
+    label: 'Safety allowance',
+    value: 5,
+    unit: 'percent',
+    advanced: true,
+  },
+  {
+    name: 'purchaseIncrement',
+    label: 'Purchase increment',
+    value: 0.125,
+    unit: 'purchase',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="binding"
+  title="Quilt Binding Calculator"
+  description="Find the binding length, number of width-of-fabric strips, and purchase yardage."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      This is for straight-grain or cross-grain double-fold binding, not bias
+      binding. Strips are cut across the entered usable fabric width and joined
+      end to end. The editable joining allowance covers joins, corners, and
+      finishing overlap.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Quilt perimeter is twice the width plus twice the length. The joining
+      allowance is added, the result is divided by usable width, and the strip
+      count is rounded up. Strip count multiplied by cut strip width gives the
+      fabric length before safety and upward purchase rounding.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      A 60 × 80 inch quilt has a 280-inch perimeter. Add 12 inches, then divide
+      292 by 40 usable inches: eight whole strips. At 2½ inches wide, those
+      strips consume 20 inches before any safety allowance or shop rounding.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/calculators/borders/">Quilt border calculator</a></li>
+    <li>
+      <a href="/guides/width-of-fabric/">Understanding width of fabric</a>
+    </li>
+    <li>
+      <a href="/calculators/fabric-yardage/">Fabric yardage calculator</a>
+    </li>
+  </ul>
+</CalculatorPage>

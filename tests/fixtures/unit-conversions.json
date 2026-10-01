@@ -1,0 +1,26 @@
+[
+  {
+    "label": "one inch",
+    "value": 1,
+    "unit": "inch",
+    "millimetres": 25.4
+  },
+  {
+    "label": "one yard",
+    "value": 1,
+    "unit": "yard",
+    "millimetres": 914.4
+  },
+  {
+    "label": "one metre",
+    "value": 1,
+    "unit": "metre",
+    "millimetres": 1000
+  },
+  {
+    "label": "G08 usable width",
+    "value": 101.6,
+    "unit": "centimetre",
+    "millimetres": 1016
+  }
+]

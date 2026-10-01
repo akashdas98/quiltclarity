@@ -1,0 +1,62 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  { name: 'quiltWidth', label: 'Quilt width', value: 60, unit: 'length' },
+  { name: 'quiltLength', label: 'Quilt length', value: 80, unit: 'length' },
+  {
+    name: 'overagePerSide',
+    label: 'Batting overage per side',
+    value: 4,
+    unit: 'length',
+    hint: 'Editable longarm-oriented default; confirm your quilting setup.',
+  },
+  {
+    name: 'rollWidth',
+    label: 'Batting roll or precut width (optional)',
+    value: 72,
+    unit: 'length',
+    optional: true,
+  },
+  {
+    name: 'rotationAllowed',
+    label: 'Allow rotating the batting on the roll',
+    value: true,
+    kind: 'checkbox',
+  },
+];
+---
+
+<CalculatorPage
+  calculator="batting"
+  title="Quilt Batting Calculator"
+  description="Find the batting size with overage and check how much to cut from an optional roll or precut width."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Overage is added to all four sides. The editable 4-inch default is a
+      longarm-oriented planning convenience, not a universal rule. This tool
+      does not calculate pieced batting.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      The calculator adds twice the side overage to each quilt dimension. When a
+      roll width is supplied, it checks both allowed orientations and reports
+      the one requiring less linear length.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      A 60 × 80 inch quilt with 4 inches per side needs batting 68 × 88 inches.
+      On a 72-inch roll, place the 68-inch dimension across the roll and cut 88
+      inches of linear length.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/guides/how-much-extra-batting/">Batting overage guide</a></li>
+    <li><a href="/calculators/quilt-backing/">Quilt backing calculator</a></li>
+    <li><a href="/calculators/quilt-binding/">Quilt binding calculator</a></li>
+  </ul>
+</CalculatorPage>

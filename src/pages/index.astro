@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const description =
+  'Turn an existing quilt cut list and real fabric on hand into a practical shopping and cutting plan, with focused calculators for common quilting tasks.';
+---
+
+<BaseLayout
+  title="Plan Quilt Fabric You Have and What to Buy — QuiltClarity"
+  description={description}
+>
+  <div class="page">
+    <section class="hero home-hero">
+      <p class="eyebrow">Practical quilting tools</p>
+      <h1>Plan the Fabric for the Quilt You’re Already Making</h1>
+      <p class="lede">
+        Bring the rectangular cut requirements from your pattern, notes, or
+        spreadsheet. Add fabric you already own, then see what to use, what to
+        buy, and how to cut the selected plan.
+      </p>
+      <p>
+        The planner reconciles all pieces for each fabric together and keeps
+        pattern comparison separate from your stock-aware shopping shortfall.
+      </p>
+      <div class="actions">
+        <a class="button" href="/fabric-cutting-planner/"
+          >Plan My Project Fabric</a
+        >
+        <a class="button secondary" href="/calculators/">Use a Calculator</a>
+      </div>
+      <p class="trust-line">
+        Free · No account · Editable quilting assumptions
+      </p>
+    </section>
+    <section aria-labelledby="tools-heading">
+      <h2 id="tools-heading">Start with the job in front of you</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Project fabric planner</h3>
+          <p>
+            Reconcile a cut list across measured remnants and any new fabric,
+            then get a shopping list, named stock allocations, instructions, and
+            diagrams from the selected placements.
+          </p>
+          <a href="/fabric-cutting-planner/">Create a fabric cutting plan</a>
+        </article>
+        <article class="card">
+          <h3>Fabric, backing, and batting</h3>
+          <p>
+            Estimate repeated-piece yardage, compare backing panels, or check
+            batting size and roll orientation.
+          </p>
+          <a href="/calculators/quilt-backing/"
+            >Calculate quilt backing yardage</a
+          >
+        </article>
+        <article class="card">
+          <h3>Eleven focused calculators</h3>
+          <p>
+            Calculate binding, HSTs, QSTs, Flying Geese, blocks, borders,
+            sashing, or how many pieces fit real stock.
+          </p>
+          <a href="/calculators/">Choose a quilting calculator</a>
+        </article>
+      </div>
+    </section>
+    <section class="content-section" aria-labelledby="workflow-heading">
+      <h2 id="workflow-heading">What you need and what you get</h2>
+      <p>
+        Start with rectangular cut or finished sizes, fabric assignments, and
+        optional measured stock. QuiltClarity returns a buy-now list, exact
+        material allocations, practical leftovers, warnings, and accessible
+        visual and text cutting plans. Calculations run locally with no account.
+      </p>
+      <p>
+        The bounded deterministic optimizer favors valid, practical cuts; it
+        does not claim a mathematically proven global minimum. <a
+          href="/how-it-works/">See how the workflow works</a
+        >.
+      </p>
+    </section>
+    <section class="content-section" aria-labelledby="learn-heading">
+      <h2 id="learn-heading">Understand the assumptions</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Usable width of fabric</h3>
+          <p>
+            Plan with the width left after selvages, not just the bolt label.
+          </p>
+          <a href="/guides/width-of-fabric/">Learn what WOF means</a>
+        </article>
+        <article class="card">
+          <h3>Finished and cut sizes</h3>
+          <p>See when seam allowance belongs in a piece measurement.</p>
+          <a href="/guides/finished-vs-cut-size/"
+            >Compare finished and cut size</a
+          >
+        </article>
+        <article class="card">
+          <h3>Transparent methodology</h3>
+          <p>Review the defaults, formulas, rounding, and optimizer limits.</p>
+          <a href="/methodology/">Read how QuiltClarity calculates results</a>
+        </article>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

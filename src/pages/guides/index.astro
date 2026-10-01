@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const startHere = [
+  [
+    'Quick Start: plan one project',
+    'Follow one small project from blank form to Buy now and the cutting plan.',
+    '/guides/getting-started/',
+  ],
+  [
+    'Full Project Planner Tutorial',
+    'Look up every important field, setting, result, warning, and print step.',
+    '/guides/project-planner-tutorial/',
+  ],
+  [
+    'Enter a cut list',
+    'Build rows quickly or paste a spreadsheet safely.',
+    '/guides/enter-a-cut-list/',
+  ],
+  [
+    'Add fabric you already have',
+    'Measure remnants as real, separate rectangles.',
+    '/guides/add-fabric-you-have/',
+  ],
+  [
+    'Check pattern yardage',
+    'Keep Pattern says, Fresh-fabric plan, and Buy now distinct.',
+    '/guides/check-pattern-yardage/',
+  ],
+  [
+    'Read your shopping plan',
+    'Understand what to purchase and why.',
+    '/guides/read-your-shopping-plan/',
+  ],
+  [
+    'Read your cutting plan',
+    'Move from allocations to practical cutting instructions.',
+    '/guides/read-your-cutting-plan/',
+  ],
+  [
+    'Print your project plan',
+    'Take a complete grayscale-safe plan to the cutting table.',
+    '/guides/print-your-project-plan/',
+  ],
+] as const;
+
+const workflows = [
+  [
+    'Turn a Pattern Cut List into One Plan',
+    'Compile cuts without recreating the quilt design.',
+    '/guides/turn-pattern-cut-list-into-plan/',
+  ],
+  [
+    'Do I Have Enough Fabric?',
+    'Prove whether measured stock fits the required rectangles.',
+    '/guides/do-i-have-enough-fabric/',
+  ],
+  [
+    'Use Remnants Before Buying More',
+    'Allocate project-local remnants, then buy the planned shortfall.',
+    '/guides/use-remnants-before-buying/',
+  ],
+] as const;
+
+const references = [
+  [
+    'Width of fabric',
+    'Measure usable width after selvages.',
+    '/guides/width-of-fabric/',
+  ],
+  [
+    'Finished vs cut size',
+    'Know when seam allowance is already included.',
+    '/guides/finished-vs-cut-size/',
+  ],
+  [
+    'Quilt seam allowance',
+    'Apply seam allowance consistently.',
+    '/guides/quilt-seam-allowance/',
+  ],
+  [
+    'Extra backing',
+    'Add overage and confirm longarm requirements.',
+    '/guides/how-much-extra-backing/',
+  ],
+  [
+    'Extra batting',
+    'Plan batting overage and roll orientation.',
+    '/guides/how-much-extra-batting/',
+  ],
+  [
+    'Calculate quilt fabric',
+    'Move from piece counts to purchase yardage.',
+    '/guides/how-to-calculate-quilt-fabric/',
+  ],
+  [
+    'Directional fabric cutting',
+    'Keep motifs and grain direction aligned.',
+    '/guides/directional-fabric-cutting/',
+  ],
+  [
+    'Fat quarter size',
+    'Use the actual rectangular dimensions.',
+    '/guides/fat-quarter-size/',
+  ],
+] as const;
+---
+
+<BaseLayout
+  title="Learn QuiltClarity: Guides for Planning Fabric and Cuts — QuiltClarity"
+  description="Start with a guided QuiltClarity project, learn every planner field and result, then explore workflow and quilting-reference guides."
+>
+  <div class="page guides-hub">
+    <header class="hero compact-hero">
+      <p class="eyebrow">Guides</p>
+      <h1>Learn QuiltClarity from your first cut list to your cutting table</h1>
+      <p class="lede">
+        Start with one short example, then use the full tutorial whenever a
+        field, result, or cutting-plan step needs a closer explanation.
+      </p>
+      <div class="actions">
+        <a class="button" href="/guides/getting-started/"
+          >Start the Quick Start</a
+        >
+        <a class="button secondary" href="/guides/project-planner-tutorial/"
+          >Open the full tutorial</a
+        >
+      </div>
+    </header>
+
+    <section aria-labelledby="start-here-heading">
+      <p class="eyebrow">Start Here</p>
+      <h2 id="start-here-heading">Learn QuiltClarity</h2>
+      <p>Teach yourself in the same order you use the planner.</p>
+      <div class="card-grid guide-card-grid">
+        {
+          startHere.map(([title, description, href], index) => (
+            <article class:list={['card', index < 2 && 'featured-guide-card']}>
+              <p class="guide-step">
+                {index < 2 ? `Step ${index + 1}` : 'Focused guide'}
+              </p>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <a href={href}>Read guide</a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="workflow-heading">
+      <p class="eyebrow">Common Workflows</p>
+      <h2 id="workflow-heading">Start with the job you need to finish</h2>
+      <div class="card-grid guide-card-grid">
+        {
+          workflows.map(([title, description, href]) => (
+            <article class="card">
+              <>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <a href={href}>Follow workflow</a>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="reference-heading">
+      <p class="eyebrow">Quilting Reference</p>
+      <h2 id="reference-heading">Check a measurement or convention</h2>
+      <p>
+        These references explain the quilting concepts behind the fields. They
+        are not prerequisites for the Quick Start.
+      </p>
+      <div class="card-grid guide-card-grid">
+        {
+          references.map(([title, description, href]) => (
+            <article class="card">
+              <>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <a href={href}>Read reference</a>
+              </>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

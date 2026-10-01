@@ -1,0 +1,90 @@
+---
+import type { CalculatorField } from './calculator-types';
+import ContextHelp from './ContextHelp.astro';
+import { getCalculatorFieldHelp } from '../lib/help';
+interface Props {
+  field: CalculatorField;
+  calculator: string;
+}
+const { field, calculator } = Astro.props;
+const id = `${calculator}-${field.name}`;
+const measure =
+  field.unit === 'length' || field.unit === 'purchase' ? field.unit : undefined;
+const helpKey = getCalculatorFieldHelp(calculator, field.name);
+---
+
+{
+  field.kind === 'checkbox' ? (
+    <div class="check-field">
+      <>
+        <input
+          id={id}
+          name={field.name}
+          type="checkbox"
+          checked={Boolean(field.value)}
+        />
+        <span class="help-label">
+          <label for={id}>{field.label}</label>
+          {helpKey && <ContextHelp helpKey={helpKey} />}
+        </span>
+      </>
+    </div>
+  ) : field.kind === 'select' ? (
+    <div class="field">
+      <div class="field-label-line">
+        <span class="help-label">
+          <label for={id}>{field.label}</label>
+          {helpKey && <ContextHelp helpKey={helpKey} />}
+        </span>
+      </div>
+      <select id={id} name={field.name}>
+        {field.options?.map((option) => (
+          <option value={option.value} selected={option.value === field.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {field.hint && <small>{field.hint}</small>}
+      <small class="field-error" data-field-error={field.name} />
+    </div>
+  ) : (
+    <div class="field">
+      <div class="field-label-line">
+        <span class="help-label">
+          <label for={id}>
+            <>
+              {field.label}
+              {field.unit === 'length' && (
+                <span>
+                  {' '}
+                  (<span data-unit-label>in</span>)
+                </span>
+              )}
+              {field.unit === 'purchase' && (
+                <span>
+                  {' '}
+                  (<span data-purchase-unit>yd</span>)
+                </span>
+              )}
+              {field.unit === 'percent' && <span> (%)</span>}
+            </>
+          </label>
+          {helpKey && <ContextHelp helpKey={helpKey} />}
+        </span>
+      </div>
+      <input
+        id={id}
+        name={field.name}
+        type="number"
+        min="0"
+        step={field.unit === 'count' ? '1' : 'any'}
+        value={field.value as number | string}
+        data-measure={measure}
+        required={!field.optional}
+        inputmode={field.unit === 'count' ? 'numeric' : 'decimal'}
+      />
+      {field.hint && <small>{field.hint}</small>}
+      <small class="field-error" data-field-error={field.name} />
+    </div>
+  )
+}

@@ -1,0 +1,83 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'finishedSize',
+    label: 'Finished HST size',
+    value: 3,
+    unit: 'length',
+  },
+  { name: 'quantity', label: 'HSTs needed', value: 24, unit: 'count' },
+  {
+    name: 'method',
+    label: 'Method',
+    value: 'two-at-a-time',
+    kind: 'select',
+    options: [
+      { value: 'two-at-a-time', label: '2 at a time' },
+      { value: 'four-at-a-time', label: '4 at a time' },
+      { value: 'eight-at-a-time', label: '8 at a time' },
+    ],
+  },
+  {
+    name: 'sizingMode',
+    label: 'Starting-square size',
+    value: 'trim-friendly',
+    kind: 'select',
+    options: [
+      { value: 'trim-friendly', label: 'Trim-friendly' },
+      { value: 'standard', label: 'Standard' },
+    ],
+  },
+  {
+    name: 'seamAllowance',
+    label: 'Seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="hst"
+  title="Half-Square Triangle Calculator"
+  description="Size starting squares and batches for 2-, 4-, or 8-at-a-time HST methods."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Enter the HST’s finished size after it is sewn into the quilt.
+      Trim-friendly mode adds practical squaring room beyond the Standard size.
+      Four-at-a-time construction uses the entered perimeter seam allowance and
+      leaves bias grain on the outer edges.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Each method has a fixed yield of 2, 4, or 8 HSTs per batch and its own
+      starting-square formula. The calculator rounds starting sizes as required,
+      rounds batch count upward, and reports both total output and unavoidable
+      extras.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      To make 24 finished 3-inch HSTs two at a time in trim-friendly mode, cut
+      two 4-inch starting squares for each batch. Twelve batches produce exactly
+      24 HSTs; square each unit to 3½ inches unfinished.
+    </p>
+  </div>
+  <ul slot="related">
+    <li>
+      <a href="/guides/finished-vs-cut-size/">Finished size versus cut size</a>
+    </li>
+    <li>
+      <a href="/guides/quilt-seam-allowance/">Quilt seam allowance guide</a>
+    </li>
+    <li>
+      <a href="/calculators/quilt-block-count/">Quilt block count calculator</a>
+    </li>
+  </ul>
+</CalculatorPage>

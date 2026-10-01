@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="QuiltClarity Calculation Methodology and Defaults"
+  description="Review QuiltClarity's units, seam and usable-width rules, purchase rounding, calculator formulas, optimizer priorities, and test approach."
+>
+  <article class="page article-page">
+    <header class="hero compact-hero">
+      <p class="eyebrow">Methodology</p>
+      <h1>How QuiltClarity calculates results</h1>
+      <p class="lede">
+        Every displayed recommendation comes from explicit inputs, shared domain
+        rules, and deterministic calculations that can be checked independently.
+      </p>
+    </header>
+    <div class="article-body">
+      <section>
+        <h2>Units and dimensions</h2>
+        <ul>
+          <li>
+            All calculations use millimetres internally with exact conversion
+            constants.
+          </li>
+          <li>
+            Usable WOF means fabric remaining after selvages; the editable
+            default is 40 inches.
+          </li>
+          <li>
+            Finished rectangle dimensions gain seam allowance on both opposite
+            edges. Cut dimensions do not.
+          </li>
+          <li>
+            Piece-level orientation and rotation choices override fabric
+            defaults.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Fabric recommendations</h2>
+        <p>
+          Calculators first determine the layout or construction length, then
+          add the selected safety allowance. Purchase length always rounds
+          upward to the selected shop increment—never to the nearest increment
+          or down.
+        </p>
+        <p>
+          Backing compares every valid panel direction and reports the
+          lowest-yardage candidate without claiming it is always aesthetically
+          preferable. Borders and sashing deduct fabric consumed by joins before
+          counting WOF capacity.
+        </p>
+      </section>
+      <section>
+        <h2>Cutting planner priorities</h2>
+        <ol>
+          <li>
+            Produce a valid plan that accounts for every requested piece exactly
+            once.
+          </li>
+          <li>Prefer practical strip-based cutting.</li>
+          <li>Prefer less fabric length, then lower cut complexity.</li>
+          <li>
+            Use stable tie-breaks so identical inputs produce identical output.
+          </li>
+        </ol>
+        <p>
+          Large valid inputs use a simpler grouped heuristic with a visible
+          warning so browser work stays bounded. The diagram projects the chosen
+          optimizer placements; it does not calculate a second layout.
+        </p>
+      </section>
+      <section>
+        <h2>Testing and source conventions</h2>
+        <p>
+          Automated golden fixtures and invariants cover conversions, placement
+          bounds, non-overlap, orientation, purchase bounds, determinism,
+          backing coverage, HST yields, and joined-strip capacity. Conventions
+          that vary in practice remain editable and are described as defaults.
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://help.prequilt.com/prequilt-101/fabric-calculator/calculations-explained/fabric-cutting-diagrams/"
+              >PreQuilt cutting-diagram explanation</a
+            >
+          </li>
+          <li>
+            <a href="https://quiltkeeperstudio.com/calculators/backing"
+              >QuiltKeeper backing conventions</a
+            >
+          </li>
+          <li>
+            <a href="https://haileystitches.com/half-square-triangle-charts/"
+              >Hailey Stitches HST method reference</a
+            >
+          </li>
+        </ul>
+        <p>
+          These practical references inform convention review; QuiltClarity's
+          locked, test-backed calculation contracts control the actual
+          implementation.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

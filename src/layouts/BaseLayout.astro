@@ -1,0 +1,232 @@
+---
+import '../styles/global.css';
+import { SITE_NAME } from '../lib/site-identity';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  pageType?: 'website' | 'article' | 'application';
+  index?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  pageType = 'website',
+  index = true,
+} = Astro.props;
+const canonicalUrl = new URL(canonicalPath, Astro.site ?? Astro.url.origin);
+const searchConsoleVerification =
+  import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+const segments = canonicalPath.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { name: 'Home', item: new URL('/', canonicalUrl).href },
+  ...segments.map((segment, index) => ({
+    name: segment
+      .split('-')
+      .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+      .join(' '),
+    item: new URL(`/${segments.slice(0, index + 1).join('/')}/`, canonicalUrl)
+      .href,
+  })),
+];
+const structuredData = [
+  ...(canonicalPath === '/'
+    ? [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: SITE_NAME,
+          alternateName: `${SITE_NAME} Fabric Planner`,
+          url: canonicalUrl.href,
+          description,
+        },
+      ]
+    : [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbItems.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            ...item,
+          })),
+        },
+      ]),
+  ...(pageType === 'application'
+    ? [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: title
+            .replace(` — ${SITE_NAME}`, '')
+            .replace(` | ${SITE_NAME}`, ''),
+          url: canonicalUrl.href,
+          description,
+          applicationCategory: 'UtilitiesApplication',
+          operatingSystem: 'Any',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        },
+      ]
+    : []),
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta
+      name="robots"
+      content={index && import.meta.env.PUBLIC_ROBOTS_NOINDEX !== 'true'
+        ? 'index, follow'
+        : 'noindex, nofollow'}
+    />
+    <meta name="theme-color" content="#fffdf8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {
+      searchConsoleVerification && (
+        <meta
+          name="google-site-verification"
+          content={searchConsoleVerification}
+        />
+      )
+    }
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonicalUrl} />
+    <script is:inline>
+      (() => {
+        const storageKey = 'quiltclarity:theme';
+        const legacyStorageKey = 'quilter:theme';
+        const root = document.documentElement;
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        let savedTheme = null;
+
+        try {
+          let stored = localStorage.getItem(storageKey);
+          if (stored === null) {
+            const legacy = localStorage.getItem(legacyStorageKey);
+            if (legacy === 'light' || legacy === 'dark') {
+              stored = legacy;
+              // Apply the old choice even if copying it to the new key fails.
+              savedTheme = legacy;
+              localStorage.setItem(storageKey, legacy);
+            }
+          }
+          if (stored === 'light' || stored === 'dark') savedTheme = stored;
+        } catch {
+          // Theme selection remains usable when browser storage is unavailable.
+        }
+
+        const applyTheme = (theme, persist = false) => {
+          root.dataset.theme = theme;
+          const themeColor = document.querySelector('meta[name="theme-color"]');
+          if (themeColor) {
+            themeColor.setAttribute(
+              'content',
+              theme === 'dark' ? '#131014' : '#fffdf8',
+            );
+          }
+          const toggle = document.querySelector('#theme-toggle');
+          if (toggle) {
+            root.dataset.themeReady = '';
+            const dark = theme === 'dark';
+            toggle.setAttribute('aria-checked', String(dark));
+            toggle.setAttribute(
+              'title',
+              dark ? 'Use light mode' : 'Use dark mode',
+            );
+          }
+          if (persist) {
+            savedTheme = theme;
+            try {
+              localStorage.setItem(storageKey, theme);
+            } catch {
+              // The active theme still applies for this page view.
+            }
+          }
+        };
+
+        applyTheme(savedTheme ?? (systemTheme.matches ? 'dark' : 'light'));
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const toggle = document.querySelector('#theme-toggle');
+          if (!(toggle instanceof HTMLButtonElement)) return;
+          applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+          toggle.addEventListener('click', () => {
+            applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
+          });
+          systemTheme.addEventListener('change', (event) => {
+            if (!savedTheme) applyTheme(event.matches ? 'dark' : 'light');
+          });
+          window.addEventListener('storage', (event) => {
+            if (
+              event.key === storageKey &&
+              (event.newValue === 'light' || event.newValue === 'dark')
+            ) {
+              savedTheme = event.newValue;
+              applyTheme(event.newValue);
+            }
+          });
+        });
+      })();
+    </script>
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header no-print">
+      <a class="brand" href="/">{SITE_NAME}</a>
+      <div class="header-actions">
+        <nav aria-label="Main navigation">
+          <a href="/fabric-cutting-planner/">Cutting planner</a>
+          <a href="/calculators/">Calculators</a>
+          <a href="/guides/">Guides</a>
+          <a href="/about/">About</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label="Dark mode"
+          title="Use dark mode"
+        >
+          <span class="theme-toggle-thumb" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer no-print">
+      <div>
+        <strong>{SITE_NAME}</strong>
+        <p>Practical quilting math. No account, uploads, or cloud storage.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/how-it-works/">How it works</a>
+        <a href="/about/">About</a>
+        <a href="/methodology/">Methodology</a>
+        <a href="/corrections/">Feedback</a>
+      </nav>
+    </footer>
+    <script>
+      import '../scripts/contextual-help';
+    </script>
+  </body>
+</html>

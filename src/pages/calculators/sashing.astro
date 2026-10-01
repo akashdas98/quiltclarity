@@ -1,0 +1,108 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  { name: 'columns', label: 'Block columns', value: 5, unit: 'count' },
+  { name: 'rows', label: 'Block rows', value: 6, unit: 'count' },
+  {
+    name: 'finishedBlockWidth',
+    label: 'Finished block width',
+    value: 12,
+    unit: 'length',
+  },
+  {
+    name: 'finishedBlockHeight',
+    label: 'Finished block height',
+    value: 12,
+    unit: 'length',
+  },
+  {
+    name: 'finishedSashingWidth',
+    label: 'Finished sashing width',
+    value: 2,
+    unit: 'length',
+  },
+  {
+    name: 'seamAllowance',
+    label: 'Seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'usableWidth',
+    label: 'Usable fabric width',
+    value: 40,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'handlingBuffer',
+    label: 'Handling/cutting buffer',
+    value: 10,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'joinSeamAllowance',
+    label: 'Join seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'safetyAllowancePercent',
+    label: 'Safety allowance',
+    value: 5,
+    unit: 'percent',
+    advanced: true,
+  },
+  {
+    name: 'purchaseIncrement',
+    label: 'Purchase increment',
+    value: 0.125,
+    unit: 'purchase',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="sashing"
+  title="Quilt Sashing Calculator"
+  description="Plan row-wise sashing pieces, strips, yardage, and finished quilt size."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Row-wise sashing · No cornerstones · No outer sashing. Finished block and
+      sashing sizes gain seam allowance when converted to cut sizes.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Vertical pieces equal the gaps in every block row. Horizontal pieces span
+      each completed row and sit between rows. The calculator totals their cut
+      lengths, includes the fabric consumed by WOF-strip joins, adds a separate
+      handling/cutting buffer, counts WOF strips, and rounds the purchase
+      upward.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      Five columns by six rows of finished 12-inch blocks with 2-inch sashing
+      finish at 68 × 82 inches. The layout needs 24 vertical sashing pieces and
+      five horizontal rows; those 68-inch horizontal pieces require joins on
+      40-inch usable fabric.
+    </p>
+  </div>
+  <ul slot="related">
+    <li>
+      <a href="/calculators/quilt-block-count/">Quilt block count calculator</a>
+    </li>
+    <li><a href="/calculators/borders/">Quilt border calculator</a></li>
+    <li>
+      <a href="/guides/quilt-seam-allowance/">Quilt seam allowance guide</a>
+    </li>
+  </ul>
+</CalculatorPage>

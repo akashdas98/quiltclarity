@@ -1,0 +1,106 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  { name: 'quantity', label: 'Number of pieces', value: 24, unit: 'count' },
+  { name: 'width', label: 'Piece width', value: 3.5, unit: 'length' },
+  { name: 'height', label: 'Piece height', value: 6.5, unit: 'length' },
+  {
+    name: 'dimensionMode',
+    label: 'Entered size',
+    value: 'cut',
+    kind: 'select',
+    options: [
+      { value: 'cut', label: 'Cut size' },
+      { value: 'finished', label: 'Finished size' },
+    ],
+  },
+  {
+    name: 'usableWidth',
+    label: 'Usable fabric width',
+    value: 40,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'seamAllowance',
+    label: 'Seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'safetyAllowancePercent',
+    label: 'Safety allowance',
+    value: 5,
+    unit: 'percent',
+    advanced: true,
+  },
+  {
+    name: 'purchaseIncrement',
+    label: 'Purchase increment',
+    value: 0.125,
+    unit: 'purchase',
+    advanced: true,
+  },
+  {
+    name: 'directional',
+    label: 'Directional fabric',
+    value: false,
+    kind: 'checkbox',
+    advanced: true,
+  },
+  {
+    name: 'rotationAllowed',
+    label: 'Allow rotation',
+    value: true,
+    kind: 'checkbox',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="fabric-yardage"
+  title="Fabric Yardage Calculator"
+  description="Estimate fabric for repeated rectangular pieces using a practical row layout."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Piece dimensions can be cut sizes or finished sizes. Finished sizes gain
+      seam allowance on every edge. Usable width excludes selvages; directional
+      fabric prevents rotation even when rotation is otherwise allowed.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      The calculator tests every legal row orientation, counts whole pieces
+      across the usable width, and rounds the required row count upward. It uses
+      the shorter valid layout, adds the selected safety percentage, then rounds
+      the purchase up to the selected shop increment.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      For 24 cut pieces at 3½ × 6½ inches on 40 inches of usable fabric,
+      rotation allows six pieces across in four 3½-inch rows. That is 14 inches
+      before the safety allowance; with 5% safety and eighth-yard purchasing,
+      buy ½ yard.
+    </p>
+  </div>
+  <ul slot="related">
+    <li>
+      <a href="/guides/how-to-calculate-quilt-yardage/"
+        >How quilt yardage is calculated</a
+      >
+    </li>
+    <li>
+      <a href="/guides/finished-vs-cut-size/">Finished size versus cut size</a>
+    </li>
+    <li>
+      <a href="/guides/width-of-fabric/">Understanding usable width of fabric</a
+      >
+    </li>
+  </ul>
+</CalculatorPage>

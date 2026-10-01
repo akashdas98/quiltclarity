@@ -1,0 +1,74 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  index={false}
+  title="Feedback system coming soon — QuiltClarity"
+  description="QuiltClarity's feedback system is coming soon. In the meantime, explore the guides and calculation methodology."
+>
+  <article class="page article-page feedback-page">
+    <header class="hero feedback-hero">
+      <p class="eyebrow">Feedback</p>
+      <h1>Feedback system coming soon</h1>
+      <p class="lede">
+        We are preparing a way to share feedback about QuiltClarity. Feedback
+        submissions are not available yet.
+      </p>
+    </header>
+
+    <section class="feedback-next" aria-labelledby="feedback-next-heading">
+      <h2 id="feedback-next-heading">Explore in the meantime</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Find a guide</h3>
+          <p>
+            Step through common quilting questions and learn how to use the
+            tools.
+          </p>
+          <a href="/guides/">Browse the guides</a>
+        </div>
+        <div class="card">
+          <h3>Check the calculations</h3>
+          <p>See the assumptions and rules behind QuiltClarity's results.</p>
+          <a href="/methodology/">Read the methodology</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .feedback-page {
+    padding-block: clamp(2rem, 7vw, 5rem);
+  }
+
+  .feedback-hero {
+    max-width: 45rem;
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+  }
+
+  .feedback-next {
+    max-width: 48rem;
+  }
+
+  .feedback-next h2 {
+    margin-bottom: 1rem;
+  }
+
+  .feedback-next .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feedback-next .card > * {
+    margin: 0;
+  }
+
+  .feedback-next .card a {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-weight: 700;
+  }
+</style>

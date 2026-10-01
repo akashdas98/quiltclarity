@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About QuiltClarity — Transparent Quilt Fabric Math"
+  description="Learn what QuiltClarity calculates, how it protects project privacy, and why every important quilting assumption remains visible."
+>
+  <article class="page article-page">
+    <header class="hero compact-hero">
+      <p class="eyebrow">About QuiltClarity</p>
+      <h1>Quilting calculations you can inspect</h1>
+      <p class="lede">
+        QuiltClarity is a free, static-first set of tools for fabric yardage,
+        rectangular cutting plans, and common quilt-construction calculations.
+      </p>
+    </header>
+    <div class="article-body">
+      <section>
+        <h2>What the site does</h2>
+        <p>
+          The fabric cutting planner turns piece requirements into a shopping
+          quantity, cutting list, and diagram from one deterministic layout.
+          Seven focused calculators handle repeated-piece yardage, backing,
+          binding, HSTs, block count, borders, and sashing.
+        </p>
+        <p>
+          Important defaults—such as usable width, seam allowance, rotation,
+          safety allowance, backing overage, and purchase increment—are visible
+          and editable. Results explain the assumptions used.
+        </p>
+      </section>
+      <section>
+        <h2>What the site does not claim</h2>
+        <p>
+          The cutting planner uses a bounded practical heuristic. It prioritizes
+          valid, strip-friendly cuts and deterministic results; it does not
+          claim to prove the global minimum fabric use. Calculator defaults are
+          planning conventions, not substitutes for pattern instructions,
+          measuring the actual quilt top, or a longarmer's requirements.
+        </p>
+      </section>
+      <section>
+        <h2>Privacy and operation</h2>
+        <p>
+          Calculations run in the browser. Projects may be saved in this
+          device's local storage, but QuiltClarity has no account, upload,
+          application backend, or cloud project store. Analytics, when a
+          deployment connects a provider, use fixed tool/action identifiers and
+          exclude project names, labels, notes, measurements, quantities, and
+          results.
+        </p>
+      </section>
+      <section>
+        <h2>How to verify or challenge a result</h2>
+        <p>
+          Read the <a href="/methodology/">calculation methodology</a>,
+          reproduce the worked examples, and check the visible assumptions in
+          your result. The <a href="/corrections/">feedback page</a> has the current
+          status of feedback submissions.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>

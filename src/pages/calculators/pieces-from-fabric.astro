@@ -1,0 +1,89 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'fitMode',
+    label: 'Question',
+    value: 'maximum',
+    kind: 'select',
+    options: [
+      { value: 'maximum', label: 'How many fit?' },
+      { value: 'requested', label: 'Can I cut this many?' },
+    ],
+  },
+  { name: 'stockWidth', label: 'Fabric width', value: 18, unit: 'length' },
+  { name: 'stockLength', label: 'Fabric length', value: 21, unit: 'length' },
+  { name: 'pieceWidth', label: 'Piece width', value: 5, unit: 'length' },
+  { name: 'pieceHeight', label: 'Piece height', value: 5, unit: 'length' },
+  { name: 'quantity', label: 'Pieces needed', value: 12, unit: 'count' },
+  {
+    name: 'dimensionMode',
+    label: 'Entered piece size',
+    value: 'cut',
+    kind: 'select',
+    options: [
+      { value: 'cut', label: 'Cut size' },
+      { value: 'finished', label: 'Finished size' },
+    ],
+  },
+  {
+    name: 'rotationAllowed',
+    label: 'Allow piece rotation',
+    value: true,
+    kind: 'checkbox',
+  },
+  {
+    name: 'directional',
+    label: 'Directional fabric',
+    value: false,
+    kind: 'checkbox',
+  },
+  {
+    name: 'seamAllowance',
+    label: 'Seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="pieces-from-fabric"
+  title="Pieces from Fabric Calculator"
+  description="Check how many repeated rectangles fit in one real fabric piece, or whether a requested quantity fits."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Fabric width is the crosswise axis and length is the lengthwise axis.
+      Enter the physical rectangle you actually own. Finished piece sizes gain
+      seam allowance before placement; cut sizes do not.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      This uses the same bounded deterministic finite-stock geometry engine as
+      the project planner. The visual layout shows actual selected placements
+      and practical rectangular leftovers; it does not promise a globally
+      optimal packing.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      An 18 × 21 inch fat-quarter-shaped rectangle can practically hold twelve
+      5-inch squares in the locked test fixture. The diagram identifies every
+      placed square and the remaining rectangular regions.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/guides/fat-quarter-size/">Fat quarter dimensions</a></li>
+    <li>
+      <a href="/guides/using-quilt-fabric-remnants/">Using fabric remnants</a>
+    </li>
+    <li>
+      <a href="/fabric-cutting-planner/">Plan stock across a full project</a>
+    </li>
+  </ul>
+</CalculatorPage>

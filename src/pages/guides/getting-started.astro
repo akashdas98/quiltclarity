@@ -1,0 +1,145 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+---
+
+<GuidePage
+  title="Quick Start: Plan One Quilt Project"
+  description="Use one small worked example to learn QuiltClarity from a blank project through Buy now and the cutting plan."
+  eyebrow="Start Here · Step 1 of 2"
+  guideSlug="getting-started"
+  guideCategory="start_here"
+  next={{
+    href: '/guides/project-planner-tutorial/',
+    label: 'Full Project Planner Tutorial',
+  }}
+>
+  <aside class="card callout">
+    <h2>What QuiltClarity does</h2>
+    <p>
+      It reconciles rectangular cuts from an existing pattern or plan with
+      measured fabric you already own, then plans only the additional purchase
+      and shows how every piece is cut.
+    </p>
+    <p>
+      It does not read pattern files, design the quilt, or maintain a permanent
+      stash.
+    </p>
+  </aside>
+
+  <section id="before-you-start">
+    <h2>Before you start</h2>
+    <p>
+      Have the cut list and the measured width and length of any fabric pieces
+      you want to use. For this example, use inches and the default ¼-inch seam
+      allowance.
+    </p>
+    <div class="example-data">
+      <h3>Worked example</h3>
+      <ul>
+        <li>Fabric: <strong>Blue</strong>, 40-inch usable WOF</li>
+        <li>Stock: one custom piece, <strong>20 × 10 inches</strong></li>
+        <li>Cuts: <strong>four 10 × 10-inch cut squares</strong></li>
+        <li>Pattern says: <strong>½ yard</strong> (optional)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>1. Open the planner and name the project</h2>
+    <p>
+      Open the planner in the button below. Enter <strong>Quick Start</strong> as
+      the optional project name and leave Measurements set to Inches and yards.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Configure the fabric</h2>
+    <p>
+      Rename the first fabric <strong>Blue</strong>. Leave usable width at 40
+      inches. Usable WOF is the width you can actually cut after removing the
+      selvages.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Add the fabric you already have</h2>
+    <p>
+      Choose <strong>Add custom piece</strong>. Enter 20 inches across the
+      fabric, 10 inches lengthwise, and quantity 1. Each stock entry is a real
+      physical rectangle; separate remnants never become one imaginary joined
+      piece.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Enter the cuts</h2>
+    <p>
+      In the first cut row choose Blue, label it <strong>Square</strong>, enter
+      quantity 4, width 10, height 10, and choose <strong>Cut</strong>. Cut
+      means the dimensions already include seam allowance.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Optionally enter the pattern amount</h2>
+    <p>
+      Open <strong>Compare with pattern yardage</strong> and enter 0.5 yard for Pattern
+      says. This is only a reference; it will not be reduced by stock.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Calculate the project plan</h2>
+    <p>
+      Select <strong>Calculate Cutting Plan</strong>. The 20 × 10-inch stock
+      piece holds two squares. The remaining two squares fit across a new
+      40-inch-wide bolt in 10 inches of raw length. With the default safety and
+      ⅛-yard purchase increment, <strong>Buy now is ⅜ yard</strong>.
+    </p>
+  </section>
+
+  <section>
+    <h2>7. Read the three different amounts</h2>
+    <dl class="guide-definition-list">
+      <div><dt>Pattern says</dt><dd>The external ½-yard reference.</dd></div>
+      <div>
+        <dt>Fresh-fabric plan</dt><dd>
+          What all four squares require if purchased new, ignoring stock.
+        </dd>
+      </div>
+      <div>
+        <dt>Buy now</dt><dd>
+          The shortfall after the measured stock covers two squares.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section>
+    <h2>8. Find the cutting plan</h2>
+    <p>
+      Under Blue, inspect <strong>Existing-stock allocations</strong> and <strong
+        >Purchased fabric</strong
+      >. Each section has cutting instructions, a diagram built from the same
+      placements, and a text version.
+    </p>
+  </section>
+
+  <section>
+    <h2>You completed the Quick Start</h2>
+    <p>
+      You created a project, entered stock and cuts, calculated the shortfall,
+      distinguished the main result concepts, and located the cutting plan.
+    </p>
+    <div class="actions">
+      <a
+        class="button"
+        href="/fabric-cutting-planner/"
+        data-guide-action="complete">Open Project Planner</a
+      >
+      <a href="/guides/project-planner-tutorial/"
+        >Next: Full Project Planner Tutorial</a
+      >
+    </div>
+  </section>
+</GuidePage>

@@ -1,0 +1,95 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  { name: 'quiltWidth', label: 'Quilt width', value: 60, unit: 'length' },
+  { name: 'quiltLength', label: 'Quilt length', value: 72, unit: 'length' },
+  {
+    name: 'overagePerSide',
+    label: 'Backing overage per side',
+    value: 4,
+    unit: 'length',
+  },
+  {
+    name: 'usableBackingWidth',
+    label: 'Usable backing width',
+    value: 40,
+    unit: 'length',
+  },
+  {
+    name: 'panelSeamAllowance',
+    label: 'Panel seam allowance',
+    value: 0.5,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'directional',
+    label: 'Directional fabric',
+    value: false,
+    kind: 'checkbox',
+  },
+  {
+    name: 'safetyAllowancePercent',
+    label: 'Safety allowance',
+    value: 5,
+    unit: 'percent',
+    advanced: true,
+  },
+  {
+    name: 'purchaseIncrement',
+    label: 'Purchase increment',
+    value: 0.125,
+    unit: 'purchase',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="backing"
+  title="Quilt Backing Calculator"
+  description="Compare every valid backing panel direction and see the lowest-yardage option."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      Overage is added on all four sides. Fabric width means usable width after
+      selvages, and each panel seam consumes the entered seam allowance on both
+      joined edges. The 4-inch value is a longarm-oriented default; requirements
+      vary, so confirm with your quilter before purchasing.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      The calculator finds the required panel count for vertical and horizontal
+      seams, accounts for width lost in joins, and compares the fabric consumed.
+      Directional fabric removes the rotated candidate. Safety and purchase
+      rounding are applied to each valid layout, and every candidate remains
+      visible. Seam orientation can also depend on print direction and your
+      quilting setup. If using a professional longarmer, confirm their
+      preferences.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      A 60 × 72 inch quilt with 4 inches extra per side needs backing at least
+      68 × 80 inches. With 40 usable inches, two 80-inch panels cover the width;
+      the calculator compares that with the horizontal alternative before
+      identifying the lowest-yardage option. A two-panel layout may place one
+      center seam along the quilt, subject to print direction and quilting
+      setup.
+    </p>
+  </div>
+  <ul slot="related">
+    <li>
+      <a href="/guides/backing-overage/">How much backing overage to add</a>
+    </li>
+    <li>
+      <a href="/guides/width-of-fabric/">Nominal and usable fabric width</a>
+    </li>
+    <li>
+      <a href="/calculators/fabric-yardage/">Fabric yardage calculator</a>
+    </li>
+  </ul>
+</CalculatorPage>

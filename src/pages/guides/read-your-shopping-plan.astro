@@ -1,0 +1,54 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+---
+
+<GuidePage
+  title="Read Your Quilt Fabric Shopping Plan"
+  description="Understand raw additional length, safety, purchase rounding, Fresh-fabric plan, Pattern says, and Buy now."
+  eyebrow="Learn QuiltClarity · Results"
+  guideSlug="read-your-shopping-plan"
+  guideCategory="start_here"
+  previous={{
+    href: '/guides/check-pattern-yardage/',
+    label: 'Check Pattern Yardage',
+  }}
+  next={{
+    href: '/guides/read-your-cutting-plan/',
+    label: 'Read Your Cutting Plan',
+  }}
+>
+  <section>
+    <h2>Start with project status</h2><p>
+      The status says whether stock covers every cut, additional purchase is
+      required, or something remains uncovered. Fix any blocking error before
+      using the numbers.
+    </p>
+  </section>
+  <section>
+    <h2>Use Buy now at the shop</h2><p>
+      Buy now is the remaining bolt purchase after stock allocation, safety, and
+      upward shop-increment rounding. No additional purchase means the entered
+      stock covers the planned cuts.
+    </p>
+  </section>
+  <section>
+    <h2>Keep comparison concepts separate</h2><dl class="guide-definition-list">
+      <div>
+        <dt>Pattern says</dt><dd>The external reference you entered.</dd>
+      </div><div>
+        <dt>Fresh-fabric plan</dt><dd>
+          All cuts from new fabric, ignoring stock.
+        </dd>
+      </div><div>
+        <dt>Buy now</dt><dd>The shortfall after owned fabric is used.</dd>
+      </div>
+    </dl>
+  </section>
+  <section>
+    <h2>Audit raw, buffered, and rounded lengths</h2><p>
+      Raw additional plan comes from placement geometry. Safety increases only
+      new fabric. Recommended purchase rounds upward to the selected increment.
+      These are intentionally different values.
+    </p>
+  </section>
+</GuidePage>

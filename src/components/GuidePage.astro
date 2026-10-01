@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME } from '../lib/site-identity';
+import type {
+  AnalyticsGuideCategory,
+  AnalyticsGuideSlug,
+} from '../lib/analytics';
+
+interface GuideLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  canonicalPath?: string;
+  index?: boolean;
+  guideSlug?: AnalyticsGuideSlug;
+  guideCategory?: AnalyticsGuideCategory;
+  previous?: GuideLink;
+  next?: GuideLink;
+  toolHref?: string;
+  toolLabel?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow = 'Quilting guide',
+  canonicalPath,
+  index = true,
+  guideSlug,
+  guideCategory,
+  previous,
+  next,
+  toolHref = '/fabric-cutting-planner/',
+  toolLabel = 'Open the planner',
+} = Astro.props;
+---
+
+<BaseLayout
+  title={`${title} — ${SITE_NAME}`}
+  description={description}
+  pageType="article"
+  canonicalPath={canonicalPath}
+  index={index}
+>
+  <article
+    class="page article-page"
+    data-guide-slug={guideSlug}
+    data-guide-category={guideCategory}
+  >
+    <header class="hero">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="trust-line">
+        Reviewed against {SITE_NAME}'s test-backed calculation rules.
+      </p>
+    </header>
+    <div class="article-body"><slot /></div>
+    {
+      (previous || next) && (
+        <nav class="guide-sequence no-print" aria-label="Guide learning path">
+          <a href="/guides/">Back to Guides</a>
+          <div class="guide-sequence-links">
+            {previous && <a href={previous.href}>Previous: {previous.label}</a>}
+            {next && (
+              <a href={next.href} data-guide-action="next">
+                Next: {next.label}
+              </a>
+            )}
+          </div>
+        </nav>
+      )
+    }
+    <aside class="card callout" aria-labelledby="guide-cta-heading">
+      <h2 id="guide-cta-heading">Turn the measurements into a cutting plan</h2>
+      <p>
+        Enter every rectangular piece by fabric and get purchase quantities,
+        cutting instructions, and a diagram built from the actual layout.
+      </p>
+      <a class="button" href={toolHref} data-guide-action="tool">{toolLabel}</a>
+    </aside>
+    <p class="content-meta">
+      See <a href="/methodology/">calculation methodology</a> or{' '}
+      <a href="/corrections/">report a correction</a>.
+    </p>
+  </article>
+</BaseLayout>

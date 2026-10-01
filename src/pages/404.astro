@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found — QuiltClarity"
+  description="The requested QuiltClarity page could not be found."
+  canonicalPath="/404/"
+  index={false}
+>
+  <div class="page narrow-page">
+    <p class="eyebrow">404</p>
+    <h1>That page is not here</h1>
+    <p>The address may have changed or the link may be incomplete.</p>
+    <div class="actions">
+      <a class="button" href="/fabric-cutting-planner/"
+        >Open the cutting planner</a
+      >
+      <a class="button secondary" href="/calculators/">Browse calculators</a>
+    </div>
+  </div>
+</BaseLayout>

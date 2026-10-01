@@ -1,0 +1,11 @@
+.astro/
+coverage/
+dist/
+node_modules/
+tmp/
+temp/
+.playwright-mcp/
+package-lock.json
+quilt_FINAL_*.md
+# Deferred specification archives are outside the active V1.1 release surface.
+docs/v2/

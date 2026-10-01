@@ -1,0 +1,74 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+---
+
+<GuidePage
+  canonicalPath="/guides/how-to-calculate-quilt-fabric/"
+  index={false}
+  title="How to Calculate Fabric Yardage for a Quilt"
+  description="A practical piece-list method for converting quilt dimensions into usable-width rows, safety allowance, purchase yardage, and a cutting plan."
+>
+  <section>
+    <h2>Start with pieces, not quilt area</h2>
+    <p>
+      Quilt yardage depends on how shapes fit across the usable fabric width.
+      Multiplying the quilt’s finished area by a percentage can miss seam
+      allowance, repeated pieces, directional constraints, and partial rows. A
+      dependable estimate begins with a piece list grouped by fabric.
+    </p>
+    <ol>
+      <li>List each rectangular piece, its quantity, and its fabric.</li>
+      <li>Convert finished measurements to cut measurements once.</li>
+      <li>Measure or choose a conservative usable width after selvages.</li>
+      <li>
+        Decide whether each piece may rotate and whether the print is
+        directional.
+      </li>
+      <li>
+        Arrange whole pieces across WOF and round the number of rows upward.
+      </li>
+      <li>Add a stated safety allowance and round the purchase upward.</li>
+    </ol>
+  </section>
+  <section>
+    <h2>A repeated-rectangle example</h2>
+    <p>
+      Suppose one fabric needs 24 rectangles cut at 3½ × 6½ inches and has 40
+      inches of usable width. When rotation is allowed, six pieces fit across
+      with their 6½-inch edge across WOF. Four rows at 3½ inches each consume 14
+      inches down the bolt. A 5% allowance makes 14.7 inches, which rounds up to
+      the next eighth-yard increment: 18 inches, or ½ yard.
+    </p>
+    <p>
+      The{' '}<a href="/calculators/fabric-yardage/"
+        >fabric yardage calculator</a
+      >{' '}performs this repeated-piece calculation and shows the chosen
+      orientation.
+    </p>
+    <p>
+      <a
+        href="https://help.prequilt.com/prequilt-101/fabric-calculator/calculations-explained/fabric-cutting-diagrams/"
+        >PreQuilt's calculation explanation</a
+      >{' '}
+      is a useful comparison for why actual row geometry matters.
+    </p>
+  </section>
+  <section>
+    <h2>When the quilt uses several piece sizes</h2>
+    <p>
+      Treat each fabric independently and account for every piece exactly once.
+      A practical plan can fill space left in a strip row with smaller pieces,
+      but it must keep pieces inside usable width and respect orientation. This
+      is a layout problem, so the best estimate comes from actual placements
+      rather than a second area-only formula.
+    </p>
+    <p>
+      Before calculating, review{' '}<a href="/guides/finished-vs-cut-size/"
+        >finished versus cut size</a
+      >{' '}and{' '}<a href="/guides/width-of-fabric/">usable width of fabric</a
+      >. Then enter all fabrics and pieces in the planner below; it returns a
+      shopping total, cutting list, and diagram from the same deterministic
+      layout.
+    </p>
+  </section>
+</GuidePage>

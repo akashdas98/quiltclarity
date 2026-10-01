@@ -1,0 +1,73 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'finishedWidth',
+    label: 'Finished unit width',
+    value: 4,
+    unit: 'length',
+  },
+  {
+    name: 'finishedHeight',
+    label: 'Finished unit height',
+    value: 2,
+    unit: 'length',
+  },
+  { name: 'quantity', label: 'Flying Geese needed', value: 12, unit: 'count' },
+  {
+    name: 'method',
+    label: 'Construction method',
+    value: 'four-at-a-time',
+    kind: 'select',
+    options: [
+      { value: 'four-at-a-time', label: '4 at a time' },
+      { value: 'one-at-a-time', label: '1 at a time' },
+    ],
+  },
+  {
+    name: 'sizingMode',
+    label: 'Starting-cut size',
+    value: 'trim-friendly',
+    kind: 'select',
+    options: [
+      { value: 'trim-friendly', label: 'Trim-friendly' },
+      { value: 'standard', label: 'Standard' },
+    ],
+  },
+];
+---
+
+<CalculatorPage
+  calculator="flying-geese"
+  title="Flying Geese Calculator"
+  description="Calculate body and background cuts for conventional 2:1 Flying Geese, one or four at a time."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      This calculator requires the conventional 2:1 finished width-to-height
+      proportion. Trim-friendly mode adds squaring room. The four-at-a-time
+      method is not described as no-waste.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      The selected method determines whether each batch uses one body rectangle
+      and two background squares or one body square and four background squares.
+      Batch counts round upward and expose produced extras.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      Twelve finished 4 × 2 inch geese made four at a time need three batches.
+      In trim-friendly mode, cut three 5½-inch body squares and twelve 3⅛-inch
+      background squares; trim the twelve units to 4½ × 2½ inches unfinished.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/calculators/half-square-triangle/">HST calculator</a></li>
+    <li><a href="/calculators/quarter-square-triangle/">QST calculator</a></li>
+    <li><a href="/guides/quilt-seam-allowance/">Seam allowance guide</a></li>
+  </ul>
+</CalculatorPage>

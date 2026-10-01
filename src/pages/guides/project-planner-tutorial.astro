@@ -1,0 +1,317 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+
+const contents = [
+  ['before-you-begin', 'Before you begin'],
+  ['project-and-units', 'Project and units'],
+  ['fabrics', 'Fabrics'],
+  ['usable-wof', 'Nominal vs usable WOF'],
+  ['directional-fabric', 'Directional fabric and rotation'],
+  ['purchase-safety', 'Purchase safety and rounding'],
+  ['fabric-you-have', 'Fabric you already have'],
+  ['stock-presets', 'Stock presets and dimensions'],
+  ['cut-requirements', 'Cut requirements'],
+  ['piece-label', 'Piece label'],
+  ['quantity', 'Quantity'],
+  ['width-height', 'Width and height'],
+  ['cut-vs-finished', 'Cut vs finished'],
+  ['wof-strips', 'WOF strips and orientation'],
+  ['paste-cut-list', 'Spreadsheet paste'],
+  ['pattern-yardage', 'Pattern yardage'],
+  ['calculate', 'Calculate and recalculate'],
+  ['project-status', 'Project status'],
+  ['shopping-list', 'Shopping list'],
+  ['buy-now', 'Buy now'],
+  ['fresh-fabric-plan', 'Fresh-fabric plan'],
+  ['pattern-says', 'Pattern says'],
+  ['stock-allocation', 'Existing-stock allocations'],
+  ['purchased-layout', 'Purchased-fabric layout'],
+  ['cutting-plan', 'Cutting instructions and diagram'],
+  ['leftovers', 'Leftovers'],
+  ['warnings', 'Assumptions and warnings'],
+  ['print-plan', 'Print'],
+  ['common-errors', 'Common errors'],
+  ['special-cases', 'Common special cases'],
+] as const;
+---
+
+<GuidePage
+  title="Full Project Planner Tutorial"
+  description="The field-by-field and result-by-result manual for turning an external quilt cut list and measured fabric into one shopping and cutting plan."
+  eyebrow="Start Here · Step 2 of 2"
+  guideSlug="project-planner-tutorial"
+  guideCategory="start_here"
+  previous={{ href: '/guides/getting-started/', label: 'Quick Start' }}
+  next={{ href: '/guides/enter-a-cut-list/', label: 'Enter a Cut List' }}
+>
+  <nav class="guide-toc card" aria-labelledby="tutorial-contents">
+    <h2 id="tutorial-contents">On this page</h2>
+    <ol>
+      {
+        contents.map(([id, label]) => (
+          <li>
+            <a href={`#${id}`}>{label}</a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+
+  <section id="before-you-begin">
+    <h2>1. Before you begin</h2><p>
+      Gather the rectangular cut requirements for each project fabric. Measure
+      any physical pieces you want to use. QuiltClarity does not need the quilt
+      design itself and does not interpret pattern prose, PDFs, or images.
+    </p>
+  </section>
+  <section id="project-and-units">
+    <h2>2. Project and units</h2><h3>Project name</h3><p>
+      <strong>What it means:</strong> an optional local label for the plan. <strong
+        >What to enter:</strong
+      > any name useful in print. It never enters analytics.
+    </p><h3>Measurements</h3><p>
+      Choose Inches and yards or Centimetres and metres before entering values.
+      The calculation converts to exact internal millimetres; switching units
+      converts existing numeric controls.
+    </p><h3>Seam allowance</h3><p>
+      The default is ¼ inch. It is added on every edge only when a requirement
+      uses Finished size.
+    </p>
+  </section>
+  <section id="fabrics">
+    <h2>3. Fabrics</h2><p>
+      Add each distinct fabric once and give it a practical name such as
+      Background or Blue print. Every cut and stock piece retains this fabric
+      identity; pieces never move between fabrics.
+    </p>
+  </section>
+  <section id="usable-wof">
+    <h2>4. Nominal vs usable WOF</h2><p>
+      <strong>Nominal width</strong> is the descriptive bolt width before selvages.
+      <strong>Usable WOF</strong> is the crosswise width actually available for cuts
+      after the selvages you plan to remove. Packing uses usable WOF. The imperial
+      default is 40 inches, but your measured or pattern-specific value is authoritative.
+    </p><p>
+      <strong>Common mistake:</strong> entering 42 inches because the bolt says 42
+      even though only 40 inches will be cut.
+    </p><p><a href="/guides/width-of-fabric/">Read the WOF reference</a>.</p>
+  </section>
+  <section id="directional-fabric">
+    <h2>5. Directional fabric and rotation</h2><p>
+      Turn on Directional fabric when a motif or grain direction must remain
+      aligned. Rotation swaps a piece's width and height only when the fabric
+      default, piece override, orientation, and WOF-strip rules all allow it. A
+      piece-level “Do not allow” setting wins.
+    </p><p>
+      <a href="/guides/directional-fabric-cutting/"
+        >Read the directional-fabric reference</a
+      >.
+    </p>
+  </section>
+  <section id="purchase-safety">
+    <h2>6. Purchase safety and rounding</h2><p>
+      Safety adds a percentage to newly purchased raw bolt length. The default
+      is 5%. Purchase increment then rounds that buffered amount upward—never
+      nearest or down. Safety does not enlarge stock you already own, and a
+      stock-covered project remains a zero purchase.
+    </p><p>
+      <strong>Example:</strong> 10 inches raw with 5% safety becomes 10.5 inches,
+      then rounds upward to the selected shop increment.
+    </p>
+  </section>
+  <section id="fabric-you-have">
+    <h2>7. Fabric you already have</h2><p>
+      Enter only physical fabric pieces available to this project. Width is
+      across the fabric; length is lengthwise. Each quantity expands into
+      separate identifiable bins. QuiltClarity proves fit geometrically instead
+      of subtracting areas or yardage totals.
+    </p>
+  </section>
+  <section id="stock-presets">
+    <h2>8. Stock presets and custom dimensions</h2><p>
+      Fat quarter, fat eighth, quarter-yard, half-yard, partial-yardage, and
+      custom actions fill convenient starting values. Dimensions remain visible
+      and editable. Measure the actual piece: an edited 18 × 20-inch fat quarter
+      is planned as 18 × 20, not 18 × 21.
+    </p>
+  </section>
+  <section id="cut-requirements">
+    <h2>9. Cut requirements</h2><p>
+      Each row describes one repeated rectangular cut group and assigns it to a
+      fabric. Add, duplicate, delete/undo, or paste rows. Calculation does not
+      depend on visual row order.
+    </p>
+  </section>
+  <section id="piece-label">
+    <h2>10. Piece label</h2><p>
+      Use a short label you will recognize at the cutting table, such as Blue
+      corner square. It appears in instructions, diagrams, and text alternatives
+      and stays local to your browser.
+    </p>
+  </section>
+  <section id="quantity">
+    <h2>11. Quantity</h2><p>
+      Enter the number of identical pieces required. Quantity must be a positive
+      whole number. If a construction method yields batches, calculate those
+      unit cuts in the relevant calculator first.
+    </p>
+  </section>
+  <section id="width-height">
+    <h2>12. Width and height</h2><p>
+      Enter the rectangle's two dimensions in the selected measurement system.
+      Width is the initial across-fabric extent; height is the initial
+      lengthwise extent. Allowed rotation may swap them.
+    </p>
+  </section>
+  <section id="cut-vs-finished">
+    <h2>13. Cut vs finished dimensions</h2><p>
+      <strong>Cut</strong> uses the entered dimensions exactly. <strong
+        >Finished</strong
+      > describes the sewn size, so QuiltClarity adds twice the project seam allowance
+      to both dimensions and shows the resolved cut size under More options.
+    </p><p>
+      <strong>Common mistake:</strong> choosing Finished for dimensions a pattern
+      already labels as cut.
+    </p><p>
+      <a href="/guides/finished-vs-cut-size/"
+        >Read the finished-vs-cut reference</a
+      >.
+    </p>
+  </section>
+  <section id="wof-strips">
+    <h2>14. WOF strips and orientation constraints</h2><p>
+      A width-of-fabric strip spans the full usable crosswise width and consumes
+      its strip width down the bolt. It cannot rotate into a lengthwise strip or
+      fit a stock bin narrower than usable WOF. Crosswise and lengthwise
+      orientation constraints likewise preserve the required fabric axis.
+    </p>
+  </section>
+  <section id="paste-cut-list">
+    <h2>15. Spreadsheet paste</h2><p>
+      Use <strong>Paste from spreadsheet</strong> for CSV or tab-separated data in
+      the documented columns: Fabric, Label, Qty, Width, Height, Size mode. Review
+      the preview, fix malformed cells, map unmatched fabrics explicitly, then confirm.
+      QuiltClarity never guesses cut requirements from prose.
+    </p>
+  </section>
+  <section id="pattern-yardage">
+    <h2>16. Pattern yardage comparison</h2><p>
+      Pattern says and Pattern usable WOF are optional per fabric. QuiltClarity
+      compares the stated amount with a separate all-new-fabric scenario using
+      the cuts you entered. A WOF mismatch produces a not-like-for-like warning.
+    </p>
+  </section>
+  <section id="calculate">
+    <h2>17. Calculate and recalculate</h2><p>
+      Select Calculate Cutting Plan after editing. Complex planning does not run
+      on every keystroke. If an input changes after a result, the old result
+      remains visible but is marked <strong>Plan needs recalculation</strong>;
+      select Recalculate before acting on it.
+    </p>
+  </section>
+  <section id="project-status">
+    <h2>18. Project status</h2><p>
+      The first result states whether every cut is covered by stock, additional
+      purchase is needed, or requirements remain uncovered. Blocking input
+      errors prevent a result; warnings preserve a usable result and explain the
+      limitation.
+    </p>
+  </section>
+  <section id="shopping-list">
+    <h2>19. Shopping list</h2><p>
+      This is the actionable per-fabric purchase summary. It separates raw
+      additional plan, the amount with safety, and the shop-rounded Buy now
+      amount.
+    </p>
+  </section>
+  <section id="buy-now">
+    <h2>20. Buy now</h2><p>
+      <strong>What it means:</strong> the purchase remaining after exact stock allocation.
+      <strong>What it includes:</strong> safety and upward purchase rounding on new
+      fabric. <strong>What it does not mean:</strong> the pattern amount or all-new-fabric
+      requirement.
+    </p>
+  </section>
+  <section id="fresh-fabric-plan">
+    <h2>21. Fresh-fabric plan</h2><p>
+      This hypothetical scenario plans all entered cuts from a new bolt under
+      current assumptions and ignores stock. It provides the fair basis for
+      pattern comparison, so it can be nonzero when Buy now is zero.
+    </p>
+  </section>
+  <section id="pattern-says">
+    <h2>22. Pattern says</h2><p>
+      This is the external amount you entered. It may include construction
+      method, trimming, shrinkage, squaring, miscuts, fussy cutting, direction,
+      or designer preference. A difference is information—not proof of a pattern
+      error.
+    </p>
+  </section>
+  <section id="stock-allocation">
+    <h2>23. Existing-stock allocations</h2><p>
+      Each physical stock bin shows the exact pieces placed into it, cutting
+      instructions, geometry, and a text equivalent. Bin labels remain distinct.
+      An allocation of two remnants is never presented as one joined rectangle.
+    </p>
+  </section>
+  <section id="purchased-layout">
+    <h2>24. Purchased-fabric layout</h2><p>
+      If stock leaves a shortfall, this section shows the exact remaining pieces
+      on a fixed-width, variable-length purchased bolt. Raw length and rounded
+      purchase are separate so you can audit the shop quantity.
+    </p>
+  </section>
+  <section id="cutting-plan">
+    <h2>25. Cutting instructions and diagram</h2><p>
+      Instructions and SVG are projected from the same selected placements.
+      Follow named stock bins first, then the purchased-bolt plan. When geometry
+      cannot be truthfully simplified into strips, use the exact diagram and
+      piece list. The layout is practical and deterministic, not a proven global
+      optimum.
+    </p>
+  </section>
+  <section id="leftovers">
+    <h2>26. Leftovers</h2><p>
+      Useful remaining regions are deterministic rectangles from the selected
+      stock geometry. Separate rectangles are listed separately; QuiltClarity
+      does not promise they combine into one contiguous remnant.
+    </p>
+  </section>
+  <section id="warnings">
+    <h2>27. Assumptions and warnings</h2><p>
+      Check usable WOF, seam allowance, safety, purchase increment, rotation,
+      direction, and method disclosures before buying or cutting.
+      Correctness-critical caveats stay visible even when a ? control offers
+      more explanation.
+    </p>
+  </section>
+  <section id="print-plan">
+    <h2>28. Print</h2><p>
+      Print includes project identity/date, shopping, comparisons, allocations,
+      instructions, assumptions, warnings, diagrams, and text alternatives.
+      Editing controls and navigation are omitted. Diagram pages choose portrait
+      or landscape and remain grayscale-safe.
+    </p>
+  </section>
+  <section id="common-errors">
+    <h2>29. Common errors</h2><ul>
+      <li>Using nominal width instead of usable WOF.</li><li>
+        Entering cut dimensions as Finished.
+      </li><li>Combining separate remnants into one rectangle.</li><li>
+        Allowing rotation for a directional piece.
+      </li><li>Reading Buy now as the fresh-fabric or pattern amount.</li><li>
+        Acting on a result marked Plan needs recalculation.
+      </li>
+    </ul>
+  </section>
+  <section id="special-cases">
+    <h2>30. Common special cases</h2><p>
+      For a cut list copied from a spreadsheet, use the deterministic paste
+      preview. For WOF strips or directional fabric, open More options. For one
+      stock rectangle and one repeated piece, use <a
+        href="/calculators/pieces-from-fabric/">Pieces from Fabric</a
+      >. For backing, batting, binding, triangle units, blocks, borders, or
+      sashing, use the focused calculators.
+    </p>
+  </section>
+</GuidePage>

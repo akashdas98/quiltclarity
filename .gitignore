@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Astro and build output
+.astro/
+dist/
+
+# Test and tooling output
+coverage/
+.playwright-mcp/
+.eslintcache
+*.tsbuildinfo
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor and OS files
+.idea/
+.vscode/
+.codex/
+# Supplemental bundles are retained locally, outside the public source snapshot.
+docs/quilt_LAUNCH_growth_package.zip
+docs/quilt_PRODUCTION_UX_CONTENT_SEO_package.zip
+docs/quiltclarity_v1_1_codex_spec_bundle.zip
+.DS_Store
+Thumbs.db
+
+# Local temporary files
+tmp/
+temp/
+*.tmp
+*.bak

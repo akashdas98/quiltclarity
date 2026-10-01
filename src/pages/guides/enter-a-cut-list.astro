@@ -1,0 +1,49 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+---
+
+<GuidePage
+  title="Enter a Quilt Cut List"
+  description="Compile rectangular requirements quickly by keyboard or safe spreadsheet paste."
+  eyebrow="Learn QuiltClarity · Cut requirements"
+  guideSlug="enter-a-cut-list"
+  guideCategory="start_here"
+  previous={{
+    href: '/guides/project-planner-tutorial/',
+    label: 'Full Project Planner Tutorial',
+  }}
+  next={{
+    href: '/guides/add-fabric-you-have/',
+    label: 'Add Fabric You Already Have',
+  }}
+>
+  <section>
+    <h2>Prepare one row per repeated cut</h2><p>
+      For each fabric, copy the piece label, quantity, width, height, and
+      whether the pattern gives a Cut or Finished size. Add each project fabric
+      before mapping rows to it.
+    </p>
+  </section>
+  <section>
+    <h2>Use the keyboard path</h2><p>
+      Tab through a row and press Enter from its last editable value to add the
+      next row. New rows inherit fabric and size mode for speed, but never hide
+      or inherit dimensions. Duplicate similar rows, then edit the differences.
+    </p>
+  </section>
+  <section>
+    <h2>Paste tabular data safely</h2><p>
+      Paste CSV or spreadsheet rows in <code
+        >Fabric | Label | Qty | Width | Height | Size mode</code
+      > order. Review the preview, resolve unmatched fabrics, and confirm. Malformed
+      or ambiguous values never import silently.
+    </p>
+  </section>
+  <section>
+    <h2>Use More options only when needed</h2><p>
+      Set piece rotation, crosswise/lengthwise orientation, or WOF-strip
+      behavior when the cut has a real constraint. Visible resolved cut-size
+      feedback shows how Finished inputs use project seam allowance.
+    </p>
+  </section>
+</GuidePage>

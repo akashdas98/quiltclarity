@@ -1,0 +1,106 @@
+# Domain Contracts
+
+## Authority
+
+`docs/v1.1/02_GOLDEN_RULES_AND_TESTS.md` is authoritative for V1.1 quilting behavior and overrides conflicting domain statements elsewhere. This document is a routing summary, not a replacement. The M0 implementation gaps are recorded in `docs/architecture/v1.1-repository-audit.md`.
+
+## Canonical Calculation Contract
+
+- Store and calculate in millimetres.
+- Use exact conversions: 1 inch = 25.4 mm, 1 yard = 914.4 mm, and 1 metre = 1000 mm.
+- Preserve precision internally; round only at explicit display or purchase boundaries.
+- Imperial purchase rounding defaults upward to 1/8 yard; metric defaults upward to 0.1 metre.
+- Explicitly model usable fabric width, seam allowances, safety allowance, directional state, and rotation permissions.
+- Return structured inputs/assumptions, calculated plan requirement, buffered requirement, purchase recommendation, explanations, warnings, and errors as relevant.
+- Normalize finished dimensions to explicit cut dimensions before optimization by adding twice the seam allowance to each dimension; cut dimensions pass through unchanged.
+- Resolve rotation as `piece.rotationAllowed ?? fabric.defaultRotationAllowed`; choosing directional fabric sets the editable fabric default to false, and an explicit piece-level value wins.
+- Orientation constrains that resolved permission: `crosswise` uses the entered width on the crosswise axis and forbids rotation; `lengthwise` requires the entered width on the lengthwise axis and therefore requires a legal rotated placement; `none` permits normal candidate selection. An explicit rotation value of `false` combined with `lengthwise` is an impossible constraint and blocks calculation.
+- WOF strips remain crosswise, cannot auto-rotate into lengthwise strips, and normalize their crosswise extent to the fabric's usable WOF rather than trusting a duplicate entered width.
+- Apply safety only after layout length is known, then round purchase length strictly upward to the selected increment while preserving exact multiples.
+
+## Domain Primitive Validation
+
+- Fabric width, usable width, purchase increments, and piece dimensions must be finite and greater than zero.
+- Safety percentages and seam allowances must be finite and non-negative; zero remains a valid editable value.
+- Piece quantities must be positive integers.
+- Impossible fit is a blocking error when a normalized piece is wider than usable fabric in every allowed orientation.
+- Validation returns stable error codes, field names, and messages; calculation helpers reject invalid direct numeric calls rather than emitting unusable results.
+
+## Single-Piece Yardage Contract
+
+- Normalize one repeated rectangle group before row calculation and use usable fabric width exclusively.
+- Evaluate unrotated and, when legal, rotated row candidates as `floor(usableWidth / acrossWidth)` pieces per row and `ceil(quantity / piecesPerRow)` rows.
+- Select the candidate with lower raw fabric length; prefer unrotated when candidate lengths tie.
+- Return a discriminated success/error result. A success exposes cut dimensions, selected orientation, pieces per row, rows, unused final-row slots, raw length, safety inputs, buffered length, purchase increment, recommended length, and warnings from the same calculation.
+- Invalid input or a piece that cannot fit in any legal orientation returns errors and no yardage explanation.
+- Zero safety is valid but warned. Directional fabric is warned when its default rotation restriction materially increases length.
+
+## Placement Contract
+
+For every valid plan:
+
+- each requested piece instance appears exactly once;
+- placements do not overlap;
+- placements stay within usable width and length;
+- directional and rotation constraints are respected;
+- piece-level restrictions override project defaults;
+- selection and tie-breaking are deterministic.
+
+Default optimization priorities are validity, practical strip-based cutting, reduced length, reduced complexity, and deterministic tie-breaking. Bounded heuristics are required; global optimality is not promised.
+
+The Milestone 3 optimizer accepts already-normalized cut-size groups for one fabric. It generates six stable strategy orderings, constructs shelf-like quilting rows, fills compatible row remainders from other groups before repeating the anchor group, and validates every candidate from its placements before scoring it. Candidate scores use configurable weights; equal scores resolve by lower used length, lower cut complexity, lower waste, then stable strategy order.
+
+The V1.1 M2 finite-stock optimizer is a separate bounded subsystem over exact physical rectangular bins. It expands stock quantities into stable material-bin instances, retains stock/fabric identity on every placement, and explores 30 deterministic combinations of constrained/area/crosswise/lengthwise/strip-friendly piece order, smallest-fit/largest-first/WOF-preserving bin order, and two guillotine split directions. Candidate validation independently proves exact placed-or-unallocated accounting, legal orientation, WOF width, bounds, non-overlap, and fabric/bin identity before selection. The selected stock-only result prioritizes fewer unmet instances, more allocated area, lower fragmentation, useful rectangular leftovers, and stable strategy order. Inputs over the full-strategy threshold use six strip-friendly candidates and disclose the performance fallback.
+
+Stock-only planning never creates a purchased material bin. A fully covered result exposes raw, buffered, and recommended additional purchase as exact zero; an incomplete result exposes those values as `null` plus the exact unmet instances so M3 can reconcile them against a variable-length purchased bolt. Safety allowance never changes stock geometry and produces guidance only when exact stock coverage makes purchase zero. Placement geometry remains authoritative; leftover rectangles are deterministic practical regions and are not claimed to form one contiguous remnant.
+
+The V1.1 M3 reconciler evaluates every validated finite-stock candidate, groups each candidate's exact unmet instances for the existing fresh-bolt optimizer, and translates purchased placements back to their original piece-instance identities. Selection is lexicographic: lower raw additional purchase, lower purchased-layout cut complexity, lower stock fragmentation, larger practical leftover rectangle, lower purchased-bolt waste, then stable finite-stock strategy order. The purchased material bin has usable WOF as its fixed width and the selected raw layout length as its geometry. Safety and upward increment rounding apply only after raw purchase selection. With purchase disabled, the reconciler returns the M2 stock allocation and exact unmet instances without a purchased bin or purchase amount.
+
+`freshFabricScenario(fabric, requirements)` intentionally has no stock parameter. It computes raw, buffered, and purchase-rounded fresh-bolt lengths from all requirements under current assumptions. Optional pattern comparison reports the external pattern amount, all three fresh-plan lengths, and `deltaFromRecommended = pattern stated - fresh recommended`; positive and negative outcomes remain informational and never claim designer error. A known pattern usable width different from current usable WOF emits an explicit not-like-for-like warning. `reconcileProject` combines each fabric's independent fresh scenario, optional pattern comparison, stock-aware buy-now result, per-fabric fresh planning comparison, and aggregate shopping status. The planner consumes this reconciled contract; `planProject` remains available only as the fresh-bolt regression and compatibility boundary.
+
+Each successful multi-group fabric result also exposes a diagnostic planning comparison. The recommended raw length is compared with the sum of raw lengths produced by optimizing each already-normalized group independently under the same fabric, orientation, WOF-strip, and optimizer constraints. The baseline does not include safety allowance or purchase rounding and never participates in candidate scoring or selection. Its deterministic outcome is `combined_shorter`, `same_length`, `recommended_longer_for_practicality`, or `not_applicable`; one-group fabrics are not applicable. Positive savings presentation requires a strictly positive arithmetic difference.
+
+Inputs above the full-strategy threshold use one grouped strip-friendly strategy and return a performance-fallback warning. An explicit placement ceiling prevents unbounded browser work because the V1 placement contract requires one geometry record per requested instance.
+
+Project validation owns project-level completeness before any per-fabric optimizer runs. A project with no cuts receives one add-a-cut error; when assignments are otherwise valid, every entered fabric must own at least one cut requirement or return a fabric-scoped message naming that fabric and telling the user to assign a row or remove it. Missing/unknown assignments suppress derivative unused-fabric errors until those assignments are corrected. Shared validation preserves stable error codes and field keys for controller linkage, but messages use visible field labels rather than internal camelCase names and include a practical remedy for fit, geometry, and capacity failures. Planner summaries prefix row/stock/fabric errors with the affected visible object name; inline errors remain adjacent to the linked control. Planner and calculator controllers establish the final error layout before focusing and scrolling to the first invalid field, fall back to the error summary when no field is linkable, and respect reduced motion.
+
+## Presentation Contract
+
+Cutting lists, explanations, and SVG diagrams consume the same calculation/placement result. Visualization must not run its own layout algorithm. Warnings do not invalidate otherwise valid output; errors do. The diagram text contract retains its complete plain-text equivalent and also exposes structured piece-group, strip, placement-run, dimension, position, rotation, and unused-width fields so the UI can produce scannable semantic markup without parsing text or recomputing geometry.
+
+Waste area remains canonical square millimetres in optimizer and project results. The presentation layer converts it to square inches for imperial display or square centimetres for metric display; exact zero is rendered as “No unused area” rather than exposing an internal unit.
+
+`src/lib/presentation` is an outer, framework-independent projection layer. The cutting-diagram projector preserves every optimizer source coordinate, applies one uniform scale, derives strip boundaries and unused rectangles from optimizer rows, and rejects geometry that does not fit the supplied fabric/result bounds. Its SVG serializer escapes project labels and IDs, uses patterns plus text rather than color alone, provides accessible title/description content, and includes grayscale print rules. Every piece-group pattern must draw a visible mark through the interior of its repeating tile; border-only paths that can make a labeled piece appear plain are invalid. Waste regions have accessible “Scrap area” titles and show fitted “Scrap” text horizontally or vertically whenever a 6px minimum can fit; smaller scraps retain the title without unreadable visible text. Vertical scrap text rotates inside an unrotated region clip so the whole word remains visible. Every positive-size piece retains a visible label. Piece labels and dimensions begin at a deterministic box-proportional size from 12px through 24px and first attempt the unrotated whole-word layout at that intended size; character-split words do not count as a fit. Rotation is considered only when that attempt fails: the fitter next tries the same size vertically, then calculates the largest continuously fitting whole-word scale in both orientations and chooses the larger result, with horizontal winning ties. Adaptive padding and stroke widths shrink with tight rectangles, while an unrotated piece-local SVG clip provides the final cross-engine paint-containment boundary for horizontal and rotated text. Visible in-diagram labels use a white under-stroke plus a broad, fully opaque soft white SVG drop shadow for reliable separation from pattern marks; print styling removes both treatments. Each fabric result retains a normal print box and starts on the default A4 portrait page. Its non-printing detail disclosures precede the visual plan in document order but are flex-ordered after it for screen presentation, so the named visual-plan section is the final box-generating print fragment and cannot return to an empty default page afterward. Only that visual-plan section receives a named A4 portrait or landscape page according to the diagram model's width/height ratio. Diagram pages use 5mm margins and intrinsic-height blocks. On print entry, the client saves the screen viewBox, obtains the SVG's complete rendered bounds (including exterior dimension labels and directional markers), and applies a print-only viewBox with exactly 5px inset on all edges. It then measures heading/legend outer height, subtracts it from the selected A4 content height, compares the height-limited scale with the available-width scale, and applies the tighter scale. The screen viewBox is restored after print. This maximizes the drawing while keeping the heading, legend, and diagram together without overflow fragments. Per-piece SVG titles and the complete row-based textual equivalent remain available independently of visible label scale.
+
+The screen viewer is always a 1:1 square, while the SVG retains its true aspect ratio and scrolls inside that canvas after enlargement. Auto margins center the SVG on both axes whenever that axis does not overflow, including a wide diagram that remains shorter than the canvas. Every screen size uses a logarithmic 1× through 10× range relative to the two-axis fitted size. The default is 1× at widths of 650px and above and 2× below 650px. Changing zoom alters the SVG's laid-out width without changing its viewBox or source geometry. The visible range control is hidden at and below 800px, while two-touch pinch remains active on touch-capable layouts, preserves the content point beneath the gesture midpoint, and synchronizes the same zoom level when the range control is present. A screen-only note below the legend discloses pinch support. The screen diagram adopts explicit dark canvas, pattern, line, and label colors under the site dark theme; print restores natural non-square sizing, overrides every diagram color to the established light grayscale-safe output, and removes zoom controls and the pinch note.
+
+The current print treatment supersedes the earlier shadow-removal statement: because browser print compositors may omit SVG blur filters, each visible label has a normally hidden duplicate text layer. Print reveals that clipped layer as a broad rounded paper-white vector stroke beneath the black label, reliably clearing nearby pattern marks without adding shaded ink; screen rendering continues to use the soft filter shadow.
+
+The current intended-size orientation rule supersedes the earlier fail-only rotation sequence: horizontal and vertical whole-word layouts are both evaluated at the authored size, vertical wins when it uses fewer lines, and equal line counts remain horizontal. The continuous-scale comparison still applies when neither authored-size orientation fits. After orientation selection, a label may grow only to 125% of its box-derived size and remains capped at 24px; this uses spare room without letting a small box jump directly from the 12px baseline to the global ceiling. Piece and scrap labels use this one shared fitter. The legacy 6px scrap cutoff is removed: every positive-size scrap rectangle retains continuously scaled visible text with the same adaptive padding, stroke sizing, and unrotated clipping as piece labels.
+
+The V1.1 reconciled-project projector is a read-only adapter over the selected M3 material-bin placements. Purchased-bolt placements retain their selected row grouping and use the existing strip-instruction projector. Finite-stock placements retain exact bin identity and coordinates; when they cannot truthfully be expressed as WOF strips, their accessible instructions identify the source remnant and exact pieces instead. Domain leftover rectangles project directly as stock-leftover regions. The adapter may supply non-geometric compatibility fields required by the shared diagram contract, but it must never normalize requirements, move a placement, select a candidate, or synthesize a second layout.
+
+## Multi-Fabric Project Contract
+
+- Schema version 2 is the canonical V1.1 project contract. Fabrics and cut requirements are top-level collections joined by `fabricId`; every requirement carries explicit orientation and WOF semantics. Fabric plans provide project-local stock arrays consumed by M2 and reserve optional pattern references for M3.
+- A V1.1 project supplies one shared unit system and seam allowance plus uniquely identified fabrics, top-level cut requirements assigned by fabric ID, optional pattern reference amounts, and zero or more project-local finite stock pieces per fabric.
+- Requirements are normalized once. Each fabric is reconciled independently; placements and leftovers never cross fabric or material-bin identities.
+- The fresh-fabric pattern scenario ignores stock. The stock-aware scenario jointly allocates exact finite rectangles and any required purchased-bolt segment, with safety and purchase rounding applied only to the raw additional purchase.
+- Selection is lexicographic: validity, lower raw additional purchase, practical cutting, useful leftovers/low fragmentation, waste, then stable deterministic order.
+- Per-bin and purchased-bolt cutting plans are read-only projections from the selected reconciliation placements. Project orchestration, prose instructions, and diagrams do not create another layout engine.
+
+## Standalone Calculator Contract
+
+- `src/lib/domain/calculators` owns framework-independent Backing, Batting, Binding, HST, QST, Flying Geese, Block Count, Borders, Sashing, and Pieces from Fabric contracts. Fabric Yardage is an explicit alias of the shared repeated-rectangle yardage engine, not a duplicate implementation; Pieces from Fabric delegates physical geometry to the finite-stock engine.
+- Calculator inputs and all returned lengths use canonical millimetres. Invalid numeric or count inputs return field-specific blocking errors; successful results return deterministic typed values, structured assumptions/formula steps, and non-blocking warnings.
+- Backing compares independently calculated vertical- and horizontal-seam candidates when non-directional, filters the horizontal candidate for directional fabric, accounts for panel-join seam consumption, exposes every valid candidate, and labels the deterministic lowest-yardage candidate without presenting it as universal advice.
+- Binding is straight/cross-grain double-fold only. HST methods own their 2/4/8 yields and starting-square formulas. Four-at-a-time uses `U × √2 + 2SA`, Standard upward quarter-inch rounding, an additional quarter inch for Trim-friendly, and the bias-edge warning.
+- Block Count uses whole blocks and models optional between-block sashing explicitly. Borders are straight, non-mitered, equal-width, side-first WOF layers. Sashing is row-wise without cornerstones or outer sashing. Borders and sashing share `joined-wof.ts`, which deducts `2 × join seam allowance` at every join before testing capacity against linear demand plus the separate handling buffer.
+- Binding, Backing, Borders, and Sashing use the shared safety and strict upward purchase-rounding primitive; warnings never substitute for invalid results.
+- Batting applies entered overage to all four sides and enumerates only roll orientations whose across-roll dimension fits. It does not calculate pieced batting; an unusably narrow supplied roll preserves the required rectangle and returns explicit guidance without inventing a layout.
+- QST models only the classic two-color hourglass batch: Standard starts at finished size plus 1.25 inches, Trim-friendly at plus 1.5 inches, and each four-unit batch consumes two squares per fabric. Flying Geese models only conventional 2:1 finished proportions, exposes both locked one-at-a-time/four-at-a-time Standard and Trim-friendly dimensions, and blocks other proportions.
+- Pieces from Fabric normalizes finished sizes through the shared seam-allowance path, derives a finite area upper bound, and asks the bounded finite-stock optimizer for the practical maximum/requested layout. Source stock dimensions remain authoritative; geometry comparisons use a scale-relative `1e-9` tolerance only at floating-point boundaries so mathematically edge-equal converted lengths are not rejected.
+
+## Verification Contract
+
+V1.1 Golden fixtures G01-G45 and required property tests are release gates. Relevant fixture subsets must pass at each milestone named by `docs/v1.1/07_TECHNICAL_MIGRATION_PLAN.md`. Legacy differentiation diagnostics are separately identified as D01-D05.

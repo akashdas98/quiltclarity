@@ -1,0 +1,20 @@
+---
+import { CONTEXT_HELP, type HelpKey } from '../lib/help';
+
+interface Props {
+  helpKey: HelpKey;
+}
+
+const { helpKey } = Astro.props;
+const entry = CONTEXT_HELP[helpKey];
+---
+
+<span class="control-with-help" data-action-help data-help-key={helpKey}>
+  <slot />
+  <span
+    class="action-help-tooltip"
+    role="tooltip"
+    data-action-help-tooltip
+    hidden>{entry.explanation}</span
+  >
+</span>

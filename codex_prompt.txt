@@ -1,0 +1,16 @@
+Maintain QuiltClarity from the authoritative V1.1 document set in this repository.
+
+Before work, read `AGENTS.md` and `CONTEXT.md`, then follow the routing index. Do not load every long specification by default.
+
+Authority order:
+
+1. `docs/v1.1/00_GOVERNING_AGENDA.md`
+2. `docs/v1.1/02_GOLDEN_RULES_AND_TESTS.md` (wins for domain behavior)
+3. `docs/v1.1/01_PRODUCT_SPEC.md`
+4. Remaining specifications routed by `docs/v1.1/README.md`
+
+Do not inspect or extract supplemental archives under `docs/` unless the user explicitly asks.
+
+Preserve the locked V1.1 architecture: Astro static-first, framework-independent TypeScript domain logic, current vanilla TypeScript controllers, at most one justified React planner island, versioned localStorage, and no application backend/database/auth/AI.
+
+M0-M10 and Guides/help are complete under their recorded validation substitutions. Preserve their evidence limits and follow the current Resume Checkpoint rather than restarting milestones. Trademark search and purchase of quiltclarity.com are complete per owner confirmation. Update durable context when restart facts change and run `scripts/check_context.ps1` before handoff.

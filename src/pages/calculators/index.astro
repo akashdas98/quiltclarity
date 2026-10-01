@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const tools = [
+  [
+    'Fabric yardage',
+    'Repeated rectangles from one fabric.',
+    '/calculators/fabric-yardage/',
+  ],
+  [
+    'Backing',
+    'Compare valid panel layouts and purchase yardage.',
+    '/calculators/quilt-backing/',
+  ],
+  [
+    'Batting',
+    'Add overage and check roll orientation.',
+    '/calculators/quilt-batting/',
+  ],
+  [
+    'Binding',
+    'Calculate binding length, strips, and yardage.',
+    '/calculators/quilt-binding/',
+  ],
+  [
+    'Half-square triangles',
+    'Size starting squares for 2, 4, or 8 at a time.',
+    '/calculators/half-square-triangle/',
+  ],
+  [
+    'Quarter-square triangles',
+    'Size classic two-color QST batches.',
+    '/calculators/quarter-square-triangle/',
+  ],
+  [
+    'Flying Geese',
+    'Plan conventional 2:1 units.',
+    '/calculators/flying-geese/',
+  ],
+  [
+    'Block count',
+    'Find whole blocks across, down, and total.',
+    '/calculators/quilt-block-count/',
+  ],
+  [
+    'Borders',
+    'Plan equal-width border layers and strips.',
+    '/calculators/borders/',
+  ],
+  [
+    'Sashing',
+    'Plan row-wise sashing without cornerstones.',
+    '/calculators/sashing/',
+  ],
+  [
+    'Pieces from fabric',
+    'Fit repeated pieces in one real fabric rectangle.',
+    '/calculators/pieces-from-fabric/',
+  ],
+];
+---
+
+<BaseLayout
+  title="Eleven Quilting Calculators — QuiltClarity"
+  description="Eleven focused quilting calculators with visible assumptions, static guidance, and local calculations."
+>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Quilting calculators</p><h1>
+        Check the math. Keep the assumptions.
+      </h1><p class="lede">
+        Each focused calculator explains what it counted and rounds fabric
+        purchases upward. No signup or upload is needed.
+      </p>
+      <p>
+        Choose yardage, backing, batting, binding, HST, QST, Flying Geese, block
+        count, borders, sashing, or finite-stock fit.
+      </p>
+    </header><div class="card-grid">
+      {
+        tools.map(([title, text, href]) => (
+          <article class="card">
+            <>
+              <h2>{title}</h2>
+              <p>{text}</p>
+              <a href={href}>Open calculator</a>
+            </>
+          </article>
+        ))
+      }
+    </div>
+    <section class="content-section" aria-labelledby="learn-heading">
+      <h2 id="learn-heading">Learn the measurements behind the answers</h2>
+      <p>
+        Start with{' '}<a href="/guides/width-of-fabric/"
+          >usable width of fabric</a
+        >, check{' '}<a href="/guides/finished-vs-cut-size/"
+          >finished versus cut size</a
+        >, or follow the full{' '}<a
+          href="/guides/how-to-calculate-quilt-yardage/">quilt yardage method</a
+        >.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

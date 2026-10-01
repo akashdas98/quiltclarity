@@ -1,0 +1,759 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContextHelp from '../components/ContextHelp.astro';
+import ControlWithHelp from '../components/ControlWithHelp.astro';
+---
+
+<BaseLayout
+  title="Quilt Fabric Planner: Use What You Have & Calculate What to Buy | QuiltClarity"
+  description="Reconcile a quilt cut list with measured fabric stock, compare optional pattern yardage, and calculate what to buy and how to cut it."
+  pageType="application"
+>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Fabric cutting planner</p>
+      <h1>Use What You Have. Calculate What to Buy.</h1>
+      <p class="lede">
+        Enter the rectangular cut list from the quilt you are already making,
+        measure fabric you have on hand, and get one reconciled shopping and
+        cutting plan. Optional pattern yardage is compared against a separate
+        fresh-fabric scenario.
+      </p>
+      <p class="trust-line">Free · No account · Saved only on this device</p>
+    </header>
+
+    <aside class="callout inline-callout first-use-helper">
+      <strong>Start with one fabric.</strong> Set up the fabrics in your project,
+      then compile all of its cut requirements in one list.
+    </aside>
+
+    <noscript
+      ><p class="errors">
+        This planner needs JavaScript to calculate locally in your browser.
+      </p></noscript
+    >
+    <form id="planner-form" novalidate>
+      <section
+        class="planner-input-section"
+        aria-labelledby="project-settings-heading"
+      >
+        <div class="planner-section-heading">
+          <div>
+            <p class="eyebrow">Project</p>
+            <h2 id="project-settings-heading">Set your project assumptions</h2>
+            <p class="hint">
+              Choose the measurements and seam allowance used across this
+              project.
+            </p>
+          </div>
+        </div>
+        <fieldset>
+          <legend class="visually-hidden">Project settings</legend>
+          <div class="form-grid">
+            <div class="field">
+              <span class="help-label">
+                <label for="project-name"
+                  >Project name <span class="hint">(optional)</span></label
+                >
+                <ContextHelp helpKey="projectName" />
+              </span>
+              <input id="project-name" name="projectName" autocomplete="off" />
+            </div>
+            <div class="field">
+              <span class="help-label">
+                <label for="unit-system">Measurements</label>
+                <ContextHelp helpKey="measurementUnits" />
+              </span>
+              <select id="unit-system" name="unitSystem"
+                ><option value="imperial">Inches and yards</option><option
+                  value="metric">Centimetres and metres</option
+                ></select
+              >
+            </div>
+            <div class="field">
+              <div class="field-label-line">
+                <span class="help-label">
+                  <label for="seam-allowance"
+                    >Seam allowance (<span data-unit-label>in</span>)</label
+                  >
+                  <ContextHelp helpKey="seamAllowance" />
+                </span>
+              </div><input
+                id="seam-allowance"
+                name="seamAllowance"
+                data-field="seamAllowance"
+                type="number"
+                min="0"
+                step="any"
+                value="0.25"
+              /><small
+                >Added on every edge when a piece uses finished size.</small
+              >
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+      <div id="planner-errors" class="errors" role="alert" hidden></div>
+      <section class="planner-input-section" aria-labelledby="fabrics-heading">
+        <div class="planner-section-heading">
+          <div>
+            <p class="eyebrow">Fabrics</p>
+            <h2 id="fabrics-heading">Describe your project fabrics</h2>
+            <p class="hint">
+              Add each fabric once, then record its usable width, fabric on
+              hand, and optional pattern reference.
+            </p>
+          </div>
+        </div>
+        <div id="fabrics"></div>
+        <div class="actions">
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" id="add-fabric"
+              >Add another fabric</button
+            >
+          </ControlWithHelp>
+        </div>
+      </section>
+      <section class="cut-list-section" aria-labelledby="cut-list-heading">
+        <div class="cut-list-heading planner-section-heading">
+          <div>
+            <p class="eyebrow">Cut requirements</p>
+            <h2 id="cut-list-heading">Build your cut list</h2>
+            <p class="hint">
+              Tab through each row. New rows keep the last fabric and size mode;
+              every dimension remains visible and editable.
+            </p>
+          </div>
+          <ControlWithHelp helpKey="actionImport">
+            <button type="button" class="secondary" id="open-paste-dialog"
+              >Paste from spreadsheet</button
+            >
+          </ControlWithHelp>
+        </div>
+        <div class="cut-list-scroll" id="cut-list-table-wrap">
+          <table class="cut-list-table">
+            <thead>
+              <tr>
+                <th scope="col"
+                  ><span class="help-label"
+                    >Fabric<ContextHelp helpKey="fabricName" /></span
+                  ></th
+                >
+                <th scope="col"
+                  ><span class="help-label"
+                    >Piece<ContextHelp helpKey="pieceLabel" /></span
+                  ></th
+                >
+                <th scope="col"
+                  ><span class="help-label"
+                    >Qty<ContextHelp helpKey="pieceQuantity" /></span
+                  ></th
+                >
+                <th scope="col"
+                  ><span class="help-label"
+                    >Width<ContextHelp helpKey="pieceDimensions" /></span
+                  ></th
+                >
+                <th scope="col"
+                  ><span class="help-label"
+                    >Height<ContextHelp helpKey="pieceDimensions" /></span
+                  ></th
+                >
+                <th scope="col"
+                  ><span class="help-label"
+                    >Cut/Finished<ContextHelp helpKey="cutVsFinished" /></span
+                  ></th
+                >
+              </tr>
+            </thead>
+            <tbody id="cut-list-rows"></tbody>
+          </table>
+        </div>
+        <p id="cut-list-empty" class="hint cut-list-empty" hidden>
+          No cut rows yet. Add a cut row or paste CSV or spreadsheet values.
+        </p>
+        <div class="actions">
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" id="add-cut-row"
+              >Add cut row</button
+            >
+          </ControlWithHelp>
+        </div>
+        <div
+          id="cut-list-undo"
+          class="cut-list-toast"
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          <span>Cut row deleted.</span>
+          <ControlWithHelp helpKey="actionUndo">
+            <button type="button" class="secondary" id="undo-cut-row"
+              >Undo delete</button
+            >
+          </ControlWithHelp>
+        </div>
+      </section>
+      <div class="actions">
+        <ControlWithHelp helpKey="actionCalculate">
+          <button type="submit" id="calculate-plan"
+            >Calculate Cutting Plan</button
+          >
+        </ControlWithHelp>
+      </div>
+      <p id="save-status" class="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <dialog id="paste-dialog" aria-labelledby="paste-dialog-heading">
+      <div class="paste-dialog-content">
+        <h2 id="paste-dialog-heading">Paste from spreadsheet</h2>
+        <p>
+          Paste CSV or tab-separated spreadsheet values. The format is detected
+          automatically. Include the header or use this exact column order:
+        </p>
+        <p><code>Fabric | Label | Qty | Width | Height | Size mode</code></p>
+        <div class="field paste-source-field">
+          <span class="help-label">
+            <label for="paste-source">Spreadsheet rows</label>
+            <ContextHelp helpKey="actionImport" />
+          </span>
+          <small id="paste-source-hint"
+            >CSV and tab-separated spreadsheet values are supported.</small
+          >
+          <textarea
+            id="paste-source"
+            rows="8"
+            wrap="off"
+            spellcheck="false"
+            aria-describedby="paste-source-hint"></textarea>
+        </div>
+        <div class="actions">
+          <ControlWithHelp helpKey="actionPreview">
+            <button type="button" id="preview-paste">Preview import</button>
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionCancel">
+            <button type="button" class="secondary" id="cancel-paste"
+              >Cancel</button
+            >
+          </ControlWithHelp>
+        </div>
+        <div id="paste-status" class="status" role="status" aria-live="polite">
+        </div>
+        <div id="paste-preview"></div>
+        <div class="actions" id="paste-confirm-actions" hidden>
+          <ControlWithHelp helpKey="actionConfirm">
+            <button type="button" id="confirm-paste" disabled
+              >Confirm import</button
+            >
+          </ControlWithHelp>
+        </div>
+      </div>
+    </dialog>
+
+    <section
+      id="planner-results"
+      class="results"
+      aria-live="polite"
+      aria-labelledby="results-heading"
+      tabindex="-1"
+      hidden
+    >
+      <p class="eyebrow">Your plan</p><h2 id="results-heading">
+        <span class="help-label">
+          Shopping list and cutting plan
+          <ContextHelp helpKey="cuttingInstructions" />
+        </span>
+      </h2>
+      <p class="print-meta" id="print-meta"></p>
+      <div id="project-summary" class="result-summary"></div>
+      <div class="actions result-actions no-print">
+        <ControlWithHelp helpKey="actionPrint">
+          <button type="button" id="print-result">Print</button>
+        </ControlWithHelp>
+        <ControlWithHelp helpKey="actionCopy">
+          <button type="button" class="secondary" id="copy-result"
+            >Copy summary</button
+          >
+        </ControlWithHelp>
+        <ControlWithHelp helpKey="actionShare">
+          <button type="button" class="secondary" id="share-result"
+            >Share summary</button
+          >
+        </ControlWithHelp>
+        <ControlWithHelp helpKey="actionEdit">
+          <button type="button" class="secondary" id="edit-result"
+            >Edit assumptions</button
+          >
+        </ControlWithHelp>
+      </div>
+      <p id="action-status" class="status" role="status" aria-live="polite"></p>
+      <div id="fabric-results"></div>
+    </section>
+    <section
+      class="content-section no-print"
+      aria-labelledby="planner-how-heading"
+    >
+      <h2 id="planner-how-heading">How the cutting planner works</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Inputs and assumptions</h3>
+          <p>
+            Group rectangular pieces by fabric. QuiltClarity converts finished
+            sizes to cut sizes once, uses the width left after selvages, and
+            respects fabric direction plus piece-level rotation and orientation
+            choices. You do not need to create a digital quilt design first.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Worked example</h3>
+          <p>
+            Twenty-four 3½ × 6½ inch cut rectangles fit six across 40 inches of
+            usable WOF when rotation is allowed. Four 3½-inch strips use 14
+            inches before safety allowance and upward purchase rounding.
+          </p>
+        </article>
+        <article class="card">
+          <h3>How to audit the answer</h3>
+          <p>
+            The shopping list, assumptions, strip instructions, diagram, and
+            text alternative all come from the selected deterministic layout.
+            Compatible groups may share otherwise unused row width, while the
+            result remains a practical heuristic rather than a proven global
+            minimum. Read the <a href="/methodology/"
+              >full calculation methodology</a
+            >.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <template id="fabric-template">
+    <fieldset class="fabric-card">
+      <legend>Fabric <span data-fabric-number></span></legend>
+      <div class="fabric-card-heading">
+        <strong data-fabric-title>Fabric</strong>
+        <span class="assumption-summary" data-fabric-summary></span>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <span class="help-label">
+            <label>Fabric name</label>
+            <ContextHelp helpKey="fabricName" />
+          </span>
+          <input data-field="name" required />
+        </div>
+        <div class="field">
+          <div class="field-label-line">
+            <span class="help-label">
+              <label>Usable width (<span data-unit-label>in</span>)</label>
+              <ContextHelp helpKey="usableWof" />
+            </span>
+          </div><input
+            data-field="usableWidth"
+            type="number"
+            min="0"
+            step="any"
+            required
+          /><small>Width after selvages are removed.</small>
+        </div>
+      </div>
+      <section class="fabric-stock" aria-label="Fabric you already have">
+        <div class="fabric-subheading">
+          <div>
+            <h3>
+              Fabric you already have<ContextHelp helpKey="stockPreset" />
+            </h3>
+            <p class="hint">
+              Add physical pieces for this project. Preset dimensions are
+              editable and should match the fabric you can actually cut.
+            </p>
+          </div>
+        </div>
+        <div data-stock-pieces></div>
+        <div class="actions stock-actions">
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" data-add-stock="fat-quarter"
+              >Add fat quarter</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" data-add-stock="fat-eighth"
+              >Add fat eighth</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionAdd">
+            <button
+              type="button"
+              class="secondary"
+              data-add-stock="quarter-yard">Add quarter yard</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" data-add-stock="half-yard"
+              >Add half yard</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionAdd">
+            <button
+              type="button"
+              class="secondary"
+              data-add-stock="partial-yardage">Add partial yardage</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionAdd">
+            <button type="button" class="secondary" data-add-stock="custom"
+              >Add custom piece</button
+            >
+          </ControlWithHelp>
+        </div>
+      </section>
+      <details data-pattern-comparison>
+        <summary>Compare with pattern yardage (optional)</summary>
+        <p class="hint">
+          QuiltClarity compares this with a fresh-fabric plan based on the cuts
+          and assumptions you entered. A difference does not necessarily mean
+          the pattern is wrong.
+        </p>
+        <div class="form-grid">
+          <div class="field">
+            <div class="field-label-line">
+              <span class="help-label">
+                <label>Pattern says (<span data-purchase-unit>yd</span>)</label>
+                <ContextHelp helpKey="patternSays" />
+              </span>
+            </div>
+            <input
+              data-field="patternStatedAmount"
+              type="number"
+              min="0"
+              step="any"
+              inputmode="decimal"
+            />
+          </div>
+          <div class="field">
+            <div class="field-label-line">
+              <span class="help-label">
+                <label
+                  >Pattern usable WOF (<span data-unit-label>in</span>) <span
+                    class="hint">(if known)</span
+                  ></label
+                >
+                <ContextHelp helpKey="patternWof" />
+              </span>
+            </div>
+            <input
+              data-field="patternAssumedUsableWidth"
+              type="number"
+              min="0"
+              step="any"
+              inputmode="decimal"
+            />
+          </div>
+        </div>
+      </details>
+      <details data-advanced>
+        <summary>Advanced settings</summary>
+        <p class="assumption-summary" data-advanced-summary></p>
+        <div class="form-grid">
+          <div class="field">
+            <div class="field-label-line">
+              <span class="help-label">
+                <label
+                  >Nominal fabric width (<span data-unit-label>in</span>)</label
+                >
+                <ContextHelp helpKey="nominalWidth" />
+              </span>
+            </div><input
+              data-field="fabricWidth"
+              type="number"
+              min="0"
+              step="any"
+              inputmode="decimal"
+              required
+            /><small>Bolt width before selvages; not used for packing.</small>
+          </div>
+          <div class="check-field">
+            <input data-field="directional" type="checkbox" />
+            <span class="help-label">
+              <label>Directional fabric</label>
+              <ContextHelp helpKey="directionalFabric" />
+            </span>
+          </div>
+          <div class="check-field">
+            <input data-field="defaultRotationAllowed" type="checkbox" />
+            <span class="help-label">
+              <label>Allow piece rotation by default</label>
+              <ContextHelp helpKey="rotation" />
+            </span>
+          </div>
+          <div class="field">
+            <div class="field-label-line">
+              <span class="help-label">
+                <label>Safety allowance (%)</label>
+                <ContextHelp helpKey="purchaseSafety" />
+              </span>
+            </div><input
+              data-field="safetyAllowancePercent"
+              type="number"
+              min="0"
+              step="any"
+            />
+          </div>
+          <div class="field">
+            <div class="field-label-line">
+              <span class="help-label">
+                <label
+                  >Purchase increment (<span data-purchase-unit>yd</span
+                  >)</label
+                >
+                <ContextHelp helpKey="purchaseIncrement" />
+              </span>
+            </div><input
+              data-field="purchaseIncrement"
+              type="number"
+              min="0"
+              step="any"
+            />
+          </div>
+          <div class="field">
+            <span class="help-label">
+              <label>Notes</label>
+              <ContextHelp helpKey="freeformNotes" />
+            </span>
+            <textarea data-field="notes" rows="2"></textarea>
+          </div>
+        </div>
+        <ControlWithHelp helpKey="actionReset">
+          <button type="button" class="secondary" data-reset-fabric-advanced>
+            Reset fabric defaults
+          </button>
+        </ControlWithHelp>
+      </details>
+      <div class="actions">
+        <ControlWithHelp helpKey="actionRemove">
+          <button type="button" class="danger" data-remove-fabric
+            >Remove fabric</button
+          >
+        </ControlWithHelp>
+      </div>
+    </fieldset>
+  </template>
+
+  <template id="stock-piece-template">
+    <article class="stock-piece">
+      <div class="stock-piece-heading">
+        <strong data-stock-title>Stock piece</strong>
+        <ControlWithHelp helpKey="actionRemove">
+          <button type="button" class="danger" data-remove-stock>Remove</button>
+        </ControlWithHelp>
+      </div>
+      <div class="form-grid stock-piece-grid">
+        <div class="field">
+          <span class="help-label">
+            <label>Label</label>
+            <ContextHelp helpKey="fabricName" />
+          </span>
+          <input data-field="label" required />
+        </div>
+        <div class="field">
+          <div class="field-label-line">
+            <span class="help-label">
+              <label
+                >Across-fabric width (<span data-unit-label>in</span>)</label
+              >
+              <ContextHelp helpKey="stockGeometry" />
+            </span>
+          </div>
+          <input
+            data-field="width"
+            type="number"
+            min="0"
+            step="any"
+            inputmode="decimal"
+            required
+          />
+        </div>
+        <div class="field">
+          <div class="field-label-line">
+            <span class="help-label">
+              <label>Lengthwise length (<span data-unit-label>in</span>)</label>
+              <ContextHelp helpKey="stockGeometry" />
+            </span>
+          </div>
+          <input
+            data-field="length"
+            type="number"
+            min="0"
+            step="any"
+            inputmode="decimal"
+            required
+          />
+        </div>
+        <div class="field">
+          <span class="help-label">
+            <label>Quantity</label>
+            <ContextHelp helpKey="pieceQuantity" />
+          </span>
+          <input
+            data-field="quantity"
+            type="number"
+            min="1"
+            step="1"
+            required
+          />
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="cut-row-template">
+    <tr class="cut-list-row">
+      <td data-label="Fabric"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="fabricId"
+            >Fabric</label
+          ><ContextHelp helpKey="fabricName" /></span
+        ><select data-field="fabricId" required></select></td
+      >
+      <td data-label="Piece"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="label">Piece</label
+          ><ContextHelp helpKey="pieceLabel" /></span
+        ><input
+          data-field="label"
+          placeholder="Blue corner square"
+          required
+        /></td
+      >
+      <td data-label="Qty"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="quantity"
+            >Quantity</label
+          ><ContextHelp helpKey="pieceQuantity" /></span
+        ><input
+          data-field="quantity"
+          type="number"
+          min="1"
+          step="1"
+          required
+        /></td
+      >
+      <td data-label="Width"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="width">Width</label
+          ><ContextHelp helpKey="pieceDimensions" /></span
+        ><input
+          data-field="width"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          required
+        /></td
+      >
+      <td data-label="Height"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="height">Height</label
+          ><ContextHelp helpKey="pieceDimensions" /></span
+        ><input
+          data-field="height"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          required
+        /></td
+      >
+      <td data-label="Cut/Finished"
+        ><span class="help-label cut-row-field-help"
+          ><label class="cut-field-label" data-label-for="dimensionMode"
+            >Cut/Finished</label
+          ><ContextHelp helpKey="cutVsFinished" /></span
+        ><select data-field="dimensionMode"
+          ><option value="cut">Cut</option><option value="finished"
+            >Finished</option
+          ></select
+        ></td
+      >
+    </tr>
+    <tr class="cut-row-errors" hidden>
+      <td colspan="6">
+        <ul class="cut-row-error-list" data-cut-row-errors></ul>
+      </td>
+    </tr>
+    <tr class="cut-row-options">
+      <td colspan="6">
+        <details data-advanced>
+          <summary>More options</summary>
+          <div class="cut-row-more">
+            <div class="cut-row-more-fields">
+              <div class="field">
+                <div class="field-label-line">
+                  <span class="help-label">
+                    <label data-label-for="rotationAllowed">Rotation</label>
+                    <ContextHelp helpKey="rotation" />
+                  </span>
+                </div><select data-field="rotationAllowed"
+                  ><option value="default">Use fabric default</option><option
+                    value="true">Allow</option
+                  ><option value="false">Do not allow</option></select
+                >
+              </div>
+              <div class="field">
+                <span class="help-label">
+                  <label data-label-for="orientation">Orientation</label>
+                  <ContextHelp helpKey="directionalFabric" />
+                </span>
+                <select data-field="orientation"
+                  ><option value="none">No constraint</option><option
+                    value="crosswise">Crosswise</option
+                  ><option value="lengthwise">Lengthwise</option></select
+                >
+              </div>
+              <div class="check-field">
+                <input data-field="isWofStrip" type="checkbox" />
+                <span class="help-label">
+                  <label data-label-for="isWofStrip"
+                    >Width-of-fabric strip</label
+                  >
+                  <ContextHelp helpKey="wofStrip" />
+                </span>
+              </div>
+              <div class="field cut-row-notes">
+                <span class="help-label">
+                  <label data-label-for="notes">Notes</label>
+                  <ContextHelp helpKey="freeformNotes" />
+                </span>
+                <textarea data-field="notes" rows="2"></textarea>
+              </div>
+            </div>
+            <p class="hint cut-size-preview" data-cut-size-preview></p>
+          </div>
+        </details>
+        <div class="cut-row-more-actions">
+          <ControlWithHelp helpKey="actionDuplicate">
+            <button type="button" class="secondary" data-duplicate-cut
+              >Duplicate row</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionReset">
+            <button type="button" class="secondary" data-reset-cut-advanced
+              >Reset piece defaults</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionRemove">
+            <button type="button" class="danger" data-remove-cut
+              >Delete row</button
+            >
+          </ControlWithHelp>
+        </div>
+      </td>
+    </tr>
+  </template>
+
+  <script>
+    import '../scripts/planner';
+  </script>
+</BaseLayout>

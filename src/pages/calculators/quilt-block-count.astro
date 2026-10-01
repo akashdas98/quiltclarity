@@ -1,0 +1,74 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'targetWidth',
+    label: 'Target quilt width',
+    value: 60,
+    unit: 'length',
+  },
+  {
+    name: 'targetLength',
+    label: 'Target quilt length',
+    value: 72,
+    unit: 'length',
+  },
+  {
+    name: 'finishedBlockWidth',
+    label: 'Finished block width',
+    value: 12,
+    unit: 'length',
+  },
+  {
+    name: 'finishedBlockHeight',
+    label: 'Finished block height',
+    value: 12,
+    unit: 'length',
+  },
+  {
+    name: 'finishedSashingWidth',
+    label: 'Finished sashing width',
+    value: 0,
+    unit: 'length',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="block-count"
+  title="Quilt Block Count Calculator"
+  description="Find how many whole blocks are needed across and down for a target quilt size."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      All dimensions are finished dimensions. Only whole rectangular blocks are
+      counted. Optional sashing sits between blocks, with no outer sashing, and
+      uses the same finished width horizontally and vertically.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Without sashing, each target dimension is divided by the matching block
+      dimension and rounded upward. With sashing, the calculator solves for the
+      smallest whole number of blocks whose combined block and between-block
+      sashing dimensions meet the target.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      A 60 × 72 inch target made from finished 12-inch blocks needs five blocks
+      across and six down: 30 blocks total. Because both divisions are exact,
+      the finished block field is exactly 60 × 72 inches before borders.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/calculators/sashing/">Quilt sashing calculator</a></li>
+    <li><a href="/calculators/borders/">Quilt border calculator</a></li>
+    <li>
+      <a href="/guides/finished-vs-cut-size/">Finished size versus cut size</a>
+    </li>
+  </ul>
+</CalculatorPage>

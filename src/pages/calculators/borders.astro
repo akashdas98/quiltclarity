@@ -1,0 +1,113 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'quiltWidth',
+    label: 'Planning/current quilt-top width',
+    value: 60,
+    unit: 'length',
+  },
+  {
+    name: 'quiltLength',
+    label: 'Planning/current quilt-top length',
+    value: 72,
+    unit: 'length',
+  },
+  {
+    name: 'finishedBorderWidth',
+    label: 'Finished border width',
+    value: 4,
+    unit: 'length',
+  },
+  {
+    name: 'layers',
+    label: 'Equal-width border layers',
+    value: 1,
+    unit: 'count',
+  },
+  {
+    name: 'seamAllowance',
+    label: 'Seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'usableWidth',
+    label: 'Usable fabric width',
+    value: 40,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'handlingBuffer',
+    label: 'Handling/cutting buffer',
+    value: 10,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'joinSeamAllowance',
+    label: 'Join seam allowance',
+    value: 0.25,
+    unit: 'length',
+    advanced: true,
+  },
+  {
+    name: 'safetyAllowancePercent',
+    label: 'Safety allowance',
+    value: 5,
+    unit: 'percent',
+    advanced: true,
+  },
+  {
+    name: 'purchaseIncrement',
+    label: 'Purchase increment',
+    value: 0.125,
+    unit: 'purchase',
+    advanced: true,
+  },
+];
+---
+
+<CalculatorPage
+  calculator="borders"
+  title="Quilt Border Calculator"
+  description="Plan equal-width straight border layers, strip count, yardage, and final quilt size."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      V1 covers equal-width, straight, non-mitered borders cut as cross-grain
+      width-of-fabric strips, with side borders first. Before cutting the final
+      border lengths, measure the assembled quilt top through the center in
+      multiple places and use the chosen measured/averaged length.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Seam allowance is added to both edges of the finished border width. For
+      each layer, the calculator totals two side lengths and two top/bottom
+      lengths after the sides are attached. Joined-strip capacity deducts the
+      fabric consumed by every join, then adds the separate handling/cutting
+      buffer, counts whole WOF strips, and rounds the planning yardage upward.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      One finished 4-inch border around a 60 × 72 inch top produces a nominal 68
+      × 80 inch top. With ¼-inch seams, cut border strips 4½ inches wide. The
+      two side borders finish at 72 inches and the top and bottom at 68 inches.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/calculators/quilt-binding/">Quilt binding calculator</a></li>
+    <li>
+      <a href="/calculators/quilt-block-count/">Quilt block count calculator</a>
+    </li>
+    <li>
+      <a href="/guides/quilt-seam-allowance/">Quilt seam allowance guide</a>
+    </li>
+  </ul>
+</CalculatorPage>

@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME } from '../lib/site-identity';
+import Field from './Field.astro';
+import ContextHelp from './ContextHelp.astro';
+import ControlWithHelp from './ControlWithHelp.astro';
+import type { CalculatorField } from './calculator-types';
+
+interface Props {
+  calculator: string;
+  title: string;
+  description: string;
+  fields: CalculatorField[];
+}
+
+const { calculator, title, description, fields } = Astro.props;
+const basic = fields.filter((field) => !field.advanced);
+const advanced = fields.filter((field) => field.advanced);
+const advancedSummary = advanced
+  .slice(0, 4)
+  .map((field) => `${field.label}: ${String(field.value)}`)
+  .join(' · ');
+---
+
+<BaseLayout
+  title={`${title} — ${SITE_NAME}`}
+  description={description}
+  pageType="application"
+>
+  <div class="page">
+    <header class="hero compact-hero">
+      <p class="eyebrow">Quilting calculator</p>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="trust-line">Free · No account · Editable assumptions</p>
+    </header>
+    <div class="calculator-shell">
+      <form class="calculator-form" data-calculator={calculator} novalidate>
+        <fieldset>
+          <legend>Your measurements</legend>
+          <div class="field calculator-measurements-field">
+            <span class="help-label">
+              <label for={`${calculator}-units`}>Measurements</label>
+              <ContextHelp helpKey="measurementUnits" />
+            </span>
+            <select id={`${calculator}-units`} name="unitSystem">
+              <option value="imperial">Inches and yards</option>
+              <option value="metric">Centimetres and metres</option>
+            </select>
+          </div>
+          <div class="form-grid">
+            {
+              basic.map((field) => (
+                <Field field={field} calculator={calculator} />
+              ))
+            }
+          </div>
+        </fieldset>
+        {
+          advanced.length > 0 && (
+            <details data-calculator-advanced>
+              <summary>Advanced settings</summary>
+              <p class="assumption-summary" data-advanced-summary>
+                {advancedSummary}
+              </p>
+              <fieldset>
+                <legend>Advanced assumptions</legend>
+                <div class="form-grid calculator-advanced-grid">
+                  {advanced.map((field) => (
+                    <Field field={field} calculator={calculator} />
+                  ))}
+                </div>
+                <ControlWithHelp helpKey="actionReset">
+                  <button type="button" class="secondary" data-reset-advanced>
+                    Reset advanced defaults
+                  </button>
+                </ControlWithHelp>
+              </fieldset>
+            </details>
+          )
+        }
+        <div
+          id={`${calculator}-errors`}
+          class="calculator-errors errors"
+          role="alert"
+          hidden
+        >
+        </div>
+        <ControlWithHelp helpKey="actionCalculate">
+          <button type="submit">Calculate</button>
+        </ControlWithHelp>
+      </form>
+      <section
+        class="calculator-result card"
+        aria-live="polite"
+        tabindex="-1"
+        hidden
+      >
+        <p class="eyebrow">Your result</p>
+        <h2>
+          <span class="help-label"
+            >Recommended answer<ContextHelp helpKey="resultMeaning" /></span
+          >
+        </h2>
+        <div data-result-content></div>
+        <div class="actions result-actions no-print">
+          <ControlWithHelp helpKey="actionCopy">
+            <button type="button" class="secondary" data-copy
+              >Copy summary</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionPrint">
+            <button type="button" class="secondary" data-print
+              >Print result</button
+            >
+          </ControlWithHelp>
+          <ControlWithHelp helpKey="actionTransfer">
+            <button type="button" class="secondary" data-add-to-planner hidden
+              >Add to planner</button
+            >
+          </ControlWithHelp>
+        </div>
+        <p class="status" data-action-status role="status"></p>
+      </section>
+    </div>
+    <section class="card explanation-card" aria-labelledby="how-heading">
+      <h2 id="how-heading">How this calculator works</h2>
+      <h3>Assumptions</h3>
+      <slot name="assumptions" />
+      <h3>Methodology</h3>
+      <slot name="methodology" />
+      <h3>Worked example</h3>
+      <slot name="example" />
+      <h3>Limitations</h3>
+      <slot name="limitations">
+        <p>
+          This focused calculator covers the construction method and rectangular
+          measurements described above. It does not infer a complete quilt
+          pattern or replace method-specific instructions.
+        </p>
+      </slot>
+      <h3>Common question</h3>
+      <slot name="faq">
+        <p>
+          <strong>Can I change the defaults?</strong> Yes. The visible defaults are
+          planning conveniences; use the measurements and assumptions that match your
+          fabric, method, and quilting setup.
+        </p>
+      </slot>
+    </section>
+    <section class="content-section" aria-labelledby="next-heading">
+      <h2 id="next-heading">Keep planning</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Relevant guide and tools</h3>
+          <slot name="related" />
+        </article>
+        <article class="card callout">
+          <h3>Plan more than one piece</h3>
+          <p>
+            Combine all the rectangles for each fabric into a shopping list,
+            cutting list, and visual layout.
+          </p>
+          <ControlWithHelp helpKey="actionTransfer">
+            <a class="button" href="/fabric-cutting-planner/"
+              >Open the fabric cutting planner</a
+            >
+          </ControlWithHelp>
+        </article>
+      </div>
+    </section>
+  </div>
+  <script>
+    import '../scripts/calculators';
+  </script>
+</BaseLayout>

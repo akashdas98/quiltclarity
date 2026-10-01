@@ -1,0 +1,26 @@
+---
+import { CONTEXT_HELP, type ContextHelpEntry, type HelpKey } from '../lib/help';
+
+interface Props {
+  helpKey: HelpKey;
+}
+
+const { helpKey } = Astro.props;
+const entry: ContextHelpEntry = CONTEXT_HELP[helpKey];
+---
+
+&nbsp;<span class="context-help" data-context-help data-help-key={helpKey}>
+  <span class="context-help-mark" aria-hidden="true">?</span>
+  <button
+    type="button"
+    class="context-help-trigger no-print"
+    aria-label={`Help: ${entry.title}`}
+    aria-expanded="false"
+    data-help-trigger></button>
+  <span class="context-help-popover" role="note" data-help-popover hidden>
+    <strong>{entry.title}</strong>
+    <span>{entry.explanation}</span>
+    {entry.caveat && <span class="context-help-caveat">{entry.caveat}</span>}
+    <a href={entry.learnMoreHref} data-help-learn-more>Learn more</a>
+  </span>
+</span>

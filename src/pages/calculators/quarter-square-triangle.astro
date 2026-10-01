@@ -1,0 +1,59 @@
+---
+import CalculatorPage from '../../components/CalculatorPage.astro';
+import type { CalculatorField } from '../../components/calculator-types';
+const fields: CalculatorField[] = [
+  {
+    name: 'finishedSize',
+    label: 'Finished QST size',
+    value: 4,
+    unit: 'length',
+  },
+  { name: 'quantity', label: 'QSTs needed', value: 24, unit: 'count' },
+  {
+    name: 'sizingMode',
+    label: 'Starting-square size',
+    value: 'trim-friendly',
+    kind: 'select',
+    options: [
+      { value: 'trim-friendly', label: 'Trim-friendly' },
+      { value: 'standard', label: 'Standard' },
+    ],
+  },
+];
+---
+
+<CalculatorPage
+  calculator="qst"
+  title="Quarter-Square Triangle Calculator"
+  description="Size starting squares and batches for classic two-color quarter-square triangle units."
+  fields={fields}
+>
+  <div slot="assumptions">
+    <p>
+      This models a classic two-color hourglass/QST batch. Each batch starts
+      with two squares from each fabric and makes four units. It does not cover
+      every multi-color QST construction variation.
+    </p>
+  </div>
+  <div slot="methodology">
+    <p>
+      Standard starting squares add 1¼ inches to finished size; trim-friendly
+      squares add 1½ inches. Batch count rounds upward, so produced and excess
+      units remain visible.
+    </p>
+  </div>
+  <div slot="example">
+    <p>
+      For 24 finished 4-inch QSTs in trim-friendly mode, cut twelve 5½-inch
+      starting squares from each fabric. Six batches produce exactly 24 units,
+      trimmed to 4½ inches unfinished.
+    </p>
+  </div>
+  <ul slot="related">
+    <li><a href="/calculators/half-square-triangle/">HST calculator</a></li>
+    <li><a href="/calculators/flying-geese/">Flying Geese calculator</a></li>
+    <li>
+      <a href="/guides/finished-vs-cut-size/">Finished versus cut size</a>
+    </li>
+  </ul>
+</CalculatorPage>
