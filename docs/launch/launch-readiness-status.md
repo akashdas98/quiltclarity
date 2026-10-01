@@ -74,27 +74,32 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
   Purchased identity: `quiltclarity.com` / `QuiltClarity`. Local source Phase 5
   is complete, including public names, metadata, apex origin and local legacy-key
   migration. Separate report location and registrar,
-  purchase/renewal details, and canonical apex/www choice are not recorded.
+  purchase/renewal details are not recorded. Apex is the canonical live host;
+  WWW permanently redirects to it with path/query retained.
   Do not treat missing repository records as incomplete search or purchase.
 - Cloudflare + Astro is already selected per owner confirmation on 2026-10-01.
-  Establish Cloudflare account/project and domain-zone state using the
+  Active zone and assets-only apex/www Workers are verified and deployed. Use the
   [hosting decision](../decisions/cloudflare-static-hosting.md) and README setup.
 - Feedback System is deferred to V2 under the
   [owner-approved decision](../decisions/v1.1-feedback-system-deferral.md).
   The retained `/corrections/` page conveys coming-soon availability; a feedback
   inbox is not a V1.1 launch dependency.
-- Connect and push the repository so hosted CI can run.
+- Public GitHub repository is pushed and hosted CI passes. Connect Cloudflare
+  Builds to it for automatic deployment; this GitHub App consent remains pending.
 - Confirm host configuration uses the purchased apex `SITE_URL` default (or an
   explicitly selected canonical origin); configure `PUBLIC_GOOGLE_SITE_VERIFICATION`
-  when Search Console supplies it. Live apex/www redirects remain a host gate.
+  when Search Console supplies it. HTTP-to-HTTPS enforcement remains a host gate.
 - Decide whether a production analytics provider will consume the existing data-layer events; do not expand the event payload schema.
 
 ## Pending on the deployed origin
 
-- Confirm HTTPS, the canonical host/redirect policy, production canonicals, sitemap, robots, and real 404 behavior.
+- HTTPS, apex canonicals, all 38 sitemap routes, robots, real 404 and WWW 301
+  pass the focused public check on 2026-10-01. HTTP apex still serves 200; enable
+  Always Use HTTPS in the zone dashboard and verify the redirect.
 - Verify Search Console, submit the sitemap, and inspect the homepage, planner, and calculator routes.
 - Confirm production analytics delivery without planner-content leakage.
-- Run public-origin smoke checks plus Firefox/Safari sanity checks where those engines are available.
+- Focused public Chrome calculator interaction passes. Full public print/mobile
+  and Firefox/Safari checks remain separate from the earlier local Chrome/Edge suite.
 - Monitor field Core Web Vitals and indexing; local synthetic checks cannot establish real-user performance or canonical selection.
 
 ## Deferred until monetization review
@@ -111,5 +116,6 @@ reconciled as of 2026-09-30, with purchase status corrected on 2026-10-01.
 Trademark search, domain purchase and local source activation are complete.
 The public [GitHub repository](https://github.com/akashdas98/quiltclarity) is
 connected and pushed; [hosted CI](https://github.com/akashdas98/quiltclarity/actions/runs/36860209033)
-passes on 2026-10-01. Connect selected Cloudflare hosting to this repository,
-configure deployment variables, and proceed through the public-origin checklist.
+passes on 2026-10-01. Static deployment is live at <https://quiltclarity.com>.
+Enable Always Use HTTPS and connect Cloudflare Builds to this repository using
+the README settings, then finish Search Console and remaining launch checks.

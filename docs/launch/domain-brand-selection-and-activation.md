@@ -45,7 +45,7 @@ Complete this block when the decision is made:
 Final public brand: QuiltClarity (domain-derived naming rule)
 Purchased domain: quiltclarity.com (owner confirmed 2026-10-01)
 Canonical HTTPS origin: https://quiltclarity.com (source/build default)
-Canonical host: apex (source/build default; live www redirect not configured here)
+Canonical host: apex (live HTTPS origin; WWW 301 retains path/query, 2026-10-01)
 Registrar:
 Initial registration price and term:
 Normal renewal price:
@@ -264,9 +264,10 @@ Before launch:
 - [ ] inspect built HTML for the final brand and origin;
 - [ ] prove no provisional public `Quilter` brand or `quilter.example` origin
       remains;
-- [ ] deploy the static `dist` output behind HTTPS;
-- [ ] confirm apex/`www` redirects and one canonical host;
-- [ ] verify production canonicals, sitemap, robots, JSON-LD, Open Graph URLs, and
+- [x] deploy the static `dist` output behind HTTPS, 2026-10-01;
+- [x] confirm HTTPS apex/`www` redirects and one canonical host, 2026-10-01;
+- [ ] enable and verify HTTP-to-HTTPS enforcement (HTTP apex currently serves 200);
+- [x] verify production canonicals, sitemap, robots, JSON-LD, Open Graph URLs, and
       real 404 behavior;
 - [ ] verify `/corrections/` retains its Feedback link, coming-soon copy,
       `noindex`, and sitemap exclusion without a submission or email endpoint;

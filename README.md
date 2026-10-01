@@ -29,7 +29,7 @@ uses millimetres internally, and is covered by golden fixtures and invariant tes
 The release checks include 215 automated tests and installed Chrome/Edge audits of
 mobile layouts, accessibility contracts, persistence, and rendered print output.
 
-The planned public address is **quiltclarity.com**; production deployment is pending.
+Live site: **[quiltclarity.com](https://quiltclarity.com/)**.
 
 ## Development
 
@@ -65,7 +65,8 @@ deployment.
 
 The selected hosting stack is **Cloudflare + static Astro**, reaffirmed by the
 owner on 2026-10-01. The public GitHub repository is connected and hosted CI
-passes. The Cloudflare account/application still needs to be connected. The
+passes. The site is deployed with Workers Static Assets; automatic deployment
+from GitHub still needs Cloudflare Builds to be connected. The
 [hosting decision](docs/decisions/cloudflare-static-hosting.md) preserves scope.
 
 | Setting              | Repository requirement                         |
@@ -84,6 +85,7 @@ Build with `npm run build`, then deploy after connecting the Cloudflare account:
 
 ```powershell
 npm exec --yes --package=wrangler@4.145.0 -- wrangler deploy
+npm exec --yes --package=wrangler@4.145.0 -- wrangler deploy --config wrangler.www.jsonc
 ```
 
 Wrangler is pinned for reproducibility and is deployment tooling only. Cloudflare's
@@ -92,8 +94,24 @@ documents this assets-only flow. Directory routes retain their trailing slash,
 and unknown routes serve Astro's `404.html` with a 404 status under Cloudflare's
 [static asset routing](https://developers.cloudflare.com/workers/static-assets/routing/static-site-generation/).
 
-After the repository release gate passes, configure the Cloudflare application
-and purchased domain, verify apex/www redirects and HTTPS, then complete
+`quiltclarity` serves the apex custom domain. `quiltclarity-www` serves a static
+301 redirect to the apex, preserving paths and query strings. It uses a separate
+asset directory because static `_redirects` rules do not support host matching.
+Neither deployment contains an application Worker script. Workers development
+and preview URLs are disabled to keep the production origin unique.
+
+To finish host setup in Cloudflare:
+
+1. For the `quiltclarity.com` zone, enable **SSL/TLS > Edge Certificates > Always
+   Use HTTPS**. HTTP apex currently serves content until that setting is enabled.
+2. For Worker `quiltclarity`, open **Settings > Builds > Connect**, authorize the
+   Cloudflare GitHub App for only `akashdas98/quiltclarity`, and use branch `main`,
+   build command `npm run verify`, and the first pinned deploy command above.
+   Set `NODE_VERSION=24`, `SITE_URL=https://quiltclarity.com`, and
+   `PUBLIC_ROBOTS_NOINDEX=false`. The redirect deployment can be redeployed with
+   the second command when its configuration changes.
+
+After these settings are confirmed, complete
 [public-origin acceptance](docs/launch/launch-readiness-status.md). Do not put
 account tokens or registrar secrets in the repository.
 

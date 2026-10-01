@@ -3,7 +3,7 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-01.
-- Objective: Connect owner-selected Cloudflare hosting to the public GitHub repository; source activation and hosted CI are complete.
+- Objective: Finish Cloudflare HTTPS enforcement and GitHub Builds connection; site is deployed at https://quiltclarity.com.
 - Cloudflare preparation, 2026-10-01: Owner authorized hosting/domain deployment.
   Sol-medium prepared assets-only `wrangler.jsonc` and README operation; model
   demand was static-host integration, effort demand bounded official routing
@@ -16,14 +16,36 @@
   checks pass. Prior source/browser evidence is reused; local dev was retained.
   Public NS lookup confirms `sean.ns.cloudflare.com` and `sara.ns.cloudflare.com`;
   no apex A record was returned. Authenticated zone/application state is unknown.
-- Access boundary: Browser control failed twice; plugin search found no
-  Cloudflare integration. Wrangler is unauthenticated. Default OAuth login was
-  canceled to narrow permissions. Automatic approval review rejected persistent
-  account-write authorization because deployment intent did not specifically
-  approve those scopes. Await owner approval for account/user/zone read,
-  Workers/scripts/routes and certificate write, and offline refresh access,
-  then resume login. No Cloudflare resources, DNS, Git integration or production
-  deployment have changed.
+- Account consent: Owner explicitly approved limited Cloudflare account/user/
+  zone read, Workers/scripts/routes and certificate write, and refreshable login
+  on 2026-10-01. OAuth login succeeded. Wrangler adds `offline_access`
+  automatically; it is not accepted as an explicit CLI scope argument.
+- Live deployment: Active owned zone and no preexisting `quiltclarity` Worker
+  verified before upload. Apex assets-only Worker version
+  `2edd4209-93f3-480f-9803-619b51cc178f` serves `quiltclarity.com`. Static redirect
+  Worker `quiltclarity-www`, version `a5f571af-9da4-4fab-ae16-bd5a659d5c62`, serves
+  `www.quiltclarity.com`. HTTPS www path/query test returns permanent 301 to the
+  exact apex path/query. Development and preview URLs are disabled. The separate
+  static redirect asset deployment is necessary because Cloudflare `_redirects`
+  cannot match hostnames; no application Worker script or backend was added.
+- Remaining host boundary: HTTP apex currently returns 200; enable zone
+  SSL/TLS > Edge Certificates > Always Use HTTPS. Cloudflare Builds is not
+  connected to GitHub. Reads of zone HTTPS settings and Builds connection/token
+  APIs return 403 under the approved limited token. Browser/native automation
+  fails to initialize, and no Cloudflare plugin is available. Owner dashboard
+  action is needed for the HTTPS toggle and the GitHub App consent; README
+  records branch, pinned deploy command and environment settings. No token or
+  refresh credential is committed or uploaded to GitHub.
+- Focused public-origin evidence, 2026-10-01: HTTPS apex loads with valid TLS;
+  all 38 sitemap URLs return 200, exact apex canonical and indexable metadata.
+  Robots points to the apex sitemap; Feedback and retained aliases remain
+  noindex, with aliases pointing canonically to their replacement guides.
+  Missing path returns real 404. Slashless calculator path returns 307 to its
+  trailing-slash route. CSS/JS return 200 with correct MIME. Installed Chrome
+  public Fabric Yardage Calculate returns 0.5 yd, 6 pieces per row, 4 rows and
+  14 in with no browser/request errors. Sol-medium performed this bounded host/
+  browser check; it is not a fresh full public print/mobile or Firefox/Safari
+  suite. Prior full local Chrome/Edge source/print evidence remains separate.
 - GitHub release checkpoint, 2026-10-01: Public repository created at
   <https://github.com/akashdas98/quiltclarity>, with `origin` connected. Reviewed
   snapshot `b500806` and checkpoint `d362c10` were pushed on `main` after the
@@ -234,13 +256,13 @@
   fresh private window, using only shipped Guides/help; about five minutes,
   described as quick and easy. Exact readback and evidence limits are in
   `docs/manual-tests/V1_1_GUIDES_HELP_MANUAL_TESTS.md`.
-- Unfinished: Establish actual Cloudflare hosting, DNS/redirects, Search Console,
+- Unfinished: Enable HTTP-to-HTTPS enforcement and connect Cloudflare Builds;
+  establish Search Console,
   and public-origin state for the now activated identity. Registrar and renewal
   details/report location remain unrecorded; do not infer incomplete owner work.
-- Next action: Obtain explicit Cloudflare OAuth scope approval and account
-  authorization, then connect the public repository to selected Cloudflare
-  hosting, then prepare production deployment and public-origin checks. Trademark search, purchase,
-  and local source activation are complete; no live deployment was performed.
+- Next action: Owner enables Always Use HTTPS and connects Worker Builds to
+  `akashdas98/quiltclarity`, then verify redirects and the first automatic deploy.
+  Trademark search, purchase, source activation and static deployment are complete.
 
 ## QuiltClarity source activation — 2026-10-01
 

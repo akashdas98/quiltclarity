@@ -1,0 +1,10 @@
+{
+  "name": "quiltclarity-www",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "www.quiltclarity.com", "custom_domain": true }],
+  "assets": {
+    "directory": "./deployment/www-redirect",
+  },
+}
