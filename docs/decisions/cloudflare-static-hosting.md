@@ -7,7 +7,9 @@ The owner reaffirmed the already selected stack on 2026-10-01:
 configured with `output: 'static'`; the deployed artifact is `dist/`, with all
 calculations and project persistence in the browser.
 
-Cloudflare account, application/project identifiers, GitHub repository URL,
+The public GitHub repository is <https://github.com/akashdas98/quiltclarity>;
+the reviewed source is pushed and hosted CI passes as of 2026-10-01.
+Cloudflare account, application/project identifiers,
 and existing domain-zone configuration have not been established in this
 session. Missing local configuration does not imply the owner lacks accounts.
 

@@ -109,6 +109,7 @@ M9 and M10 are complete, with M9's external-user-evidence limitation preserved.
 The Guides/help checkpoint is accepted and continuation documents are
 reconciled as of 2026-09-30, with purchase status corrected on 2026-10-01.
 Trademark search, domain purchase and local source activation are complete.
-Connect the repository and selected Cloudflare hosting, establish remote/hosted CI state, configure deployment
-variables, connect/push the repository, and proceed through the public-origin
-checklist.
+The public [GitHub repository](https://github.com/akashdas98/quiltclarity) is
+connected and pushed; [hosted CI](https://github.com/akashdas98/quiltclarity/actions/runs/36860209033)
+passes on 2026-10-01. Connect selected Cloudflare hosting to this repository,
+configure deployment variables, and proceed through the public-origin checklist.

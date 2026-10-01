@@ -64,8 +64,8 @@ deployment.
 ## Cloudflare deployment
 
 The selected hosting stack is **Cloudflare + static Astro**, reaffirmed by the
-owner on 2026-10-01. Provider selection is complete; the account/application and
-GitHub repository still need to be connected. The
+owner on 2026-10-01. The public GitHub repository is connected and hosted CI
+passes. The Cloudflare account/application still needs to be connected. The
 [hosting decision](docs/decisions/cloudflare-static-hosting.md) preserves scope.
 
 | Setting              | Repository requirement                         |

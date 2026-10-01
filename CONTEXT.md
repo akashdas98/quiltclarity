@@ -69,9 +69,9 @@ new work. Routed owners retain detailed evidence.
   Establish Cloudflare account/project, deployment, and Search Console state. Previous pending
   labels are not evidence that external owner work remains undone.
 - Public GitHub repository `akashdas98/quiltclarity` is created and connected.
-  Release snapshot is committed locally; push awaits owner consent for the
-  GitHub CLI's missing `workflow` scope. Original history remains on the local
-  `release-local-history` branch; never push it. Hosted CI has not run.
+  Reviewed release snapshot is pushed on `main`; hosted CI run 36860209033 passes.
+  Original history remains on the local `release-local-history` branch; never
+  push it. Local hooks and unreviewed ZIP bundles are excluded from the public snapshot.
   Windows Chrome/Edge
   coverage does not establish Firefox/Safari compatibility.
 - Guides/help and source activation are in the reviewed release snapshot.
@@ -133,7 +133,7 @@ new work. Routed owners retain detailed evidence.
 
 ## Next Recommended Steps
 
-1. Connect the GitHub repository and selected Cloudflare hosting for the activated
+1. Connect the public GitHub repository to selected Cloudflare hosting for the activated
    `quiltclarity.com` / `QuiltClarity` identity; provider selection and source activation are complete.
 2. Complete DNS/redirects, Search Console and public-origin acceptance once
    hosting is configured. Do not repeat search or purchase.
@@ -150,8 +150,8 @@ summary changes, retaining unresolved work, approvals and evidence limits.
   pre-purchase next step, then completed source activation with local legacy-key
   migration. Verify (215 tests) and installed Chrome/Edge print/browser gate pass.
   Owner reaffirmed Cloudflare + Astro; recorded the hosting decision and removed
-  the stale provider-selection task. Public GitHub repo created; push needs
-  workflow-scope consent. Cloudflare account/project setup remains.
+  the stale provider-selection task. Public GitHub repo created and pushed;
+  hosted CI passes. Cloudflare account/project setup remains.
 
 - 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
   recorded Feedback System as a planned V2 milestone, and removed the V1.1
