@@ -68,9 +68,9 @@ new work. Routed owners retain detailed evidence.
   Cloudflare + Astro is the owner-selected hosting stack, reaffirmed 2026-10-01.
   Owner approved limited OAuth access; active zone is verified and static
   apex/www deployments are live. WWW redirects permanently to apex with
-  path/query retained. HTTP apex still needs Always Use HTTPS, and Cloudflare
-  Builds needs GitHub App connection through the owner dashboard (API access
-  gives 403; browser automation is unavailable). Establish Search Console state. Previous pending
+  path/query retained. HTTP-to-HTTPS 301 now passes; owner saved the Cloudflare
+  GitHub connection. First automatic build awaits verification (Builds API
+  access gives 403; browser automation is unavailable). Establish Search Console state. Previous pending
   labels are not evidence that external owner work remains undone.
 - Public GitHub repository `akashdas98/quiltclarity` is created and connected.
   Reviewed release snapshot is pushed on `main`; hosted CI run 36860209033 passes.
@@ -137,8 +137,8 @@ new work. Routed owners retain detailed evidence.
 
 ## Next Recommended Steps
 
-1. Enable Cloudflare Always Use HTTPS and connect Worker Builds to the public
-   GitHub repository; static deployment is live at `https://quiltclarity.com`.
+1. Verify the first automatic Cloudflare build after the saved GitHub connection;
+   static deployment is live at `https://quiltclarity.com` and HTTPS enforcement passes.
 2. Complete DNS/redirects, Search Console and public-origin acceptance once
    hosting is configured. Do not repeat search or purchase.
 
@@ -156,7 +156,8 @@ summary changes, retaining unresolved work, approvals and evidence limits.
   Owner reaffirmed Cloudflare + Astro; recorded the hosting decision and removed
   the stale provider-selection task. Public GitHub repo created and pushed;
   hosted CI passes. Owner approved Cloudflare login; apex/www static deployments
-  are live. HTTP-to-HTTPS enforcement and GitHub Builds connection remain.
+  are live. HTTP-to-HTTPS passes and owner saved GitHub Builds connection;
+  first automatic build verification remains.
 
 - 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
   recorded Feedback System as a planned V2 milestone, and removed the V1.1

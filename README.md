@@ -103,7 +103,7 @@ and preview URLs are disabled to keep the production origin unique.
 To finish host setup in Cloudflare:
 
 1. For the `quiltclarity.com` zone, enable **SSL/TLS > Edge Certificates > Always
-   Use HTTPS**. HTTP apex currently serves content until that setting is enabled.
+   Use HTTPS**. HTTP-to-HTTPS 301 was verified on 2026-10-01.
 2. For Worker `quiltclarity`, open **Settings > Builds > Connect**, authorize the
    Cloudflare GitHub App for only `akashdas98/quiltclarity`, and use branch `main`,
    build command `npm run verify`, and the first pinned deploy command above.

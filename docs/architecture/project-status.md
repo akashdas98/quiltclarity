@@ -3,7 +3,15 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-01.
-- Objective: Finish Cloudflare HTTPS enforcement and GitHub Builds connection; site is deployed at https://quiltclarity.com.
+- Objective: Verify the first automatic Cloudflare build after the owner saved the GitHub connection; site is deployed at https://quiltclarity.com.
+- Host setup update, 2026-10-01: Owner confirmed the GitHub connection is saved.
+  HTTP apex now returns 301 to HTTPS, verified directly; the HTTPS enforcement
+  gap is closed. Push this documentation checkpoint to trigger the first
+  automatic build and inspect its GitHub check/deployment status. Direct parent
+  model demand is bounded release-state verification; effort demand is a
+  targeted HTTP/checks inspection and recorded build outcome. Acceptance:
+  owner setup preserved, automatic build triggered and outcome verified, no
+  application behavior changes or unrelated V2 archive edits staged.
 - Cloudflare preparation, 2026-10-01: Owner authorized hosting/domain deployment.
   Sol-medium prepared assets-only `wrangler.jsonc` and README operation; model
   demand was static-host integration, effort demand bounded official routing
@@ -28,12 +36,12 @@
   exact apex path/query. Development and preview URLs are disabled. The separate
   static redirect asset deployment is necessary because Cloudflare `_redirects`
   cannot match hostnames; no application Worker script or backend was added.
-- Remaining host boundary: HTTP apex currently returns 200; enable zone
-  SSL/TLS > Edge Certificates > Always Use HTTPS. Cloudflare Builds is not
-  connected to GitHub. Reads of zone HTTPS settings and Builds connection/token
+- Host access boundary: HTTP-to-HTTPS 301 is verified and the owner reports
+  Cloudflare Builds connected to GitHub; the first automatic build is pending
+  verification. Reads of zone HTTPS settings and Builds connection/token
   APIs return 403 under the approved limited token. Browser/native automation
   fails to initialize, and no Cloudflare plugin is available. Owner dashboard
-  action is needed for the HTTPS toggle and the GitHub App consent; README
+  action completed the HTTPS toggle and GitHub connection; README
   records branch, pinned deploy command and environment settings. No token or
   refresh credential is committed or uploaded to GitHub.
 - Focused public-origin evidence, 2026-10-01: HTTPS apex loads with valid TLS;
