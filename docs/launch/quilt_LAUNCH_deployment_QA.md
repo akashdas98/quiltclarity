@@ -99,8 +99,8 @@
 - [x] final source brand replacement and purchased-origin build defaults verified on 2026-10-01
 - [ ] production host variables and live canonical/redirect policy match the activated identity
 - [x] Cloudflare + Astro hosting stack selected, reaffirmed by owner 2026-10-01
-- [x] Cloudflare static application deployed, public repository pushed and hosted CI passes; Cloudflare Builds automatic deployment connection remains pending
-- [x] HTTPS apex and WWW are served with valid TLS; Always Use HTTPS still needs enabling for HTTP apex
+- [x] Cloudflare static application deployed, public repository pushed, hosted CI and first Cloudflare automatic build/deployment pass, 2026-10-01
+- [x] HTTPS apex/WWW valid TLS and HTTP-to-HTTPS 301 with path/query preservation, 2026-10-01
 - [x] production build with purchased apex origin, verified 2026-10-01
 - [x] local `npm run smoke:browser` passes on installed Windows Chrome and Edge after the build, including print/PDF checks, 2026-10-01
 - [x] public crawl check: 38 sitemap pages, canonicals, retained noindex routes, robots and real 404, 2026-10-01

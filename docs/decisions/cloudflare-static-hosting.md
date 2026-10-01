@@ -11,8 +11,9 @@ The public GitHub repository is <https://github.com/akashdas98/quiltclarity>;
 the reviewed source is pushed and hosted CI passes as of 2026-10-01.
 Cloudflare login and the active `quiltclarity.com` zone were verified on
 2026-10-01. The static `quiltclarity` Worker serves the apex custom domain;
-`quiltclarity-www` serves the permanent redirect to it. Automatic GitHub Builds
-integration remains pending, along with the zone's HTTP-to-HTTPS setting.
+`quiltclarity-www` serves the permanent redirect to it. GitHub Builds integration
+and its first automatic deployment passed on 2026-10-01; the new version is
+active at 100%. HTTP-to-HTTPS 301 is verified with path/query preservation.
 
 ## Rationale
 

@@ -3,11 +3,21 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-01.
-- Objective: Verify the first automatic Cloudflare build after the owner saved the GitHub connection; site is deployed at https://quiltclarity.com.
+- Objective: Hosting setup is complete; continue remaining launch acceptance for https://quiltclarity.com.
+- Automatic deployment evidence, 2026-10-01: Push `8993dc5` triggered Cloudflare
+  [build 6456a7ff-3dda-4e7b-951d-aec2731ade49](https://dash.cloudflare.com/fb2063c1b86d4a82beaf7d3fc6532963/workers/services/view/quiltclarity/production/builds/6456a7ff-3dda-4e7b-951d-aec2731ade49),
+  whose GitHub check completed successfully. Wrangler deployment listing
+  confirms version `203eed09-e111-4296-8f37-47005b4ff6eb` active at 100%.
+  [GitHub CI 36867632879](https://github.com/akashdas98/quiltclarity/actions/runs/36867632879)
+  passed in 57 seconds. Post-deploy public apex content and 38-route sitemap
+  remain correct; HTTP path/query returns 301 to the same HTTPS path/query.
+  Cloudflare GitHub connection, automatic deployment and HTTPS enforcement are
+  now complete. No application source changed; prior browser/print evidence is
+  reused. Local dev service and unrelated V2 archive edits are preserved.
 - Host setup update, 2026-10-01: Owner confirmed the GitHub connection is saved.
   HTTP apex now returns 301 to HTTPS, verified directly; the HTTPS enforcement
-  gap is closed. Push this documentation checkpoint to trigger the first
-  automatic build and inspect its GitHub check/deployment status. Direct parent
+  gap is closed. Documentation checkpoint triggered the first automatic build;
+  successful check/deployment evidence is recorded above. Direct parent
   model demand is bounded release-state verification; effort demand is a
   targeted HTTP/checks inspection and recorded build outcome. Acceptance:
   owner setup preserved, automatic build triggered and outcome verified, no
@@ -36,9 +46,8 @@
   exact apex path/query. Development and preview URLs are disabled. The separate
   static redirect asset deployment is necessary because Cloudflare `_redirects`
   cannot match hostnames; no application Worker script or backend was added.
-- Host access boundary: HTTP-to-HTTPS 301 is verified and the owner reports
-  Cloudflare Builds connected to GitHub; the first automatic build is pending
-  verification. Reads of zone HTTPS settings and Builds connection/token
+- Host access boundary: HTTP-to-HTTPS 301 and automatic Cloudflare Builds are
+  verified. Reads of zone HTTPS settings and Builds connection/token
   APIs return 403 under the approved limited token. Browser/native automation
   fails to initialize, and no Cloudflare plugin is available. Owner dashboard
   action completed the HTTPS toggle and GitHub connection; README
@@ -264,12 +273,11 @@
   fresh private window, using only shipped Guides/help; about five minutes,
   described as quick and easy. Exact readback and evidence limits are in
   `docs/manual-tests/V1_1_GUIDES_HELP_MANUAL_TESTS.md`.
-- Unfinished: Enable HTTP-to-HTTPS enforcement and connect Cloudflare Builds;
-  establish Search Console,
+- Unfinished: Establish Search Console,
   and public-origin state for the now activated identity. Registrar and renewal
   details/report location remain unrecorded; do not infer incomplete owner work.
-- Next action: Owner enables Always Use HTTPS and connects Worker Builds to
-  `akashdas98/quiltclarity`, then verify redirects and the first automatic deploy.
+- Next action: Complete Search Console and remaining public launch acceptance;
+  Cloudflare automatic build, active production deployment and redirects pass.
   Trademark search, purchase, source activation and static deployment are complete.
 
 ## QuiltClarity source activation — 2026-10-01

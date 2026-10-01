@@ -65,8 +65,9 @@ deployment.
 
 The selected hosting stack is **Cloudflare + static Astro**, reaffirmed by the
 owner on 2026-10-01. The public GitHub repository is connected and hosted CI
-passes. The site is deployed with Workers Static Assets; automatic deployment
-from GitHub still needs Cloudflare Builds to be connected. The
+passes. The site is deployed with Workers Static Assets; Cloudflare Builds
+automatically deploys pushes to `main`. The first automatic build and active
+deployment were verified on 2026-10-01. The
 [hosting decision](docs/decisions/cloudflare-static-hosting.md) preserves scope.
 
 | Setting              | Repository requirement                         |
@@ -100,7 +101,7 @@ asset directory because static `_redirects` rules do not support host matching.
 Neither deployment contains an application Worker script. Workers development
 and preview URLs are disabled to keep the production origin unique.
 
-To finish host setup in Cloudflare:
+Cloudflare settings used for this deployment:
 
 1. For the `quiltclarity.com` zone, enable **SSL/TLS > Edge Certificates > Always
    Use HTTPS**. HTTP-to-HTTPS 301 was verified on 2026-10-01.

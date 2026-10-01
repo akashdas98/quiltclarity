@@ -266,7 +266,7 @@ Before launch:
       remains;
 - [x] deploy the static `dist` output behind HTTPS, 2026-10-01;
 - [x] confirm HTTPS apex/`www` redirects and one canonical host, 2026-10-01;
-- [ ] enable and verify HTTP-to-HTTPS enforcement (HTTP apex currently serves 200);
+- [x] enable and verify HTTP-to-HTTPS 301 with path/query preservation, 2026-10-01;
 - [x] verify production canonicals, sitemap, robots, JSON-LD, Open Graph URLs, and
       real 404 behavior;
 - [ ] verify `/corrections/` retains its Feedback link, coming-soon copy,

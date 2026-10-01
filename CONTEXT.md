@@ -21,7 +21,7 @@ new work. Routed owners retain detailed evidence.
   see `scripts/agent-routing/VERIFICATION.md`.
 - V1.1 M0-M10 are complete. M9 uses the approved guided-operator substitution;
   no U01-U05 external-quilter study occurred. M10 has a dated competitive-gate
-  PASS. Public launch remains blocked by post-M10 checkpoints.
+  PASS. Public site is deployed; remaining launch acceptance is routed below.
 - Guides/help implementation and technical validation are recorded complete:
   learning hub, Quick Start, planner tutorial, contextual help, closed analytics,
   and 38 currently indexable routes plus retained noindex routes. Help covers
@@ -69,8 +69,8 @@ new work. Routed owners retain detailed evidence.
   Owner approved limited OAuth access; active zone is verified and static
   apex/www deployments are live. WWW redirects permanently to apex with
   path/query retained. HTTP-to-HTTPS 301 now passes; owner saved the Cloudflare
-  GitHub connection. First automatic build awaits verification (Builds API
-  access gives 403; browser automation is unavailable). Establish Search Console state. Previous pending
+  GitHub connection. First automatic Cloudflare build and GitHub CI pass;
+  its new Worker version is confirmed active. Establish Search Console state. Previous pending
   labels are not evidence that external owner work remains undone.
 - Public GitHub repository `akashdas98/quiltclarity` is created and connected.
   Reviewed release snapshot is pushed on `main`; hosted CI run 36860209033 passes.
@@ -137,8 +137,8 @@ new work. Routed owners retain detailed evidence.
 
 ## Next Recommended Steps
 
-1. Verify the first automatic Cloudflare build after the saved GitHub connection;
-   static deployment is live at `https://quiltclarity.com` and HTTPS enforcement passes.
+1. Complete Search Console and remaining public launch acceptance;
+   automatic Cloudflare deployment is verified and HTTPS enforcement passes.
 2. Complete DNS/redirects, Search Console and public-origin acceptance once
    hosting is configured. Do not repeat search or purchase.
 
@@ -157,7 +157,7 @@ summary changes, retaining unresolved work, approvals and evidence limits.
   the stale provider-selection task. Public GitHub repo created and pushed;
   hosted CI passes. Owner approved Cloudflare login; apex/www static deployments
   are live. HTTP-to-HTTPS passes and owner saved GitHub Builds connection;
-  first automatic build verification remains.
+  first automatic build and active deployment pass. Search Console remains.
 
 - 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
   recorded Feedback System as a planned V2 milestone, and removed the V1.1

@@ -84,18 +84,18 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
   [owner-approved decision](../decisions/v1.1-feedback-system-deferral.md).
   The retained `/corrections/` page conveys coming-soon availability; a feedback
   inbox is not a V1.1 launch dependency.
-- Public GitHub repository is pushed and hosted CI passes. Connect Cloudflare
-  Builds to it for automatic deployment; this GitHub App consent remains pending.
+- Public GitHub repository is pushed, hosted CI passes, and Cloudflare Builds
+  automatically deploys `main`; first automatic build and active version pass.
 - Confirm host configuration uses the purchased apex `SITE_URL` default (or an
   explicitly selected canonical origin); configure `PUBLIC_GOOGLE_SITE_VERIFICATION`
-  when Search Console supplies it. HTTP-to-HTTPS enforcement remains a host gate.
+  when Search Console supplies it. HTTP-to-HTTPS enforcement passes.
 - Decide whether a production analytics provider will consume the existing data-layer events; do not expand the event payload schema.
 
 ## Pending on the deployed origin
 
 - HTTPS, apex canonicals, all 38 sitemap routes, robots, real 404 and WWW 301
-  pass the focused public check on 2026-10-01. HTTP apex still serves 200; enable
-  Always Use HTTPS in the zone dashboard and verify the redirect.
+  pass the focused public check on 2026-10-01. HTTP-to-HTTPS 301 passes with
+  path/query preservation; post-automatic-deploy apex and sitemap checks pass.
 - Verify Search Console, submit the sitemap, and inspect the homepage, planner, and calculator routes.
 - Confirm production analytics delivery without planner-content leakage.
 - Focused public Chrome calculator interaction passes. Full public print/mobile
@@ -117,5 +117,5 @@ Trademark search, domain purchase and local source activation are complete.
 The public [GitHub repository](https://github.com/akashdas98/quiltclarity) is
 connected and pushed; [hosted CI](https://github.com/akashdas98/quiltclarity/actions/runs/36860209033)
 passes on 2026-10-01. Static deployment is live at <https://quiltclarity.com>.
-Enable Always Use HTTPS and connect Cloudflare Builds to this repository using
-the README settings, then finish Search Console and remaining launch checks.
+HTTPS enforcement and the first automatic Cloudflare build/deployment pass.
+Finish Search Console and remaining launch checks.
