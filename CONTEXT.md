@@ -68,10 +68,14 @@ new work. Routed owners retain detailed evidence.
   Cloudflare + Astro is the owner-selected hosting stack, reaffirmed 2026-10-01.
   Establish Cloudflare account/project, deployment, and Search Console state. Previous pending
   labels are not evidence that external owner work remains undone.
-- Hosted CI needs a connected/pushed GitHub repository. Windows Chrome/Edge
+- Public GitHub repository `akashdas98/quiltclarity` is created and connected.
+  Release snapshot is committed locally; push awaits owner consent for the
+  GitHub CLI's missing `workflow` scope. Original history remains on the local
+  `release-local-history` branch; never push it. Hosted CI has not run.
+  Windows Chrome/Edge
   coverage does not establish Firefox/Safari compatibility.
-- Existing Guides/help work is uncommitted. Inspect Git state rather than
-  treating the last commit as the full implemented baseline.
+- Guides/help and source activation are in the reviewed release snapshot.
+  Unrelated V2 archive edits remain unstaged and preserved locally.
 
 ## Hard Boundaries
 
@@ -146,7 +150,8 @@ summary changes, retaining unresolved work, approvals and evidence limits.
   pre-purchase next step, then completed source activation with local legacy-key
   migration. Verify (215 tests) and installed Chrome/Edge print/browser gate pass.
   Owner reaffirmed Cloudflare + Astro; recorded the hosting decision and removed
-  the stale provider-selection task. Account/project and repository setup remain.
+  the stale provider-selection task. Public GitHub repo created; push needs
+  workflow-scope consent. Cloudflare account/project setup remains.
 
 - 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
   recorded Feedback System as a planned V2 milestone, and removed the V1.1

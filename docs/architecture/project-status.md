@@ -4,6 +4,16 @@
 
 - Updated: 2026-10-01.
 - Objective: Connect the GitHub repository and owner-selected Cloudflare hosting; source activation is complete.
+- GitHub release checkpoint, 2026-10-01: Public repository created at
+  <https://github.com/akashdas98/quiltclarity>, with `origin` connected. Reviewed
+  snapshot `b500806` is local on `main`; original history is retained only on
+  `release-local-history`. Push was rejected because the authenticated GitHub
+  CLI token lacks `workflow` scope. No source branch or CI run is hosted yet.
+  A GitHub device authorization flow is waiting for owner consent to that scope;
+  retry the push with the CLI credential helper after consent. Never push the
+  backup branch. No credential-shaped text findings; local paths generalized,
+  ZIP bundles/hooks excluded. This release step changed records only, so prior
+  complete application/browser evidence remains applicable.
 - Public repository route, 2026-10-01: Owner authorized publishing
   `akashdas98/quiltclarity` publicly for the GitHub profile. Parent model demand
   is release integration and preservation of pending work; effort demand is
@@ -199,11 +209,12 @@
   fresh private window, using only shipped Guides/help; about five minutes,
   described as quick and easy. Exact readback and evidence limits are in
   `docs/manual-tests/V1_1_GUIDES_HELP_MANUAL_TESTS.md`.
-- Unfinished: Establish actual hosting, hosted CI, DNS/redirects, Search Console,
+- Unfinished: Complete GitHub workflow-scope consent and push, then establish
+  actual hosting, hosted CI, DNS/redirects, Search Console,
   and public-origin state for the now activated identity. Registrar and renewal
   details/report location remain unrecorded; do not infer incomplete owner work.
-  Existing Guides/help and continuation work remain uncommitted; preserve it.
-- Next action: Connect the repository to GitHub and the selected Cloudflare
+- Next action: Finish the authorized public GitHub push and verify hosted CI,
+  then connect the selected Cloudflare
   hosting, then prepare production deployment and public-origin checks. Trademark search, purchase,
   and local source activation are complete; no live deployment was performed.
 
