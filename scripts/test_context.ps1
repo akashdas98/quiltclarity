@@ -44,7 +44,9 @@ try {
   Expect-Failure "broken route" "invalid route"
   Write-Fixture "CONTEXT.md" ($context.Replace('`docs/architecture/domain-contracts.md`', '`../outside.md`'))
   Expect-Failure "escaping route" "invalid route"
-  Write-Fixture "CONTEXT.md" ($context + "`n- Fourth recent change.`n")
+  # Isolate the history limit from the byte budget, even near production's cap.
+  $historyPrefix = ($context -split '(?m)^## Recent Changes\s*$', 2)[0]
+  Write-Fixture "CONTEXT.md" ($historyPrefix + "## Recent Changes`n`n- First.`n- Second.`n- Third.`n- Fourth.`n")
   Expect-Failure "unbounded history" "three recent-change"
   Write-Fixture "CONTEXT.md" $context
   Write-Fixture "AGENTS.md" ($agents + ('x' * 16385))
