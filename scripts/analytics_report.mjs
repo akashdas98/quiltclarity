@@ -4,7 +4,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const DATASET = 'quiltclarity_events_v1';
+const DATASET = 'quiltclarity_analytics_events';
 const API_ROOT = 'https://api.cloudflare.com/client/v4/accounts';
 const SCHEMA_VERSION = '1';
 const TIMEOUT_MS = 10_000;

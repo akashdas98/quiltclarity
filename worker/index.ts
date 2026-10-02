@@ -9,7 +9,7 @@ const MAX_BODY_BYTES = 4096;
 
 interface WorkerEnvironment {
   ANALYTICS_ENABLED?: string;
-  ANALYTICS?: {
+  quiltclarity_analytics_engine?: {
     writeDataPoint(point: {
       blobs: string[];
       indexes: string[];
@@ -74,7 +74,7 @@ export async function handleAnalyticsRequest(
   ) {
     return new Response(null, { status: 415 });
   }
-  if (env.ANALYTICS_ENABLED !== 'true' || !env.ANALYTICS) {
+  if (env.ANALYTICS_ENABLED !== 'true' || !env.quiltclarity_analytics_engine) {
     return new Response(null, { status: 204 });
   }
   const body = await readBoundedBody(request);
@@ -89,7 +89,9 @@ export async function handleAnalyticsRequest(
   if (!envelope) return new Response(null, { status: 400 });
   try {
     // Analytics Engine queues a point; 204 is not a durable storage receipt.
-    env.ANALYTICS.writeDataPoint(analyticsDataPoint(envelope));
+    env.quiltclarity_analytics_engine.writeDataPoint(
+      analyticsDataPoint(envelope),
+    );
   } catch {
     // Measurement must not affect the static product.
   }

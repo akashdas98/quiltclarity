@@ -7,7 +7,10 @@
   "main": "worker/index.ts",
   "vars": { "ANALYTICS_ENABLED": "true" },
   "analytics_engine_datasets": [
-    { "binding": "ANALYTICS", "dataset": "quiltclarity_events_v1" },
+    {
+      "binding": "quiltclarity_analytics_engine",
+      "dataset": "quiltclarity_analytics_events",
+    },
   ],
   "observability": { "enabled": false },
   "assets": {

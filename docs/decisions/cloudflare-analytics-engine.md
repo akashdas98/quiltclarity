@@ -29,7 +29,7 @@ referrers, URL queries/fragments, identifiers, project content or error text.
 Provider infrastructure still receives ordinary network metadata; this is not a
 claim of anonymous transport or zero personal-data processing.
 
-The dataset quiltclarity_events_v1 uses blob1 schema version, blob2 canonical path,
+The dataset quiltclarity_analytics_events uses blob1 schema version, blob2 canonical path,
 blob3 event name, blob4 projected categorical properties as JSON, index1 event name
 and double1 count 1. Analytics Engine supplies receipt timestamps and sampling
 intervals. No individual visitor/session index is created.

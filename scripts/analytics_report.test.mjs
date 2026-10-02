@@ -111,6 +111,7 @@ test('parses bounded days and json options', () => {
 
 test('builds the sampling-weighted schema-filtered Analytics Engine query', () => {
   const query = buildQuery(7);
+  assert.match(query, /FROM quiltclarity_analytics_events WHERE/);
   assert.match(query, /SUM\(_sample_interval\) AS total/);
   assert.match(query, /timestamp >= NOW\(\)-INTERVAL '7' DAY/);
   assert.match(query, /blob1='1'/);

@@ -32,7 +32,7 @@ function request(
 function bindings() {
   return {
     ANALYTICS_ENABLED: 'true',
-    ANALYTICS: { writeDataPoint: vi.fn() },
+    quiltclarity_analytics_engine: { writeDataPoint: vi.fn() },
     ASSETS: { fetch: vi.fn(async () => new Response('asset')) },
   };
 }
@@ -118,12 +118,16 @@ describe('Cloudflare analytics collector', () => {
         )
       ).status,
     ).toBe(204);
-    expect(env.ANALYTICS.writeDataPoint).toHaveBeenCalledWith({
+    expect(
+      env.quiltclarity_analytics_engine.writeDataPoint,
+    ).toHaveBeenCalledWith({
       blobs: ['1', '/about/', 'pageview', '{}'],
       indexes: ['pageview'],
       doubles: [1],
     });
-    expect(env.ANALYTICS.writeDataPoint).toHaveBeenCalledTimes(1);
+    expect(
+      env.quiltclarity_analytics_engine.writeDataPoint,
+    ).toHaveBeenCalledTimes(1);
     for (const req of [
       request({}, { method: 'GET' }),
       request({}, { path: '/api/analytics?secret=1' }),
@@ -138,7 +142,9 @@ describe('Cloudflare analytics collector', () => {
       request({}, { body: '{bad json' }),
     ])
       expect((await handleAnalyticsRequest(req, env)).status).not.toBe(204);
-    expect(env.ANALYTICS.writeDataPoint).toHaveBeenCalledTimes(1);
+    expect(
+      env.quiltclarity_analytics_engine.writeDataPoint,
+    ).toHaveBeenCalledTimes(1);
     for (const header of ['DNT', 'Sec-GPC'])
       expect(
         (
@@ -153,11 +159,15 @@ describe('Cloudflare analytics collector', () => {
       (await handleAnalyticsRequest(request({}, { body: 'invalid' }), disabled))
         .status,
     ).toBe(204);
-    expect(disabled.ANALYTICS.writeDataPoint).not.toHaveBeenCalled();
+    expect(
+      disabled.quiltclarity_analytics_engine.writeDataPoint,
+    ).not.toHaveBeenCalled();
     const failing = bindings();
-    failing.ANALYTICS.writeDataPoint.mockImplementation(() => {
-      throw new Error('binding down');
-    });
+    failing.quiltclarity_analytics_engine.writeDataPoint.mockImplementation(
+      () => {
+        throw new Error('binding down');
+      },
+    );
     expect(
       (
         await handleAnalyticsRequest(
@@ -185,6 +195,8 @@ describe('Cloudflare analytics collector', () => {
     const env = bindings();
     expect((await handleAnalyticsRequest(req, env)).status).toBe(413);
     expect(pulls).toBeLessThanOrEqual(2);
-    expect(env.ANALYTICS.writeDataPoint).not.toHaveBeenCalled();
+    expect(
+      env.quiltclarity_analytics_engine.writeDataPoint,
+    ).not.toHaveBeenCalled();
   });
 });
