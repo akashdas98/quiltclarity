@@ -50,6 +50,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           exclude project names, labels, notes, measurements, quantities, and
           results.
         </p>
+        {
+          import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true' &&
+            import.meta.env.PUBLIC_ROBOTS_NOINDEX !== 'true' && (
+              <p>
+                Production measurement uses Simple Analytics to count page
+                visits and fixed tool actions. We send the page's canonical path
+                and allowed categories, without project content, URL queries,
+                shared-project fragments, cookies, or visitor IDs. The provider
+                receives normal network metadata such as IP addresses and HTTP
+                browser headers. Do Not Track and Global Privacy Control disable
+                this measurement. See the provider's{' '}
+                <a href="https://docs.simpleanalytics.com/data-collection">
+                  data collection documentation
+                </a>
+                .
+              </p>
+            )
+        }
       </section>
       <section>
         <h2>How to verify or challenge a result</h2>

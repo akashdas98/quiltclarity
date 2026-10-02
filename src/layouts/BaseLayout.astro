@@ -75,7 +75,11 @@ const structuredData = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang="en"
+  data-analytics-path={canonicalPath}
+  data-analytics-index={index}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -178,6 +182,30 @@ const structuredData = [
           });
         });
       })();
+    </script>
+    <script>
+      import { startSimpleAnalytics } from '../lib/analytics/simple-analytics';
+
+      const privacyNavigator = navigator as Navigator & {
+        globalPrivacyControl?: boolean;
+      };
+      startSimpleAnalytics(
+        {
+          enabled:
+            import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true' &&
+            document.documentElement.dataset.analyticsIndex === 'true',
+          staging: import.meta.env.PUBLIC_ROBOTS_NOINDEX === 'true',
+          canonicalPath: document.documentElement.dataset.analyticsPath ?? '',
+        },
+        {
+          origin: window.location.origin,
+          doNotTrack: navigator.doNotTrack,
+          globalPrivacyControl: privacyNavigator.globalPrivacyControl,
+          fetch: window.fetch.bind(window),
+          setTimeout: window.setTimeout.bind(window),
+          clearTimeout: window.clearTimeout.bind(window),
+        },
+      );
     </script>
     <script
       type="application/ld+json"

@@ -26,7 +26,7 @@ and deployment boundaries.
 
 Built with Astro and TypeScript. The calculation engine is independent of the UI,
 uses millimetres internally, and is covered by golden fixtures and invariant tests.
-The release checks include 215 automated tests and installed Chrome/Edge audits of
+The release checks include 219 automated tests and installed Chrome/Edge audits of
 mobile layouts, accessibility contracts, persistence, and rendered print output.
 
 Live site: **[quiltclarity.com](https://quiltclarity.com/)**.
@@ -60,6 +60,36 @@ is a [planned V2 milestone](docs/v2/feedback-system-milestone.md), with no V1.1
 submission channel to configure. Staging builds may set `PUBLIC_ROBOTS_NOINDEX=true`; production must
 leave it false. Copy `.env.example` to a local `.env` when configuring a
 deployment.
+
+Simple Analytics is enabled by the registered production build profile in
+the tracked `.env.production`, which contains only public configuration.
+Set `PUBLIC_SIMPLE_ANALYTICS_ENABLED=false` in the build process environment
+and rebuild to disable it. Account dashboard receipt is a separate check.
+This setting is build-time, and the bridge runs only
+on `https://quiltclarity.com` when `PUBLIC_ROBOTS_NOINDEX` is false. It respects
+Do Not Track and Global Privacy Control. Preview, local, HTTP, www, and noindex
+pages send nothing. Never put account credentials in `.env.production`.
+
+The bridge sends one static canonical-path pageview and the existing closed
+action events directly to Simple Analytics' documented `/events` endpoint. It
+does not load the vendor browser script or add cookies, user IDs, project data,
+query strings, hashes, referrers, or the browser user agent to payloads. Browser
+requests still expose ordinary network information, such as IP address, to the
+provider. Requests omit credentials and referrer, time out after five seconds,
+and are never retried or stored offline. At most four requests run at once;
+another 32 may wait in memory, after which new events are dropped. The custom
+`ua` field is the fixed
+`QuiltClarity/1.0` label; reports that depend on visitor or browser identity
+need separate validation before use. Event counts and pageviews are the intended
+initial measures. Activation requires an account and an explicit production
+build; this repository does not contain account credentials.
+
+For a local enabled build, run `node scripts/simple_analytics_browser_audit.mjs`
+against the built `dist/`; it intercepts provider requests and submits none.
+Use `node scripts/simple_analytics_browser_audit.mjs --disabled` against a
+explicitly disabled build to verify that it makes no provider requests, even when
+served through the audit's simulated production origin. These checks do not
+establish ingestion into the owner's dashboard.
 
 ## Cloudflare deployment
 

@@ -240,6 +240,26 @@ export interface AnalyticsSink {
 }
 
 export const ANALYTICS_DOM_EVENT = 'quiltclarity:analytics';
+const PROVIDER_QUEUE_LIMIT = 32;
+const providerQueue: AnalyticsEvent[] = [];
+let providerTrack: ((event: unknown) => void) | undefined;
+
+export function configureAnalyticsProvider(
+  track: (event: unknown) => void,
+): void {
+  providerTrack = track;
+  for (const event of providerQueue.splice(0)) {
+    try {
+      track(event);
+    } catch {
+      // A provider failure cannot affect product actions or later events.
+    }
+  }
+}
+
+export function clearAnalyticsProviderQueue(): void {
+  providerQueue.length = 0;
+}
 export const ANALYTICS_FIRST_USED_DATE_KEY =
   'quiltclarity:analytics-first-used-date';
 const LEGACY_ANALYTICS_FIRST_USED_DATE_KEY =
@@ -277,12 +297,29 @@ declare global {
 export const browserAnalyticsSink: AnalyticsSink = {
   track(event) {
     const safeEvent = Object.freeze({ ...event });
-    window.dispatchEvent(
-      new CustomEvent<Readonly<AnalyticsEvent>>(ANALYTICS_DOM_EVENT, {
-        detail: safeEvent,
-      }),
-    );
-    if (Array.isArray(window.dataLayer)) window.dataLayer.push(safeEvent);
+    try {
+      window.dispatchEvent(
+        new CustomEvent<Readonly<AnalyticsEvent>>(ANALYTICS_DOM_EVENT, {
+          detail: safeEvent,
+        }),
+      );
+    } catch {
+      // An optional observer cannot suppress the provider or product action.
+    }
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(safeEvent);
+    } catch {
+      // An optional data layer cannot suppress the provider or product action.
+    }
+    if (import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true') {
+      try {
+        if (providerTrack) providerTrack(safeEvent);
+        else if (providerQueue.length < PROVIDER_QUEUE_LIMIT)
+          providerQueue.push(safeEvent);
+      } catch {
+        // Remote measurement failure must never interrupt product behavior.
+      }
+    }
   },
 };
 
