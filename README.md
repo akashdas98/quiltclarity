@@ -26,7 +26,8 @@ and deployment boundaries.
 
 Built with Astro and TypeScript. The calculation engine is independent of the UI,
 uses millimetres internally, and is covered by golden fixtures and invariant tests.
-The release checks include 219 automated tests and installed Chrome/Edge audits of
+The release checks include 222 application tests, six analytics-report tests, and
+installed Chrome/Edge audits of
 mobile layouts, accessibility contracts, persistence, and rendered print output.
 
 Live site: **[quiltclarity.com](https://quiltclarity.com/)**.
@@ -61,35 +62,53 @@ submission channel to configure. Staging builds may set `PUBLIC_ROBOTS_NOINDEX=t
 leave it false. Copy `.env.example` to a local `.env` when configuring a
 deployment.
 
-Simple Analytics is enabled by the registered production build profile in
-the tracked `.env.production`, which contains only public configuration.
-Set `PUBLIC_SIMPLE_ANALYTICS_ENABLED=false` in the build process environment
-and rebuild to disable it. Account dashboard receipt is a separate check.
-This setting is build-time, and the bridge runs only
-on `https://quiltclarity.com` when `PUBLIC_ROBOTS_NOINDEX` is false. It respects
-Do Not Track and Global Privacy Control. Preview, local, HTTP, www, and noindex
-pages send nothing. Never put account credentials in `.env.production`.
+## Cloudflare analytics
 
-The bridge sends one static canonical-path pageview and the existing closed
-action events directly to Simple Analytics' documented `/events` endpoint. It
-does not load the vendor browser script or add cookies, user IDs, project data,
-query strings, hashes, referrers, or the browser user agent to payloads. Browser
-requests still expose ordinary network information, such as IP address, to the
-provider. Requests omit credentials and referrer, time out after five seconds,
-and are never retried or stored offline. At most four requests run at once;
-another 32 may wait in memory, after which new events are dropped. The custom
-`ua` field is the fixed
-`QuiltClarity/1.0` label; reports that depend on visitor or browser identity
-need separate validation before use. Event counts and pageviews are the intended
-initial measures. Activation requires an account and an explicit production
-build; this repository does not contain account credentials.
+The production profile enables PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED in tracked
+.env.production (public settings only). Process-environment false plus a rebuild
+disables browser collection; ANALYTICS_ENABLED=false in the Worker configuration
+disables ingestion. Local/staging/HTTP/www/noindex pages and DNT/GPC browsers send
+nothing. No Simple Analytics subscription or browser script is used.
 
-For a local enabled build, run `node scripts/simple_analytics_browser_audit.mjs`
-against the built `dist/`; it intercepts provider requests and submits none.
-Use `node scripts/simple_analytics_browser_audit.mjs --disabled` against a
-explicitly disabled build to verify that it makes no provider requests, even when
-served through the audit's simulated production origin. These checks do not
-establish ingestion into the owner's dashboard.
+The optional POST /api/analytics endpoint accepts one versioned, validated
+canonical-path pageview or existing categorical event per request. Both browser
+and Worker use the closed allow-list. Four requests run at once, with 32 pending
+in memory, five-second timeouts, no retry and no offline storage. Requests omit
+credentials and referrer. Analytics failure never blocks calculations.
+
+The provider receives normal network metadata, but our telemetry dataset contains
+only canonical paths, event names and fixed categories/booleans. No cookies,
+visitor identifiers, project content, dimensions, arbitrary error text or URL
+query/fragment values are stored. Counts can be sampled or affected by forged
+public submissions; they are diagnostic event totals, not unique-user funnels.
+
+Private reports require an account-scoped Analytics Read token. Set
+CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_ANALYTICS_READ_TOKEN in your local process
+environment or ignored local credential tooling, then run:
+
+```powershell
+npm run analytics:report -- --days 7
+npm run analytics:report -- --days 30 --json
+```
+
+Never put tokens in tracked environment files, command-line arguments, browser
+code or chat. Reports support 1-90 days and weight counts by the provider sampling
+interval. Analytics Engine retains data for three months; no archival service is
+configured. The read token needs Account Analytics Read for the site account,
+not deployment or billing permission. An ignored `.env.analytics` may hold these
+two values locally; use Node's native environment loader to run the same report:
+
+```powershell
+node --env-file=.env.analytics scripts/analytics_report.mjs --days 7
+```
+
+Run node scripts/cloudflare_analytics_browser_audit.mjs against enabled dist,
+or add --disabled against an explicitly disabled build. The audit intercepts
+submissions and sends none to production; actual SQL receipt is a separate gate.
+
+Only Workers Free is authorized. No payment method, paid upgrade or subscription
+is configured by this integration. Stop activation if Cloudflare requires one.
+See the [analytics-only architecture decision](docs/decisions/cloudflare-analytics-engine.md).
 
 ## Cloudflare deployment
 
@@ -121,14 +140,15 @@ npm exec --yes --package=wrangler@4.145.0 -- wrangler deploy --config wrangler.w
 
 Wrangler is pinned for reproducibility and is deployment tooling only. Cloudflare's
 [Astro deployment guide](https://docs.astro.build/en/guides/deploy/cloudflare/)
-documents this assets-only flow. Directory routes retain their trailing slash,
+documents the static-assets flow. Directory routes retain their trailing slash,
 and unknown routes serve Astro's `404.html` with a 404 status under Cloudflare's
 [static asset routing](https://developers.cloudflare.com/workers/static-assets/routing/static-site-generation/).
 
 `quiltclarity` serves the apex custom domain. `quiltclarity-www` serves a static
 301 redirect to the apex, preserving paths and query strings. It uses a separate
 asset directory because static `_redirects` rules do not support host matching.
-Neither deployment contains an application Worker script. Workers development
+Only the apex deployment has the optional analytics-only Worker handler;
+www remains an assets-only redirect. Workers development
 and preview URLs are disabled to keep the production origin unique.
 
 Cloudflare settings used for this deployment:

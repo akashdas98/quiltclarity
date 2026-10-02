@@ -28,6 +28,8 @@ import remnantsGuide from '../src/pages/guides/using-quilt-fabric-remnants.astro
 import patternGuide from '../src/pages/guides/check-pattern-yardage.astro?raw';
 import guideIndex from '../src/pages/guides/index.astro?raw';
 import howItWorks from '../src/pages/how-it-works.astro?raw';
+import { INDEXABLE_PATHS } from '../src/lib/analytics/canonical-paths';
+import { GET as getSitemap } from '../src/pages/sitemap.xml';
 import sitemap from '../src/pages/sitemap.xml.ts?raw';
 import robots from '../src/pages/robots.txt.ts?raw';
 import aboutPage from '../src/pages/about.astro?raw';
@@ -105,21 +107,38 @@ describe('Milestone 8 static SEO and content contracts', () => {
     expect(howItWorks).toContain('placements.');
   });
 
-  it('lists indexable product and trust routes, excluding unavailable feedback', () => {
-    const routeCount = sitemap.match(/^ {2}'\//gm)?.length ?? 0;
-    expect(routeCount).toBe(38);
-    expect(sitemap).toContain("'/guides/getting-started/'");
-    expect(sitemap).toContain("'/guides/project-planner-tutorial/'");
-    expect(sitemap).toContain("'/guides/use-remnants-before-buying/'");
-    expect(sitemap).toContain("'/guides/how-to-calculate-quilt-fabric/'");
-    expect(sitemap).toContain("'/calculators/pieces-from-fabric/'");
-    expect(sitemap).toContain("'/how-it-works/'");
-    expect(sitemap).toContain(
-      "'Content-Type': 'application/xml; charset=utf-8'",
+  it('lists indexable product and trust routes, excluding unavailable feedback', async () => {
+    expect(INDEXABLE_PATHS).toHaveLength(38);
+    expect(new Set(INDEXABLE_PATHS).size).toBe(38);
+    for (const route of [
+      '/guides/getting-started/',
+      '/guides/project-planner-tutorial/',
+      '/guides/use-remnants-before-buying/',
+      '/guides/how-to-calculate-quilt-fabric/',
+      '/calculators/pieces-from-fabric/',
+      '/how-it-works/',
+      '/about/',
+      '/methodology/',
+    ])
+      expect(INDEXABLE_PATHS).toContain(route);
+    expect(INDEXABLE_PATHS).not.toContain('/corrections/');
+    expect(sitemap).toContain('INDEXABLE_PATHS');
+    const response = await getSitemap({
+      site: new URL('https://quiltclarity.com'),
+    } as Parameters<typeof getSitemap>[0]);
+    expect(response.headers.get('Content-Type')).toBe(
+      'application/xml; charset=utf-8',
     );
-    expect(sitemap).toContain("'/about/'");
-    expect(sitemap).toContain("'/methodology/'");
-    expect(sitemap).not.toContain("'/corrections/'");
+    const xml = await response.text();
+    const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+      (match) => match[1],
+    );
+    expect(locations).toEqual(
+      INDEXABLE_PATHS.map(
+        (route) => new URL(route, 'https://quiltclarity.com').href,
+      ),
+    );
+    expect(xml).not.toContain('/corrections/');
     expect(correctionsPage).toContain('index={false}');
     expect(baseLayout).toContain('href="/corrections/">Feedback</a>');
   });

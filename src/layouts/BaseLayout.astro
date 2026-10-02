@@ -184,15 +184,15 @@ const structuredData = [
       })();
     </script>
     <script>
-      import { startSimpleAnalytics } from '../lib/analytics/simple-analytics';
+      import { startCloudflareAnalytics } from '../lib/analytics/cloudflare-analytics';
 
       const privacyNavigator = navigator as Navigator & {
         globalPrivacyControl?: boolean;
       };
-      startSimpleAnalytics(
+      startCloudflareAnalytics(
         {
           enabled:
-            import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true' &&
+            import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED === 'true' &&
             document.documentElement.dataset.analyticsIndex === 'true',
           staging: import.meta.env.PUBLIC_ROBOTS_NOINDEX === 'true',
           canonicalPath: document.documentElement.dataset.analyticsPath ?? '',

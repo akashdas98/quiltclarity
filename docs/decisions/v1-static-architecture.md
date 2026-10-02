@@ -6,6 +6,11 @@ V1 is an Astro static-first site with a framework-independent TypeScript domain 
 
 V1 has no application backend, database, authentication, server persistence, AI endpoint, or runtime server calculation dependency.
 
+Owner amendment (2026-10-02): a narrowly scoped optional Cloudflare analytics
+ingestion endpoint and provider telemetry storage are permitted under
+[the analytics-only exception](../decisions/cloudflare-analytics-engine.md).
+Core calculations and project persistence remain static/browser-only.
+
 ## Rationale
 
 This architecture serves the product's core planner and calculator workflow with crawlable content, low operational cost, minimal JavaScript, local privacy, and static-hosting compatibility. A narrowly scoped planner island preserves maintainability without turning content and simple calculators into a full SPA.

@@ -21,6 +21,13 @@ This records the owner choice separately from the stale generic host-selection
 checkpoint. It preserves the locked static architecture and the purchased
 `quiltclarity.com` / QuiltClarity identity.
 
+## Analytics-only amendment
+
+On 2026-10-02 the owner approved an optional analytics-only handler in the apex
+Worker, recorded in [the provider decision](cloudflare-analytics-engine.md).
+Astro output remains static; www remains an assets-only redirect. The original
+assets-only deployment description below is dated history.
+
 ## Consequences
 
 The deployment implementation uses Workers Static Assets via `wrangler.jsonc`,

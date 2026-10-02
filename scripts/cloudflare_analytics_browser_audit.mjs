@@ -5,9 +5,9 @@ import path from 'node:path';
 import { chromium } from 'playwright-core';
 
 // Run against an opt-in build. Every request is fulfilled locally or aborted;
-// no analytics request reaches the provider and no preview server is needed.
+// no request reaches production and no preview server is needed.
 const origin = 'https://quiltclarity.com';
-const endpoint = 'https://queue.simpleanalyticscdn.com/events';
+const endpoint = `${origin}/api/analytics`;
 const dist = path.resolve('dist');
 const disabled = process.argv.includes('--disabled');
 const types = {
@@ -47,17 +47,6 @@ for (const [name, executablePath] of browsers) {
           const request = route.request();
           const url = new URL(request.url());
           if (url.href === endpoint) {
-            if (request.method() === 'OPTIONS') {
-              await route.fulfill({
-                status: 204,
-                headers: {
-                  'access-control-allow-origin': origin,
-                  'access-control-allow-methods': 'POST, OPTIONS',
-                  'access-control-allow-headers': 'Content-Type',
-                },
-              });
-              return;
-            }
             records.push({
               payload: request.postDataJSON(),
               headers: await request.allHeaders(),
@@ -65,10 +54,7 @@ for (const [name, executablePath] of browsers) {
             if (scenario === 'failed') await route.abort('failed');
             else
               await route.fulfill({
-                status: 200,
-                contentType: 'application/json',
-                body: '{}',
-                headers: { 'access-control-allow-origin': origin },
+                status: 204,
               });
             return;
           }
@@ -127,33 +113,25 @@ for (const [name, executablePath] of browsers) {
           );
         } else {
           assert.ok(
-            records.some(({ payload }) => payload.type === 'pageview'),
+            records.some(({ payload }) => payload.event.name === 'pageview'),
             `${name}/${scenario}: pageview missing`,
           );
           assert.ok(
-            records.some(({ payload }) => payload.event === 'tool_viewed'),
+            records.some(({ payload }) => payload.event.name === 'tool_viewed'),
             `${name}/${scenario}: startup event missing`,
           );
           assert.ok(
             records.some(
-              ({ payload }) => payload.event === 'calculator_completed',
+              ({ payload }) => payload.event.name === 'calculator_completed',
             ),
             `${name}/${scenario}: completion missing`,
           );
           for (const { payload, headers } of records) {
-            assert.equal(payload.hostname, 'quiltclarity.com');
+            assert.equal(payload.version, 1);
             assert.equal(payload.path, routePath);
-            assert.equal(payload.ua, 'QuiltClarity/1.0');
             assert.ok(
               Object.keys(payload).every((key) =>
-                [
-                  'type',
-                  'hostname',
-                  'path',
-                  'ua',
-                  'event',
-                  'metadata',
-                ].includes(key),
+                ['version', 'path', 'event'].includes(key),
               ),
             );
             assert.doesNotMatch(

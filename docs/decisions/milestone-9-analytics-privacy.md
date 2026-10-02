@@ -6,6 +6,14 @@ and marker writes use `quiltclarity:*`, with legacy local-key migration.
 The historical namespace below does not override that decision or expand the
 closed event/privacy contract.
 
+## Current provider amendment
+
+The owner-approved 2026-10-02 [Cloudflare Analytics Engine replacement](cloudflare-analytics-engine.md)
+supersedes the Simple Analytics transport below. Its optional telemetry-only
+endpoint/storage is the sole new runtime exception; all categorical privacy,
+local marker and contained-failure requirements remain active. Simple Analytics
+preparation/activation below is historical implementation evidence.
+
 ## Decision
 
 Quilter uses a small typed browser adapter with a closed event union and allow-listed calculator identifiers. The adapter emits a provider-neutral `quilter:analytics` DOM event and, only when a deployment has already created one, appends the same safe event to `window.dataLayer`. Every adapter call contains its own failure boundary.

@@ -311,7 +311,7 @@ export const browserAnalyticsSink: AnalyticsSink = {
     } catch {
       // An optional data layer cannot suppress the provider or product action.
     }
-    if (import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true') {
+    if (import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED === 'true') {
       try {
         if (providerTrack) providerTrack(safeEvent);
         else if (providerQueue.length < PROVIDER_QUEUE_LIMIT)

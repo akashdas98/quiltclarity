@@ -18,9 +18,11 @@
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "test": "vitest run",
+    "test:analytics-report": "node --test scripts/analytics_report.test.mjs",
+    "analytics:report": "node scripts/analytics_report.mjs",
     "test:watch": "vitest",
     "smoke:browser": "npm run build && node scripts/browser_smoke.mjs",
-    "verify": "npm run typecheck && npm run lint && npm run format && npm test && npm run build"
+    "verify": "npm run typecheck && npm run lint && npm run format && npm test && npm run test:analytics-report && npm run build"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

@@ -44,27 +44,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>Privacy and operation</h2>
         <p>
           Calculations run in the browser. Projects may be saved in this
-          device's local storage, but QuiltClarity has no account, upload,
-          application backend, or cloud project store. Analytics, when a
-          deployment connects a provider, use fixed tool/action identifiers and
+          device's local storage, but QuiltClarity has no account, upload, or
+          cloud project store. Analytics use fixed tool/action identifiers and
           exclude project names, labels, notes, measurements, quantities, and
           results.
         </p>
         {
-          import.meta.env.PUBLIC_SIMPLE_ANALYTICS_ENABLED === 'true' &&
+          import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED === 'true' &&
             import.meta.env.PUBLIC_ROBOTS_NOINDEX !== 'true' && (
               <p>
-                Production measurement uses Simple Analytics to count page
-                visits and fixed tool actions. We send the page's canonical path
-                and allowed categories, without project content, URL queries,
-                shared-project fragments, cookies, or visitor IDs. The provider
-                receives normal network metadata such as IP addresses and HTTP
-                browser headers. Do Not Track and Global Privacy Control disable
-                this measurement. See the provider's{' '}
-                <a href="https://docs.simpleanalytics.com/data-collection">
-                  data collection documentation
-                </a>
-                .
+                Production measurement sends page visits and fixed tool actions
+                to QuiltClarity's same-origin analytics endpoint. Only the
+                canonical page path and allowed categories are stored in
+                Cloudflare Analytics Engine. Project content, URL queries,
+                shared-project fragments, cookies, visitor IDs, IP addresses,
+                and browser headers are not stored in analytics data. Cloudflare
+                handles normal request metadata to deliver the request. Do Not
+                Track and Global Privacy Control disable this measurement.
               </p>
             )
         }

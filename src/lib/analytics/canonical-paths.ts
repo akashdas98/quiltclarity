@@ -1,0 +1,48 @@
+// Keep this list aligned with the indexable sitemap; both use this source.
+export const INDEXABLE_PATHS = [
+  '/',
+  '/fabric-cutting-planner/',
+  '/calculators/',
+  '/calculators/fabric-yardage/',
+  '/calculators/quilt-backing/',
+  '/calculators/quilt-batting/',
+  '/calculators/quilt-binding/',
+  '/calculators/half-square-triangle/',
+  '/calculators/quarter-square-triangle/',
+  '/calculators/flying-geese/',
+  '/calculators/quilt-block-count/',
+  '/calculators/borders/',
+  '/calculators/sashing/',
+  '/calculators/pieces-from-fabric/',
+  '/guides/',
+  '/guides/getting-started/',
+  '/guides/project-planner-tutorial/',
+  '/guides/enter-a-cut-list/',
+  '/guides/add-fabric-you-have/',
+  '/guides/read-your-shopping-plan/',
+  '/guides/read-your-cutting-plan/',
+  '/guides/print-your-project-plan/',
+  '/guides/turn-pattern-cut-list-into-plan/',
+  '/guides/do-i-have-enough-fabric/',
+  '/guides/use-remnants-before-buying/',
+  '/guides/width-of-fabric/',
+  '/guides/finished-vs-cut-size/',
+  '/guides/quilt-seam-allowance/',
+  '/guides/how-much-extra-backing/',
+  '/guides/how-much-extra-batting/',
+  '/guides/how-to-calculate-quilt-fabric/',
+  '/guides/directional-fabric-cutting/',
+  '/guides/fat-quarter-size/',
+  '/guides/using-quilt-fabric-remnants/',
+  '/guides/check-pattern-yardage/',
+  '/how-it-works/',
+  '/about/',
+  '/methodology/',
+] as const;
+
+const indexablePaths = new Set<string>(INDEXABLE_PATHS);
+export function isIndexablePath(
+  value: unknown,
+): value is (typeof INDEXABLE_PATHS)[number] {
+  return typeof value === 'string' && indexablePaths.has(value);
+}

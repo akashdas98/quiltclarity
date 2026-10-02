@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { emitAnalytics } from '../src/lib/analytics';
 import { projectProviderEvent } from '../src/lib/analytics/provider-projection';
-import { startSimpleAnalytics } from '../src/lib/analytics/simple-analytics';
+import { startCloudflareAnalytics } from '../src/lib/analytics/cloudflare-analytics';
 
 const config = {
   enabled: true,
@@ -20,7 +20,7 @@ function environment(fetcher = vi.fn(() => Promise.resolve(new Response()))) {
   };
 }
 
-describe('Simple Analytics privacy boundary', () => {
+describe('Cloudflare analytics privacy boundary', () => {
   it('projects valid categorical fields and removes unknown fields', () => {
     expect(
       projectProviderEvent({
@@ -76,7 +76,7 @@ describe('Simple Analytics privacy boundary', () => {
       { ...config, canonicalPath: '/planner/?secret=1' },
     ]) {
       const env = environment();
-      expect(startSimpleAnalytics(blocked, env)).toBe(false);
+      expect(startCloudflareAnalytics(blocked, env)).toBe(false);
       expect(env.fetch).not.toHaveBeenCalled();
     }
     for (const override of [
@@ -86,29 +86,27 @@ describe('Simple Analytics privacy boundary', () => {
       { globalPrivacyControl: true },
     ]) {
       const env = { ...environment(), ...override };
-      expect(startSimpleAnalytics(config, env)).toBe(false);
+      expect(startCloudflareAnalytics(config, env)).toBe(false);
       expect(env.fetch).not.toHaveBeenCalled();
     }
   });
 
   it('posts a fixed pageview first, drains ordinary bursts, and bounds overflow', async () => {
     const env = environment();
-    vi.stubEnv('PUBLIC_SIMPLE_ANALYTICS_ENABLED', 'true');
-    expect(startSimpleAnalytics(config, env)).toBe(true);
+    vi.stubEnv('PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED', 'true');
+    expect(startCloudflareAnalytics(config, env)).toBe(true);
     expect(env.fetch).toHaveBeenCalledOnce();
     const [url, init] = vi.mocked(env.fetch).mock.calls[0]!;
-    expect(url).toBe('https://queue.simpleanalyticscdn.com/events');
+    expect(url).toBe('/api/analytics');
     expect(init).toMatchObject({
       credentials: 'omit',
       referrerPolicy: 'no-referrer',
       keepalive: true,
     });
     expect(JSON.parse(String(init?.body))).toEqual({
-      type: 'pageview',
-      hostname: 'quiltclarity.com',
+      version: 1,
       path: '/fabric-cutting-planner/',
-      ua: 'QuiltClarity/1.0',
-      event: 'pageview',
+      event: { name: 'pageview' },
     });
 
     vi.stubGlobal('window', {
@@ -138,12 +136,9 @@ describe('Simple Analytics privacy boundary', () => {
       expect(env.fetch).toHaveBeenCalledTimes(2);
       const eventInit = vi.mocked(env.fetch).mock.calls[1]![1];
       expect(JSON.parse(String(eventInit?.body))).toEqual({
-        type: 'event',
-        hostname: 'quiltclarity.com',
+        version: 1,
         path: '/fabric-cutting-planner/',
-        ua: 'QuiltClarity/1.0',
-        event: 'fabric_added',
-        metadata: {},
+        event: { name: 'fabric_added' },
       });
       for (let index = 0; index < 10; index += 1)
         expect(() => emitAnalytics({ name: 'fabric_added' })).not.toThrow();
@@ -166,7 +161,7 @@ describe('Simple Analytics privacy boundary', () => {
       });
       expect(() => emitAnalytics({ name: 'fabric_added' })).not.toThrow();
       expect(env.fetch).toHaveBeenCalledTimes(49);
-      expect(startSimpleAnalytics(config, env)).toBe(false);
+      expect(startCloudflareAnalytics(config, env)).toBe(false);
       expect(env.fetch).toHaveBeenCalledTimes(49);
     } finally {
       vi.unstubAllGlobals();

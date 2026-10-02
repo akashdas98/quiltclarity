@@ -4,9 +4,17 @@
   "workers_dev": false,
   "preview_urls": false,
   "routes": [{ "pattern": "quiltclarity.com", "custom_domain": true }],
+  "main": "worker/index.ts",
+  "vars": { "ANALYTICS_ENABLED": "true" },
+  "analytics_engine_datasets": [
+    { "binding": "ANALYTICS", "dataset": "quiltclarity_events_v1" },
+  ],
+  "observability": { "enabled": false },
   "assets": {
+    "binding": "ASSETS",
     "directory": "./dist",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
+    "run_worker_first": ["/api/analytics"],
   },
 }

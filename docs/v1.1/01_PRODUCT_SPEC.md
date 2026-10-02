@@ -602,4 +602,10 @@ Functional completion requires:
 - all 11 calculators work and expose assumptions;
 - print is coherent;
 - no backend/account dependency;
+
+Owner amendment (2026-10-02): a narrowly scoped optional Cloudflare analytics
+ingestion endpoint and provider telemetry storage are permitted under
+[the analytics-only exception](../decisions/cloudflare-analytics-engine.md).
+Core calculations and project persistence remain static/browser-only.
+
 - competitor acceptance gate passes before public launch.
