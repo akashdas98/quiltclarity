@@ -9,14 +9,32 @@ import process from 'node:process';
 import { chromium } from 'playwright-core';
 import { SITE_ORIGIN as PUBLIC_SITE_ORIGIN } from '../src/lib/site-identity.ts';
 import { inspectCheckboxAlignment } from './lib/checkbox-alignment-audit.mjs';
+import { auditPlannerExport } from './lib/planner-export-audit.mjs';
+import { auditPlannerPrintAction } from './lib/planner-print-action-audit.mjs';
 import {
   assertCleanPrintContract,
+  assertPrintContentParity,
   assertRenderedPrintContract,
   parsePrintedPdf,
 } from './lib/pdf-print-audit.mjs';
 
 const ROOT = process.cwd();
-const SITE_ORIGIN = 'http://127.0.0.1:4321';
+const PUBLIC_SMOKE_ORIGIN = process.env.QUILTCLARITY_SMOKE_ORIGIN;
+let siteOrigin = 'http://127.0.0.1:4321';
+if (PUBLIC_SMOKE_ORIGIN !== undefined) {
+  const url = new URL(PUBLIC_SMOKE_ORIGIN);
+  assert.ok(
+    url.protocol === 'https:' &&
+      url.pathname === '/' &&
+      !url.username &&
+      !url.password &&
+      !url.search &&
+      !url.hash,
+    'QUILTCLARITY_SMOKE_ORIGIN must be an HTTPS origin without a path, query, credentials, or fragment',
+  );
+  siteOrigin = url.origin;
+}
+const SITE_ORIGIN = siteOrigin;
 const CANONICAL_ORIGIN = new URL(process.env.SITE_URL ?? PUBLIC_SITE_ORIGIN)
   .origin;
 const ROUTES = [
@@ -871,6 +889,15 @@ async function runGuideHelpAudit(client) {
 
 async function runPlannerAudit(client) {
   console.log('  Planner interaction and keyboard checks...');
+  // Exercise the tablet PDF path at desktop geometry. Device selection must
+  // remain independent of the viewport used by the layout/print regressions.
+  const mobileSignals = await client.send(
+    'Page.addScriptToEvaluateOnNewDocument',
+    {
+      source:
+        "Object.defineProperty(navigator, 'userAgentData', { configurable: true, value: { mobile: true } });",
+    },
+  );
   // This fixture uses imperial inputs; earlier native-select/help audits persist
   // their own drafts in this shared browser context.
   await evaluate(
@@ -1015,7 +1042,41 @@ async function runPlannerAudit(client) {
       window.print = () => { window.__printRequested = true; };
       document.querySelector('#copy-result').click();
       await new Promise((resolve) => setTimeout(resolve, 30));
-      document.querySelector('#print-result').click();
+      const originalObjectUrl = URL.createObjectURL;
+      const originalAnchorClick = HTMLAnchorElement.prototype.click;
+      URL.createObjectURL = (blob) => {
+        if (blob.type === 'application/pdf') {
+          window.__exportedPdfPromise = blob.arrayBuffer().then((buffer) => {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let offset = 0; offset < bytes.length; offset += 16384) {
+              binary += String.fromCharCode(...bytes.subarray(offset, offset + 16384));
+            }
+            return btoa(binary);
+          });
+        }
+        return originalObjectUrl.call(URL, blob);
+      };
+      HTMLAnchorElement.prototype.click = function () {
+        if (this.download.endsWith('.pdf')) {
+          window.__exportedPdfFilename = this.download;
+          return;
+        }
+        return originalAnchorClick.call(this);
+      };
+      const exportButton = document.querySelector('#export-pdf-result');
+      exportButton.click();
+      const exportStarted = performance.now();
+      while (exportButton.disabled) {
+        if (performance.now() - exportStarted > 15000) throw new Error('PDF export timed out');
+        await new Promise((resolve) => setTimeout(resolve, 20));
+      }
+      if (!window.__exportedPdfPromise) {
+        throw new Error('PDF export failed: ' + document.querySelector('#action-status').textContent);
+      }
+      window.__exportedPdfData = await window.__exportedPdfPromise;
+      URL.createObjectURL = originalObjectUrl;
+      HTMLAnchorElement.prototype.click = originalAnchorClick;
       document.querySelector('#share-result').click();
       const shareFallback = document.querySelector('#action-status').textContent.includes('not available');
       document.querySelector('#edit-result').click();
@@ -1189,6 +1250,9 @@ async function runPlannerAudit(client) {
         const label = cell.querySelector('.cut-field-label');
         const control = cell.querySelector('input, select');
         return label && control &&
+          label.getBoundingClientRect().width > 0 &&
+          label.getBoundingClientRect().height > 0 &&
+          getComputedStyle(label).visibility !== 'hidden' &&
           getComputedStyle(label).position !== 'absolute' &&
           label.getBoundingClientRect().bottom <=
             control.getBoundingClientRect().top + 1;
@@ -1408,6 +1472,11 @@ async function runPlannerAudit(client) {
         leaksCanonicalWasteArea: resultText.includes('mm²'),
         copiedSummary: window.__copiedSummary,
         printRequested: window.__printRequested === true,
+        exportedPdf: window.__exportedPdfData,
+        exportedPdfFilename: window.__exportedPdfFilename,
+        exportButtonLabel: document.querySelector('#export-pdf-result').innerText.replace(/\\s+/g, ' ').trim(),
+        exportButtonRestored: !document.querySelector('#export-pdf-result').disabled,
+
         shareFallback,
         editFocusedProjectName: document.activeElement === document.querySelector('#project-name'),
         events: window.dataLayer,
@@ -1632,7 +1701,15 @@ async function runPlannerAudit(client) {
     result.copiedSummary,
     /You need additional fabric for \d+ of \d+ fabrics\./,
   );
-  assert.equal(result.printRequested, true);
+  assert.equal(
+    result.printRequested,
+    false,
+    'planner export must not invoke native print',
+  );
+  assert.match(result.exportButtonLabel, /export PDF\s+for print/);
+  assert.equal(result.exportButtonRestored, true);
+  assert.match(result.exportedPdfFilename, /\.pdf$/);
+  assert.ok(result.exportedPdf.startsWith('JVBER'));
   assert.equal(result.shareFallback, true);
   assert.equal(result.editFocusedProjectName, true);
   assert.equal(result.privateDataLeaked, false);
@@ -1761,6 +1838,34 @@ async function runPlannerAudit(client) {
   assert.ok(accessibleNames.includes('Project name (optional)'));
 
   console.log('  Print rendering check...');
+  // Narrow screen geometry must not select mobile card styles for printed prose.
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
+  await client.send('Emulation.setEmulatedMedia', { media: 'print' });
+  const narrowPrintLayout = await evaluate(
+    client,
+    `(() => ({
+      shoppingDisplay: getComputedStyle(document.querySelector('.shopping-table')).display,
+      shoppingHeaderPosition: getComputedStyle(document.querySelector('.shopping-table thead')).position,
+      shoppingBodyDisplay: getComputedStyle(document.querySelector('.shopping-table tbody')).display,
+      mainMinimumHeight: getComputedStyle(document.querySelector('main')).minHeight,
+      diagramMarginsReset: [...document.querySelectorAll('.diagram-print-page')].every(
+        (page) => getComputedStyle(page).marginTop === '0px',
+      ),
+    }))()`,
+  );
+  assert.equal(narrowPrintLayout.shoppingDisplay, 'table');
+  assert.equal(narrowPrintLayout.shoppingHeaderPosition, 'static');
+  assert.equal(narrowPrintLayout.shoppingBodyDisplay, 'table-row-group');
+  assert.equal(narrowPrintLayout.mainMinimumHeight, '0px');
+  assert.equal(narrowPrintLayout.diagramMarginsReset, true);
+  await client.send('Emulation.setEmulatedMedia', { media: 'screen' });
+  await client.send('Emulation.clearDeviceMetricsOverride');
+
   const printContract = await evaluate(
     client,
     `(() => {
@@ -1859,6 +1964,12 @@ async function runPlannerAudit(client) {
         markers,
         samePageGroups,
         diagrams,
+        closingTexts: [...document.querySelectorAll(
+          '.fabric-result .leftover-summary, .fabric-result .assumptions, .fabric-result .warnings',
+        )].flatMap((section) => [
+          printableText(section.querySelector('h3')),
+          ...[...section.querySelectorAll('p, li')].map((element) => element.textContent.trim()),
+        ]).filter(Boolean),
         fabricHeadings: [...document.querySelectorAll('.fabric-result-intro > h2')]
           .map((heading) => printableText(heading)),
         buyNowHeadlines: [...document.querySelectorAll('.result-hero > strong')]
@@ -2034,7 +2145,7 @@ async function runPlannerAudit(client) {
   assert.notEqual(printState.diagramPageHeight, '0px');
   assert.equal(printState.diagramContentDisplay, 'inline-block');
   assert.ok(printState.diagramContentBreakInside.includes('avoid'));
-  assert.equal(printState.diagramBreakBefore, 'auto');
+  assert.equal(printState.diagramBreakBefore, 'page');
   assert.equal(printState.everyDiagramOwnsProtectedPage, true);
   assert.ok(printState.diagramWidth > 0);
   assert.ok(printState.diagramHeight > 0);
@@ -2095,6 +2206,131 @@ async function runPlannerAudit(client) {
     printContract,
   );
   assert.equal(cleanPrint.pages.length, 7);
+  const exportArtifactsDirectory = path.join(ROOT, 'tmp', 'pdfs');
+  await mkdir(exportArtifactsDirectory, { recursive: true });
+  await writeFile(
+    path.join(exportArtifactsDirectory, 'planner-export.pdf'),
+    Buffer.from(result.exportedPdf, 'base64'),
+  );
+  await writeFile(
+    path.join(exportArtifactsDirectory, 'planner-native-multi.pdf'),
+    Buffer.from(cleanPdf.data, 'base64'),
+  );
+  const exportedPrint = await assertCleanPrintContract(
+    result.exportedPdf,
+    printContract,
+  );
+  await assertPrintContentParity(
+    result.exportedPdf,
+    cleanPdf.data,
+    printContract,
+  );
+  assert.ok(exportedPrint.pages.length >= printContract.diagrams.length + 2);
+  // The same result must export identically at phone/tablet widths, including
+  // after an unsupported-label error. This checks the actual PDF, not CSS.
+  for (const width of [390, 820]) {
+    await client.send('Emulation.setEmulatedMedia', { media: 'screen' });
+    await client.send('Emulation.setDeviceMetricsOverride', {
+      width,
+      height: 900,
+      deviceScaleFactor: 1,
+      mobile: true,
+    });
+    const mobileExport = await evaluate(
+      client,
+      `(async () => {
+      const button = document.querySelector('#export-pdf-result');
+      const originals = [...document.querySelectorAll('svg.cutting-diagram')]
+        .map((svg) => svg.outerHTML);
+      const originalUrl = URL.createObjectURL;
+      const originalClick = HTMLAnchorElement.prototype.click;
+      let pending;
+      URL.createObjectURL = (blob) => {
+        pending = blob.arrayBuffer().then((buffer) => {
+          const bytes = new Uint8Array(buffer);
+          let binary = '';
+          for (let offset = 0; offset < bytes.length; offset += 16384)
+            binary += String.fromCharCode(...bytes.subarray(offset, offset + 16384));
+          return btoa(binary);
+        });
+        return originalUrl.call(URL, blob);
+      };
+      HTMLAnchorElement.prototype.click = function () {
+        if (!this.download.endsWith('.pdf')) return originalClick.call(this);
+      };
+      const run = async () => {
+        button.click();
+        const started = performance.now();
+        while (button.disabled) {
+          if (performance.now() - started > 15000) throw new Error('Export retry timed out');
+          await new Promise((resolve) => setTimeout(resolve, 20));
+        }
+      };
+      try {
+        const heading = document.querySelector('.fabric-result-intro > h2');
+        const label = heading.innerHTML;
+        heading.textContent = 'Unsupported \\u{1F9F5}';
+        await run();
+        const failureShown = document.querySelector('#action-status').textContent
+          .includes('The bundled PDF font cannot print');
+        heading.innerHTML = label;
+        await run();
+        if (!pending) throw new Error('PDF retry did not produce a file');
+        return {
+          data: await pending, failureShown,
+          restored: !button.disabled && !button.hasAttribute('aria-busy'),
+          fallbackLink: !!document.querySelector('#action-status a[download$=".pdf"]'),
+          unchanged: originals.every((svg, index) => svg ===
+            document.querySelectorAll('svg.cutting-diagram')[index].outerHTML),
+        };
+      } finally {
+        URL.createObjectURL = originalUrl;
+        HTMLAnchorElement.prototype.click = originalClick;
+      }
+    })()`,
+    );
+    assert.equal(mobileExport.failureShown, true);
+    assert.equal(mobileExport.restored, true);
+    assert.equal(mobileExport.fallbackLink, true);
+    assert.equal(mobileExport.unchanged, true);
+    const mobilePrint = await assertCleanPrintContract(
+      mobileExport.data,
+      printContract,
+    );
+    assert.deepEqual(
+      mobilePrint.pages.map(({ width, height }) => [width, height]),
+      exportedPrint.pages.map(({ width, height }) => [width, height]),
+    );
+  }
+  await client.send('Emulation.clearDeviceMetricsOverride');
+  await client.send('Emulation.setEmulatedMedia', { media: 'print' });
+
+  // Exercise an engine that ignores named-page assignment. This is a bounded
+  // fallback regression, not a substitute for physical iPhone print evidence.
+  await evaluate(
+    client,
+    `(() => {
+      const style = document.createElement('style');
+      style.id = 'print-unnamed-page-audit';
+      style.textContent = '@media print { .diagram-print-page { page: auto !important; } }';
+      document.head.append(style);
+    })()`,
+  );
+  const unnamedPagePdf = await client.send('Page.printToPDF', {
+    printBackground: true,
+    preferCSSPageSize: true,
+  });
+  await assertCleanPrintContract(unnamedPagePdf.data, {
+    ...printContract,
+    diagrams: printContract.diagrams.map((diagram) => ({
+      ...diagram,
+      orientation: 'portrait',
+    })),
+  });
+  await evaluate(
+    client,
+    `document.querySelector('#print-unnamed-page-audit').remove()`,
+  );
   const pdf = await client.send('Page.printToPDF', {
     printBackground: true,
     preferCSSPageSize: true,
@@ -2133,6 +2369,41 @@ async function runPlannerAudit(client) {
       Buffer.from(oneFabricPdf.data, 'base64'),
     );
   }
+  const oneFabricContent = await evaluate(
+    client,
+    `(() => {
+      const fabric = document.querySelector('.fabric-result');
+      const headingText = (element) =>
+        element.querySelector('.print-help-label')?.textContent.trim() ||
+        element.textContent.trim();
+      return {
+        diagramIds: [...fabric.querySelectorAll('.diagram-print-page')]
+          .map((page) => page.dataset.printAuditMarkerId),
+        fabricHeadings: [headingText(fabric.querySelector('.fabric-result-intro > h2'))],
+        buyNowHeadlines: [fabric.querySelector('.result-hero > strong').textContent.trim()],
+        closingTexts: [...fabric.querySelectorAll('.leftover-summary, .assumptions, .warnings')]
+          .flatMap((section) => [
+            headingText(section.querySelector('h3')),
+            ...[...section.querySelectorAll('p, li')].map((element) => element.textContent.trim()),
+          ]).filter(Boolean),
+      };
+    })()`,
+  );
+  await evaluate(
+    client,
+    `document.querySelector('#print-audit-marker-styles').disabled = true`,
+  );
+  const cleanOneFabricPdf = await client.send('Page.printToPDF', {
+    printBackground: true,
+    preferCSSPageSize: true,
+  });
+  await assertCleanPrintContract(cleanOneFabricPdf.data, {
+    ...printContract,
+    ...oneFabricContent,
+    diagrams: printContract.diagrams.filter((diagram) =>
+      oneFabricContent.diagramIds.includes(diagram.markerId),
+    ),
+  });
   const oneFabricPages = parsePrintedPdf(oneFabricPdf.data);
   assert.equal(oneFabricPages.length, 4);
   assert.ok(
@@ -2390,6 +2661,9 @@ async function runPlannerAudit(client) {
       ),
     'saved planner state to restore',
   );
+  await client.send('Page.removeScriptToEvaluateOnNewDocument', {
+    identifier: mobileSignals.identifier,
+  });
 }
 
 async function runThemeAudit(client) {
@@ -2845,6 +3119,7 @@ async function runCalculatorAudit(client) {
     `localStorage.removeItem('quiltclarity:planner-state')`,
   );
   await navigate(client, '/fabric-cutting-planner/', '#planner-form');
+  await assertMultipleCutRowLabels(client);
   const intermediateCutErrorLayout = await evaluate(
     client,
     `(async () => {
@@ -2971,6 +3246,42 @@ async function runCalculatorAudit(client) {
   assert.deepEqual(classicScrollbarLayout.offenders, []);
 }
 
+async function assertMultipleCutRowLabels(client) {
+  const labels = await evaluate(
+    client,
+    `(async () => {
+      const initialCount = document.querySelectorAll('.cut-list-row').length;
+      document.querySelector('[data-duplicate-cut]').click();
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      const rows = [...document.querySelectorAll('.cut-list-row')];
+      const result = {
+        rowCount: rows.length,
+        expectedCount: initialCount + 1,
+        everyLabelVisibleAndAssociated: rows.every((row) =>
+          [...row.querySelectorAll('td')].every((cell) => {
+            const label = cell.querySelector('.cut-field-label');
+            const control = cell.querySelector('input, select');
+            if (!label || !control || label.htmlFor !== control.id) return false;
+            const bounds = label.getBoundingClientRect();
+            const style = getComputedStyle(label);
+            return bounds.width > 0 && bounds.height > 0 &&
+              style.visibility === 'visible' && label.innerText.trim().length > 0;
+          }),
+        ),
+      };
+      document.querySelectorAll('[data-remove-cut]')[rows.length - 1].click();
+      return result;
+    })()`,
+  );
+  assert.equal(labels.rowCount, labels.expectedCount);
+  assert.ok(labels.rowCount >= 2);
+  assert.equal(
+    labels.everyLabelVisibleAndAssociated,
+    true,
+    'every cut-row field needs a visible associated label, including later rows',
+  );
+}
+
 async function runMobileAudit(client) {
   console.log('  Narrow mobile viewport check...');
   await client.send('Emulation.setDeviceMetricsOverride', {
@@ -2994,6 +3305,7 @@ async function runMobileAudit(client) {
     );
     await navigate(client, '/fabric-cutting-planner/', '#planner-form');
 
+    await assertMultipleCutRowLabels(client);
     const planner = await evaluate(
       client,
       `(async () => {
@@ -3583,6 +3895,14 @@ async function runBrowser(browser) {
     await runThemeAudit(client);
     await runGuideHelpAudit(client);
     await runPlannerAudit(client);
+    console.log('  Device-specific planner Print/PDF action checks...');
+    await auditPlannerPrintAction(launchedBrowser, SITE_ORIGIN);
+    console.log('  Single-fabric portrait/landscape PDF export checks...');
+    await auditPlannerExport(
+      launchedBrowser,
+      SITE_ORIGIN,
+      path.join(ROOT, 'tmp', 'pdfs'),
+    );
     await runCalculatorAudit(client);
     await runMobileAudit(client);
     return browser.name;
@@ -3593,22 +3913,27 @@ async function runBrowser(browser) {
 }
 
 async function main() {
-  const server = spawn(
-    process.execPath,
-    [
-      path.join(ROOT, 'node_modules', 'astro', 'bin', 'astro.mjs'),
-      'preview',
-      '--host',
-      '127.0.0.1',
-      '--port',
-      '4321',
-    ],
-    { cwd: ROOT, stdio: 'ignore' },
-  );
+  const server =
+    PUBLIC_SMOKE_ORIGIN === undefined
+      ? spawn(
+          process.execPath,
+          [
+            path.join(ROOT, 'node_modules', 'astro', 'bin', 'astro.mjs'),
+            'preview',
+            '--host',
+            '127.0.0.1',
+            '--port',
+            '4321',
+          ],
+          { cwd: ROOT, stdio: 'ignore' },
+        )
+      : undefined;
   try {
     await waitFor(
       async () => (await fetch(SITE_ORIGIN)).ok,
-      'Astro preview server',
+      PUBLIC_SMOKE_ORIGIN === undefined
+        ? 'Astro preview server'
+        : `public site ${SITE_ORIGIN}`,
     );
     console.log('Auditing static routes...');
     await auditStaticRoutes();
@@ -3624,7 +3949,7 @@ async function main() {
       `Browser smoke passed in ${completed.join(' and ')}; 38 indexable routes, crawl controls, Guides/contextual help, theme persistence, planner, calculator, persistence, analytics, accessibility, performance, narrow mobile layout, and print checks passed.`,
     );
   } finally {
-    await stopChild(server);
+    if (server) await stopChild(server);
   }
 }
 

@@ -127,6 +127,7 @@ export const ANALYTICS_HELP_KEYS = [
   'actionCancel',
   'actionConfirm',
   'actionPrint',
+  'actionExportPdf',
   'actionCopy',
   'actionShare',
   'actionEdit',

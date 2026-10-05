@@ -9,7 +9,7 @@ import ControlWithHelp from '../components/ControlWithHelp.astro';
   description="Reconcile a quilt cut list with measured fabric stock, compare optional pattern yardage, and calculate what to buy and how to cut it."
   pageType="application"
 >
-  <div class="page">
+  <div class="page planner-page">
     <header class="hero">
       <p class="eyebrow">Fabric cutting planner</p>
       <h1>Use What You Have. Calculate What to Buy.</h1>
@@ -269,7 +269,15 @@ import ControlWithHelp from '../components/ControlWithHelp.astro';
       <div id="project-summary" class="result-summary"></div>
       <div class="actions result-actions no-print">
         <ControlWithHelp helpKey="actionPrint">
-          <button type="button" id="print-result">Print</button>
+          <button
+            type="button"
+            id="export-pdf-result"
+            class="export-pdf-button"
+            aria-label="Print"
+          >
+            <span>Print</span>
+            <small hidden>for print</small>
+          </button>
         </ControlWithHelp>
         <ControlWithHelp helpKey="actionCopy">
           <button type="button" class="secondary" id="copy-result"
@@ -287,7 +295,13 @@ import ControlWithHelp from '../components/ControlWithHelp.astro';
           >
         </ControlWithHelp>
       </div>
-      <p id="action-status" class="status" role="status" aria-live="polite"></p>
+      <p
+        id="action-status"
+        class="status no-print"
+        role="status"
+        aria-live="polite"
+      >
+      </p>
       <div id="fabric-results"></div>
     </section>
     <section

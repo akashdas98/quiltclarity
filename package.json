@@ -40,5 +40,9 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.66.0",
     "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "jspdf": "4.2.1",
+    "svg2pdf.js": "2.8.1"
   }
 }

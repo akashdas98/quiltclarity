@@ -46,7 +46,8 @@ describe('Milestone 7 static UI contracts', () => {
     expect(plannerPage).toContain('<form id="planner-form"');
     expect(plannerPage).toContain('role="alert"');
     expect(plannerPage).toContain('aria-live="polite"');
-    expect(plannerPage).toContain('Print');
+    expect(plannerPage).toContain('<span>Print</span>');
+    expect(plannerPage).toContain('for print');
     expect(plannerPage).toContain('Copy summary');
     expect(plannerPage).toContain('Share summary');
     expect(plannerScript).toContain('Text version of this allocation');
@@ -81,8 +82,10 @@ describe('Milestone 7 static UI contracts', () => {
   it('wires result controls for print-only content separation', () => {
     expect(baseLayout).toContain("import '../styles/global.css'");
     expect(plannerPage).toContain('result-actions no-print');
-    expect(plannerPage).toContain('id="print-result"');
+    expect(plannerPage).toContain('id="export-pdf-result"');
     expect(plannerScript).toContain('window.print()');
+    expect(plannerScript).toContain('shouldExportPlannerPdf');
+    expect(plannerScript).toContain('createPlannerPrintPdf');
     expect(plannerScript).toContain(
       "diagram.width >= diagram.height ? 'landscape' : 'portrait'",
     );

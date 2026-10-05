@@ -383,6 +383,12 @@ export const CONTEXT_HELP = {
       'Opens the browser print flow using the dedicated readable plan layout.',
     learnMoreHref: '/guides/print-your-project-plan/',
   },
+  actionExportPdf: {
+    title: 'Export PDF for print',
+    explanation:
+      'Downloads a print-ready PDF of the current plan. Open the file to print or save it.',
+    learnMoreHref: '/guides/print-your-project-plan/',
+  },
   actionCopy: {
     title: 'Copy summary',
     explanation:

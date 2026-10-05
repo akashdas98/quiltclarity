@@ -35,6 +35,7 @@ import {
   type AnalyticsPlannerContext,
   type AnalyticsStockSource,
 } from '../lib/analytics';
+import { shouldExportPlannerPdf } from '../lib/printing/print-action';
 
 const form = required<HTMLFormElement>('planner-form');
 const fabricsRoot = required<HTMLElement>('fabrics');
@@ -1723,9 +1724,95 @@ fabricsRoot.addEventListener('change', (event) => {
   });
 });
 
-required<HTMLButtonElement>('print-result').addEventListener('click', () => {
+const exportPdfButton = required<HTMLButtonElement>('export-pdf-result');
+const exportPlannerPdf = shouldExportPlannerPdf({
+  userAgent: navigator.userAgent,
+  platform: navigator.platform,
+  maxTouchPoints: navigator.maxTouchPoints,
+  userAgentDataMobile: (
+    navigator as Navigator & { userAgentData?: { mobile?: boolean } }
+  ).userAgentData?.mobile,
+});
+if (exportPlannerPdf) {
+  exportPdfButton.setAttribute('aria-label', 'export PDF for print');
+  exportPdfButton.querySelector('span')!.textContent = 'export PDF';
+  exportPdfButton.querySelector('small')!.hidden = false;
+  const helpRoot = exportPdfButton.closest<HTMLElement>('[data-action-help]')!;
+  helpRoot.dataset.helpKey = 'actionExportPdf';
+  helpRoot.querySelector<HTMLElement>(
+    '[data-action-help-tooltip]',
+  )!.textContent = CONTEXT_HELP.actionExportPdf.explanation;
+}
+let latestPdfUrl: string | undefined;
+
+exportPdfButton.addEventListener('click', async () => {
+  if (exportPdfButton.disabled) return;
   emitAnalytics({ name: 'print_result' });
-  window.print();
+  exportPdfButton.disabled = true;
+  exportPdfButton.setAttribute('aria-busy', 'true');
+  if (!exportPlannerPdf) {
+    actionStatus.textContent = 'Preparing print…';
+    try {
+      // These faces are used only by print CSS, so fonts.ready alone on the
+      // screen does not initiate their first load. Load both before native Print
+      // enters print media and measures SVG labels/diagram geometry.
+      const fonts = await Promise.allSettled([
+        document.fonts.load('400 16px "QuiltClarity Print"'),
+        document.fonts.load('700 16px "QuiltClarity Print"'),
+      ]);
+      await document.fonts.ready;
+      actionStatus.textContent = fonts.some(
+        (font) => font.status === 'rejected',
+      )
+        ? 'Print fonts could not load. Using browser fallback fonts.'
+        : '';
+      window.print();
+    } catch {
+      actionStatus.textContent = 'Could not open Print. Try Print again.';
+    } finally {
+      exportPdfButton.disabled = false;
+      exportPdfButton.removeAttribute('aria-busy');
+    }
+    return;
+  }
+  actionStatus.textContent = 'Preparing your PDF…';
+  try {
+    const { createPlannerPrintPdf } =
+      await import('../lib/printing/planner-pdf');
+    const pdf = await createPlannerPrintPdf({
+      pageRoot:
+        required<HTMLElement>('planner-results').closest<HTMLElement>('.page')!,
+    });
+    const pdfBlob = new Blob([new Uint8Array(pdf)], {
+      type: 'application/pdf',
+    });
+    const url = URL.createObjectURL(pdfBlob);
+    if (latestPdfUrl) URL.revokeObjectURL(latestPdfUrl);
+    latestPdfUrl = url;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'quiltclarity-plan.pdf';
+    link.textContent = 'Open or download the PDF';
+    actionStatus.replaceChildren(
+      'PDF ready. If the download did not start, ',
+      link,
+      '.',
+    );
+    link.click();
+  } catch (error) {
+    actionStatus.textContent =
+      error instanceof Error &&
+      error.message.startsWith('The bundled PDF font cannot')
+        ? error.message
+        : 'Could not prepare the PDF. Try export PDF again.';
+  } finally {
+    exportPdfButton.disabled = false;
+    exportPdfButton.removeAttribute('aria-busy');
+  }
+});
+
+window.addEventListener('pagehide', () => {
+  if (latestPdfUrl) URL.revokeObjectURL(latestPdfUrl);
 });
 
 window.addEventListener('beforeprint', fitPrintDiagrams);

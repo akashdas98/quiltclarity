@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'QuiltClarity Print';
+  src: url('/fonts/NotoSans-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'QuiltClarity Print';
+  src: url('/fonts/NotoSans-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
 :root {
   color-scheme: light;
   --ink: #20221f;
@@ -722,6 +736,18 @@ input[type='checkbox'] {
   gap: 0.65rem;
   margin: 1rem 0;
 }
+.export-pdf-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  line-height: 1.15;
+}
+.export-pdf-button small {
+  font-size: 0.75em;
+  font-weight: 600;
+}
 details {
   margin: 1rem 0;
 }
@@ -828,6 +854,9 @@ summary {
   display: inline;
 }
 .cut-row-field-help {
+  display: block;
+}
+.cut-row-field-help > .context-help {
   display: none;
 }
 .cut-row-errors > td {
@@ -1179,7 +1208,7 @@ dialog::backdrop {
 .shopping-summary-note {
   margin: 0;
 }
-@media (max-width: 650px) {
+@media screen and (max-width: 650px) {
   .shopping-mobile-help {
     display: flex;
     flex-wrap: wrap;
@@ -1440,13 +1469,13 @@ dialog::backdrop {
   min-width: 0;
 }
 
-@media (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
   .calculator-shell {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
@@ -1481,7 +1510,7 @@ dialog::backdrop {
   .cut-list-table > thead {
     display: none;
   }
-  .cut-list-row:first-of-type .cut-row-field-help {
+  .cut-list-row:first-of-type .cut-row-field-help > .context-help {
     display: inline;
   }
   .cut-list-table,
@@ -1568,7 +1597,7 @@ dialog::backdrop {
   }
 }
 
-@media (max-width: 650px) {
+@media screen and (max-width: 650px) {
   .cut-list-table .cut-list-row td {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.3rem;
@@ -1624,6 +1653,10 @@ dialog::backdrop {
     color: #000;
     background: #fff;
   }
+  .planner-page {
+    --accent-text: #6d334f;
+    font-family: 'QuiltClarity Print', sans-serif;
+  }
   .no-print,
   form,
   .result-actions,
@@ -1647,6 +1680,9 @@ dialog::backdrop {
   .help-label:not(.screen-help-label) {
     display: inline !important;
     white-space: normal;
+  }
+  main {
+    min-height: 0;
   }
   .page {
     width: 100%;
@@ -1757,10 +1793,18 @@ dialog::backdrop {
     border-radius: 0;
     background: transparent;
   }
+  .material-plan .diagram-print-page,
   .diagram-print-page {
     display: block;
     width: var(--print-page-width, 100%);
+    /* The physical print box may be narrower if named page sizes are ignored. */
+    max-width: 100%;
     margin: 0;
+    /* Dedicated sheets must not depend on named-page transitions alone. */
+    break-before: page;
+    page-break-before: always;
+    break-after: page;
+    page-break-after: always;
     font-size: 0;
     line-height: 0;
     break-inside: avoid-page;
@@ -1857,6 +1901,12 @@ dialog::backdrop {
     stroke-width: 7px;
     stroke-linejoin: round;
     paint-order: stroke fill;
+  }
+  .planner-page .cutting-diagram text,
+  .planner-page .cutting-diagram .waste-label,
+  .planner-page .cutting-diagram .dimension-label,
+  .planner-page .cutting-diagram .direction-marker text {
+    font-family: 'QuiltClarity Print', sans-serif;
   }
   .fabric-result > details {
     display: none !important;
