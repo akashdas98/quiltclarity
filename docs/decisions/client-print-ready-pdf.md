@@ -1,7 +1,8 @@
 # Client print-ready PDF
 
-Date: 2026-10-02; corrected 2026-10-03. Status: implemented locally; owner
-iPhone/tablet PDF acceptance and local device-routing correction passed 2026-10-03.
+Date: 2026-10-02; corrected 2026-10-03. Status: published 2026-10-05;
+owner iPhone/tablet PDF acceptance passed 2026-10-03. Desktop first-click font
+readiness correction is included in runtime commit 9d7d342.
 
 ## Decision
 
@@ -76,7 +77,9 @@ no project-data network requests; lazy loading and performance containment; exis
 Chrome/Edge browser and clean PDF text/paint contracts plus rendered visual review.
 Physical iPhone/tablet export/viewer acceptance passed per owner 2026-10-03.
 This is owner evidence. Owner waived Firefox acceptance on 2026-10-05; Firefox
-remains untested and is not a pending release requirement. No deployment is authorized.
+remains untested and is not a pending release requirement. Owner authorized
+publication of the validated changes on 2026-10-05; deployment evidence is owned
+by the Resume Checkpoint in ../architecture/project-status.md.
 
 Bundled Noto Sans supports common Latin accents, fractions, Greek and Cyrillic.
 Unsupported characters (including many CJK characters and emoji) stop export with

@@ -3,12 +3,28 @@ import assert from 'node:assert/strict';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
+import { createServer } from 'vite';
 import {
   assertCleanPrintContract,
   assertPrintContentParity,
 } from './pdf-print-audit.mjs';
 
 export async function auditPlannerExport(browser, origin, artifactsDirectory) {
+  // Reuse the canonical TypeScript collector contract through the installed
+  // build tool, rather than duplicating its event/field taxonomy in this audit.
+  const sourceLoader = await createServer({
+    configFile: false,
+    logLevel: 'silent',
+    server: { middlewareMode: true, hmr: false, watch: null },
+  });
+  let projectAnalyticsEnvelope;
+  try {
+    ({ projectAnalyticsEnvelope } = await sourceLoader.ssrLoadModule(
+      '/src/lib/analytics/envelope.ts',
+    ));
+  } finally {
+    await sourceLoader.close();
+  }
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
   });
@@ -166,7 +182,30 @@ export async function auditPlannerExport(browser, origin, artifactsDirectory) {
       assert.ok(allText.includes('Étoile ½'));
       assert.ok(allText.includes('Pièce ¼'));
       for (const request of requests.slice(firstRequest)) {
-        assert.equal(new URL(request.url()).origin, new URL(origin).origin);
+        const url = new URL(request.url());
+        assert.equal(url.origin, new URL(origin).origin);
+        if (url.pathname === '/api/analytics') {
+          // Production can flush existing queued calculation/print events
+          // during export. Their closed envelope is separate from PDF/font GETs.
+          assert.equal(request.method(), 'POST');
+          assert.equal(url.search, '');
+          const payload = request.postDataJSON();
+          const projected = projectAnalyticsEnvelope(payload);
+          assert.notEqual(
+            projected,
+            null,
+            'analytics must use the fixed taxonomy',
+          );
+          assert.deepEqual(
+            payload,
+            projected,
+            'analytics must contain no extra fields/project content',
+          );
+          assert.equal(payload.path, '/fabric-cutting-planner/');
+          assert.equal(request.headers().cookie ?? '', '');
+          assert.equal(request.headers().referer ?? '', '');
+          continue;
+        }
         assert.equal(request.method(), 'GET');
         assert.equal(request.postData(), null);
       }
