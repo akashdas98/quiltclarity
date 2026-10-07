@@ -56,6 +56,14 @@ Use the startup/recovery rule above. `CONTEXT.md` is the compact map of authorit
 
 Do not bulk-read all project documents by default. Use the routing index in `CONTEXT.md` and `rg` to load only the smallest relevant source-of-truth sections, architecture notes, decisions, source files, and tests.
 
+For task/roadmap questions, load `docs/architecture/continuation-roadmap.md`.
+For cross-package questions or uncertain routes, use
+`docs/architecture/documentation-index.md` and its complete section catalog.
+Search the routed source text before calling information absent; unlocated is
+not proof of deletion. Preserve a catalog/topic route when docs are added or
+renamed, including pending and conditional post-launch work. Historical and
+research files stay findable without overriding active authority.
+
 Authority order:
 
 1. `docs/v1.1/00_GOVERNING_AGENDA.md` governs strategy, scope, and reason-to-win.
@@ -179,7 +187,7 @@ Context placement rules:
 
 ## Do Not
 
-- Do not add a backend, database, authentication, cloud persistence, or server-side calculations in V1.1.
+- Do not add a backend, database, authentication, cloud persistence, or server-side calculations in V1.1, except the owner-approved optional analytics-only ingestion and telemetry contract in `docs/decisions/cloudflare-analytics-engine.md`.
 - Do not add AI, accounts, paid tiers, image/PDF ingestion, pattern generation, stash inventory, community features, arbitrary polygon packing, or a full quilt designer.
 - Do not change the locked stack or domain behavior silently.
 - Do not claim the heuristic optimizer is globally optimal.

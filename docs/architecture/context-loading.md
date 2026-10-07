@@ -27,7 +27,10 @@ The required V1.1 architecture is:
 - React remains an allowed ceiling of one planner island only if later state complexity materially justifies replacing the current controller; it is not currently installed.
 - SVG diagrams projected directly from optimizer placements.
 - Versioned `localStorage` for project persistence and migration plus a separate allow-listed site-theme preference.
-- Static-hosting-compatible deployment with no application backend, database, authentication, server persistence, AI endpoint, or runtime calculation service.
+- Static-hosting-compatible deployment; the owner-approved optional analytics-only
+  ingestion/storage exception is in `../decisions/cloudflare-analytics-engine.md`.
+  No product backend, database, authentication, cloud project storage, AI endpoint
+  or runtime calculation service is allowed.
 
 Do not turn the whole site into a React application or create a second layout engine for diagrams.
 
@@ -59,6 +62,17 @@ handoff process or evidence of product acceptance.
 
 ## Selective Loading
 
+- Next steps, milestones, launch/post-launch continuation: load
+  `docs/architecture/continuation-roadmap.md` and relevant current evidence.
+- Unknown or cross-package topics: use `docs/architecture/documentation-index.md`
+  and `documentation-catalog.json`, then search/read the matched source sections.
+  The catalog retains historical, research and optional local archive routes
+  without adding them to startup context or product authority.
+- Ads/AdSense/monetization: load `docs/launch/postlaunch-ads-review.md`, launch
+  readiness and the relevant V1.1 ad/performance/privacy constraints.
+- Growth/Search Console: load the launch postlaunch framework, growth cadence,
+  SEO feedback-loop sections and closed analytics contract.
+
 - Domain/calculator work: load `docs/architecture/domain-contracts.md`, relevant sections of `docs/v1.1/02_GOLDEN_RULES_AND_TESTS.md` and `01_PRODUCT_SPEC.md`, the active migration milestone, domain source, and tests.
 - Optimizer/planning work: also load V1.1 Golden sections 9-11 and the finite-stock, scoring, pattern-comparison, performance, and property-test requirements in `07_TECHNICAL_MIGRATION_PLAN.md`.
 - UI work: load affected sections of `01_PRODUCT_SPEC.md` and `03_UX_IA_SPEC.md` plus the active source/components.
@@ -67,6 +81,8 @@ handoff process or evidence of product acceptance.
 - Guides/help work: load `docs/v1.1_GUIDES_HELP/README.md`, its Guides/help spec,
   manual plan, the Guides audit, and the owner-validation decision; retain the
   core Golden/domain authority in `docs/v1.1/`.
+  This is a Guides-specific overlay; the older copied product/UX sections do not
+  replace later core CSV/TSV, validation, label or responsive amendments.
 - Runtime/deployment work: load `docs/decisions/v1-static-architecture.md` and `docs/architecture/product-and-runtime-boundaries.md`.
 - Milestone completion: load the milestone's full handoff section, acceptance requirements, tests, and `docs/architecture/project-status.md`.
 

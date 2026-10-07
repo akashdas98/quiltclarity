@@ -78,7 +78,7 @@
 ## Measurement
 
 - [ ] implemented analytics events and exact allow-listed properties match `src/lib/analytics/analytics.ts`; no arbitrary metadata, project content, exact dimensions, or identifiers
-- [ ] date-only `quilter:analytics-first-used-date` marker yields only the allowed returning-user boolean; storage/analytics failure does not block tools
+- [ ] date-only `quiltclarity:analytics-first-used-date` (legacy `quilter:*` is migration input only) marker yields only the allowed returning-user boolean; storage/analytics failure does not block tools
 - [ ] production provider decision is made without widening the closed schema
 - [ ] after public activation: Search Console ownership, sitemap submission, and production-domain analytics delivery are confirmed
 
@@ -97,7 +97,7 @@
 
 - [x] trademark search and `quiltclarity.com` purchase complete per owner confirmation on 2026-10-01
 - [x] final source brand replacement and purchased-origin build defaults verified on 2026-10-01
-- [ ] production host variables and live canonical/redirect policy match the activated identity
+- [x] production apex canonicals, www/HTTPS redirects and automatic deployment verified, 2026-10-01
 - [x] Cloudflare + Astro hosting stack selected, reaffirmed by owner 2026-10-01
 - [x] Cloudflare static application deployed, public repository pushed, hosted CI and first Cloudflare automatic build/deployment pass, 2026-10-01
 - [x] HTTPS apex/WWW valid TLS and HTTP-to-HTTPS 301 with path/query preservation, 2026-10-01
@@ -105,8 +105,8 @@
 - [x] local `npm run smoke:browser` passes on installed Windows Chrome and Edge after the build, including print/PDF checks, 2026-10-01
 - [x] public crawl check: 38 sitemap pages, canonicals, retained noindex routes, robots and real 404, 2026-10-01
 - [x] focused public Chrome Fabric Yardage calculator interaction, 2026-10-01
-- [ ] mobile smoke test
-- [ ] print smoke test
+- [x] public Chrome/Edge narrow mobile viewport smoke, 2026-10-01 (desktop emulation; physical Safari pending)
+- [x] public Chrome/Edge clean PDF pagination, geometry and rendered paint smoke, 2026-10-01
 - [ ] on the deployed origin, verify HTTPS, redirects, canonicals, sitemap, robots, real 404, and representative planner/calculator/guide routes; check Firefox/Safari where available
 
 ## First 72 hours

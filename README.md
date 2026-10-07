@@ -54,6 +54,21 @@ Chrome and Edge installed:
 npm run smoke:browser
 ```
 
+To run the same Chrome/Edge route, interaction, mobile, and print audit against
+the deployed HTTPS site without rebuilding or starting a local preview server,
+set an explicit public origin and invoke the harness directly:
+
+```powershell
+$env:QUILTCLARITY_SMOKE_ORIGIN = 'https://quiltclarity.com'
+node scripts/browser_smoke.mjs
+Remove-Item Env:QUILTCLARITY_SMOKE_ORIGIN
+```
+
+`SITE_URL` still controls the expected canonical and sitemap origin, defaulting
+to `https://quiltclarity.com`; set it separately if auditing a build with a
+different canonical origin. The public target must be an HTTPS origin without
+a path or query.
+
 Production static builds set `SITE_URL` to the public HTTPS origin. They may
 also set `PUBLIC_GOOGLE_SITE_VERIFICATION` to emit the Search Console ownership
 meta tag. Feedback currently has a static coming-soon page; the Feedback System
@@ -119,16 +134,17 @@ automatically deploys pushes to `main`. The first automatic build and active
 deployment were verified on 2026-10-01. The
 [hosting decision](docs/decisions/cloudflare-static-hosting.md) preserves scope.
 
-| Setting              | Repository requirement                         |
-| -------------------- | ---------------------------------------------- |
-| Production branch    | `main`                                         |
-| Node version         | 24 or newer, matching `package.json` and CI    |
-| Release verification | `npm run verify`                               |
-| Static build         | `npm run build` (also included in verify)      |
-| Static artifact      | `dist/`                                        |
-| Canonical origin     | `SITE_URL=https://quiltclarity.com`            |
-| Preview indexing     | `PUBLIC_ROBOTS_NOINDEX=true` on preview builds |
-| Production indexing  | `PUBLIC_ROBOTS_NOINDEX=false`                  |
+| Setting              | Repository requirement                                   |
+| -------------------- | -------------------------------------------------------- |
+| Production branch    | `main`                                                   |
+| Node version         | 24 or newer, matching `package.json` and CI              |
+| Release verification | `npm run verify`                                         |
+| Static build         | `npm run build` (also included in verify)                |
+| Static artifact      | `dist/`                                                  |
+| Canonical origin     | `SITE_URL=https://quiltclarity.com`                      |
+| Preview indexing     | `PUBLIC_ROBOTS_NOINDEX=true` on preview builds           |
+| Production indexing  | `PUBLIC_ROBOTS_NOINDEX=false`                            |
+| Optional analytics   | `PUBLIC_CLOUDFLARE_ANALYTICS_ENABLED=true` in production |
 
 `wrangler.jsonc` configures a Workers Static Assets deployment of `./dist`.
 Build with `npm run build`, then deploy after connecting the Cloudflare account:
@@ -162,8 +178,9 @@ Cloudflare settings used for this deployment:
    `PUBLIC_ROBOTS_NOINDEX=false`. The redirect deployment can be redeployed with
    the second command when its configuration changes.
 
-After these settings are confirmed, complete
-[public-origin acceptance](docs/launch/launch-readiness-status.md). Do not put
+These settings, redirects and first automatic deployment passed on 2026-10-01.
+Search Console setup and public-origin acceptance subsequently passed; continue
+[post-launch monitoring](docs/launch/launch-readiness-status.md). Do not put
 account tokens or registrar secrets in the repository.
 
 ## Project authority
@@ -175,3 +192,7 @@ package is historical V1 evidence. Launch continuation starts at
 [`docs/launch/quilt_LAUNCH_manifest.md`](docs/launch/quilt_LAUNCH_manifest.md);
 current dependencies are in
 [`docs/launch/launch-readiness-status.md`](docs/launch/launch-readiness-status.md).
+The [documentation map](docs/architecture/documentation-index.md) indexes all
+current, historical and research docs. The
+[continuation roadmap](docs/architecture/continuation-roadmap.md) preserves
+post-launch growth and the [ads review](docs/launch/postlaunch-ads-review.md).

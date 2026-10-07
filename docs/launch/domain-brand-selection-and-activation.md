@@ -25,8 +25,11 @@ were completed long ago. Purchased domain: `quiltclarity.com`; public brand:
 `QuiltClarity`. This is owner completion evidence, not an independent claim of
 legal clearance. Phases 1-4 are retained historical process and must not be
 repeated as pending work. Phase 5 local source activation is complete on
-2026-10-01 under `../decisions/site-identity-activation.md`; proceed to actual
-hosting configuration and Phase 6 public-origin checks.
+2026-10-01 under `../decisions/site-identity-activation.md`. Cloudflare static
+deployment, public GitHub/CI, redirects and automatic Builds also pass. Phase 6
+has since passed Search Console setup and public Chrome/Edge browser acceptance;
+use current launch readiness for post-launch monitoring rather than replaying
+completed setup.
 
 **The source public brand is now `QuiltClarity`.** The public brand is the
 human-readable brand form selected with the purchased domain. For example, if the

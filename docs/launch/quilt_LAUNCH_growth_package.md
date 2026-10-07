@@ -200,7 +200,7 @@ Track impressions, clicks, CTR, and average position.
 
 ## Analytics
 
-`src/lib/analytics/analytics.ts` is the closed event and property contract. It includes calculator start/completion/error, planner configuration and calculation, stock sufficiency and purchase shortfall, pattern and cutting views, printing/copying, Guides/help interactions, and an allow-listed `returning_user` boolean. Consume only the implemented event names and their exact typed properties; do not add `piece_added`, `diagram_viewed`, `add_to_planner`, arbitrary dimensions, or user-entered metadata. Never send project or fabric names, notes, pasted rows, piece labels, exact dimensions, or identifiers. The returning-user category uses only the separate date-only `quilter:analytics-first-used-date` local marker. Analytics failure must never block a calculation.
+`src/lib/analytics/analytics.ts` is the closed event and property contract. It includes calculator start/completion/error, planner configuration and calculation, stock sufficiency and purchase shortfall, pattern and cutting views, printing/copying, Guides/help interactions, and an allow-listed `returning_user` boolean. Consume only the implemented event names and their exact typed properties; do not add `piece_added`, `diagram_viewed`, `add_to_planner`, arbitrary dimensions, or user-entered metadata. Never send project or fabric names, notes, pasted rows, piece labels, exact dimensions, or identifiers. The returning-user category uses only the separate date-only `quiltclarity:analytics-first-used-date` (legacy `quilter:*` is migration input only) local marker. Analytics failure must never block a calculation.
 
 ## Weekly launch dashboard
 

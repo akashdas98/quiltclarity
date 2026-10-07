@@ -21,8 +21,11 @@ function Expect-Failure([string]$label, [string]$message) {
 try {
   New-Item -ItemType Directory -Path $fixture | Out-Null
   # Copy maintained Markdown only; never inspect/extract supplemental archives.
-  $files = @(Get-Item (Join-Path $sourceRoot "AGENTS.md"), (Join-Path $sourceRoot "CONTEXT.md"))
+  $files = @(Get-Item (Join-Path $sourceRoot "AGENTS.md"), (Join-Path $sourceRoot "CONTEXT.md"), (Join-Path $sourceRoot "README.md"), (Join-Path $sourceRoot "codex_prompt.txt"))
   $files += @(Get-ChildItem (Join-Path $sourceRoot "docs") -Recurse -File -Filter "*.md")
+  $files += @(Get-ChildItem (Join-Path $sourceRoot "docs") -Recurse -File -Filter "*.png")
+  $files += @(Get-ChildItem (Join-Path $sourceRoot "scripts") -Recurse -File -Filter "*.md")
+  $files += Get-Item (Join-Path $sourceRoot "docs/architecture/documentation-catalog.json")
   foreach ($file in $files) {
     $relative = $file.FullName.Substring($sourceRoot.Length + 1)
     $destination = Join-Path $fixture $relative
@@ -55,6 +58,19 @@ try {
   Write-Fixture $statusPath ($status.Replace('- Next action:', '- Missing action:'))
   Expect-Failure "incomplete recovery" "missing nonempty field"
   Write-Fixture $statusPath $status
+  $catalogPath = "docs/architecture/documentation-catalog.json"
+  $catalogText = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path $fixture $catalogPath)
+  Write-Fixture $catalogPath ($catalogText.Replace('"path": "AGENTS.md"', '"path": "../outside.md"'))
+  Expect-Failure "escaping catalog route" "catalog has escaping route"
+  Write-Fixture $catalogPath ($catalogText.Replace('"path": "AGENTS.md"', '"path": "missing-doc.md"'))
+  Expect-Failure "missing catalog destination" "catalog has missing route"
+  Write-Fixture $catalogPath $catalogText
+  Write-Fixture "docs/architecture/unindexed-doc.md" "# New unindexed task"
+  Expect-Failure "new document requires route" "Unindexed project documentation"
+  Remove-Item -LiteralPath (Join-Path $fixture "docs/architecture/unindexed-doc.md")
+  Write-Fixture "README.md" ((Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path $fixture "README.md")) + "`n## New uncataloged topic`n")
+  Expect-Failure "new section requires discovery metadata" "catalog has stale sections"
+  Copy-Item -LiteralPath (Join-Path $sourceRoot "README.md") -Destination (Join-Path $fixture "README.md")
   & (Join-Path $PSScriptRoot "check_context.ps1") -RootPath $fixture -Quiet
   Write-Host "PASS: restored context"
 } finally {

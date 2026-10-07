@@ -4,7 +4,12 @@
 **Revision date:** 2026-08-21  
 **Product:** QuiltClarity (`quiltclarity.com`)
 
-This is the complete replacement-ready V1.1 specification package for updating the existing QuiltClarity repository.
+This package supplies the Guides/help overlay on the current core V1.1 contract.
+Its copied base specifications predate later core CSV/TSV, validation, field-label
+and responsive amendments and must not replace them. Core `../v1.1/` retains
+product/domain authority; Guides-specific additions and the owner-validation
+substitution govern learning/help. M0-M10 and Guides owner acceptance are complete.
+Use `../architecture/continuation-roadmap.md` and project status for current work.
 
 It includes the earlier V1.1 product redesign **plus a pre-launch Guides and contextual-help overhaul**.
 

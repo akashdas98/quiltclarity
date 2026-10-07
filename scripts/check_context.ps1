@@ -18,6 +18,11 @@ $requiredFiles = @(
   "docs/decisions/v1.1-reconciliation-and-pattern-comparison.md",
   "docs/decisions/v1.1-calculator-domain-expansion.md",
   "docs/architecture/context-loading.md",
+  "docs/architecture/documentation-index.md",
+  "docs/architecture/documentation-catalog.json",
+  "docs/architecture/continuation-roadmap.md",
+  "docs/architecture/documentation-reconciliation-2026-10-01.md",
+  "docs/launch/postlaunch-ads-review.md",
   "docs/architecture/context-history-through-2026-09-02.md",
   "docs/architecture/product-and-runtime-boundaries.md",
   "docs/architecture/domain-contracts.md",
@@ -176,6 +181,60 @@ if ($checkpoint -notmatch '(?m)^- Updated: \d{4}-\d{2}-\d{2}\.') {
 foreach ($heading in @("## Decision", "## Rationale", "## Consequences")) {
   if ($status -match "(?m)^$([regex]::Escape($heading))\s*$") {
     throw "Status doc contains durable decision heading $heading"
+  }
+}
+
+# Completeness is separate from validity of existing CONTEXT routes: an omitted
+# document or new section used to be invisible to this checker.
+$catalog = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path $root "docs/architecture/documentation-catalog.json") | ConvertFrom-Json
+if ($catalog.schema_version -ne 1 -or -not $catalog.documents) {
+  throw "Invalid documentation catalog schema."
+}
+$catalogPaths = @{}
+$entries = @($catalog.documents) + @($catalog.evidence) + @($catalog.archives)
+foreach ($entry in $entries) {
+  if (-not $entry.path -or -not $entry.authority -or -not $entry.topics) {
+    throw "Documentation catalog entry missing path/authority/topics."
+  }
+  $variants = @($entry.path) + @($entry.alternatives)
+  $found = @()
+  foreach ($relative in $variants) {
+    if (-not $relative) { continue }
+    $resolved = [IO.Path]::GetFullPath((Join-Path $root $relative))
+    $prefix = $root.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
+    if (-not $resolved.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+      throw "Documentation catalog has escaping route: $relative"
+    }
+    $key = $relative.Replace('\', '/')
+    if ($catalogPaths.ContainsKey($key)) { throw "Duplicate documentation catalog route: $relative" }
+    $catalogPaths[$key] = $true
+    if (Test-Path -LiteralPath $resolved -PathType Leaf) { $found += $resolved }
+  }
+  if ($found.Count -eq 0 -and -not $entry.optional) {
+    throw "Documentation catalog has missing route: $($entry.path)"
+  }
+  # Section names are checked; line numbers are advisory positions from the audit.
+  if ($entry.path -match '\.md$') {
+    foreach ($resolved in $found) {
+      $actualHeadings = @(Get-Content -Encoding utf8 -LiteralPath $resolved | Where-Object { $_ -match '^#{1,6} ' } | ForEach-Object { $_ -replace '^#+ ', '' })
+      $indexedHeadings = @($entry.sections | ForEach-Object { $_.heading })
+      if (($actualHeadings -join "`n") -cne ($indexedHeadings -join "`n")) {
+        throw "Documentation catalog has stale sections: $($entry.path)"
+      }
+    }
+  }
+}
+$documentFiles = @(Get-ChildItem -LiteralPath (Join-Path $root "docs") -Recurse -File | Where-Object { $_.Extension -in @('.md', '.png', '.zip') })
+if (Test-Path -LiteralPath (Join-Path $root "scripts")) {
+  $documentFiles += @(Get-ChildItem -LiteralPath (Join-Path $root "scripts") -Recurse -File -Filter '*.md')
+}
+foreach ($name in @('AGENTS.md', 'CONTEXT.md', 'README.md', 'codex_prompt.txt')) {
+  $documentFiles += Get-Item -LiteralPath (Join-Path $root $name)
+}
+foreach ($file in $documentFiles) {
+  $relative = $file.FullName.Substring($root.Length + 1).Replace('\', '/')
+  if (-not $catalogPaths.ContainsKey($relative)) {
+    throw "Unindexed project documentation: $relative"
   }
 }
 

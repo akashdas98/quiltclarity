@@ -83,7 +83,11 @@ Launch is allowed only after:
 These product checkpoints are recorded complete; retain their evidence limits.
 They do not authorize purchase or production deployment. Continue through
 `../launch/launch-readiness-status.md` and the reconciled domain/brand runbook
-for hosting, hosted CI, and public-origin QA. Local source activation is complete.
+for dated public-origin QA and Search Console evidence. Source activation, hosted CI,
+static Cloudflare deployment, redirects and automatic Builds pass as of 2026-10-01;
+Search Console setup and public Chrome/Edge acceptance subsequently passed.
+Post-launch continuation, including ads review, is routed through
+`../architecture/continuation-roadmap.md`.
 Do not repeat the already completed trademark search or domain purchase.
 Feedback collection is deferred to V2 under
 `../decisions/v1.1-feedback-system-deferral.md`; `/corrections/` remains a static

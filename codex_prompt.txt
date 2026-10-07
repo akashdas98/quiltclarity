@@ -1,6 +1,6 @@
 Maintain QuiltClarity from the authoritative V1.1 document set in this repository.
 
-Before work, read `AGENTS.md` and `CONTEXT.md`, then follow the routing index. Do not load every long specification by default.
+Before work, follow `AGENTS.md`: read only CONTEXT Current Status and Context Routing at startup when missing. Retrieve relevant gaps and source sections on demand. Use docs/architecture/documentation-index.md for unknown routes and continuation-roadmap.md for next-task questions. Do not load every long specification by default.
 
 Authority order:
 

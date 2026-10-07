@@ -2,6 +2,12 @@
 
 **Revision date:** 2026-08-21
 
+**Historical handoff:** Prospective implementation and owner-test statements below
+are superseded by completed M0-M10 and Guides/help owner acceptance. Current
+state is in `../architecture/project-status.md` and `../../CONTEXT.md`; future
+work is in `../architecture/continuation-roadmap.md`. Core V1.1 and approved
+substitution decisions retain authority.
+
 ## Decision state
 
 The old launch product is intentionally superseded.

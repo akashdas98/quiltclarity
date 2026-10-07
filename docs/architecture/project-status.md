@@ -2,8 +2,1026 @@
 
 ## Resume Checkpoint
 
-- Updated: 2026-10-01.
-- Objective: Hosting setup is complete; continue remaining launch acceptance for https://quiltclarity.com.
+- Updated: 2026-10-08.
+- Guides CSS release complete and documentation publication prepared, 2026-10-08.
+  Owner requested both Guides publication and a concrete docs review/push follow-up.
+  Commit834d54e is live; GitHub CI37667627130 and Cloudflare Builds pass. Isolated
+  verify passes (231 application tests, six analytics-report tests), full installed
+  Chrome/Edge smoke passes including print/PDF. Live Chrome/Edge at1440/390px
+  confirms hub hero/group gaps32px, three heading margins0 and article actions
+  centered/contained. Probe/screenshots: tmp/adsense-verification-release/tmp/
+  guides-live-probe.mjs and guides-live-{chrome,msedge}-{1440,390}.png.
+  Sol-medium docs review complete: current AdSense/Search Console status reconciled,
+  duplicate index routes removed, README local-preview dependency removed and
+  public personal paths generalized.26 reviewed docs/context-checker files are
+  prepared for a separate commit now, before email/ads readiness resumes. V2
+  filename replacement and ad preview tooling remain excluded/preserved.
+  Documentation checker/regression and isolated-publication gates precede push;
+  hosted CI confirmation remains the final docs publication check.
+  Routing: parent bounded release/scope handling; effort medium for release/live
+  gates, low final checkpoint. Sol model demand cross-document authority/public
+  review; effort medium focused diff/dependency review. No domain behavior changed.
+- AdSense verification-only release complete, 2026-10-07: owner authorized
+  publication ("ok continue"). Commit7434e05 changes only BaseLayout's meta tag.
+  GitHub CI run37664453373 and Cloudflare build45a45e27-cad2-4f81-97ce-b790c225241d
+  pass. All42 live HTML pages including unknown-route404 have exactly one matching
+  head tag and no ad loader. Receipt: tmp/adsense-verification-live.json.
+  Isolated release checkout passes typecheck/lint/format,231 application tests,
+  six analytics-report tests, build/context gates and full installed Chrome/Edge
+  smoke including print/PDF. Windows checkout CRLF caused format/context-byte
+  failures; restoring repository LF resolved them with zero source diff. Existing
+  gh authentication bypassed a stalled default Git credential helper using only
+  per-command settings. No persistent Git configuration changed.
+  Dirty work and owner preview preserved. Evidence checkout retained at
+  tmp/adsense-verification-release; no release process remains. Approval pending.
+  Next: owner checks AdSense status; contact/privacy, consent and project-data
+  compatibility remain before serving. No advertising loader or slots added.
+  Routing: direct parent; model demand bounded established release/scope handling;
+  effort medium for gates/live confirmation, low for final checkpoint.
+- AdSense verification metadata prepared locally, 2026-10-07: owner supplied
+  ca-pub-4803184576327262 meta tag; BaseLayout.astro now emits it in the shared
+  head. Build passes; all 42 generated HTML pages contain exactly one matching
+  tag in head and no AdSense loader. Focused formatting passes. Unpublished;
+  no commit/push/deployment or ad serving. Existing dirty work preserved. Next:
+  publish the verification-only change after release checks/owner authorization;
+  privacy/contact, consent and project-data readiness remain pending.
+  Routing: direct parent; model demand is bounded shared-head/source verification;
+  effort demand is low deterministic edit and generated-output inspection.
+- AdSense dashboard screenshot confirmed, 2026-10-07: quiltclarity.com shows
+  Getting your site ready to show ads, green Verify site ownership and Review
+  requested (request time 07 Oct 2026 22:07). AdSense code snippet is selected;
+  screenshot supplies publisher ca-pub-4803184576327262. This proves dashboard
+  state, not approval or live code installation. No verification/ad code was added
+  by this session. Next: obtain Meta tag for script-free verification preparation;
+  privacy/contact, consent and project-data review remain pending. Evidence:
+  owner-supplied Screenshot 2026-10-07 232044.png.
+- AdSense provider direction confirmed by owner, 2026-10-07 ("adsense confirm").
+  Google AdSense is selected for readiness preparation. Account status/IDs,
+  operator contact, privacy disclosures, consent and project-data compatibility
+  remain unresolved before integration. Provider choice does not establish account
+  approval or authorize application, live serving or deployment. See
+  ../launch/postlaunch-ads-review.md, Provider, disclosures and privacy prerequisites.
+  Routing: parent direct; model demand is bounded approval-scope reconciliation;
+  effort demand is low direct record update. Acceptance: provider recorded
+  consistently, rollout limits/existing work preserved, context checker passes.
+- Clear-ready handoff for finalized ad sizing,2026-10-07, at owner request:
+  approved sizing/fallback decisions and completed mockup evidence are saved in
+  ../decisions/v1.1-ad-placement-scope.md and ../launch/postlaunch-ads-review.md.
+  Resume with provider/account direction, privacy/contact/consent and project-data
+  compatibility; no production integration/application/rollout approval exists.
+  Mockup task complete; worker completed,4323 is not listening, owner4322 PID61080
+  remains intentionally preserved. No task-owned process, unresolved mockup item
+  or pending approval remains. Uncommitted source/docs and V2 filename replacement
+  remain preserved. Context check PASS. Readiness receipt:
+  tmp/ad-sizing-clear-lifecycle.json (completed task, fresh checkpoint, zero active
+  operations/unresolved items). Parent model demand: bounded handoff reconciliation;
+  effort demand: low direct checkpoint/process/lifecycle verification. User invokes
+  /clear; this record does not claim it occurred.
+- Finalized ad sizing mockup verified,2026-10-07: only isolated preview client/CSS
+  updated to approved common formats and200x200/250x250 narrow fallbacks. Chrome
+  passes168 cases (42 routes x320/390/1440/1920); Edge28 (7 routes x4 widths).
+  Slot identity/geometry, unchanged content width, control clearance, result focus,
+  empty/failed stability and rail removal pass. Clean paginated PDF text/geometry
+  matches baseline in both browsers at390/1920px. Focused Chrome final-result slots
+  pass visibility and sizing at320/390/1920. Six-template threshold-neighbor audit
+  and planner rails1576/1856/1928 pass. Worker/root visual review finds centered
+  narrow squares/rails with readable controls.728x90-in970x90 backfill simulation
+  preserves geometry; it proves layout only, not actual provider fill. Evidence:
+  ../launch/postlaunch-ads-review.md, Finalized sizing mockup verification;
+  tmp/ad-layout/ receipts/screenshots/PDFs and three routed local audit fixtures.
+  Syntax/lint/format/whitespace pass. Owned4323 stopped; owner4322 PID61080 preserved.
+  Context/catalog checks recovered via narrow escalation without ACL/config changes;
+  summary budget fixed by compacting duplicated history. Final checkpoint/index
+  validation passed. No provider/production/commit/deployment changed.
+  Next: provider/account direction, privacy/contact/consent and project-data review;
+  real serving/performance/physical Safari acceptance remains unestablished.
+  Routing: Sol-medium worker for bounded cross-template sizing/browser execution;
+  parent medium for scope/code/visual review, low for final checkpoint/index checks.
+  No fresh allocation escalation or duplicate browser suite was needed.
+- Ad sizing finalized by owner,2026-10-07 ("ok, finalise these"): common-format
+  usable-width bands, responsive wide banners and200x200/250x250 inline fallbacks
+  are approved design. Stable approval is in
+  ../decisions/v1.1-ad-placement-scope.md, Finalized sizing design; execution plan
+  is ../launch/postlaunch-ads-review.md, Layout-fit plan following Google best
+  practices. Exact template viewport breakpoints remain measured-fit work.
+  Next: update isolated mockup and run affected layout/focus/print checks, then
+  resolve provider/privacy/contact/consent. Approval does not authorize account
+  submission, production integration or live rollout. No runtime changed here.
+  Existing sandbox-helper ACL failure leaves shell/context verification pending;
+  no fresh PASS claimed. Model demand: parent for bounded approval reconciliation;
+  effort demand: low. No worker/process/dependency/commit/deployment started.
+- Narrow inline fallback approved for the ad plan,2026-10-07: owner requested
+  ads across supported screen sizes apart from geometry-limited side rails.
+  Current Layout-fit plan adds250x250 at250-299px usable inline width and200x200
+  at200-249px for planner/calculators/directories/guide articles. Both are supported
+  Google formats with more limited supply; actual fill/consent is not guaranteed.
+  This supersedes the plan's original below300px omission; below200px makes no
+  request. Rails unchanged. Next: revise isolated mockup and measure all templates
+  at320px/transition widths, reserved square heights, focus/controls and clean print.
+  No runtime/account/publication change. Shell/Git read remains blocked by the
+  sandbox-helper ACL error; no context-check or fresh layout PASS claimed. Model
+  demand: parent suffices for direct bounded plan amendment; effort demand: low.
+  Existing source/work preserved; no process or worker started.
+- Ad layout-fit plan prepared, 2026-10-07: owner directed following Google best
+  practices after requesting well-supported formats fitted to the layout. Current
+  plan: ../launch/postlaunch-ads-review.md, Layout-fit plan following Google best
+  practices. Common-format steps for mobile banners, guide rectangles and rails;
+  selective728-970px responsive90px banners; normal similar-size backfill retained,
+  no site zoom/stretch. All locked placements and halved rail density preserved;
+  below300px inline/no160px rail fit exclusions are explicit planning tradeoffs.
+  No actual provider/account/sizing-runtime change or rollout. Next: revise the
+  isolated mockup, measure template thresholds and verify browser/print behavior,
+  then provider/privacy/contact/consent preparation. Prior arbitrary-size proposals
+  are superseded. Shell/context checker blocked by sandbox-helper ACL failure;
+  saved geometry is historical, no fresh runtime/checker PASS claimed. Model
+  demand: parent for provider/layout synthesis; effort demand: medium. No worker,
+  process, dependency, commit or deployment created by this plan task.
+- Ad sizing research, 2026-10-07: owner requested Google standards and best
+  practices before deciding breakpoints/dynamic sizing. Official sources and
+  inventory-informed revised inline/rail width bands are recorded in
+  ../launch/postlaunch-ads-review.md, Google sizing and best-practice review.
+  Prior mockup proves placement/layout only; provider sizing was not verified.
+  Owner corrected permitted-size versus inventory reasoning: revised proposal
+  prioritizes Google's well-supplied standard sizes; initial arbitrary-width
+  bands are superseded review history. Variable-width/fixed-height units are
+  supported; arbitrary loaded-ad desktop
+  resizing and intermediate-width fill are not established. Sizes/provider remain
+  unapproved; no mockup/runtime/account/deployment change. Next: owner decides
+  candidate width bands, narrow fallback and wide rail shape, then revise/verify
+  mockup before provider integration. Model demand: parent for provider/layout
+  contract judgment; effort demand: medium official-source comparison. Acceptance:
+  sizing limits, best practices, explicit proposal/evidence limits and checkpoint.
+- Owner sequence, 2026-10-07: immediately after ad-related work is complete,
+  perform security hardening. Review actual Cloudflare dashboard WAF/bot/rate
+  settings, add a scoped analytics rate limit and test appropriate security
+  headers against the final ad/consent setup, calculations, search crawlers and
+  print. This schedules the next workstream; no security/runtime/deployment
+  change is authorized or performed by this recordkeeping task. Current ads
+  provider/privacy/contact/consent and integration work remains first.
+  Initial read-only evidence, 2026-10-07: worker/index.ts validates origin,
+  method, categorical JSON and a4096-byte body cap, but Worker/wrangler configs
+  contain no limiter. Dashboard-only rules are unverified. Live homepage200
+  and analytics GET405 responses lack CSP, HSTS, X-Content-Type-Options,
+  X-Frame-Options, Referrer-Policy and Permissions-Policy headers. No analytics
+  POST was sent. Cloudflare automatic DDoS protection is a platform baseline,
+  not proof custom rules were configured. Recheck live/dashboard state before
+  implementation; origin validation is not authentication or throttling.
+  Route: continuation-roadmap.md, Security hardening after ads. Model demand:
+  existing parent for bounded sequence/evidence reconciliation; effort demand:
+  low, direct owner instruction and focused routing/context checks. Acceptance:
+  next step ordered after ads, evidence limits explicit, no runtime change,
+  source edits preserved, context/catalog valid. No new process or worker.
+- Owner halves rail density, 2026-10-07: candidate rectangle top spacing is now
+  1220px (was610px), skyscraper spacing1700px (was850px), on each side. First
+  unit remains, longer stacks have half as many units rounded upward. Inline
+  slots/content width unchanged. All42 pages remain covered by the local mockup;
+  no production ad integration is complete. Chrome42/Edge7 page checks verify
+  each reduced stack against initial geometry; both browsers also verify1600px
+  skyscraper spacing, successful result focus and print exclusion. Updated
+  planner desktop screenshots and density receipt in tmp/ad-layout/; fixture
+  tmp/ad-rail-density-audit.mjs. Focused formatting/lint pass. Temporary audit
+  preview stopped automatically; owner4322 preserved and separate4323 stopped.
+  Model demand: existing parent suffices for bounded numeric spacing change;
+  effort demand: low, direct change plus count/neighboring-boundary assertions.
+  Stable owner refinement recorded in ../decisions/v1.1-ad-placement-scope.md;
+  detailed dimensions remain in ../launch/postlaunch-ads-review.md.
+- Responsive ad mockup complete locally, 2026-10-07. Run
+  `node scripts/ad-layout-preview.mjs` with the existing site on4322 to reopen
+  the separate mockup. Owner requested preview shutdown on2026-10-07;
+  exec session70301 stopped with Ctrl+C. Owner-managed4322 remains unchanged.
+  Three new scripts/ad-layout-preview files provide loopback proxy, explicit
+  template/guide slot boundaries and responsive placeholders. All locked
+  placements are represented, including tutorial4 and planner4. Rails choose
+  candidate300x250 or160x600 by actual margins and page length; no content
+  narrowing or artificial length. Informational pages receive rails only;
+  shared article CSS originally caused guide inline slots there and was fixed
+  by restricting the branch to guide routes. Filled/empty/failed states retain
+  geometry, final planner slot follows complete result and tracks its visibility.
+  Installed Chrome:42 routes x390/1440/1920px =126 geometry cases; Edge:7
+  representative routes x3 widths =21 cases. All pass width/count/containment,
+  unique boundaries, control clearance and rail bounds. Chrome also passes
+  320px and planner rail transitions1576/1856px. All11 calculator default
+  submissions produce/focus results. Chrome/Edge planner result focus/scroll,
+  state geometry and resize rail removal pass; clean PDFs at390/1920 match
+  baseline paginated text and text geometry with ads/chrome excluded. Mobile
+  inline and wide-rail screenshots inspected. Audit fixture corrections:
+  collapsed-details controls have nonzero bounds but are not painted, so use
+  checkVisibility; compare document-space positions across selector scrolling;
+  prepare both PDF targets identically before comparison. No runtime fix was
+  needed for those audit artifacts. Focused script syntax/lint/format pass.
+  Evidence/geometry/dimensions/limits: ../launch/postlaunch-ads-review.md,
+  Responsive local mockup; local tmp/ad-layout-audit.mjs and tmp/ad-layout/.
+  No physical Safari/provider/production release acceptance claimed.
+  Model demand: Sol worker for bounded cross-template JavaScript implementation,
+  existing parent for scope/privacy/focus/print review; evidence is interacting
+  six-template placement contracts. Effort demand: medium source tracing and
+  focused browser verification; implementation corrections keep allocation
+  unchanged, final recordkeeping needs only direct reconciliation. Installed
+  Node/Playwright/Chrome/Edge reused; no dependencies or provider installed.
+  Existing local Guides CSS and all unrelated dirty work preserved. No commit,
+  deployment, account application, ads.txt or live provider authorized/performed.
+  Next: owner reviews local sizes/spacing; then provider/privacy/contact/consent
+  preparation. Search Console follow-up remains aroundOctober13. Lifecycle
+  receipt tmp/ad-mockup-lifecycle.json records the preview stopped and a fresh
+  checkpoint; no agent-created operation remains active.
+- Clear-ready handoff prepared, 2026-10-07, at owner request: Placement-definition
+  and local spacing tasks are complete. Active placement authority is
+  ../decisions/v1.1-ad-placement-scope.md; ../launch/postlaunch-ads-review.md
+  owns provider/privacy/consent/testing/rollback preparation and explicitly marks
+  earlier contradictory placement recommendations superseded. Preserve locked
+  desktop rails across all page templates plus route-specific mobile/desktop
+  inline slots: planner4, calculator directory2, each calculator3, Guides
+  directory3, Quick Start2; other articles start/end plus ten-step blocks,
+  deduplicating coincident boundaries. Tutorial30 steps yields four slots.
+  No slots/provider/scripts/ads.txt/application or live ads exist from this task.
+  Future decisions: creative sizes, rail count/spacing, provider, real operator
+  contact/privacy disclosures, consent and rollout. These are saved future work,
+  not unrecorded blockers or a pending approval request for this handoff.
+  Next session: build the responsive layout mockup with all locked placements
+  and stacked rails; verify content width, controls, result focus/scroll, print
+  exclusion and empty/failure geometry before provider-specific preparation.
+  Search Console: owner reports homepage/planner on Google, export13 impressions/
+  zero clicks through October3; aggregate Pages still processing. Recheck around
+  October13. Analytics includes possible owner/audit traffic; no organic-demand,
+  revenue or field-CWV conclusion is established.
+  Local runtime edits are only src/styles/global.css: Guides hub heading tops0,
+  hero bottom2rem, group spacing2rem, Getting Started action row center alignment.
+  Installed Chrome computed bounds/screenshots pass at1440/390px; formatting,
+  whitespace and memory checks pass. These CSS fixes are uncommitted/unpublished;
+  no fresh full release/browser/print gate is claimed. Preserve them and all
+  unrelated dirty docs/catalog/context-tooling and V2 filename replacement;
+  do not stage everything or push release-local-history. No commit/deployment
+  authorized by this handoff. Existing owner-managed localhost4322 is unchanged.
+  Model demand: existing parent for bounded durable-state reconciliation;
+  effort demand: low, focused source/status review and lifecycle verification.
+  Acceptance: restart state fresh, scope/limits explicit, source edits preserved,
+  catalog/context/whitespace valid, lifecycle clear-ready. No agent-created
+  running process, worker or current task approval remains. Lifecycle receipt:
+  tmp/ads-plan-clear-lifecycle.json. Only the owner invokes /clear.
+- Guide article slots locked, 2026-10-06: Quick Start before Before you start
+  and before completion section. Other short articles before first real step
+  and after last; long articles additionally before11,21,31,etc, interpreted as
+  ten-step blocks with distinct physical boundaries, no double end ad. All
+  Common Workflows/Quilting Reference articles included, mobile/desktop plus
+  rails. Source confirms tutorial30 steps, hence four slots (before1/11/21,
+  after30); cut-list guide four substantive sections, hence two. Explicit
+  Quick Start overrides general placement; exclude TOC/nested/shared CTA from
+  step counts. Stable scope and anchors in ../decisions/v1.1-ad-placement-scope.md.
+  Model demand: existing parent for bounded authorial-boundary interpretation;
+  effort demand: low, source heading/anchor trace and direct decision update.
+  Acceptance: preserve all locked routes, ten-step interpretation explicit,
+  physical-gap deduplication and mobile/desktop parity, catalog/context checks.
+  No ad runtime/provider/deployment change. Prior local CSS fixes preserved.
+- Guides spacing/action alignment corrected locally, 2026-10-06: Owner requests
+  hub hero bottom margin2rem, group gaps2rem and Getting Started Next link
+  vertically centered with Open Project Planner. Before: rendered hero20px,
+  guide-card group gaps48px, link text top-aligned in stretched flex box. CSS
+  now scopes hero margin2rem to `.guides-hub`, changes `.guide-card-grid` bottom
+  margin3rem to2rem (used only by the hub's three groups), and sets
+  `.article-body .actions` align-items:center. Installed Chrome at1440/390px
+  verifies hero and both group gaps32px, previous zero heading margins retained,
+  desktop action/link text centers equal and mobile wrapping contained. Local
+  probe/screenshots: tmp/guides-spacing-probe.mjs and getting-started-actions
+  width PNGs. Stylesheet formatting/whitespace and context checks pass. Model
+  demand: existing parent for bounded cascade/flow diagnosis; effort demand:
+  low for computed bounds and focused desktop/mobile checks. No publication;
+  CSS is local/uncommitted. Ads placement work remains ongoing, no slots built.
+- Guides heading spacing corrected locally, 2026-10-06: Owner requests removal
+  of unnecessary top margin on reference-heading-style headers. Rendered Chrome
+  evidence: all three Guides hub section headings inherited global h2 margin32px
+  after an eyebrow. `src/styles/global.css` now scopes margin-top0 to
+  `.guides-hub > section > .eyebrow + h2`, keeping the eyebrow's normal gap and
+  all other heading rules. Model demand: existing parent for bounded cascade
+  diagnosis; effort demand: low, computed-style probe and minimal CSS edit.
+  Acceptance: three heading margins0 at1440/390px and neighboring calculator
+  heading unchanged, stylesheet formatting/whitespace and memory checks.
+  An initial neighbor assertion wrongly expected32px; existing `.card >
+:first-child` already resets that heading to0. Corrected verification expectation,
+  no additional UI change. No publication; source fix is local/uncommitted.
+  Ads placement design remains the ongoing task; no slots implemented.
+- Guides directory placement locked, 2026-10-06: inline after Start Here, Common
+  Workflows and Quilting Reference: three complete section boundaries outside
+  their card grids, confirmed in guides/index.astro. Mobile/desktop plus rails;
+  individual guide articles unchanged. Records validated; no runtime edit.
+- Owner locks ad placement scope, 2026-10-06: Desktop rails default across page
+  templates, including homepage/info; both sides/multiple units in scope where
+  real margins fit without changing content. Planner inline slots locked after
+  Project, Fabrics, Cut Requirements/Calculate and complete final result, on
+  mobile and desktop. Rails supplement inline, not replace it.
+  Follow-up locks `/calculators/` directory inline slots before/after the complete
+  list, all layouts. Source boundaries: after hero/before `.card-grid`, then
+  after `.card-grid`; no slots among cards. Separate follow-up locks all11
+  individual calculator pages: three inline slots, after header/above
+  `.calculator-shell` plus before/after the complete "How this
+  calculator works" section, mobile/desktop plus rails. Shared CalculatorPage
+  source confirms boundaries outside form/result and `.explanation-card`; no
+  slot does not split result-card numbers/explanations. Creative sizes remain responsive candidates,
+  not a verified all-width layout or implemented ads. Stable authority:
+  ../decisions/v1.1-ad-placement-scope.md. This supersedes earlier density/cap,
+  rail replacement and section-rejection recommendations below. Exact responsive
+  formats/count/spacing and provider/privacy/contact/consent remain undecided;
+  no provider adoption, runtime edit or publication performed. Existing planner
+  success focuses and scrolls `resultsRoot` (planner.ts); preserve that path for
+  after-Calculate slot. Next: responsive layout design with all locked slots and
+  rail stacks, then provider-specific preparation/verification. Model demand:
+  existing parent for scoped contract reconciliation; effort demand: low for
+  direct owner-instruction application and source-confirmed result focus.
+  Acceptance: locked choices recorded without promoting provider/rollout scope,
+  prior recommendations explicitly superseded, routes/catalog/checkpoint valid.
+- Ads review/design prepared, 2026-10-06: Owner requested continuation after
+  homepage/planner indexing confirmation. Concrete proposal is in
+  ../launch/postlaunch-ads-review.md, Placement and rollout proposal.
+  Follow-up: owner explicitly requests desktop side-rail inclusion in design.
+  Proposal now includes one nonsticky 300x250 right rail when actual spare
+  geometry fits without changing content width. Breakpoints await rendered
+  layout verification. Owner
+  also asks about ads after Project, Fabrics, Cut requirements/Calculate and
+  final result. Subsequent owner challenge exposes an overinterpretation:
+  section boundaries within a form are not automatically entry interruptions.
+  Corrected design treats after-Fabrics/mobile banners, multiple rails and
+  rail-plus-inline as candidates, with density unresolved. One-unit maximum
+  and rail replacement were recommendations, not governing rules or approved
+  constraints. Calculate-to-result placement remains higher risk; no revenue
+  loss or task abandonment is measured. Actual layout/behavior must establish
+  compatibility with section14. Current Google multiple-unit/viewability
+  guidance supports evaluating placements, not predicting revenue from count.
+  No implementation or product-rule override is authorized by the discussion.
+  Boundaries map GuidePage, CalculatorPage and planner source;
+  candidate 300x250/728x90 sizes, no unit below 300 usable pixels, stable
+  reserved geometry and empty-gap tradeoff. Guide pilot is width-of-fabric and
+  how-to-calculate-quilt-fabric; calculators and planner are later stages.
+  Source review found About privacy text but no dedicated Privacy route/footer
+  link or real Feedback inbox. Provider choice, truthful disclosures/contact,
+  consent and account setup remain prerequisites; third-party top-level script
+  compatibility with project-data privacy must be reviewed before tool-page ads.
+  Current official AdSense sizing/ads.txt/privacy/CMP guidance is linked in the
+  proposal, with AdSense only a candidate. No provider selected, application,
+  ad infrastructure, runtime edit, new dependency or publication occurred.
+  Model demand: existing parent for product/privacy and template contract review;
+  effort demand: medium for selective source mapping and official-policy checks.
+  Acceptance: route/geometry/state map, failure/print/privacy boundaries,
+  provider prerequisites, pilot/rollback and owner choices are concrete.
+  Reassessment: neither axis changed; no delegate warranted. Next: owner review
+  of manual placement scope and provider direction; then provider-specific
+  preparation. Full Pages report and October13 Performance recheck remain
+  independent monitoring. No active operation/worker; pending owner choices
+  prevent clear-ready recommendation. Preserve unrelated dirty docs/work.
+- Search Console evidence received, 2026-10-06: Owner reports Pages still shows
+  "Processing data, please check again in a day or so" after several days.
+  Supplied owner-supplied `quiltclarity.com-Performance-on-Search-2026-10-06.zip`
+  (SHA256 `437661050aa0ec2fec40ff7fc44b5cde41cd2fe8e89b8d1d1f04cc68dc2d9df0`).
+  Read all seven CSVs without modifying/extracting the source. Filters are Web,
+  Last 3 months (not the requested seven days); Chart contains September30-
+  October3 only: zero impressions first two days, two on October2 and eleven
+  on October3. Total: 13 impressions, zero clicks; seven distinct page rows.
+  Chart/page/country/device totals reconcile. Width-of-fabric guide has five
+  impressions; backing calculator and fabric-yardage guide have two each; four
+  other pages have one each. Eight visible queries total nine impressions;
+  query rows do not account for every impression. All reported impressions are
+  desktop; aggregate position 59.38 is too sparse to justify rank/CTR changes.
+  Queries fit existing fabric-width/backing/yardage tasks; no new-page demand
+  is established. Historical search appearances show Google discovery/search
+  visibility despite the processing message; they do not establish current
+  index status or coverage of all38 sitemap routes. No confirmed site defect or
+  current widespread Google incident is established. Do not claim a guaranteed
+  processing deadline. Official Google URL Inspection guidance distinguishes
+  indexed results from live indexability tests:
+  https://support.google.com/webmasters/answer/9012289?hl=en .
+  Owner subsequently confirms initial URL Inspection reports "URL is on Google"
+  for both homepage and `/fabric-cutting-planner/` (2026-10-06). This is owner-
+  reported indexing evidence for those two key pages; last crawl/canonical
+  details were not supplied, and coverage of all38 routes is not established.
+  No additional indexing request or speculative site fix is warranted by this
+  evidence. Pages report remains processing; recheck/export Performance in about
+  one week, noting latest data date. Next substantive task: recovered ads
+  review/design; report monitoring can proceed in parallel. Rollout scope
+  remains unapproved.
+  Model demand: existing parent for bounded CSV interpretation/evidence limits;
+  effort demand: low, direct table reconciliation plus official documentation.
+  Acceptance: source filters/dates preserved, independent totals agree, search
+  appearances distinguished from current indexing, no speculative code change.
+  No operation/worker remains; aggregate coverage remains a monitoring item.
+- Post-launch monitoring, 2026-10-05 at 16:41 UTC: Read-only live HTML checks
+  pass for all 38 unique sitemap routes (HTTP200, exact self-canonical, no
+  page/header noindex, no unexpected redirect). Robots and sitemap return200;
+  `/corrections/` retains noindex/nofollow and sitemap exclusion. These are
+  technical crawl checks, not proof of Google indexing or fresh browser/print
+  acceptance. No runtime, provider, deployment or analytics contract changed.
+  Existing private seven-day report returns 590 pageviews, 90 planner calculation
+  attempts, 66 completions, 20 planner validation failures and two flying-geese
+  validation errors. All reported calculator/planner failures are `validation`;
+  source emitters confirm these represent blocked invalid input, not evidence
+  of runtime exceptions. Totals are sampling-weighted events, not unique users;
+  owner/release-audit traffic may be included and cannot be separated by this
+  report. Do not use these counts as an organic-demand or conversion baseline.
+  Credential-free detailed snapshot: `tmp/postlaunch-monitor-2026-10-05.json`;
+  bounded read-only check: `tmp/postlaunch-monitor-2026-10-05.mjs` (local evidence,
+  not a tracked deliverable). Search Console browser access failed before
+  initialization because of Windows sandbox `helper_sandbox_lock_failed`;
+  owner asked for report range, indexed/excluded counts/reasons and Performance
+  clicks/impressions. Those remain pending; no indexing/traffic conclusion or
+  content fix is justified yet. Next: review that evidence, then define the
+  recovered ads design/runbook; provider adoption and implementation remain
+  subject to finalized scope.
+  Model demand: existing parent for bounded evidence interpretation across
+  monitoring and privacy contracts; no worker handoff warranted. Effort demand:
+  medium for live verification and distinguishing validation from runtime
+  errors. Acceptance: live crawler invariants, private aggregate report,
+  source-confirmed error meaning, honest Search Console access/evidence limits,
+  preserved unrelated dirty work. Reassessment: neither axis changed after
+  validation categories resolved the apparent error signal. No task process or
+  worker remains; owner evidence is pending, so no clear-ready recommendation.
+- Release deployed and task complete, 2026-10-05: Owner authorized publication
+  and requested a clear-ready handoff. Runtime commit 9d7d342438b2db296b9e31a35a026b3351e7a8d9
+  publishes phone/tablet PDF, desktop native Print, first-click print-font
+  readiness, persistent cut labels, pinned lazy PDF libraries and local fonts.
+  Test/decision follow-up 9dbd2baa1ce472f2d78bcae8c846992ffc176ddd is current main;
+  no runtime code changed in that follow-up. Both commits are pushed. Hosted CI
+  passes at https://github.com/akashdas98/quiltclarity/actions/runs/37330699718
+  and https://github.com/akashdas98/quiltclarity/actions/runs/37332402949.
+  Cloudflare automatic version 2c7eb0a0-d345-4cd9-ab19-e3da6ec7a7b5 is active at
+  100% (initial runtime version e132abe6-f171-48b8-81b1-8b1e322f98d2).
+  Public Chrome/Edge full audit passes: all 38 indexable routes, crawler controls,
+  Guides/help, planner/calculators, persistence, analytics privacy, accessibility,
+  performance, mobile layout, native-print and PDF content/layout/paint, first-
+  click delayed/failed font readiness, device/width routing and repeat/retry.
+  Live regular/bold font SHA-256 values match the validated release assets.
+  Portable verify passes 231 unit tests, six analytics-report tests and 42-page
+  build; hosted CI also validates its clean committed context/source snapshot.
+  Production export audit initially confused legitimate analytics POSTs with
+  PDF resource requests. A print_result-only correction was contradicted by
+  queued calculation events. The final oracle reuses the canonical closed
+  envelope projector through installed Vite and requires exact projection,
+  planner path, same origin and empty/absent cookie/referrer; other export
+  requests remain GET with no body. Focused and full public checks pass. No
+  analytics/runtime workaround, extra dependency or project upload was added.
+  Search Console setup is complete per owner: ownership and sitemap previously
+  accepted; robots finally detected 2026-10-05. Live robots and 38-entry sitemap
+  return HTTP200. This is not proof of Google page indexing. Firefox was waived
+  by owner, remains untested, and is not a pending release requirement. Prior
+  physical iPhone/tablet PDF owner acceptance is retained; Chromium audits do
+  not claim independent Firefox/Safari or target-quilter evidence.
+  Model demand: existing parent for scoped deployment/contract review; effort
+  demand: medium for selective publication, failure diagnosis and live verification.
+  Reassessment: neither axis changed after the bounded audit-only diagnosis.
+  Preserve unrelated dirty docs/catalog/context tooling and the V2 filename
+  replacement unstaged; do not push release-local-history. Release source is
+  committed; no task operation/worker or approval remains. The existing owner-
+  managed local instance on port 4322 is unchanged and needs no conversation state.
+  Next session: post-launch indexing/measurement monitoring, then the recovered
+  ads review/design in ../launch/postlaunch-ads-review.md. Ads/provider rollout
+  needs finalized scope; V2 research is not an approved implementation backlog.
+  Checkpoint owners: this Resume Checkpoint, CONTEXT summary and continuation
+  roadmap. Memory/whitespace validation passes. Lifecycle checker confirms
+  clear-ready: fresh checkpoint, completed task, zero unresolved items and active
+  operations (tmp/print-release-clear-lifecycle.json). User alone invokes /clear.
+  This release requires no retained conversation state.
+- Firefox acceptance waived by owner, 2026-10-05: Owner explicitly requests
+  skipping the Firefox test. Remove it as a pending launch requirement; retain
+  Firefox as untested, not PASS. Standards-based APIs support an expectation of
+  compatibility, but the installed Chrome/Edge evidence does not verify Gecko
+  print layout. No Firefox test, source change or deployment performed for this
+  decision. Next: authorized publication of local fixes and Search Console review.
+- Desktop first-click print correction complete locally, 2026-10-05: Owner reports
+  first Print has no text/blank diagram; subsequent clicks work. Cold local
+  Chrome instrumentation confirms native Print is invoked while both dedicated
+  print font faces are unloaded. Print-only font use plus font-display:block
+  permits invisible first-use glyphs; earlier PDF audits loaded print fonts before
+  capture and the action audit stub never entered print media, masking readiness.
+  Model demand: existing parent for bounded controller/CSS/browser integration,
+  no worker needed. Effort demand: medium for explicit font lifecycle tracing and
+  cold/delayed/failed-load checks. Acceptance: desktop waits for regular/bold
+  print fonts before native Print, double-click is contained, failed fonts retain
+  readable fallback and repeat use, mobile PDF remains unchanged. Preserve prior
+  device PDF acceptance; no deployment authorized.
+  Before/after instrumentation on the existing port 4322 instance records both
+  faces unloaded at the original first native Print invocation, loaded after
+  the correction. The controller explicitly loads both faces before Print;
+  font-display:swap preserves visible fallback for failed loads and menu printing.
+  Busy state contains repeated clicks and recovers after completion/failure.
+  `npm run verify` passes (231 unit tests, six report tests, 42-page build).
+  Installed Chrome/Edge smoke passes cold/delayed/failing font loads, first and
+  repeated native calls, device/viewport routing, and prior clean native/export
+  content/layout/paint, mobile PDF and recovery contracts. These checks establish
+  font readiness at invocation; owner first-click print-preview confirmation
+  remains device evidence, not claimed by the stubbed action check. Existing
+  local server remains available; refresh it for retest. No deployment performed.
+- Mobile-only output correction complete locally, 2026-10-03: Owner clarifies PDF
+  export is exclusively for phones/tablets, selected by device type; desktop
+  retains native Print regardless of viewport width. This supersedes the earlier
+  universal-export interpretation. Model demand: Sol for bounded typed controller
+  integration; root owns browser regression and decision/help/checkpoint updates.
+  Effort demand: medium for isolated device routing and signal/viewport matrix.
+  Acceptance: narrow desktop stays Print, wide tablet stays PDF; iPad desktop UA
+  is covered without treating Windows touch PCs as mobile; help/analytics match
+  the single action; PDF generation and native print regressions remain intact.
+  Existing device PDF pass is retained. No deployment is authorized.
+  `npm run verify` passes (231 unit tests, six report tests, 42-page build).
+  Installed Chrome/Edge smoke passes the six-device routing matrix at 1200,
+  390 and 820px, native Print invocation on desktop, lazy PDF download on mobile,
+  existing clean PDF content/layout/paint checks and error/retry cases. Device
+  signal emulation proves routing, not physical Safari rendering. Owner's prior
+  physical PDF acceptance remains the device evidence. No domain/PDF engine
+  change. Help and printing guide now describe the matching desktop/mobile flow.
+- Owner physical acceptance, 2026-10-03: Owner confirms iPhone/tablet PDF
+  works, closing the deferred local export/download/viewer acceptance. This is
+  owner device evidence, alongside the recorded Chrome/Edge PDF checks; no
+  Firefox pass or production deployment is implied. The accepted fixed A4 PDF
+  generator is unchanged by the mobile-only action correction above. Screen
+  diagram responsiveness remains a separate breakpoint concern.
+  Next: Firefox acceptance and Search Console robots/crawl-report recheck.
+  Deployment remains unauthorized.
+- PDF parity corrected locally, 2026-10-02: Owner reported missing items and a
+  format mismatch. Identical-input native-print/export PDFs established omitted hero
+  eyebrow/introduction/trust line, first-use callout and results eyebrow/heading.
+  Manual serialization also changes row-rule shopping tables, three-column
+  decision facts, inline emphasis and SVG label styling. Previous content/paint
+  checks were necessary but did not establish desktop format parity.
+  Correction: project the full print-visible page into focused semantic blocks,
+  retain rich runs, row-rule tables, auto-fit facts, canonical spacing/dividers and
+  source SVG styles. Planner native print and export share local fonts. Closing
+  sections preflight the portrait prose page and stay together when they fit.
+  Full native/export prose wording and order, section pages/alignment/typography,
+  diagram orientation/isolation and painted bounds pass in installed Chrome/Edge.
+  Final `npm run verify` passes: 222 unit tests, six analytics-report tests,
+  type/lint/format checks and the 42-page build; context validation passes.
+  Layout anchors allow 8pt vertical, 2pt horizontal and 0.5pt font-size drift;
+  this is format parity evidence, not pixel identity. Rendered multi-fabric and
+  wide/tall PDFs were visually reviewed. Chromium's clipped margin text is ignored
+  by the reference comparison only when its rendered glyph box has no ink.
+  Local port 4322 also passes short/tall/long export parity and failure/retry.
+  Owner deferred physical iPhone/tablet export/viewer acceptance and Firefox to
+  pending follow-up work (2026-10-02). Neither check has passed yet. Resume by
+  refreshing the existing port 4322 instance, exporting on iPhone/tablet and
+  checking the download/viewer, full content, diagram orientation and fit; then
+  complete Firefox acceptance. Local implementation is complete, no deployment
+  is authorized, and this handoff needs no retained conversation state.
+  Model demand: Sol implementation of the now-diagnosed semantic/layout boundary;
+  effort demand: high for rich text, pagination and variant preservation. Root
+  owns integration/tests/CSS; worker owns the PDF module. No deployment or domain
+  change. Owner asked Codex to investigate; no supplied PDF was needed.
+- Print-ready PDF implemented locally, 2026-10-02: Planner uses one "export PDF"
+  button with "for print" subtitle at all widths; its action never calls native
+  print. `src/lib/printing/planner-pdf.ts` exports rendered result text and native
+  SVG vectors with fixed A4 pages, existing desktop orientation, tight geometry
+  crop, maximal two-axis fit, atomic title/legend, grayscale patterns and local
+  licensed fonts. No domain recomputation, project upload or deployment.
+  `npm run verify` passes (222 tests, six report tests, 42-page build).
+  Installed Chrome/Edge smoke passes desktop and 390/820px exports, seven-page
+  stock-plus-purchase completeness, repeat/error recovery, unchanged live SVG and
+  prior native-print regressions. Focused Chrome/Edge checks also pass four-page
+  single-fabric wide/tall, accented/fraction labels, wrapped names/metadata,
+  font-fetch failure/retry and same-origin GET-only export requests. Actual PDF
+  paint/text assertions and rendered seven-page/portrait/landscape visual review
+  pass; scratch evidence is in `tmp/pdfs/` (not committed).
+  Existing local instance on port 4322 passes focused export checks; no new server
+  is needed. Physical iPhone/tablet PDF download/viewer retest remains owner
+  acceptance. Bundled-font missing glyphs (e.g. CJK/emoji) produce an actionable
+  error rather than altered labels; see ../decisions/client-print-ready-pdf.md.
+- Print-ready PDF implementation authorized, 2026-10-02: Owner requests export
+  PDF / for print for phones/tablets, PC-consistent format and no direct Print.
+  Use one export action at all widths; no UA/pointer/touch device heuristics.
+  Decision: ../decisions/client-print-ready-pdf.md. Reuse existing rendered result
+  and SVG; client-only page generation, pinned lazy dependencies, self-host fonts.
+  Model demand: Sol substantive PDF/browser implementation; parent cross-contract
+  review and visual/paint QA. Effort demand: high for layout/conversion boundary,
+  medium for bounded action integration. Separate worker ownership prevents edits
+  to existing dirty browser smoke/docs from being overwritten.
+  Acceptance: PC content order, A4 diagram orientation/maximal safe fit, atomic
+  heading/legend/SVG, complete closing content, grayscale/vector/searchable text,
+  long/Unicode/multi-fabric cases, privacy, repeat/error handling and native desktop
+  regression. Physical iPhone export/viewer retest remains required.
+- Physical print isolation retest, 2026-10-02: Owner confirms blank sheets and
+  missing trailing content are fixed; labels remain fixed. Remaining failures:
+  native iPhone diagram orientation and inefficient fit/large gaps. Fit uses
+  requested A4 orientation but clamps width to measured wrapper.clientWidth;
+  those are not guaranteed to describe the native physical sheet. Do not undo
+  containment or claim an unsupported orientation-detection heuristic as a fix.
+  Native CSS page sizing is not a reliable canonical output boundary on this
+  observed path. Ask owner preference: add print-ready client PDF alongside
+  native Print, or retain native-only with orientation limitation.
+  Proposed PDF scope: explicit per-page dimensions, atomic diagram title/legend
+  and vector geometry from existing presentation model; paginate all existing
+  summary/instructions/remaining regions/assumptions/warnings; lazy local-only
+  generation, self-host assets, preserved native Print and accessible HTML.
+  No backend, data upload, device heuristics, or domain/placement changes.
+  Existing PDF text/paint audits are reusable. PDF-LIB official docs verify
+  browser-native page creation/vector drawing capability; not installed yet.
+  Dependency/font choice, divergence record and browser/device validation would
+  be required for implementation. Owner print-flow preference is pending.
+- Native print reassessment, 2026-10-02: Owner requests continued source
+  investigation; a device PDF is supporting evidence, not a prerequisite.
+  Astra-medium read-only review finds screen width queries leak into print and
+  a higher-specificity screen margin survives on diagram sheets outside the fit
+  budget. WebKit 250685 reports print queries using browser rather than page
+  width; 15548 reports iOS page-size differences. These corroborate boundaries,
+  not this app's exact blank-page/missing-tail cause. No hidden final-section
+  branch exists. Nested named-page flow and print-event sizing remain concerns.
+  Model demand: cross-engine architectural judgment after contradicted tests;
+  effort demand: focused source/engine-boundary comparison, no duplicate suite.
+  Correction: screen-only responsive rules; explicit print minimum-height and
+  sheet margin reset. Tests assert narrow-viewport print uses real table/header
+  layout and zero external diagram margin; single-fabric clean PDF must retain
+  all closing text, not merely have four nonblank pages. Mixed orientation on
+  engines ignoring page size remains unresolved; no device success claimed.
+  Canonical client PDF is the reviewed durable alternative if native pagination
+  still fails; it requires a scoped dependency/design decision, not another CSS
+  wrapper. No new dependency or production deployment in this investigation.
+  Completed: build/lint and installed Chrome/Edge suites pass, including phone-
+  width print-style checks, complete single-fabric clean PDF, original 7/4 page
+  outcomes, mixed orientation, named-page-disabled fallback and paint bounds.
+  Existing LAN 4322 serves the new styles. Next: physical iPhone retest, retain
+  native mixed-orientation limitation and evaluate canonical PDF if it still
+  fails. Device PDF is optional diagnostic evidence, never a prerequisite.
+- Owner local confirmation, 2026-10-02: Cut-row label correction PASS on device.
+  Blank sheet between first two content pages and missing final page still FAIL
+  on iPhone. Prior report says larger multi-fabric/multi-row inputs can restore
+  remaining-region output; keep both small and larger cases in acceptance.
+  No further CSS change or deployment. Need actual iPhone print PDF and iOS
+  version to inspect pagination/page geometry; desktop PDF PASS is insufficient.
+- Cut-row labels and print clarification, 2026-10-02: Owner reports Useful
+  remaining regions reappears with multiple fabrics/multiple cut rows; omission
+  is content-dependent, not universal. Physical blank-page and orientation
+  failures remain open; retain device PDF request and single-/multi-fabric cases.
+  Cut labels are wrapped in .cut-row-field-help, hidden globally and revealed
+  only for the first row at the card breakpoint. This violates Product Spec
+  section 4 and UX section 7 persistent visible labels. Change visibility for
+  every row at every width; preserve semantic associations and error layouts.
+  First verification exposed the sparse contextual-help contract: hide only the
+  help child, never its shared label wrapper; preserve header/first-row icons.
+  Model demand: bounded CSS/DOM contract correction by parent, no worker needed.
+  Effort demand: trace ancestor visibility, amend multi-row rendered assertions,
+  verify desktop, 800px cards, 390px stacked controls and neighboring print.
+  Acceptance: all row labels visibly paint and remain associated; existing
+  keyboard/error/layout/PDF gates pass; no print fix claimed from this change.
+  Completed locally: build, lint, changed-source formatting, memory checker and
+  installed Chrome/Edge smoke pass. Multi-row label visibility/associations are
+  checked at 800px and 390px; desktop checks now require nonzero visible bounds.
+  Existing 4322 serves the correction. No deployment. Print failure remains open.
+- Physical iPhone local retest FAIL, 2026-10-02: Owner reports an extra blank
+  sheet between the first two content pages, diagram orientation still wrong,
+  and final Useful remaining regions/related content missing on corrected local
+  output. Earlier Chromium fallback PASS does not establish this path. Stop
+  extending CSS workaround until actual device PDF/page geometry is inspected.
+  Existing 4322 server remains owner-managed; no deployment occurred.
+  Source confirms remaining-region section exists and is not print-hidden; no
+  root cause for its omission is established. PDF tests lacked explicit closing
+  content completeness; add occurrence checks for leftovers, assumptions and
+  warnings, including repeated fabric sections. Actual iPhone PDF and iOS
+  version are needed to distinguish pagination loss, scaling and timing.
+  Model demand remains cross-engine print reasoning; effort shifts from CSS
+  adjustment to evidence comparison. No further product patch in this turn.
+  Build, lint and Chrome/Edge smoke pass with the added final-content checks,
+  including named-page-disabled output. Memory checker passes. Next: owner
+  supplies iPhone print PDF and iOS version; inspect pagination/paint against
+  complete source content before choosing an architectural correction.
+- iPhone print regression investigation, 2026-10-02: Owner reports Chrome and
+  Safari print preview both lose dedicated pages/mixed orientation and clip
+  diagrams. This is physical-device failure evidence; prior desktop gates do
+  not establish iPhone acceptance. Code relies on named-page transitions for
+  diagram isolation and sizes landscape pages to the requested A4 width even
+  when the print engine may ignore that size. WebKit issue 15548 includes iOS
+  page-size failure reports; the exact device cause remains unconfirmed.
+  Model demand: Sol source analysis of interacting CSS/client sizing contracts.
+  Effort demand: high dependency tracing across sizing, events and PDF assertions.
+  Acceptance: explicit page isolation and safe containing-width bounds; preserve
+  desktop orientation, atomic title/legend/SVG and PDF paint checks. Physical
+  iPhone retest is required; mixed orientation cannot be promised on an engine
+  ignoring named-page sizes. Browser-independent PDF output needs scoped design.
+  Owner confirms QuiltClarity's Print button is the failing path; iOS version
+  is not supplied. Local CSS adds modern/legacy breaks before and after each
+  diagram and max-width:100% to constrain requested width to the containing box.
+  Build, lint, changed-source formatting and installed Chrome/Edge smoke pass.
+  Clean mixed-orientation PDFs retain 7/4 page counts and atomic title/legend/SVG
+  paint bounds. Added clean-PDF regression disables named-page assignment and
+  proves separate portrait diagram sheets with text/paint inside safe bounds
+  in both installed engines. This is an approximation, not iPhone proof.
+  After diagnosis, implementation model demand is bounded CSS/test editing;
+  effort demand is targeted edit plus affected installed-browser verification.
+  No dependencies or device detection added; existing unrelated work preserved.
+  Local retest, 2026-10-02: Owner requested local testing. Existing Astro dev
+  server on http://192.168.0.101:4322/ serves the corrected print CSS and planner
+  (HTTP200). Duplicate preview on 4323/session 58357 was stopped after owner
+  clarified the existing instance; preserve the owner's 4322 server.
+  Physical iPhone retest remains pending. No public deployment.
+  Unfinished: publish correction after owner authorization and retest both
+  physical iPhone browsers; automatic mixed orientation remains unresolved.
+  A browser-independent PDF path is a proposed design, not implemented/approved.
+- Search Console, 2026-10-02: Owner reports sitemap Success; Settings still says
+  "No robots.txt file". Fresh apex robots at 07:20 UTC returns HTTP200 text/plain,
+  Allow: / and the correct sitemap. Delayed/unpopulated Google reporting remains
+  plausible, not proven. No site change justified. Recheck October 3; inspect
+  exact host/status/date if a fetch error appears. Indexing remains separate.
+- Cloudflare analytics production and private reports complete, 2026-10-02:
+  Owner confirms Workers Free, enables Analytics Engine and supplies binding
+  quiltclarity_analytics_engine / dataset quiltclarity_analytics_events. Commit
+  2816237 implements the migration; 7968157 aligns collector/report names. Both
+  selectively pushed to main, preserving preexisting dirty docs/catalog/V2 work.
+  Manual deployment succeeds at 1fecf5f2-3d6e-4f97-ac5f-642bad9d12a4; subsequent
+  automatic Builds version 099c01fd-b34c-468b-b80e-61f6e6fb3a71 is active at 100%.
+  Hosted CI passes at https://github.com/akashdas98/quiltclarity/actions/runs/36976754157.
+  Full verification passes: 222 application tests, six report tests, zero Astro
+  diagnostics, lint/format and 42-page static build. Prior installed Chrome/Edge
+  workflow/mobile/PDF checks remain valid because this follow-up changes only
+  server binding/report dataset names. No UI/domain geometry change occurred.
+  Live Chrome pageview, tool_viewed, calculator_started and calculator_completed
+  fetch promises all resolve ok:true/HTTP204. Privacy query/hash sentinels,
+  cookies and referrer are absent; zero old-provider requests. Public home/About
+  and 38-entry sitemap pass200; unknown route404 and HTTP/www path/query301 pass.
+  Invalid JSON envelope rejects400. SQL read token works; report proves stored
+  pageview and calculator events, with privacy sentinels absent. Audit-generated
+  events are included in these early counts; do not treat them as organic traffic.
+  Initial live audit incorrectly treated Chrome CDP net::ERR_ABORTED after204
+  as delivery failure, and parent briefly misread it as old-provider traffic.
+  Instrumented native fetch outcomes and SQL receipt establish success despite
+  that diagnostic; no production transport patch or cause beyond that evidence
+  is claimed. Live verification helper remains in ignored tmp.
+  User-provided report token is held only in Git-ignored .env.analytics and used
+  for Analytics Read calls; no token value recorded here, browser-shipped or committed.
+  No paid plan, card, broader permissions, account cancellation or database added.
+  Current reporting is the private CLI; a local live dashboard is possible but
+  was discussed, not requested/implemented. No task workers/processes remain.
+  Next independent work: Search Console recheck, remaining Firefox/physical Safari
+  evidence, operational monitoring and agreed ads design via continuation roadmap.
+- Cloudflare free account confirmed and deployment attempted, 2026-10-02:
+  Owner confirms current Workers plan is Free and sees an active Workers token.
+  Existing local report token is still blank. Deployment with current authorized
+  OAuth uploads assets but version creation rejects with Cloudflare code 10089:
+  Analytics Engine must first be enabled at the account dashboard. No paid upgrade
+  or payment method was requested or added; no permissions were expanded.
+  Browser setup attempt fails Windows sandbox initialization
+  (helper_sandbox_lock_failed); owner must enable the service in the dashboard.
+  Active version remains 49803d53-f5b8-438a-a753-ed516bd61ceb at 100%; public About
+  returns 200 and retains the Simple Analytics disclosure. No new version activated.
+  Commit 2816237 remains local/unpushed to avoid repeated automatic failed Builds.
+  Model demand: bounded deployment/account-boundary review by parent, no worker.
+  Effort demand: reuse passing release checks; verify actual activation outcome.
+  Next: owner enables Analytics Engine without billing changes; retry deployment
+  and publish source, then verify live actions and SQL receipt with Account Analytics
+  Read permission. Active token status alone does not establish that permission.
+- Cloudflare analytics implementation complete, activation pending (2026-10-02):
+  Selective local commit 2816237 replaces the Simple Analytics source transport
+  with a same-origin optional Worker collector, closed envelope/server projection,
+  shared 38-route sitemap allow-list, static ASSETS fallback, ingestion kill switch
+  and private sampling-weighted reports. The approved exception is in
+  ../decisions/cloudflare-analytics-engine.md. Reports keep read credentials local.
+  verify passes: zero Astro diagnostics, lint/format, 222 Vitest application tests,
+  six Node report tests and 42-page static build. Installed Chrome/Edge full
+  workflow/mobile/keyboard/PDF geometry/paint checks pass. Enabled intercepted
+  audit sends four expected requests; DNT/GPC/noindex send zero. Disabled-profile
+  Chrome/Edge audits send zero; enabled dist restored. Wrangler 4.145.0 dry run
+  passes with ANALYTICS, ASSETS and enabled ingestion bindings. The sitemap source
+  refactor exposed an old literal-source test; it now verifies all 38 generated
+  XML locations against the shared list, without reducing route coverage.
+  Model demand: Sol typed browser/edge privacy integration; Luna explicit private
+  Node reporting. Effort demand: medium dependency tracing/failure verification
+  for each, parent release/account review. All workers and task processes finished;
+  preexisting dev service remains untouched. No new dependency/install needed.
+  Existing OAuth Worker account-settings read succeeds; subscriptions and Analytics
+  SQL reads return 403. Owner Workers Free confirmation is now complete;
+  Analytics Engine enablement is required before production activation.
+  SQL receipt also needs an account-scoped Analytics Read token. Blank ignored
+  .env.analytics is prepared with account ID; owner may fill the token locally,
+  never in chat. No access or billing change made.
+  Commit is local, not pushed or deployed; live site still uses the prior Simple
+  Analytics integration. Preserve all earlier dirty documentation/catalog/V2 work.
+  Next: enable Analytics Engine; deploy/publish selected commit, verify live endpoint
+  and static redirects/404; obtain read token and prove SQL/report receipt.
+- Simple Analytics live activation, 2026-10-02: Owner confirmed registered
+  quiltclarity.com and authorized prepared-integration activation. Selective
+  commit e5c4026 publishes the bridge, strict projector, disclosure, tests,
+  intercepted audit and tracked public-only .env.production flag. Cloudflare
+  automatic deployment serves active version 0e4b2003-1fee-4b05-ae22-dfdac2350e5f
+  at 100%; deployed pages contain the analytics shell/disclosure. Process env
+  PUBLIC_SIMPLE_ANALYTICS_ENABLED=false plus rebuild remains the rollback;
+  subsequent Builds inherit the registered production profile. No standard
+  vendor SDK was installed and no Cloudflare account permission expanded.
+  Enabled-profile verify passes (219 tests, zero Astro diagnostics, lint/format,
+  42-page build), intercepted Chrome/Edge privacy tests pass and full installed
+  browser/mobile/PDF smoke passes. Live Chrome pageview, tool_viewed,
+  calculator_started and calculator_completed each receive HTTP 201 with
+  ok:true/success:true from Simple Analytics. Query/hash test secrets, cookies
+  and referrer are absent; no request failure occurs. This confirms provider API
+  acceptance, not signed-in dashboard visibility or onboarding detection.
+  Hosted CI exposed an inherited test fixture conflict: adding a fourth history
+  entry to a nearly full context file hit byte limits before the intended history
+  assertion. Commit 6282258 isolates those invariants without relaxing the
+  checker; all 13 local context cases pass and hosted CI now passes at
+  https://github.com/akashdas98/quiltclarity/actions/runs/36970043052.
+  Only analytics-related README hunks and that fixture fix were staged/pushed;
+  earlier documentation/catalog work and V2 replacement remain unstaged.
+  No task processes/workers remain; the preexisting dev service is preserved.
+  Next: owner refreshes dashboard and confirms reports/onboarding; retain
+  Search Console status, Firefox/physical Safari and agreed ads review pending.
+- Analytics activation authorized, 2026-10-02: Owner confirms quiltclarity.com
+  is added in Simple Analytics after selecting no DNT collection/no noscript,
+  and accepts enabling the prepared integration. Onboarding is waiting for data;
+  its standard-script detection is not proof of direct-endpoint receipt. Existing
+  Cloudflare limited OAuth deployment works; historical Builds API access is
+  403 and browser automation is unavailable. Use a tracked public-only
+  .env.production activation flag so subsequent Builds retain activation;
+  process-environment false remains the rollback override. Selectively publish
+  only analytics source/config/test changes, preserving unrelated unstaged work.
+  Model demand: production/source continuity and external-delivery judgment.
+  Effort demand: bounded build-profile validation and deployed-origin request
+  checks, reusing the completed core/regression evidence. No worker/install needed.
+  Acceptance: enabled release build and intercepted privacy audit pass; deployment
+  version and live requests verified; distinguish HTTP acceptance from dashboard
+  ingestion and don't add the duplicate standard SDK.
+- Provider registration authorized, 2026-10-02: Owner explicitly requested
+  registering quiltclarity.com in Simple Analytics. Browser initialization again
+  failed with "trusted Node process exited unexpectedly"; no signed-in account
+  could be accessed and registration was not performed. Owner sign-in/registration
+  through the Simple Analytics dashboard is the available handoff. Account/plan
+  confirmation and production activation/dashboard receipt remain pending;
+  registration authorization persists and must not be requested again.
+- Simple Analytics integration preparation complete, 2026-10-02: Strict
+  event-specific runtime projection, default-disabled build flag, production
+  apex/index/staging/privacy gates, static canonical pageviews and direct browser
+  event transport are implemented. No vendor SDK, backend, cookie, visitor ID,
+  arbitrary metadata or query/hash/referrer collection is added. Startup buffers
+  are bounded; delivery uses four in-flight requests plus 32 pending, five-second
+  timeouts, drop-newest overflow and no retry/offline storage. Normal bursts
+  drain; observer/dataLayer/network failures remain contained. About renders
+  provider disclosure only for enabled non-staging builds. Operation and account
+  activation are in README; the existing analytics decision owns the contract.
+  Parent reviewed source/implementation and corrected normal-burst delivery
+  before verification. Sol-medium implementation finished; no further model or
+  effort change was needed after the transport diagnosis.
+  Verification: npm run verify passes (219 tests, zero Astro diagnostics, lint,
+  full formatting, 42-page static build); npm run smoke:browser passes installed
+  Chrome/Edge across 38 indexable routes, planner/calculators, keyboard, mobile,
+  persistence and clean PDF geometry/paint. Intercepted enabled-build provider
+  audit passes Chrome/Edge for startup/completion payloads, secret URL parameters,
+  DNT/GPC/noindex suppression and failed-network calculator usability. Default
+  builds make zero provider requests in both browsers even on simulated HTTPS
+  production origin. These intercepted tests establish browser behavior, not
+  real provider ingestion, public deployment or physical Safari evidence.
+  Default-disabled output is restored. No account, subscription, activation,
+  commit/push or deployment occurred; existing dirty work and dev service remain.
+  Next: owner registers quiltclarity.com in Simple Analytics and confirms plan
+  event/property entitlement, then activate an explicit production build and
+  verify dashboard receipt. Search Console status, Firefox/physical Safari and
+  agreed ads review remain pending. No task worker or audit process remains.
+- Simple Analytics preparation authorized, 2026-10-02: Owner selected the
+  recommended provider and instructed continuation. Implement disabled by
+  default; account/plan confirmation and production activation remain pending.
+  Model demand: interacting privacy and browser-startup boundaries; Sol-medium
+  worker owns typed bridge/tests while parent reviews provider source and release
+  evidence. Effort demand: bounded contract tracing, source inspection and
+  affected-system checks. Acceptance: no requests when disabled; event-specific
+  runtime allow-lists; static canonical paths; bounded, contained delivery;
+  no project/URL/referrer/identifier leakage; installed-browser verification.
+  Source diagnosis: both latest and SRI v11 vendor scripts add User-Agent Client
+  Hints despite ignored useragent metrics, and error reporting includes arbitrary
+  error text and runtime pathname. SRI v11 SHA-256 matches the published hash.
+  Reassessed transport, not privacy requirements: use the documented JSON event
+  endpoint directly from the browser, without a backend or third-party SDK.
+  Non-submitting OPTIONS returns 204 and allows production-origin POST with
+  Content-Type. This establishes browser transport availability, not event
+  ingestion/dashboard delivery. Model and effort allocations remain unchanged.
+- Continuation preparation, 2026-10-02: Public sitemap/robots recheck passes
+  (HTTP 200, 38 sitemap entries, crawl allowed and exact apex sitemap pointer).
+  Google's processing status remains unknown; browser automation initialization
+  exited twice, so no account status or setting was read or changed. Owner was
+  asked for current Sitemaps status/Last read/error and whether to select Simple
+  Analytics preparation. Provider choice remains pending; no integration or
+  activation is inferred from the generic continuation request. Reviewed vendor
+  controls for optional metrics, canonical-path handling and early event queues;
+  requirements and fail-open/unbounded defaults are recorded in launch readiness.
+  No application code, account, subscription or host configuration changed.
+  Model demand: privacy-boundary judgment across static shell, typed adapter and
+  vendor defaults; effort demand: bounded source/document tracing and two public
+  fetches. Existing tools suffice; no worker or capability installed. Acceptance:
+  preserve closed fields and disabled production tracking, distinguish public
+  reachability from Google status, and expose concrete setup requirements.
+  Verification: touched-file formatting, context/catalog and diff whitespace
+  checks pass; no fresh application or provider-delivery test is claimed.
+  Next: resolve owner provider choice and Search Console status before dependent
+  work; Firefox/physical Safari and agreed ads design remain pending.
+- Production measurement review, 2026-10-01: Reviewed current first-party
+  Cloudflare, Simple Analytics, GA4 and Plausible documentation against the
+  shipped closed adapter and V1.1 measurement goals. Simple Analytics is the
+  recommended event-capable candidate; account/plan entitlement and adoption
+  remain owner decisions. Cloudflare cannot consume custom workflow events;
+  GA4 standard identifiers and Plausible daily IP/User-Agent hashes conflict
+  with the current privacy boundary without a separate decision. Recommendation,
+  pricing caveats and concrete integration/delivery acceptance are recorded in
+  `../launch/launch-readiness-status.md` under Activation state and remaining
+  decisions. No provider account, subscription, script, payload or host setting
+  changed; existing unstaged work is preserved. Model demand: multi-constraint
+  privacy/product-fit judgment based on source and provider contracts. Effort
+  demand: bounded adapter tracing and official-document comparison, with no
+  worker or capability installation needed. Acceptance: preserve the event
+  schema, distinguish traffic from workflow delivery, expose account/cost and
+  identifier limits, and leave a concrete owner decision before integration.
+  Verification: context/catalog checker, touched-file Prettier and repository
+  diff whitespace checks pass. This review makes no fresh runtime-test claim.
+  Next: owner selects event-capable measurement or explicitly defers workflow
+  measurement; Search Console recheck remains October 2-3 and Firefox/physical
+  Safari plus agreed ads design remain pending.
+- Session handoff complete, 2026-10-01: Full public Chrome/Edge audit passes;
+  Domain ownership verified; sitemap and home/planner/Fabric Yardage live tests
+  pass per owner. Sitemaps still says "Couldn't fetch" and robots/crawl reports
+  have no data for today's new property. Leave submission unchanged; recheck
+  on October 2-3, retaining detailed error/Last read if it persists. This is an
+  observation handoff, not completed indexing or sitemap acceptance.
+  Next independent task: production analytics provider decision, then remaining
+  Firefox/physical Safari checks and agreed ads review/design. No provider,
+  tracking integration or ad rollout is selected/approved. Existing unstaged
+  work and V2 filename replacement are preserved; no commit or push performed.
+  No task worker or smoke process remains. The pre-existing Astro dev service
+  (PID 61080 at handoff) is intentionally preserved independently of this session;
+  it is not running a continuation task or writing a production build.
+- Search Console follow-up, 2026-10-01: Owner confirms verified Domain property
+  and submitted sitemap reports "Couldn't fetch" despite browser reachability.
+  Owner confirms exact submitted URL https://quiltclarity.com/sitemap.xml.
+  Owner confirms only Test live URL succeeded; Sitemaps still reports
+  "Couldn't fetch". Current inspection-service reachability is established,
+  sitemap processing/last-attempt outcome remains unresolved.
+  Initial N/A fields did not establish a fetch failure. Owner confirms all three
+  representative pages (home, planner, Fabric Yardage) have green live inspection
+  results, but Settings reports "No robots.txt file". Fresh HTTPS apex robots.txt
+  returns 200 text/plain, Allow: / and the correct sitemap; HTTPS www and HTTP
+  apex return 301 to that exact HTTPS apex robots URL, without challenge headers.
+  Google's robots report reflects last-crawl results per origin, not a direct
+  statement of current file existence. Unpopulated/stale reporting is plausible,
+  not proven. Owner screenshot shows verified ownership, property added
+  1 October 2026, "No robots.txt file" with disabled Open report, and Crawl stats
+  "No data available yet". This supports not-yet-populated reporting; no specific
+  failed robots fetch/host/date is displayed. Recheck robots/crawl and sitemap
+  reports after observation time; live accessibility is confirmed, indexing and
+  sitemap processing are not. No robots file or host setting change justified.
+  Direct requests to https://quiltclarity.com/sitemap.xml return HTTP 200,
+  application/xml, 2,983 bytes and 38 entries, without redirect, challenge header
+  or X-Robots-Tag. robots.txt returns HTTP 200 and allows all crawlers with the
+  correct apex sitemap URL. The same responses occur with a Googlebot user-agent
+  string; this does not establish access from verified Google crawler IPs.
+  No implementation failure is established and no application/security setting
+  changed. Next: leave the existing submission in place and recheck the Sitemaps
+  report after processing time; retain detailed error/Last read if failure persists.
+  Representative page live/indexing inspection can proceed independently. Do not conflate live-fetch success
+  with sitemap processing or completed indexing.
+  Model demand is bounded HTTP/SEO boundary judgment; effort demand is direct
+  response comparison and official Google error-procedure review. Existing Node
+  fetch, rg and web tools suffice; no worker/capability installation warranted.
+  Acceptance: preserve Domain verification, distinguish local reachability from
+  Google's fetch, and defer fixes until the failing boundary is established.
+- Public acceptance continuation, 2026-10-01: Full existing smoke harness
+  passed against https://quiltclarity.com in installed Windows Chrome and Edge.
+  All 38 indexable routes, crawl controls, no-JavaScript content/layout,
+  Guides/help, themes, planner/calculator workflows, keyboard/accessibility,
+  persistence, closed analytics adapter, narrow mobile viewport containment,
+  performance fallback and clean printed PDF geometry/paint assertions pass.
+  The 500-piece fallback rendered in 135.0 ms (Chrome) and 119.7 ms (Edge).
+  This is desktop-engine viewport emulation, not physical-device Safari proof;
+  injected test analytics proves the adapter contract, not provider delivery.
+  Owner subsequently confirmed Search Console ownership verification complete
+  on 2026-10-01; subsequent Domain/sitemap/live-test evidence is recorded above.
+  Native browser
+  access failed with the Windows sandbox lock error; available Playwright has
+  no signed-in Google session. The requested Domain-property TXT value is
+  no longer needed after owner verification. Firefox is absent from standard
+  Windows install locations.
+  No Google/Cloudflare account, DNS or measurement-provider setting changed.
+  Public mode in `scripts/browser_smoke.mjs` accepts an explicit credential-free
+  HTTPS origin, reuses every assertion and skips local preview spawn/stop.
+  README documents direct invocation without a build; local default is retained.
+  Sol-medium completed syntax/ESLint/format checks; parent reviewed the diff and
+  ran the public suite. Parent model demand was release-evidence judgment across
+  remote delivery/browser/print boundaries; effort demand was bounded dependency
+  review and affected-system verification. After diagnosis, neither axis changed;
+  the focused implementation remained Sol-medium. Acceptance checks above pass.
+  Unfinished: Search Console sitemap-fetch diagnosis/URL inspection,
+  production measurement decision/delivery, Firefox and physical Safari evidence.
+- Documentation reconciliation, 2026-10-01: All available project documents
+  and local original ZIP snapshots audited. Complete section catalog, task/topic
+  map and sourced continuation roadmap preserve selective startup while routing
+  historical evidence, pending growth/ads work and V2 research. The August 24
+  ads agreement is recovered in `../launch/postlaunch-ads-review.md`: surface
+  and define/map post-live monetization work; slot recommendations and runbook
+  questions were discussed, final production choices remain pending. Earlier
+  unrecoverable/missing-checklist claims were unsupported. Detailed scope,
+  coverage, root cause and verification: `documentation-reconciliation-2026-10-01.md`.
+  Parent model demand is cross-package authority and status reconciliation; effort
+  demand is full inventory reading, contradiction tracing and targeted writeback.
+  Sol-medium workers reviewed bounded packages; installed filesystem/rg/Node/PS
+  tools suffice. Acceptance: every doc routed, scope/approvals/evidence preserved,
+  next/post-launch tasks visible, coverage checker exercised, no product changes.
+- Objective: Production analytics and private SQL reports are complete; continue Search Console recheck, remaining browser acceptance and agreed ads review via the roadmap.
+- Documentation verification, 2026-10-01: Catalog covers 86 Markdown/text
+  documents, three dated PNG evidence artifacts and three optional local ZIP
+  snapshots (18 documentation members). Memory/catalog check and all 13 isolated
+  checker cases pass, including unindexed-file, new-section, missing-destination
+  and escaping-route failures. Full repository Prettier and diff whitespace
+  checks pass. Topic searches find ads, post-launch, Search Console, Feedback
+  and owner-validation sections; 39 navigation document destinations resolve.
+  Both preserved V2 brief filenames have the same section headings, so the
+  reviewed public filename and owner's local replacement are routable without
+  staging or changing that work. Their content differs; no identity is claimed.
+  A focused Sol-medium semantic review found no concrete scope/status/routing
+  defect. No application rebuild or fresh browser result is claimed for this
+  documentation/checker-only change; the existing dev service is preserved.
 - Automatic deployment evidence, 2026-10-01: Push `8993dc5` triggered Cloudflare
   [build 6456a7ff-3dda-4e7b-951d-aec2731ade49](https://dash.cloudflare.com/fb2063c1b86d4a82beaf7d3fc6532963/workers/services/view/quiltclarity/production/builds/6456a7ff-3dda-4e7b-951d-aec2731ade49),
   whose GitHub check completed successfully. Wrangler deployment listing
@@ -273,8 +1291,8 @@
   fresh private window, using only shipped Guides/help; about five minutes,
   described as quick and easy. Exact readback and evidence limits are in
   `docs/manual-tests/V1_1_GUIDES_HELP_MANUAL_TESTS.md`.
-- Unfinished: Establish Search Console,
-  and public-origin state for the now activated identity. Registrar and renewal
+- Unfinished: Establish Search Console and complete remaining public browser/measurement
+  acceptance; retain post-launch monitoring, ads review/design and V2 Feedback. Registrar and renewal
   details/report location remain unrecorded; do not infer incomplete owner work.
 - Next action: Complete Search Console and remaining public launch acceptance;
   Cloudflare automatic build, active production deployment and redirects pass.
@@ -389,7 +1407,7 @@ this is a byte measurement, not an exact token-use benchmark.
 
 ## Current Status
 
-The previous V1 product completed Milestones 0-10 and its supplemental production pass. V1.1 now supersedes that launch thesis; V1.1 M0-M10 are complete, including a dated competitive-launch-gate PASS. Post-M10 Guides/help and continuation-document reconciliation are complete. Public launch remains blocked by identity, deployment, and public-origin checkpoints.
+The previous V1 product completed Milestones 0-10 and its supplemental production pass. V1.1 now supersedes that launch thesis; V1.1 M0-M10 are complete, including a dated competitive-launch-gate PASS. Post-M10 Guides/help and continuation-document reconciliation are complete. Identity, deployment, hosted CI, redirects and automatic Builds are complete as of 2026-10-01. Search Console and remaining public browser/measurement acceptance remain. The inventory below contains dated counts; current evidence is in Resume Checkpoint.
 
 Completed pre-build assets:
 
@@ -432,7 +1450,8 @@ Completed pre-build assets:
 Current phase: V1.1 M10 complete; post-M10 Guides/help implementation and
 technical validation complete. Owner-only `MT-U01` and `MT-U02` passed on
 2026-09-30; the checkpoint divergence review is recorded below. Public launch
-still awaits identity, deployment, and public-origin launch dependencies.
+continues with Search Console and remaining public acceptance; identity and
+static deployment are complete. Post-launch work remains on the continuation roadmap.
 This owner acceptance must not be presented as independent novice or
 target-quilter evidence.
 
@@ -470,6 +1489,22 @@ Resolution: Checkpoint accepted under the recorded substitution. No independent 
 
 ## Known Issues
 
+- Owner confirmed Search Console ownership verification complete on 2026-10-01;
+  Domain property confirmed; sitemap reports "Couldn't fetch". Detailed fetch
+  error/live test and URL indexing/canonical results are pending.
+- Production measurement adoption/delivery and Firefox/physical Safari evidence
+  remain pending; full public Chrome/Edge viewport/mobile and PDF print checks pass.
+- Post-launch ads review/design is pending with recovered provenance; no slots or
+  provider rollout are complete. Planned V2 Feedback and research remain distinct.
+- No U01-U05 external study occurred; completed M9 and owner Guides substitutions
+  must not be reopened by older pending notes.
+
+## Historical issue and repair log through 2026-08-31
+
+The following entries preserve intermediate observations and retest requests.
+They are not current next steps. Later completion records, approved decisions
+and Resume Checkpoint supersede their pending labels and obsolete setup state.
+
 - Trademark search, domain purchase and source activation are complete. The
   confirmed `quiltclarity.com` / `QuiltClarity` identity is implemented locally;
   hosting and live configuration still require current evidence.
@@ -505,12 +1540,12 @@ Resolution: Checkpoint accepted under the recorded substitution. No independent 
 
 ## Next Checks
 
-- Guides/help and continuation-document reconciliation are complete; preserve
-  the recorded operator/owner evidence limitations.
-- Trademark search, purchase and source activation are complete. Establish
-  current hosting/configuration state before deployment. Feedback remains deferred to V2.
-- Connect and push the repository, run hosted CI, deploy the static `dist` output, and submit `sitemap.xml` in Search Console.
-- Repeat smoke checks on the public origin and add Firefox/Safari sanity checks where those engines are available.
+- Read `continuation-roadmap.md` for next-task and milestone questions.
+- Complete Search Console and remaining public browser/measurement acceptance.
+- Follow post-live monitoring and surface the recovered ads review/design task.
+- Keep planned V2 Feedback separate from research proposals and optional growth.
+- Source activation, GitHub/CI, static hosting, redirects and automatic Builds
+  are complete; do not repeat them based on historical entries.
 
 ## Milestone Divergence Reviews
 
@@ -1682,3 +2717,17 @@ Resolution:
 - Move to the separately recorded guides-overhaul checkpoint. Do not resume
   domain/brand or deployment work until that overhaul and the following
   continuation-document reconciliation are complete.
+
+## Cloudflare analytics exception review � 2026-10-02
+
+MILESTONE DIVERGENCE REVIEW
+Milestone: Post-launch measurement; completed M0-M10 are not reopened.
+Relevant agenda clauses: privacy-safe measurement and static-first product scope.
+Relevant golden rules/tests: domain rules unchanged; G01-G45 remain passing.
+Observed divergence: Optional telemetry ingestion and provider storage introduce
+a narrowly scoped runtime boundary beyond the former assets-only deployment.
+Reason: The owner's no-card/free preference conflicts with Simple Analytics'
+paid-only event reporting; owner explicitly approved Analytics Engine migration.
+Resolution: Documented analytics-only exception; browser/domain/project state
+remain unchanged. Production free-plan deployment and authenticated SQL/report receipt now pass;
+the completed production evidence is recorded in the latest Resume Checkpoint.

@@ -217,7 +217,11 @@ App copy, contextual help and Guides must use the same terminology.
 
 ## 13. Work sequence
 
-Execute `07_TECHNICAL_MIGRATION_PLAN.md` M0–M11 in order.
+Historical adoption sequence: the migration plan defines M0–M10, all complete.
+The separate post-M10 Guides/help checkpoint is also complete under its owner
+substitution. No defined M11 should be inferred from the original entry-point
+wording. Continue through `../architecture/continuation-roadmap.md`; do not
+restart implementation or owner tests from this older handoff.
 
 Do not close a milestone with blocking earlier correctness failures.
 

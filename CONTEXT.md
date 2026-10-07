@@ -15,71 +15,58 @@ new work. Routed owners retain detailed evidence.
 
 ## Current Status
 
-- Routing guard synchronized to schema v2 on 2026-09-22; 23 routing/lifecycle
-  tests and memory checks pass. The owner confirmed all installed hooks are active
-  in the current runtime. Protected governance and measured savings remain open;
-  see `scripts/agent-routing/VERIFICATION.md`.
-- V1.1 M0-M10 are complete. M9 uses the approved guided-operator substitution;
-  no U01-U05 external-quilter study occurred. M10 has a dated competitive-gate
-  PASS. Public site is deployed; remaining launch acceptance is routed below.
-- Guides/help implementation and technical validation are recorded complete:
-  learning hub, Quick Start, planner tutorial, contextual help, closed analytics,
-  and 38 currently indexable routes plus retained noindex routes. Help covers
-  every planner/calculator field, button and distinct result concept.
-  Owner cases `MT-U01` and `MT-U02` passed on 2026-09-30 in a fresh Chrome
-  private window using shipped Guides/help; checkpoint divergence review is
-  recorded. This is owner evidence, not independent novice validation.
-  Inline labels/help, subgrid form alignment, dropdown sizing and checkbox
-  centering repairs passed Chrome/Edge and focused pinned Windows-WebKit checks;
-  the owner confirmed dropdown/checkbox appearance on iPhone/iPad. Pinned
-  WebKit is not independent physical Safari evidence. Detailed dated results
-  stay in project status. Continuation docs were reconciled on 2026-09-30;
-  owner correction on 2026-10-01 established completed trademark search/purchase.
-- QuiltClarity source activation is complete on 2026-10-01: public branding,
-  shared identity/metadata, purchased apex origin, package/automation names,
-  and storage namespaces are updated. Saved projects, theme, and date-only
-  analytics markers migrate locally from legacy keys. `npm run verify` passes
-  (215 tests); fresh installed Chrome/Edge metadata/mobile/print checks pass.
-  Deployment/public-origin acceptance remains separate; see project status.
-- Feedback now has an owner-approved V1.1 coming-soon scope at `/corrections/`;
-  the Feedback System is a planned V2 milestone, with no current submission
-  channel or feedback-inbox launch dependency. See the routed deferral decision.
-  The page is noindex and excluded from the current 38-route sitemap while
-  retaining its URL and footer link; reassess indexing when the V2 system ships.
-- Runtime remains Astro/static HTML, vanilla TypeScript controllers, independent
-  domain/presentation modules, schema-v2 browser persistence, and no React.
-  G01-G45 and legacy diagnostics D01-D05 are automated. Historical verification
-  in project status is not evidence of a fresh run.
-- Agent workflow now uses selective startup context, adaptive economical delegation,
-  focused evidence and verification, and restart state when facts change. Details stay
-  in project status rather than duplicated here. Required gates are unchanged;
-  actual quota savings remain unmeasured.
+- V1.1 M0-M10 are complete; M10 has a dated PASS. M9 uses the approved
+  guided-operator substitution: no U01-U05 external-quilter study occurred.
+- Guides/help implementation, technical checks and owner MT-U01/MT-U02 are
+  complete (2026-09-30). This is owner evidence, not independent novice evidence.
+- Owner confirmed prior trademark/domain completion. QuiltClarity activation
+  and legacy-key migration completed 2026-10-01; dated gates in project status.
+- Public GitHub main, hosted CI, Cloudflare static apex/www, HTTPS redirects and
+  Builds pass. Print/PDF runtime 9d7d342 and audit follow-up 9dbd2ba are live
+  2026-10-05; hosted CI and full public Chrome/Edge audits pass.
+  Search Console setup
+  complete per owner (robots detected 2026-10-05); Firefox waived; Cloudflare analytics and
+  private reports are verified live 2026-10-02. Evidence is in project status.
+- Feedback at /corrections/ is static coming-soon, noindex and outside the
+  38-route sitemap. Feedback System is planned V2; no V1.1 inbox gate exists.
+- Docs/ZIP audit/catalog complete October1. Ads placements/sizes finalized;
+  October7 updated mockup Chrome168/Edge28 checks pass, including narrow fallbacks
+  and print. Rail density halved; AdSense meta7434e05 live; review pending; privacy/consent/rollout pending.
+- Guides spacing/action CSS834d54e live October8; Chrome/Edge/live geometry pass.
+  October7 mockup evidence saved in project status; preview stopped per owner.
+- Runtime stays static Astro plus vanilla TypeScript, independent domain and
+  presentation, schema-v2 browser persistence, closed analytics, and no React.
+  G01-G45 and D01-D05 are automated. Historical tests are not fresh health proof.
+- Routing v2/lifecycle guard synchronized; hooks active per owner 2026-09-22.
+  Guardrails do not establish protected governance or measured savings.
 
 ## Active Gaps
 
-- Guides/help owner acceptance is complete; never relabel it independent
-  novice/target-quilter evidence or reopen the superseded M9 recruitment gate.
-- Trademark search and domain purchase are complete per owner confirmation
-  on 2026-10-01. Repository candidate docs did not capture that state; do not
-  repeat those tasks. Purchased domain: `quiltclarity.com`; public brand:
-  `QuiltClarity` under the domain-derived naming rule. The separate report location,
-  registrar, purchase date, and canonical apex/www choice are not recorded.
-- Source identity replacement and purchased-origin configuration are complete.
-  Cloudflare + Astro is the owner-selected hosting stack, reaffirmed 2026-10-01.
-  Owner approved limited OAuth access; active zone is verified and static
-  apex/www deployments are live. WWW redirects permanently to apex with
-  path/query retained. HTTP-to-HTTPS 301 now passes; owner saved the Cloudflare
-  GitHub connection. First automatic Cloudflare build and GitHub CI pass;
-  its new Worker version is confirmed active. Establish Search Console state. Previous pending
-  labels are not evidence that external owner work remains undone.
-- Public GitHub repository `akashdas98/quiltclarity` is created and connected.
-  Reviewed release snapshot is pushed on `main`; hosted CI run 36860209033 passes.
-  Original history remains on the local `release-local-history` branch; never
-  push it. Local hooks and unreviewed ZIP bundles are excluded from the public snapshot.
-  Windows Chrome/Edge
-  coverage does not establish Firefox/Safari compatibility.
-- Guides/help and source activation are in the reviewed release snapshot.
-  Unrelated V2 archive edits remain unstaged and preserved locally.
+- Post-launch monitor: 38 live routes pass crawl checks (2026-10-05). Owner's
+  2026-10-06 Search Console export has 13 impressions, no clicks through October3;
+  Homepage/planner indexed per owner; Pages report still processing.
+  Analytics may include audit traffic; evidence is in project status.
+
+- Search Console ownership, sitemap Success and robots detection are complete
+  per owner (latest 2026-10-05); monitor indexing. Cloudflare analytics/report receipt pass (2026-10-02).
+  iPhone/tablet PDF passes per owner (2026-10-03). Mobile PDF/desktop Print and
+  first-click font readiness are deployed (2026-10-05). Firefox waived, untested.
+  No release blocker remains; next is monitoring and ads review/design.
+  Desktop tests do not prove physical Safari.
+- Owner locks desktop rails and route-specific inline slots (October6).
+  Articles: ten-step blocks/start/end; Quick Start uses explicit overrides.
+  Responsive mockup verified locally; provider/disclosures/consent pending.
+  No production slots implemented; separate preview stopped, owner4322 preserved.
+  See `docs/launch/postlaunch-ads-review.md`.
+- Preserve M9/Guides owner substitutions and their limits; do not reopen completed
+  gates or repeat trademark/domain purchase from historical pending notes.
+- Registrar, purchase/renewal dates and separate trademark report location are
+  unrecorded. Apex is canonical; www and HTTP redirect with path/query retained.
+  Missing records do not imply incomplete owner work.
+- Public repo: akashdas98/quiltclarity. Original history remains local on
+  release-local-history; never push that branch. Machine hooks and unreviewed ZIP
+  snapshots stay excluded from public source. Existing V2 filename replacement
+  is preserved unstaged; research proposals are not approved implementation scope.
 
 ## Hard Boundaries
 
@@ -90,7 +77,8 @@ new work. Routed owners retain detailed evidence.
   rounding; physical stock/bin identity; stock-free pattern comparison.
 - SVG/text/print project actual placements. No second layout engine, unbounded
   search, or global-optimality claim. Preserve accessible static content.
-- No backend, database, auth, server persistence, AI, PDF/image/prose ingestion,
+- Optional analytics-only runtime/storage exception: `docs/decisions/cloudflare-analytics-engine.md`.
+- No product backend, database, auth, server persistence, AI, PDF/image/prose ingestion,
   permanent stash, full quilt designer, or arbitrary polygon packing.
 - Browser persistence and closed analytics retain the privacy rules in
   `AGENTS.md`. Required golden, milestone, browser, and print gates still apply.
@@ -99,6 +87,12 @@ new work. Routed owners retain detailed evidence.
 
 ## Context Routing
 
+- Complete documentation/topic/section map: `docs/architecture/documentation-index.md`, `docs/architecture/documentation-catalog.json`
+- Completed milestones and pending/conditional continuation: `docs/architecture/continuation-roadmap.md`
+- Ads/AdSense/monetization recovered agreement, proposed slots and runbook questions: `docs/launch/postlaunch-ads-review.md`
+- Post-launch growth, Search Console cadence, query classification and narrow/stop decisions: `docs/launch/quilt_LAUNCH_postlaunch_framework.md`, `docs/launch/quilt_LAUNCH_growth_package.md`
+- All-document migration reconciliation and evidence limits: `docs/architecture/documentation-reconciliation-2026-10-01.md`
+- V2 research-only brief and visual/manual evidence routes: use the complete documentation map; research proposals are not approved implementation scope.
 - Agent workflow and repository rules: `AGENTS.md`
 - Activated public identity and legacy-key compatibility: `docs/decisions/site-identity-activation.md`
 - Selected Cloudflare hosting stack: `docs/decisions/cloudflare-static-hosting.md`
@@ -123,24 +117,30 @@ new work. Routed owners retain detailed evidence.
 - Context-memory rationale: `docs/decisions/workflow-context-memory.md`
 - Locked V1 architecture decision: `docs/decisions/v1-static-architecture.md`
 - Static SEO route/content decision: `docs/decisions/milestone-8-static-seo-content.md`
-- Analytics/privacy decision: `docs/decisions/milestone-9-analytics-privacy.md`
+- Analytics/privacy: `docs/decisions/milestone-9-analytics-privacy.md`, `docs/decisions/cloudflare-analytics-engine.md`
 - How to load context: `docs/architecture/context-loading.md`
 - Stable product/runtime boundaries: `docs/architecture/product-and-runtime-boundaries.md`
 - Stable calculation and optimizer contracts: `docs/architecture/domain-contracts.md`
 - Mutable milestone status and divergence reviews: `docs/architecture/project-status.md`
 - Historical V1 baseline package: `docs/product/quilt_FINAL_product_spec_v1.md`, `docs/product/quilt_FINAL_golden_rules_and_tests.md`, `docs/product/quilt_FINAL_codex_handoff.md`, `docs/product/quilt_FINAL_prebuild_dossier.md`
 - Supplemental production UX/content/SEO implementation specification: `docs/ux_content_seo/quilt_PRODUCTION_UX_CONTENT_SEO_spec.md`
-- Supplemental launch package, domain/brand runbook and candidate review, competitor benchmark, and mutable checklist: `docs/launch/quilt_LAUNCH_growth_package.md`, `docs/launch/domain-brand-selection-and-activation.md`, `docs/launch/domain-brand-candidate-review-2026-08-10.md`, `docs/launch/competitor-benchmark-2026-08-10.md`, `docs/launch/launch-readiness-status.md`
+- Launch, brand/benchmark evidence and readiness: use `docs/architecture/documentation-index.md` and `docs/launch/launch-readiness-status.md`.
 - Reconciled launch continuation index: `docs/launch/quilt_LAUNCH_manifest.md`
 - Manual validation protocols: `docs/manual-tests/v1.1-m9-guided-manual-validation.md`, `docs/manual-tests/v1.1-m9-usability-gate.md`, `docs/manual-tests/differentiation-hardening-overlay.md`
 - Static route/query-map and structured-data decision: `docs/decisions/milestone-8-static-seo-content.md`
 
 ## Next Recommended Steps
 
-1. Complete Search Console and remaining public launch acceptance;
-   automatic Cloudflare deployment is verified and HTTPS enforcement passes.
-2. Complete DNS/redirects, Search Console and public-origin acceptance once
-   hosting is configured. Do not repeat search or purchase.
+1. Monitor the deployed origin and Search Console indexing; setup and the
+   authorized print/PDF release are complete. Evidence is in project status.
+2. Ad sizes/fallbacks are finalized and updated mockup browser/print gates pass.
+   AdSense meta live; review requested. Next: privacy/contact/consent and project-data
+   compatibility before integration. No live rollout/application authorized.
+   Evidence and approval limits are in project status.
+3. After ad work: analytics rate limiting, Cloudflare rule audit and tested
+   security headers. Sequence/evidence: project status and continuation roadmap.
+4. Keep conditional growth and planned V2 Feedback visible without promoting
+   the V2 research brief to an approved feature backlog.
 
 ## Mandatory Update Protocol
 
@@ -149,25 +149,22 @@ summary changes, retaining unresolved work, approvals and evidence limits.
 
 ## Recent Changes
 
-- 2026-10-01: Owner confirmed trademark search and domain purchase completed
-  long ago; purchased domain is `quiltclarity.com`. Corrected the stale
-  pre-purchase next step, then completed source activation with local legacy-key
-  migration. Verify (215 tests) and installed Chrome/Edge print/browser gate pass.
-  Owner reaffirmed Cloudflare + Astro; recorded the hosting decision and removed
-  the stale provider-selection task. Public GitHub repo created and pushed;
-  hosted CI passes. Owner approved Cloudflare login; apex/www static deployments
-  are live. HTTP-to-HTTPS passes and owner saved GitHub Builds connection;
-  first automatic build and active deployment pass. Search Console remains.
+- 2026-10-08: Guides CSS834d54e live; docs reviewed for immediate separate push.
+  October7 final ad sizing/fallback mockup passes Chrome168/Edge28 cases,
+  thresholds/focus/print; preview stopped. AdSense selected; readiness next, security
+  afterward. Evidence/approval limits in project status; no live ad rollout.
 
-- 2026-09-30: Redesigned `/corrections/` as a static Feedback coming-soon page,
-  recorded Feedback System as a planned V2 milestone, and removed the V1.1
-  feedback-inbox dependency. Evidence and tooling corrections are in project status.
-  Follow-up excludes Feedback from search indexing and the 38-route sitemap;
-  fresh build and full Chrome/Edge audit pass.
-  Reconciled domain/brand and launch continuation documents against completed
-  V1.1, accepted Guides/help, and Feedback deferral. Scope and documentation
-  validation live in project status; no official lookup, purchase, or deployment occurred.
+- 2026-10-01: All available project docs and original ZIP snapshots audited;
+  complete section catalog/topic map and sourced continuation roadmap added.
+  August ads agreement recovered, stale active summaries reconciled, and catalog
+  coverage added to memory checks. Details in the dated reconciliation report.
+  Confirmed prior trademark/domain completion; activated `quiltclarity.com` with
+  legacy-key migration. Cloudflare + Astro decision, public GitHub/CI, apex/www
+  hosting, HTTPS redirects and automatic Builds completed. Local and public
+  Chrome/Edge gates passed; dated details and Search Console progress remain in
+  project status and launch readiness.
 
-- 2026-09-22: Synchronized Portfolio's schema-v2 routing/runtime guard, independent
-  model/effort evidence, Terra support, capability inventory/hash checks, lifecycle
-  clear-readiness guard, installer, and tests. The 23-test suite and memory checks pass.
+- 2026-09-30: Feedback coming-soon and V2 deferral removed the V1.1 inbox gate;
+  `/corrections/` is noindex/outside the sitemap. Build/Chrome/Edge pass.
+  Launch/brand docs reconciled with completed V1.1 and owner Guides acceptance.
+  Evidence/tooling corrections are in project status; no lookup/purchase/deployment.

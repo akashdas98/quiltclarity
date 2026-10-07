@@ -13,8 +13,18 @@ checkpoint does not constitute a fresh runtime release run. Guides/help implemen
 technical validation are complete, and owner cases MT-U01/MT-U02 passed on
 2026-09-30 under the approved substitution (not independent novice evidence).
 Continuation-document reconciliation is complete on 2026-09-30; scope and
-evidence are in `../architecture/project-status.md`. Launch activation remains blocked by deployment-owner
-choices and public-origin checks. Local source identity activation is complete
+evidence are in `../architecture/project-status.md`. Static deployment, apex/www
+redirects, HTTPS enforcement, hosted CI and first automatic Cloudflare deployment
+passed on 2026-10-01. Full public Chrome/Edge mobile viewport and clean PDF
+print audits pass on the same date. Search Console setup is complete per owner
+(robots detected 2026-10-05); indexing remains monitoring work. Production
+measurement passed 2026-10-02. Owner accepted iPhone/tablet PDF 2026-10-03 and
+waived Firefox acceptance 2026-10-05; Firefox remains untested, not PASS.
+Latest print/PDF changes are published in runtime commit 9d7d342 (2026-10-05).
+Hosted CI, automatic deployment and full public Chrome/Edge acceptance pass
+2026-10-05; audit-only follow-up 9dbd2ba preserves runtime output. No current
+release blocker remains. See the Resume Checkpoint for versions and evidence.
+Local source identity activation is complete
 on 2026-10-01 under `../decisions/site-identity-activation.md`: verify (215 tests),
 42-page build and fresh installed Chrome/Edge metadata/mobile/print audits pass.
 The owner confirmed on 2026-10-01 that trademark search and purchase of
@@ -66,7 +76,7 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
 - The missing favicon identified by the launch checklist was added as `/favicon.svg` and linked from the shared layout.
 - The live public-evidence competitor review is recorded in `competitor-benchmark-2026-08-10.md`. It found meaningful differentiation for the locked piece-list workflow and no justification for expanding V1 into a design canvas, pattern library, accounts, cloud sync, image ingestion, community, arbitrary shapes, or PDF generation.
 
-## Pending before deployment
+## Activation state and remaining decisions
 
 - Guides/help owner acceptance is complete; execution evidence and limits are
   in `../manual-tests/V1_1_GUIDES_HELP_MANUAL_TESTS.md`.
@@ -89,22 +99,164 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
 - Confirm host configuration uses the purchased apex `SITE_URL` default (or an
   explicitly selected canonical origin); configure `PUBLIC_GOOGLE_SITE_VERIFICATION`
   when Search Console supplies it. HTTP-to-HTTPS enforcement passes.
-- Decide whether a production analytics provider will consume the existing data-layer events; do not expand the event payload schema.
+- Owner selected Simple Analytics on 2026-10-02. Default-disabled integration
+  is prepared; register the production site, confirm plan event/property support,
+  then activate and verify dashboard receipt. Do not expand the payload schema.
+
+Live activation, 2026-10-02 supersedes the preparation status above: owner
+confirms quiltclarity.com is registered. Selective source commit e5c4026 enables
+the public-only .env.production profile; Cloudflare automatic deployment serves
+the analytics shell and disclosure. Live pageview/tool-view/start/completion
+requests receive HTTP 201 with success:true from the provider and exclude
+query/hash secrets, referrer and cookies. Actual dashboard reports/onboarding
+detection await owner confirmation; API receipt alone does not establish that
+view. Hosted CI passes after the independent fixture correction in 6282258;
+local verify (219 tests), enabled intercepted privacy audit and full installed
+Chrome/Edge mobile/print suites pass. No standard SDK was added. Override
+PUBLIC_SIMPLE_ANALYTICS_ENABLED=false in the build process and rebuild to roll
+back; production profile remains durable across automatic Builds.
+
+Production measurement review, 2026-10-01 (historical recommendation; owner
+selected Simple Analytics preparation on 2026-10-02):
+Simple Analytics is the preferred candidate for the existing closed workflow
+events. Its [event API](https://docs.simpleanalytics.com/events) and
+[metadata API](https://docs.simpleanalytics.com/metadata) support event counts
+and categorical properties; its [collection documentation](https://docs.simpleanalytics.com/data-collection)
+states that IP addresses are neither stored nor hashed. This fits the current
+no-fingerprint requirement more closely than the alternatives reviewed. Verify
+the selected plan supports required events/properties before adoption. The
+[pricing page](https://www.simpleanalytics.com/pricing) currently displays a
+self-serve price of GBP 20/month at 100k pageviews and a free hobby plan with
+one-month history and a required badge; currency, billing frequency, eligibility
+and event-feature entitlement need confirmation in the owner's account. No
+subscription, trial or account was created.
+
+[Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/faq/)
+does not support custom events. It can supply traffic/performance evidence but
+cannot establish planner completion, stock use or print/copy actions; choosing
+it alone leaves workflow measurement pending. [GA4](https://developers.google.com/analytics/devguides/collection/ga4/events)
+supports custom events, but its standard cookie/identifier behavior would require
+an explicit privacy-contract decision and consent design before integration.
+[Plausible](https://plausible.io/data-policy) supports events but derives daily
+visitor identifiers from IP/User-Agent hashes, so it is not recommended under
+the current prohibition on fingerprints. These are product-fit judgments, not
+legal compliance determinations or claims that all provider configurations were
+tested.
+
+Proposed integration acceptance after owner selection: install one optional
+static browser bridge before controller events fire, consuming only
+`quiltclarity:analytics` and the exact typed event/field allow-list in
+`src/lib/analytics/analytics.ts`. Do not forward an arbitrary dataLayer, DOM
+content, project storage, URL queries/fragments, free-text referrers, automatic
+click/form collection or vendor visitor identifiers. Review the provider's
+automatic pageview/referrer/campaign collection and disable or sanitize it to
+the approved static routes before production use. Preserve the local date-only
+returning-user boolean and contain blocked-script/network/queue failures.
+Count activation as event ratios, not unique-user conversion: repeated attempts
+can inflate counts and no cross-visit user funnel is promised. Verify delivery
+in the actual provider dashboard with controlled planner/calculator/guide cases,
+inspect every network payload for prohibited content, test delayed/blocked
+loading and sink failures, and run the affected release/browser gates. Update
+operator/privacy disclosures to the actual chosen configuration. No application
+code or hosting setting was changed by this review; provider delivery remains
+pending until an owner-selected account/plan is configured and verified.
+
+Setup preparation, 2026-10-02: The vendor's
+[ignore-metrics settings](https://docs.simpleanalytics.com/ignore-metrics)
+can disable referrer, campaign parameters, page-load IDs, engagement, browser,
+viewport and language collection. Start with all optional metrics disabled;
+do not enable the separate automated-events helper. A fixed canonical path
+must be supplied from the static page shell, not arbitrary browser pathname
+input. The documented [path overwriter](https://docs.simpleanalytics.com/overwrite-path)
+falls back to the original path on an error or falsy result, so it cannot be
+treated as a fail-closed privacy filter without verification of the selected
+script. Keep hash collection disabled and verify query/hash/referrer handling
+against the actual vendor payload, including on shared planner URLs.
+The [placeholder event function](https://docs.simpleanalytics.com/events)
+supports early events, but the stock example queue is unbounded; any adopted
+bridge must cap its queue and contain delayed/blocked vendor loading. These
+are reviewed integration requirements, not implemented or runtime-tested
+settings. Owner subsequently selected Simple Analytics and authorized disabled
+integration preparation. Account/plan confirmation and activation remain pending.
+Source inspection supersedes the SDK setup proposal: latest and pinned SRI v11
+append client-hint fields despite the ignored-useragent setting and report
+arbitrary error text/runtime paths. Preparation therefore uses the
+[documented JSON endpoint](https://docs.simpleanalytics.com/events/server-side)
+directly from the static browser client; no vendor SDK or backend is added.
+A non-submitting CORS OPTIONS check returns 204 and permits POST/Content-Type
+from the production origin. This proves browser transport support only;
+dashboard receipt requires the actual owner account and controlled activation.
+
+Preparation completion, 2026-10-02: The direct browser bridge is implemented
+and remains disabled by default. Full verify (219 tests), static build and
+installed Chrome/Edge browser/print gates pass. Intercepted enabled-build tests
+verify canonical pageviews, startup/tool-completion payloads, secret query/hash
+exclusion, privacy-signal/noindex suppression and failed-network usability;
+default builds send no provider requests. Activation instructions and the
+intercepted audit are in README. Account/plan confirmation, production rollout
+and real dashboard receipt remain pending. No actual events were submitted by
+the audit and no public deployment was performed.
 
 ## Pending on the deployed origin
 
+- Public release acceptance, 2026-10-05: Current main 9dbd2ba, runtime 9d7d342,
+  is automatically deployed at 100%; hosted CI and full public Chrome/Edge
+  native-print/mobile-PDF audit pass, including first-click font readiness and
+  privacy. This supersedes local-only/deployment-pending rows below. Firefox is
+  waived, untested; next work is post-launch monitoring and ads review/design.
+- Search Console closure, 2026-10-05: Owner confirms robots is finally detected.
+  Ownership, sitemap Success and robots detection are complete; the earlier
+  missing-robots report is superseded. Continue post-launch indexing/crawl review.
+- Owner local PDF acceptance, 2026-10-03: iPhone/tablet PDF works. This closes
+  the deferred physical export/viewer check for the local implementation;
+  Firefox and production deployment remain pending. Earlier native-print
+  failures below are historical evidence, not a failed PDF-export retest.
 - HTTPS, apex canonicals, all 38 sitemap routes, robots, real 404 and WWW 301
   pass the focused public check on 2026-10-01. HTTP-to-HTTPS 301 passes with
   path/query preservation; post-automatic-deploy apex and sitemap checks pass.
-- Verify Search Console, submit the sitemap, and inspect the homepage, planner, and calculator routes.
+- Update 2026-10-02: Owner reports sitemap Success, superseding the earlier
+  fetch failure below. Settings still says "No robots.txt file"; fresh apex
+  robots returns HTTP200 text/plain with Allow: / and the correct sitemap.
+  Recheck robots/crawl reporting October 3; no site change justified.
+- Owner confirmed Search Console ownership verification complete on 2026-10-01.
+  Domain property confirmed; submitted sitemap reports "Couldn't fetch". Direct
+  HTTP 200/XML/38-entry and robots checks pass. Owner subsequently reports test
+  success only for Test live URL; Sitemaps remains "Couldn't fetch". Leave the
+  submission in place, recheck processing status, and inspect representative pages. No site/security setting was changed during diagnosis.
+- Public recheck, 2026-10-02: sitemap returns HTTP 200 application/xml with
+  38 entries; robots returns HTTP 200 text/plain, allows crawling and points to
+  the exact apex sitemap. This does not establish Google's processing outcome.
+  Browser automation initialization failed twice with a trusted Node runtime
+  exit; current signed-in Search Console status could not be inspected. Owner
+  report of status, Last read and detailed error remains pending.
 - Confirm production analytics delivery without planner-content leakage.
-- Focused public Chrome calculator interaction passes. Full public print/mobile
-  and Firefox/Safari checks remain separate from the earlier local Chrome/Edge suite.
+- Latest owner local retest, 2026-10-02: Print isolation fixes blank sheets and
+  missing final content. Labels also pass. Diagram orientation and efficient
+  page fit still fail; native Print versus additional print-ready PDF preference
+  is pending. No production deployment. Earlier failure details remain below.
+- Physical iPhone print failure, 2026-10-02: Owner used QuiltClarity's Print
+  button in Chrome and Safari; both lose dedicated pages/mixed orientation and
+  clip diagrams. This supersedes the prior absence of device print evidence.
+  Local CSS now adds explicit diagram page breaks and containing-width limits;
+  local retest FAIL: extra blank sheet, orientation unchanged, final remaining
+  regions/related content missing. Deployment remains pending; inspect actual
+  print isolation correction locally; device PDF is optional evidence. Physical
+  retest and mixed orientation remain unresolved. See the
+  Resume Checkpoint for technical verification and evidence limits.
+- Full public-origin Chrome/Edge suite passes on 2026-10-01, including narrow
+  mobile viewport layouts, workflows, keyboard, persistence, closed analytics
+  adapter and clean PDF geometry/paint. These are desktop-engine checks; physical
+  mobile Safari and Firefox evidence remain pending. Provider delivery is unproven.
 - Monitor field Core Web Vitals and indexing; local synthetic checks cannot establish real-user performance or canonical selection.
 
 ## Deferred until monetization review
 
-- AdSense application and ad placement remain post-live decisions.
+- Owner selected AdSense for readiness preparation and requested account review
+  on 2026-10-07. Verification-only meta tag 7434e05 is live; approval is pending.
+  Owner-locked placements and sizing have a verified isolated local mockup.
+  Contact/privacy, consent and project-data compatibility remain before ad
+  serving. No production loader or slots are implemented. The recovered August
+  agreement, design, evidence and rollout limits are in `postlaunch-ads-review.md`.
 - Contact, privacy, and terms/disclaimer content must reflect the real operator, host, analytics provider, jurisdiction, and monetization configuration. Do not invent legal identity or policy details before those inputs exist.
 - Apply for AdSense only after a live-site quality review confirms the package's readiness conditions.
 
@@ -119,3 +271,35 @@ connected and pushed; [hosted CI](https://github.com/akashdas98/quiltclarity/act
 passes on 2026-10-01. Static deployment is live at <https://quiltclarity.com>.
 HTTPS enforcement and the first automatic Cloudflare build/deployment pass.
 Finish Search Console and remaining launch checks.
+
+## Cloudflare measurement preparation � 2026-10-02
+
+Owner approved replacing the paid-only Simple Analytics event feature with
+free-only Analytics Engine. Local commit 2816237 implements the collector and
+private reports; 222 application tests, six report tests, installed Chrome/Edge
+workflow/print and intercepted privacy audits, disabled profile and Wrangler
+dry run pass. Account SQL/subscription reads are 403 with the current limited
+OAuth login. Owner Workers Free confirmation and Analytics Read token are
+needed for activation and actual report receipt. The commit is not yet pushed
+or deployed; live Simple Analytics measurement remains the prior production
+state. No billing or account permission changed.
+
+Owner confirms Workers Free on 2026-10-02. Deployment rejects version creation
+with code 10089 because account Analytics Engine is not enabled; uploaded assets
+did not activate a new version. Active production version is
+49803d53-f5b8-438a-a753-ed516bd61ceb; prior Simple Analytics disclosure remains
+served with HTTP 200. Browser initialization is unavailable (Windows sandbox ACL
+failure). Owner service enablement and an Analytics Read token remain required.
+
+## Cloudflare measurement live � 2026-10-02
+
+Owner-enabled Analytics Engine now uses quiltclarity_analytics_engine binding
+and quiltclarity_analytics_events dataset. Commits 2816237/7968157 are published;
+manual deployment and subsequent automatic Builds pass. Active version
+099c01fd-b34c-468b-b80e-61f6e6fb3a71 is at100%; hosted CI36976754157 passes.
+Live canonical pageview/tool/calculation fetches resolve204 and private SQL reports
+prove stored events without private sentinels. Zero Simple Analytics traffic is
+observed. HTTP/www301, real404 and38-route sitemap remain correct. The read token
+stays in ignored local .env.analytics; no billing or permissions expanded. Early
+counts include technical audit events. The browser CDP abort diagnostic after204
+is superseded by actual fetch-promise success and confirmed SQL receipt.
