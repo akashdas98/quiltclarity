@@ -316,6 +316,9 @@ html[data-theme-ready] .theme-toggle {
 .compact-hero {
   margin-bottom: 1.25rem;
 }
+.guides-hub > .hero {
+  margin-bottom: 2rem;
+}
 .eyebrow {
   margin: 0 0 0.35rem;
   color: var(--accent-text);
@@ -335,6 +338,9 @@ h1 {
 }
 h2 {
   margin-top: 2rem;
+}
+.guides-hub > section > .eyebrow + h2 {
+  margin-top: 0;
 }
 .lede {
   color: var(--muted);
@@ -629,7 +635,10 @@ legend {
   display: none;
 }
 .guide-card-grid {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+.article-body .actions {
+  align-items: center;
 }
 .featured-guide-card {
   border-width: 2px;
