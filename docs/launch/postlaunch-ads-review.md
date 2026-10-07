@@ -595,6 +595,86 @@ refreshes an ad, and no ad code belongs inside `renderResult` or domain modules.
 
 ### Provider, disclosures and privacy prerequisites
 
+#### Readiness review, 2026-10-08
+
+The owner confirms end-to-end delivery to `contact@quiltclarity.com` works.
+This is owner-reported delivery evidence, supplementing the Cloudflare setup
+receipt; Codex did not send a test email. The dedicated `/privacy/` page and
+footer Privacy/contact links are prepared locally. Publication remains
+separate from preparation. AdSense review is still pending in the latest known
+account evidence; no fresh dashboard approval evidence or ad-serving authorization
+has been supplied.
+
+Local acceptance passes: typecheck, changed-file lint/format, eight affected
+route/collector tests, isolated static build and full installed Chrome/Edge
+smoke including print/PDF. The build adds one indexable route (39 total,43 HTML
+pages). Focused privacy checks pass at320/390/1440px in light/dark and without
+JavaScript; both privacy print PDFs contain the required disclosures. Evidence
+and remaining owner decisions are in `../architecture/project-status.md`.
+No provider loader was exercised; these are site-content/layout gates only.
+
+Current source boundaries:
+
+- `src/lib/persistence/planner-storage.ts` stores schema-v2 project state under
+  `quiltclarity:planner-state`, with legacy migration. Storage is origin-scoped,
+  not route-scoped. Omitting the loader from tools would reduce direct form/DOM
+  exposure, but a top-level loader on a Guide or homepage could still access
+  saved projects on the same origin. Neither a route allowlist nor an iframe
+  creative proves isolation of the provider's top-level loader.
+- `src/scripts/planner.ts` explicitly shares the project title and result summary
+  through the browser share sheet, or copies the summary to the clipboard at the
+  user's request. This is user-directed sharing, not an analytics payload or a
+  shared-project URL-fragment feature.
+- `src/lib/analytics/cloudflare-analytics.ts` sends only projected envelopes to
+  `/api/analytics`, omits credentials/referrers, and disables collection for
+  DNT/GPC, staging and excluded paths. The provider projection and server-side
+  validation remain the authoritative closed-data boundary. Adding advertising
+  must not expand that boundary or merge project content with ad reports.
+
+The compatibility gate is **unresolved**, not a finding that AdSense currently
+collects project content. No loader is installed or tested. Before enabling it,
+review documented provider data behavior and the intended configuration, then
+audit an isolated preview with synthetic project-name/label/cut-list sentinels,
+network payloads, URL/referrer handling, local storage access, consent denial,
+withdrawal, provider failure and reload/navigation. A passing bounded audit is
+evidence for the tested version/configuration, not proof of future provider code
+or a browser isolation boundary. If compatibility cannot be established, retain
+the default-off state; changing storage architecture or privacy promises requires
+its own explicit product decision. Do not silently drop the approved placements
+or claim that content-only ads solve saved-project exposure.
+
+Recommended consent candidate: Google's built-in Privacy & messaging CMP
+(Google LLC CMP, ID300 on the current certified list). This is a recommendation,
+not owner selection, account configuration or deployment. The current
+[publisher CMP requirements](https://support.google.com/adsense/answer/13554116)
+require a certified TCF-integrated CMP for personalized ads in the EEA, UK and
+Switzerland; certification does not establish full legal compliance. Google's
+[setup instructions](https://support.google.com/adsense/answer/10960768?hl=en)
+require the site/privacy-policy URL, message choices and provider code, and note
+cross-origin referrer-policy compatibility. Do not install that code merely to
+prepare the message. A later reviewed integration must test the selected regional
+behavior and persistent withdrawal controls before eligible ad requests. Review
+[US state messaging](https://support.google.com/adsense/answer/10961479?hl=en)
+and the operator's actual applicable obligations/settings separately; do not
+invent an operator jurisdiction or declare universal compliance.
+
+The local privacy draft must describe today's browser storage, Cloudflare
+measurement/hosting and Cloudflare-to-Gmail contact handling truthfully. Its
+conditional advertising section must distinguish proposed AdSense from active
+serving, cover Google/vendor advertising cookies and personalization, and link
+the relevant controls described in Google's
+[required content](https://support.google.com/adsense/answer/1348695?hl=en).
+Before serving, replace conditional wording with the actual enabled providers,
+consent controls and configuration. Operator identity/jurisdiction, email
+retention practices and account consent settings are not supplied facts; no
+unsupported retention deadline or legal claim is added.
+
+Routing: parent model demand is interacting provider/browser privacy boundaries
+and authority judgment; effort demand is medium source tracing and current
+official-provider review. Sol-medium owns the bounded Astro content/footer
+implementation. Existing Astro, Playwright Core, route fixtures and build tooling
+are sufficient; no capability installation or new dependency is justified.
+
 Owner confirmed Google AdSense as the selected provider on 2026-10-07
 ("adsense confirm") for readiness preparation. Account status/approval and actual
 IDs were initially unestablished. Owner subsequently created the account and
@@ -643,6 +723,114 @@ than silently weaken project privacy. Route-limit scripts to eligible surfaces;
 do not add a global provider loader to every BaseLayout page.
 
 ### Implementation, checks and rollout
+
+#### Selected Google CMP setup, 2026-10-08
+
+The owner selected Google's built-in Privacy & messaging CMP and authorized
+continuation of consent setup and the project-data review. This supersedes the
+earlier proposed-candidate status. Owner selection is not visitor consent and
+does not relax the project-data contract or authorize ungated ad serving.
+
+Account access recovered after the owner signed in directly to the supported
+fallback browser. The computer-control runtime still exits during initialization.
+Codex created and verified an unpublished `QuiltClarity privacy choices` draft
+for `quiltclarity.com`, English (`en`), with first-screen Do not consent enabled
+in every listed European region, Close (do not consent) ON and message
+optimization OFF. Site display name and the prepared privacy-policy URL were
+saved. The optional logo is OFF, retaining a text QuiltClarity header; no new
+brand asset was uploaded. The account Messages table confirms Draft, modified
+8 October2026, with publication switch OFF. No message was published and no
+loader was deployed. Account-wide settings were inspected but not changed:
+common ad partners198, coverage maximization ON, legitimate-interest controls
+ON and enabled by default, Google consent mode OFF, special-feature-two OFF,
+owner data purposes0. These remain configuration/disclosure review inputs;
+the draft preview's zero-partner placeholder is not evidence of no partners.
+Reopening after saving confirms the configured choices persisted; mobile draft
+preview shows equally styled Consent and Do not consent buttons, Manage options
+and close-to-decline. Evidence is in project status. This is an account preview,
+not live regional consent, keyboard/assistive-technology or real-device acceptance.
+
+Prepared message settings (to apply and verify in the account):
+
+| Field                                  | Prepared choice                                                       | Reason / dependency                                                                                        |
+| -------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Message type                           | European regulations, Google CMP                                      | Selected provider-native consent manager                                                                   |
+| Site                                   | `quiltclarity.com`                                                    | Verify the actual site entry and review state; do not invent a site ID                                     |
+| Message name                           | `QuiltClarity privacy choices`                                        | Internal account label                                                                                     |
+| Default language                       | English (`en`)                                                        | Current site language; no unreviewed extra translations                                                    |
+| Privacy policy URL                     | `https://quiltclarity.com/privacy/`                                   | Local source exists; verify published HTTP200/content before publishing a message                          |
+| Do not consent                         | ON on the first screen throughout EEA/UK/Switzerland                  | A direct decline choice; preserve calculations after denial                                                |
+| Close (do not consent)                 | ON, if available                                                      | Dismissal must decline, not silently grant consent                                                         |
+| Consent message optimization           | OFF initially                                                         | Keep the reviewed choices stable during acceptance                                                         |
+| Design                                 | Readable site colors, clear focus, no obscured choices                | Check narrow mobile, keyboard, zoom, contrast and dismissal                                                |
+| Other Google consent-mode integrations | Do not enable unrelated Google Ads/Analytics integrations             | QuiltClarity uses its separate closed Cloudflare measurement; no Google Analytics deployment is authorized |
+| Save state                             | Draft until public policy, provider-data gate and runtime review pass | Preparation is separate from message publication and ad activation                                         |
+
+The table describes prepared choices; the paragraph above identifies those
+actually saved and the account settings left unchanged.
+First inspect existing messages, partners and account-wide settings. Reuse an
+appropriate existing draft rather than creating duplicate messages; do not
+overwrite other sites' shared settings. Record the actual selected ad partners,
+purpose/legitimate-interest options, regions and any owner-data-use request before
+reviewing the published disclosure. Do not add owner data-use purposes without
+an actual need. Review applicable US state messages/opt-outs and GPC handling
+against the actual operator/account configuration; do not infer jurisdiction
+from the development machine's timezone.
+
+Official instructions:
+[create a European regulations message](https://support.google.com/adsense/answer/10960768?hl=en),
+[manage consent mode settings](https://support.google.com/adsense/answer/16053245?hl=en),
+and [Privacy & messaging tests](https://support.google.com/adsense/answer/10924669?hl=en).
+The account preview can review the draft UI, but live regional delivery and
+withdrawal require the actual published message and supported runtime tagging.
+Google documents `?fc=alwaysshow&fctype=gdpr` for testing the published European
+message regardless of region; it is not an ad-test flag, a simulator of legal
+location, or authorization to request real ads from a development page.
+
+Runtime acceptance must cover pending/accept/decline/withdraw choices, repeated
+visits, provider/network/storage failure and print. Declining or withdrawing must
+never disable the calculators. No new global loader or custom consent popup is
+added while the actual provider configuration and data behavior are unresolved.
+
+#### Isolated loader privacy outcome, 2026-10-08
+
+Sol's synthetic-data audit is complete in installed Chrome and Edge. It used the
+isolated static build on localhost, seeded project-name/fabric-notes/piece-label/
+cut-list sentinels in the actual planner storage key and a DOM node, and executed
+the actual publisher loader plus its reviewed versioned implementation script.
+All other external requests were captured and aborted before network. No ad unit
+was pushed and no creative was served or clicked. The positive control proved
+the probes recorded a deliberate planner-key read and marker-bearing request.
+
+In this bounded run, Google code read `google_ama_config`, `__storage_test__`,
+`__lsv__` and `__lsa__`, with no observed planner-key read or synthetic marker in
+captured request URLs/headers/bodies. The DOM probe is partial. This establishes
+only a narrow no-project-text observation, not provider isolation or a full
+compatibility PASS. Ad/CMP responses were blocked, actual origin and regional
+consent were not reproduced, and scripts can change. Receipts, positive control,
+endpoints, version variants and SHA-256 hashes: `../../tmp/ad-privacy/README.md`,
+`../../tmp/ad-privacy/loader-audit.json` and the adjacent reproducible helper.
+
+Both browsers attempted `/pagead/ads`, lookup and ad-quality requests without a
+manual unit push. These were blocked; the attempted ad URL carried publisher ID,
+page URL and browser/viewport/time parameters. `format=0x0` and off-screen
+geometry do not establish a displayable creative. The account's By site table
+subsequently showed Auto ads **OFF**, Auto optimise **ON**, zero exclusions and
+one site. No ad setting was changed. The localhost attempts therefore cannot be
+attributed to Auto ads being enabled on `quiltclarity.com`; their precise cause
+and actual-site serving outcome remain undetermined. Treat a bare loader as
+capable of initiating provider requests even without visible/manual slots.
+
+Google documents that
+[ad tags can set cookies without a displayed ad](https://support.google.com/adsense/answer/7549925?hl=en),
+and that [Auto optimize](https://support.google.com/adsense/answer/9141298?hl=en)
+can experiment on Auto ads formats/settings. Before any activation, review and
+lock account experiment behavior against the owner-approved explicit placements;
+do not claim the current OFF setting proves no request or future placement change.
+No global loader was added. Keep live serving disabled until published truthful
+disclosure, actual consent configuration and configuration-specific privacy/
+network/denial/withdrawal tests pass. A later compatibility conclusion must retain
+the limits of dynamic third-party code and the unchanged project privacy contract.
 
 1. Owner selected AdSense, requested account review and authorized publication
    of the verification-only meta tag on 2026-10-07. Approval is pending. Resolve

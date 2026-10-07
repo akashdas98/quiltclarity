@@ -11,8 +11,11 @@ or content issues, with truthful expectations about review and follow-up.
 
 ## Current baseline
 
-V1.1 retains `/corrections/` as a static Feedback coming-soon page. It collects
-no submissions, is marked `noindex`, and is excluded from the XML sitemap.
+Owner amendment2026-10-08 authorizes a static email Feedback invitation at the
+retained `/corrections/` route, using `contact@quiltclarity.com`, and a dedicated
+Contact page. This update is verified locally; the live page remains
+coming-soon until publication resumes. No site form or submission endpoint is
+added. `/corrections/` remains `noindex` and excluded from the XML sitemap.
 Reassess indexing when the capability ships. This milestone adds a future feedback capability; no launch date,
 backend, provider, account requirement, or delivery channel has been selected.
 

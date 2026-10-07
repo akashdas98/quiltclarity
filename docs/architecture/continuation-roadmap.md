@@ -1,6 +1,6 @@
 # Project Continuation Roadmap
 
-Updated 2026-10-07. This routes existing work and distinguishes completion,
+Updated 2026-10-08. This routes existing work and distinguishes completion,
 pending review, conditional growth and future proposals. It does not create new
 product approvals or renumber the governed milestones. `project-status.md` owns
 dated execution evidence and divergence reviews. Launch is not the final project
@@ -65,6 +65,20 @@ performance and analytics privacy remain change-time obligations. Optional
 external-quilter testing may add evidence later; its absence does not reopen M9
 or completed owner Guides acceptance. Registrar/renewal/report-location record
 gaps do not mean that search or purchase are unfinished.
+
+Contact delivery is owner-confirmed 2026-10-08. A dedicated Privacy page and
+footer contact/privacy links are prepared locally with isolated build and
+Chrome/Edge/print checks passing; publication is pending. CMP selection/account
+configuration and same-origin project-storage compatibility remain open before
+provider integration. Preparation does not authorize ad serving. Latest evidence
+and limits are in `project-status.md` and the ads review.
+
+Latest owner steering2026-10-08 pauses publication. Shared article/Guide widths,
+inline-link spacing, a real Contact page and email Feedback are fixed locally;
+the clean44-page build and full Chrome/Edge/static/print checks pass.
+Google CMP draft is saved; its runtime/compatibility gate remains open. The
+email invitation supersedes unavailable Feedback copy, while its full V2
+form/service and current noindex behavior remain separately governed.
 
 Current next work is post-launch Search Console monitoring and AdSense readiness;
 the owner sequences security hardening after ad work. For ads questions, load

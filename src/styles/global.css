@@ -382,11 +382,8 @@ h2 {
 .callout {
   background: var(--surface);
 }
-.article-page {
-  max-width: 62rem;
-}
-.article-body {
-  max-width: 48rem;
+.article-page > .hero {
+  max-width: none;
 }
 .article-body section {
   margin: 2.5rem 0;
@@ -651,9 +648,6 @@ legend {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-.guide-toc {
-  max-width: 44rem;
 }
 .guide-toc ol {
   columns: 2 16rem;

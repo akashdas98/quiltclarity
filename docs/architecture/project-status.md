@@ -3,6 +3,158 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-08.
+- Website publication resumed2026-10-08: owner says continue after verified
+  article/link-spacing/Contact/email Feedback corrections. Scope is the prepared
+  website and its governing records; Google CMP remains Draft, no provider loader
+  or ad serving authorized by this continuation. Existing V2 filename replacement
+  and ad-preview scripts remain excluded. Direct parent model demand is bounded
+  release/scope judgment using established Git/CI/Cloudflare workflow; effort
+  medium covers exact-release checks and live receipt. Acceptance: isolated full
+  verify, prior complete Chrome/Edge local smoke plus targeted final sentence,
+  hosted CI/deployment and live Chrome/Edge checks; owner dev retained.
+- How it works follow-up2026-10-08: owner found the missing space before
+  measurement guides. Astro removed the newline-only anchor boundary; added an
+  explicit space and the exact sentence to the no-JavaScript smoke regression.
+  Isolated44-page build and focused Chrome/Edge1200/390px rendered text pass;
+  formatting passes. Evidence: tmp/article-fixes/how-spacing.mjs. Parent retains
+  implementation capability with low effort for this bounded content correction;
+  no delegation or broader rerun required. Publication remains paused.
+- Local article/contact/feedback corrections complete; publication paused,
+  2026-10-08. Owner explicitly says before promoting anything: match main-page
+  width on How it works, About, Methodology, Privacy, Contact, Feedback and all
+  Guide articles (exclude Guides hub); fix Privacy inline-link word boundaries;
+  add a real static Contact destination instead of footer mailto; invite Feedback
+  emails to contact@quiltclarity.com. Email availability supersedes Sep30's
+  unavailable/no-email instruction; full V2 form/service remains deferred and
+  Feedback indexing unchanged. Amendment is in
+  ../decisions/v1.1-feedback-system-deferral.md. Sol-medium owns shared frontend
+  diagnosis/implementation: capability demand cross-template CSS/Astro/route
+  contracts; effort demand focused rendered DOM/cascade/bounds and neighboring
+  static/responsive/print verification. Parent medium reconciles authority/scope,
+  then low checkpoint. Acceptance: coherent shared width fix, rendered spaces,
+  Contact route/footer, truthful email Feedback/About, preserved hub/domain/print,
+  no backend/ad-loader/publication and existing dirty work/dev process retained.
+  Baseline rendered diagnosis (Chrome1440px): main page1216px atx112;
+  article992px atx224, hero832px, body768px; Feedback hero720px/next768px.
+  Mobile390px page shells all358px atx16. Privacy actual paragraph text joins
+  Cloudflare/hosts, email/address and See/Google-policy/for; prior smoke checked
+  help-label/flex joins, not ordinary inline paragraph anchors. Existing October7
+  ad-mockup receipts are historical: affected article slot/rail geometry must be
+  rechecked against the widened content before provider integration.
+  Removed shared article/hero/body/TOC width caps and Feedback-specific caps;
+  all requested articles now use the main page shell. Explicit Astro spaces fix
+  the Privacy link boundaries. Added /contact/ and routed the footer there;
+  Feedback invites email and About agrees. Feedback remains noindex; Contact
+  and Privacy bring the local canonical route list to40. Checks PASS: eight
+  affected route/collector tests, typecheck, lint and clean isolated44-page build;
+  rendered Chrome1440/390px confirms main/article1216/358px alignment. Full
+  installed Chrome/Edge smoke passes40 indexable routes, new article-width and
+  no-JavaScript inline-link checks, neighboring planner/calculator/accessibility/
+  persistence/performance checks and clean print/PDF contracts. Isolated output:
+  tmp/privacy-readiness-release. Temporary previews/smoke stopped; owner4322
+  retained. No commit/push/deploy or consent/ad activation. Owner dev HMR showed
+  stale Feedback scoped CSS; clean isolated output is the verified release.
+- Google CMP draft saved; isolated privacy audit completed with limits,
+  2026-10-08. Owner signed in directly after initial control-runtime failures;
+  supported Playwright browser account access then worked. Created and reopened
+  `QuiltClarity privacy choices` for quiltclarity.com, English(en). Do not consent
+  ON for all listed EEA/UK/Switzerland regions, Close(do not consent) ON, consent
+  optimization OFF; optional logo OFF with text QuiltClarity header. Site name
+  and https://quiltclarity.com/privacy/ saved. Messages table confirms Draft and
+  publication OFF. No consent message or provider loader published. Readback and
+  mobile-preview evidence: tmp/adsense-cmp-draft-{readback,status}.yml and
+  tmp/adsense-cmp-mobile-preview.png. Initial account-wide defaults inspected,
+  not changed:198 common partners, fallback/coverage maximization ON,
+  legitimate-interest controls/default ON, consent mode OFF, special-feature-two
+  OFF, owner purposes0. Actual partners/coverage/interest choices and US regional
+  settings need review before activation; zero-partner draft preview is a placeholder.
+  By site shows Auto ads OFF, Auto optimise ON, exclusions0; no existing ad units.
+  Sol's Chrome/Edge synthetic audit loaded two actual versioned Google scripts,
+  logged Google storage-key reads and no planner-key read/project-name/notes/
+  label/cut-list marker in captured requests. Positive control detected deliberate
+  planner-key access and marker-bearing request. All other outbound provider
+  requests aborted before network. Both attempted pagead/ads without unit push,
+  plus lookup/quality requests. Account Auto ads OFF contradicts attribution to
+  that setting: localhost/configuration lookup and blocked responses limit causal
+  interpretation. No displayable creative or real-site serving result established.
+  Report/receipts/hashes: tmp/ad-privacy/README.md and loader-audit.json.
+  Compatibility stays unresolved: same-origin capability, partial DOM probe,
+  published CMP/denial/withdrawal/real-origin/creative/future versions untested.
+  Next: publication decision for prepared Privacy/contact source; finish actual
+  account consent settings, then a consent-aware configuration audit before any
+  live loader/serving. Auto optimisation must respect locked explicit placements.
+  Full portable verify of isolated privacy release PASS: typecheck/lint/format,
+  231 application tests,six report tests,43-page build. Initial full format failed
+  due to isolated archive CRLF; verified root LF/isolate CRLF and normalized only
+  isolated tracked text, then gate passed. Prior Chrome/Edge full smoke and new
+  privacy-page print/static checks remain adequate (no semantic source change).
+  Audit workers/previews complete; owner4322 PID61080 preserved. No task server
+  remains, no commit/push/deploy, no real ad requests/impressions/clicks.
+  Reassessment: parent medium for account/source interpretation, low for handoff;
+  Sol capability retained for bounded causal correction, no duplicate audit run.
+  This is a completed draft and bounded review, not full advertising readiness.
+- Google built-in CMP selected and both workstreams authorized, 2026-10-08:
+  owner says "I consent to the recommended option. continue with both" after
+  the explanation of site consent setup and project-privacy review. This selects
+  Google Privacy & messaging and authorizes preparation/account setup plus the
+  isolated provider-data audit; it is not visitor consent or a waiver of project
+  privacy. No ad-serving gate is removed. Parent uses existing browser tools for
+  account setup; Sol-high owns the bounded synthetic-data loader audit. Parent
+  model demand is authority/account judgment; effort demand medium for account
+  dependencies and evidence reconciliation. Worker model demand is browser/network
+  instrumentation; high effort addresses dynamic script paths and false negatives.
+  Acceptance: selected CMP configuration recorded honestly, synthetic data only,
+  no real ad impressions/clicks or live loader, protected project content, existing
+  dirty work and owner dev process preserved; stop for actual account-access limits.
+- Privacy/contact readiness preparation complete locally, 2026-10-08: owner confirms
+  forwarding delivery works and instructs continuation. This is owner-reported
+  delivery evidence; Codex sent no email. Added a dedicated `/privacy/` route
+  and shared-footer privacy/contact links locally; no commit/push/deploy or ad
+  serving. Current provider/browser privacy review is in
+  ../launch/postlaunch-ads-review.md, Readiness review, 2026-10-08. Saved projects
+  are same-origin local storage: excluding tools alone cannot establish provider
+  loader isolation. Compatibility remains unresolved, without evidence that an
+  uninstalled loader currently collects project content. Google built-in CMP is
+  a proposed candidate; owner/account configuration remains separate.
+  Model demand: parent handles interacting browser/provider privacy constraints;
+  Sol handles bounded Astro/route content implementation. Effort demand: medium
+  focused source tracing, current official guidance and affected verification.
+  Acceptance: truthful static policy/contact, aligned sitemap/closed route list,
+  usable responsive/footer/print behavior, no loader or project-data changes,
+  preserved dirty work and owner development process.
+  Checks PASS: typecheck, changed-file lint/format, eight affected route/collector
+  tests, isolated static build (43 pages,39 indexable routes) and full installed
+  Chrome/Edge smoke including planner/calculators, persistence, accessibility,
+  performance and clean print/PDF contracts. Focused new-page checks pass in both
+  browsers at320/390/1440px, light/dark, with JavaScript disabled; footer links
+  remain inside viewport, no external script is loaded, no page errors/overflow.
+  Both privacy PDFs have two pages and required disclosure text. Parent reviewed
+  the narrow-page screenshot. Evidence: tmp/privacy-readiness-release/dist,
+  tmp/privacy-readiness-audit/receipt.json, screenshots and PDFs; audit helpers
+  tmp/privacy-page-audit.mjs and tmp/privacy-print-text-audit.mjs. Task previews
+  stopped; owner4322 PID61080 preserved, with shared build assets untouched.
+  Next: owner publication decision for this source update, CMP selection/account
+  configuration and provider-data compatibility gate. A dedicated policy does
+  not establish legal/provider compliance or authorize ad serving. Operator
+  identity/jurisdiction and email-retention practices remain unsupplied; draft
+  makes no invented claims. Parent effort reassessed to low for final checkpoint;
+  model demand unchanged for accurate approval/remaining-risk reconciliation.
+- Contact forwarding complete 2026-10-08 (local date):
+  `contact@quiltclarity.com` forwards to `quiltclarity@gmail.com` via Cloudflare.
+  Owner explicitly approved `email_routing:write` OAuth expansion, completed
+  account consent and verified the Gmail destination. Existing scopes preserved.
+  Enabled Email Routing DNS and exact-address rule16bcdce6720545a29ec529993aa264dd;
+  catch-all remains disabled. Cloudflare reports enabled/ready; destination is
+  verified. Public DNS over HTTPS confirms three Cloudflare MX records and SPF;
+  existing Search Console TXT preserved. No prior public MX/SPF was replaced.
+  Receipt: tmp/email-routing-receipt.json (2026-10-07T20:30:06Z).
+  End-to-end email delivery was not tested; do not infer receipt from setup.
+  Prepared ignored tmp/email-routing-configure.cjs is idempotent and stops for
+  existing unrelated MX/SPF. No website contact change or ad serving authorized.
+  Route: direct Cloudflare API using existing local Wrangler credentials;
+  model demand bounded API/auth diagnosis, effort demand focused permission and
+  mail-state checks. Acceptance: verified destination, enabled exact-address
+  rule, valid mail DNS, and honest separation of setup from delivery evidence.
 - Guides CSS and reviewed documentation publication complete, 2026-10-08.
   Owner requested both Guides publication and a concrete docs review/push follow-up.
   Commit834d54e is live; GitHub CI37667627130 and Cloudflare Builds pass. Isolated
@@ -20,7 +172,7 @@
   This completion checkpoint is published as the final documentation-only follow-up.
   V2 filename replacement and ad preview tooling remain excluded/preserved.
   Both requested outcomes are complete; no task-owned process/worker or release
-  blocker remains. Resume contact-email forwarding/privacy/consent preparation;
+  blocker remains. Resume privacy/consent preparation (contact forwarding now complete);
   AdSense review remains pending and no ad serving is enabled.
   Routing: parent bounded release/scope handling; effort medium for release/live
   gates, low final checkpoint. Sol model demand cross-document authority/public

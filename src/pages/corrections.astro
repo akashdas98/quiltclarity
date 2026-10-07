@@ -4,21 +4,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   index={false}
-  title="Feedback system coming soon — QuiltClarity"
-  description="QuiltClarity's feedback system is coming soon. In the meantime, explore the guides and calculation methodology."
+  title="Feedback — QuiltClarity"
+  description="Share feedback about QuiltClarity by email, or explore the guides and calculation methodology."
+  pageType="article"
 >
   <article class="page article-page feedback-page">
     <header class="hero feedback-hero">
       <p class="eyebrow">Feedback</p>
-      <h1>Feedback system coming soon</h1>
+      <h1>Share your feedback</h1>
       <p class="lede">
-        We are preparing a way to share feedback about QuiltClarity. Feedback
-        submissions are not available yet.
+        Email <a href="mailto:contact@quiltclarity.com"
+          >contact@quiltclarity.com</a
+        >{' '}
+        with feedback about QuiltClarity, including anything confusing or a calculation
+        you would like us to check.
       </p>
     </header>
 
     <section class="feedback-next" aria-labelledby="feedback-next-heading">
-      <h2 id="feedback-next-heading">Explore in the meantime</h2>
+      <h2 id="feedback-next-heading">Explore the site</h2>
       <div class="card-grid">
         <div class="card">
           <h3>Find a guide</h3>
@@ -44,12 +48,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .feedback-hero {
-    max-width: 45rem;
     margin-bottom: clamp(2rem, 6vw, 4rem);
-  }
-
-  .feedback-next {
-    max-width: 48rem;
   }
 
   .feedback-next h2 {

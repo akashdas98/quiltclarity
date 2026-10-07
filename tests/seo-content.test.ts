@@ -33,6 +33,7 @@ import { GET as getSitemap } from '../src/pages/sitemap.xml';
 import sitemap from '../src/pages/sitemap.xml.ts?raw';
 import robots from '../src/pages/robots.txt.ts?raw';
 import aboutPage from '../src/pages/about.astro?raw';
+import contactPage from '../src/pages/contact.astro?raw';
 import methodologyPage from '../src/pages/methodology.astro?raw';
 import correctionsPage from '../src/pages/corrections.astro?raw';
 import gettingStartedGuide from '../src/pages/guides/getting-started.astro?raw';
@@ -107,9 +108,9 @@ describe('Milestone 8 static SEO and content contracts', () => {
     expect(howItWorks).toContain('placements.');
   });
 
-  it('lists indexable product and trust routes, excluding unavailable feedback', async () => {
-    expect(INDEXABLE_PATHS).toHaveLength(38);
-    expect(new Set(INDEXABLE_PATHS).size).toBe(38);
+  it('lists indexable product and trust routes, excluding feedback', async () => {
+    expect(INDEXABLE_PATHS).toHaveLength(40);
+    expect(new Set(INDEXABLE_PATHS).size).toBe(40);
     for (const route of [
       '/guides/getting-started/',
       '/guides/project-planner-tutorial/',
@@ -118,6 +119,8 @@ describe('Milestone 8 static SEO and content contracts', () => {
       '/calculators/pieces-from-fabric/',
       '/how-it-works/',
       '/about/',
+      '/contact/',
+      '/privacy/',
       '/methodology/',
     ])
       expect(INDEXABLE_PATHS).toContain(route);
@@ -140,6 +143,7 @@ describe('Milestone 8 static SEO and content contracts', () => {
     );
     expect(xml).not.toContain('/corrections/');
     expect(correctionsPage).toContain('index={false}');
+    expect(baseLayout).toContain('href="/contact/">Contact</a>');
     expect(baseLayout).toContain('href="/corrections/">Feedback</a>');
   });
 
@@ -153,9 +157,9 @@ describe('Milestone 8 static SEO and content contracts', () => {
     expect(robots).toContain('PUBLIC_ROBOTS_NOINDEX');
     expect(aboutPage).toContain('bounded practical heuristic');
     expect(methodologyPage).toContain('nearest increment');
-    expect(correctionsPage).toContain('Feedback system coming soon');
-    expect(correctionsPage).toContain('submissions are not available yet.');
-    expect(correctionsPage).not.toContain('PUBLIC_CORRECTIONS_EMAIL');
-    expect(correctionsPage).not.toContain('mailto:');
+    expect(contactPage).toContain('mailto:contact@quiltclarity.com');
+    expect(correctionsPage).toContain('Share your feedback');
+    expect(correctionsPage).toContain('mailto:contact@quiltclarity.com');
+    expect(correctionsPage).not.toContain('<form');
   });
 });

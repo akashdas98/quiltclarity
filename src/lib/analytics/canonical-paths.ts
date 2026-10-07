@@ -37,6 +37,8 @@ export const INDEXABLE_PATHS = [
   '/guides/check-pattern-yardage/',
   '/how-it-works/',
   '/about/',
+  '/contact/',
+  '/privacy/',
   '/methodology/',
 ] as const;
 

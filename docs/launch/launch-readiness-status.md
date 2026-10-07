@@ -92,8 +92,12 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
   [hosting decision](../decisions/cloudflare-static-hosting.md) and README setup.
 - Feedback System is deferred to V2 under the
   [owner-approved decision](../decisions/v1.1-feedback-system-deferral.md).
-  The retained `/corrections/` page conveys coming-soon availability; a feedback
-  inbox is not a V1.1 launch dependency.
+  The live `/corrections/` page currently conveys coming-soon availability.
+  Owner amendment2026-10-08 authorizes local email Feedback/Contact changes to
+  `contact@quiltclarity.com`, whose delivery the owner confirms. Publication is
+  paused; requested layout/content fixes pass local Chrome/Edge/static/print checks.
+  The full form/service remains V2;
+  current Feedback noindex/sitemap exclusion is preserved.
 - Public GitHub repository is pushed, hosted CI passes, and Cloudflare Builds
   automatically deploys `main`; first automatic build and active version pass.
 - Confirm host configuration uses the purchased apex `SITE_URL` default (or an

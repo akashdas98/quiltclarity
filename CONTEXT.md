@@ -27,18 +27,22 @@ new work. Routed owners retain detailed evidence.
   Search Console setup
   complete per owner (robots detected 2026-10-05); Firefox waived; Cloudflare analytics and
   private reports are verified live 2026-10-02. Evidence is in project status.
-- Feedback at /corrections/ is static coming-soon, noindex and outside the
-  38-route sitemap. Feedback System is planned V2; no V1.1 inbox gate exists.
+- Article widths/link spaces/Contact/email Feedback fixed locally October8;
+  Chrome/Edge/static/print pass (40 local indexable routes). Publication paused.
+  /corrections/ stays noindex/outside sitemap; full Feedback form remains V2.
+- Contact delivery works per owner (October8). Privacy page/footer links prepared
+  locally; verify/Chrome/Edge/print pass. Unpublished; selected Google CMP draft
+  saved. Provider-data compatibility unresolved; see project status.
 - Docs/ZIP audit/catalog complete October1. Ads placements/sizes finalized;
   October7 updated mockup Chrome168/Edge28 checks pass, including narrow fallbacks
   and print. Rail density halved; AdSense meta7434e05 live; review pending; privacy/consent/rollout pending.
 - Guides spacing/action CSS834d54e live October8; Chrome/Edge/live geometry pass.
-  October7 mockup evidence saved in project status; preview stopped per owner.
+  Mockup evidence in project status; preview stopped.
 - Runtime stays static Astro plus vanilla TypeScript, independent domain and
   presentation, schema-v2 browser persistence, closed analytics, and no React.
   G01-G45 and D01-D05 are automated. Historical tests are not fresh health proof.
-- Routing v2/lifecycle guard synchronized; hooks active per owner 2026-09-22.
-  Guardrails do not establish protected governance or measured savings.
+- Routing v2/lifecycle guard synchronized; hooks owner-confirmed 2026-09-22.
+  No protected-governance or measured-savings claim.
 
 ## Active Gaps
 
@@ -134,8 +138,9 @@ new work. Routed owners retain detailed evidence.
 1. Monitor the deployed origin and Search Console indexing; setup and the
    authorized print/PDF release are complete. Evidence is in project status.
 2. Ad sizes/fallbacks are finalized and updated mockup browser/print gates pass.
-   AdSense meta live; review requested. Next: privacy/contact/consent and project-data
-   compatibility before integration. No live rollout/application authorized.
+   AdSense meta live; review requested. Contact delivery confirmed by owner.
+   Google CMP draft saved; article/Contact/Feedback fixes verified locally.
+   Publication paused. Then consent/runtime/privacy gates; no live ads.
    Evidence and approval limits are in project status.
 3. After ad work: analytics rate limiting, Cloudflare rule audit and tested
    security headers. Sequence/evidence: project status and continuation roadmap.
@@ -150,21 +155,17 @@ summary changes, retaining unresolved work, approvals and evidence limits.
 ## Recent Changes
 
 - 2026-10-08: Guides CSS834d54e live; reviewed docsba408b3 pushed, hosted gates pass.
+  Contact works; Privacy/footer local gates pass. Google CMP draft saved;
+  bounded privacy audit complete, compatibility unresolved. No live serving.
   October7 final ad sizing/fallback mockup passes Chrome168/Edge28 cases,
   thresholds/focus/print; preview stopped. AdSense selected; readiness next, security
   afterward. Evidence/approval limits in project status; no live ad rollout.
 
 - 2026-10-01: All available project docs and original ZIP snapshots audited;
-  complete section catalog/topic map and sourced continuation roadmap added.
-  August ads agreement recovered, stale active summaries reconciled, and catalog
-  coverage added to memory checks. Details in the dated reconciliation report.
-  Confirmed prior trademark/domain completion; activated `quiltclarity.com` with
-  legacy-key migration. Cloudflare + Astro decision, public GitHub/CI, apex/www
-  hosting, HTTPS redirects and automatic Builds completed. Local and public
-  Chrome/Edge gates passed; dated details and Search Console progress remain in
-  project status and launch readiness.
+  catalog/roadmap and recovered ads agreement recorded in dated reconciliation.
+  QuiltClarity activated with legacy-key migration; prior trademark/domain done.
+  GitHub/CI/Cloudflare complete; evidence in project status/launch readiness.
 
 - 2026-09-30: Feedback coming-soon and V2 deferral removed the V1.1 inbox gate;
-  `/corrections/` is noindex/outside the sitemap. Build/Chrome/Edge pass.
-  Launch/brand docs reconciled with completed V1.1 and owner Guides acceptance.
-  Evidence/tooling corrections are in project status; no lookup/purchase/deployment.
+  `/corrections/` is noindex/outside sitemap. Build/browser pass; launch docs
+  reconciled with V1.1 and owner Guides acceptance. Evidence in project status.

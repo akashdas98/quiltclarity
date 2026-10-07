@@ -75,6 +75,8 @@ const ROUTES = [
   '/guides/check-pattern-yardage/',
   '/how-it-works/',
   '/about/',
+  '/contact/',
+  '/privacy/',
   '/methodology/',
   '/corrections/',
 ];
@@ -277,9 +279,49 @@ async function runSiteWideSpacingAudit(client) {
         `${route} at ${width}px`,
         route === '/fabric-cutting-planner/' ? 1 : 0,
       );
+      if (
+        route === '/guides/' ||
+        route === '/corrections/' ||
+        route === '/contact/' ||
+        documentArticleRoute(route)
+      ) {
+        const layout = await evaluate(
+          client,
+          `(() => {
+          const box = (selector) => {
+            const element = document.querySelector(selector);
+            if (!element) return null;
+            const rect = element.getBoundingClientRect();
+            return { x: rect.x, width: rect.width };
+          };
+          return { page: box('.page'), hero: box('.article-page > .hero'), body: box('.article-body'), next: box('.feedback-next') };
+        })()`,
+        );
+        const expectedWidth = Math.min(1216, width - 32);
+        assert.ok(
+          Math.abs(layout.page.width - expectedWidth) < 1,
+          `${route} should use the main page width at ${width}px`,
+        );
+        for (const part of [layout.hero, layout.body, layout.next].filter(
+          Boolean,
+        )) {
+          assert.ok(
+            Math.abs(part.width - layout.page.width) < 1 &&
+              Math.abs(part.x - layout.page.x) < 1,
+            `${route} article content should align with its page at ${width}px`,
+          );
+        }
+      }
     }
   }
   await client.send('Emulation.clearDeviceMetricsOverride');
+}
+
+function documentArticleRoute(route) {
+  return (
+    (route.startsWith('/guides/') && route !== '/guides/') ||
+    ['/how-it-works/', '/about/', '/methodology/', '/privacy/'].includes(route)
+  );
 }
 
 async function runNoScriptSpacingAudit(browser) {
@@ -297,6 +339,11 @@ async function runNoScriptSpacingAudit(browser) {
         '/fabric-cutting-planner/',
         '/calculators/fabric-yardage/',
         '/guides/getting-started/',
+        '/how-it-works/',
+        '/about/',
+        '/privacy/',
+        '/contact/',
+        '/corrections/',
         '/404.html',
       ]) {
         await navigate(client, route, 'h1');
@@ -304,6 +351,46 @@ async function runNoScriptSpacingAudit(browser) {
           client,
           `${route} without JavaScript at ${width}px`,
         );
+        if (route === '/how-it-works/') {
+          assert.match(
+            await page.locator('article').innerText(),
+            /Review the calculation methodology or browse the measurement guides\./,
+          );
+        }
+        if (route === '/privacy/') {
+          const text = await page.locator('article').innerText();
+          assert.match(text, /Cloudflare hosts the site/);
+          assert.match(text, /email contact@quiltclarity\.com/);
+          assert.match(
+            text,
+            /See Google's privacy policy for Gmail's practices/,
+          );
+        }
+        if (route === '/contact/') {
+          assert.equal(
+            await page
+              .locator('.site-footer a', { hasText: 'Contact' })
+              .getAttribute('href'),
+            '/contact/',
+          );
+          assert.match(
+            await page.locator('article').innerText(),
+            /Email contact@quiltclarity\.com\./,
+          );
+        }
+        if (route === '/corrections/') {
+          assert.match(
+            await page.locator('article').innerText(),
+            /Email contact@quiltclarity\.com with feedback/,
+          );
+          assert.equal(await page.locator('article form').count(), 0);
+        }
+        if (route === '/about/') {
+          assert.match(
+            await page.locator('article').innerText(),
+            /email feedback about a calculation/,
+          );
+        }
       }
     }
   } finally {
@@ -539,7 +626,7 @@ async function auditStaticRoutes() {
   const sitemap = await fetch(`${SITE_ORIGIN}/sitemap.xml`);
   assert.equal(sitemap.status, 200);
   const sitemapText = await sitemap.text();
-  assert.equal((sitemapText.match(/<url>/g) ?? []).length, 38);
+  assert.equal((sitemapText.match(/<url>/g) ?? []).length, 40);
   assert.ok(!sitemapText.includes('/corrections/'));
   assert.doesNotMatch(sitemapText, /quilter\.example/);
   for (const location of sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)) {
@@ -3946,7 +4033,7 @@ async function main() {
     ))
       completed.push(await runBrowser(browser));
     console.log(
-      `Browser smoke passed in ${completed.join(' and ')}; 38 indexable routes, crawl controls, Guides/contextual help, theme persistence, planner, calculator, persistence, analytics, accessibility, performance, narrow mobile layout, and print checks passed.`,
+      `Browser smoke passed in ${completed.join(' and ')}; 40 indexable routes, crawl controls, Guides/contextual help, theme persistence, planner, calculator, persistence, analytics, accessibility, performance, narrow mobile layout, and print checks passed.`,
     );
   } finally {
     if (server) await stopChild(server);

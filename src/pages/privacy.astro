@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy — QuiltClarity"
+  description="How QuiltClarity handles saved projects, site analytics, email, and future advertising."
+  pageType="article"
+>
+  <article class="page article-page">
+    <header class="hero compact-hero">
+      <p class="eyebrow">Privacy</p>
+      <h1>How QuiltClarity handles your information</h1>
+      <p class="lede">
+        Your quilting calculations run in your browser. This page explains what
+        stays on your device, what the site measures, and what happens when you
+        choose to share a result or email us.
+      </p>
+    </header>
+
+    <div class="article-body">
+      <section>
+        <h2>Projects and browser storage</h2>
+        <p>
+          QuiltClarity has no account or cloud project store. The planner saves
+          your project in this browser's local storage so you can return to it.
+          Project names, fabric details, cut lists, measurements, and results
+          are not sent to QuiltClarity's analytics service. You can remove saved
+          site data through your browser's settings; doing so also removes your
+          saved project and preferences on that browser.
+        </p>
+        <p>
+          Local storage also holds your light or dark theme choice and a
+          date-only marker used to determine whether a tool visit is a return
+          visit. The marker is not a visitor identifier. QuiltClarity does not
+          set a cookie for these features.
+        </p>
+      </section>
+
+      <section>
+        <h2>Sharing, copying, and downloads</h2>
+        <p>
+          Copy summary puts the displayed summary on your clipboard. Share
+          result opens your device's share sheet with the summary and your
+          project name, if you entered one. The service or person you select to
+          share with then handles that content under their own terms. Printing
+          and PDF export are prepared in your browser. You choose where a PDF is
+          saved or sent.
+        </p>
+      </section>
+
+      <section>
+        <h2>Site analytics and hosting</h2>
+        <p>
+          On the public site, QuiltClarity sends a page visit and limited tool
+          actions to a same-origin analytics endpoint. The stored record
+          contains the page's canonical path and fixed action categories, such
+          as which tool was opened. Some tool events include fixed categories or
+          count ranges and a boolean return-visit category. The analytics record
+          does not contain project content, URL queries or fragments, cookies,
+          visitor IDs, IP addresses, browser headers, or referrers. Analytics
+          Engine retains these records for three months.
+        </p>
+        <p>
+          <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a>{
+            ' '
+          }
+          hosts the site and handles ordinary network request metadata to deliver
+          pages and the analytics endpoint. The browser sends no QuiltClarity analytics
+          when Do Not Track or Global Privacy Control is enabled. Analytics failures
+          do not stop the tools. You can also clear the return-visit marker through
+          your browser's site-data settings.
+        </p>
+      </section>
+
+      <section>
+        <h2>Advertising</h2>
+        <p>
+          QuiltClarity has requested Google AdSense review. The site currently
+          has an account-verification tag, but does not load advertising scripts
+          or serve ads. No advertising cookies or ad requests are initiated by
+          QuiltClarity at this stage.
+        </p>
+        <p>
+          If advertising is enabled later, this page will describe the actual
+          setup before ads are served. Google's advertising services and its
+          partners may use cookies to show ads based on visits to this and other
+          sites. You can learn about Google's advertising data practices and
+          choices at <a href="https://policies.google.com/technologies/ads"
+            >Google's advertising privacy page</a
+          > and manage personalized ads at <a
+            href="https://myadcenter.google.com/">My Ad Center</a
+          >. Any required consent controls must be in place before ad serving.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>
+          For privacy questions or corrections, email{' '}
+          <a href="mailto:contact@quiltclarity.com">contact@quiltclarity.com</a
+          >. Cloudflare Email Routing forwards messages to our Gmail inbox, so
+          those providers handle the message to deliver it. See{' '}
+          <a href="https://policies.google.com/privacy"
+            >Google's privacy policy</a
+          >{' '}
+          for Gmail's practices. Please avoid including sensitive project information
+          unless it is needed for your request.
+        </p>
+      </section>
+      <p>Last updated: 8 October 2026.</p>
+    </div>
+  </article>
+</BaseLayout>

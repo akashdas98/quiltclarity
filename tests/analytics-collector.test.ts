@@ -38,8 +38,8 @@ function bindings() {
 }
 
 describe('Cloudflare analytics collector', () => {
-  it('shares exactly 38 indexable paths and projects all untrusted extras', () => {
-    expect(INDEXABLE_PATHS).toHaveLength(38);
+  it('shares exactly 40 indexable paths and projects all untrusted extras', () => {
+    expect(INDEXABLE_PATHS).toHaveLength(40);
     expect(
       projectAnalyticsEnvelope({
         version: 1,
