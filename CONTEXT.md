@@ -149,7 +149,7 @@ summary changes, retaining unresolved work, approvals and evidence limits.
 
 ## Recent Changes
 
-- 2026-10-08: Guides CSS834d54e live; docs reviewed for immediate separate push.
+- 2026-10-08: Guides CSS834d54e live; reviewed docsba408b3 pushed, hosted gates pass.
   October7 final ad sizing/fallback mockup passes Chrome168/Edge28 cases,
   thresholds/focus/print; preview stopped. AdSense selected; readiness next, security
   afterward. Evidence/approval limits in project status; no live ad rollout.

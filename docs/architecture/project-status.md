@@ -3,7 +3,7 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-08.
-- Guides CSS release complete and documentation publication prepared, 2026-10-08.
+- Guides CSS and reviewed documentation publication complete, 2026-10-08.
   Owner requested both Guides publication and a concrete docs review/push follow-up.
   Commit834d54e is live; GitHub CI37667627130 and Cloudflare Builds pass. Isolated
   verify passes (231 application tests, six analytics-report tests), full installed
@@ -14,10 +14,14 @@
   Sol-medium docs review complete: current AdSense/Search Console status reconciled,
   duplicate index routes removed, README local-preview dependency removed and
   public personal paths generalized.26 reviewed docs/context-checker files are
-  prepared for a separate commit now, before email/ads readiness resumes. V2
-  filename replacement and ad preview tooling remain excluded/preserved.
-  Documentation checker/regression and isolated-publication gates precede push;
-  hosted CI confirmation remains the final docs publication check.
+  published in separate commitba408b3. Exact public checkout passes context/catalog
+  checker and13 regression cases plus npm verify. Hosted CI37668172229 and
+  Cloudflare Builds pass. No runtime source changed in that documentation commit.
+  This completion checkpoint is published as the final documentation-only follow-up.
+  V2 filename replacement and ad preview tooling remain excluded/preserved.
+  Both requested outcomes are complete; no task-owned process/worker or release
+  blocker remains. Resume contact-email forwarding/privacy/consent preparation;
+  AdSense review remains pending and no ad serving is enabled.
   Routing: parent bounded release/scope handling; effort medium for release/live
   gates, low final checkpoint. Sol model demand cross-document authority/public
   review; effort medium focused diff/dependency review. No domain behavior changed.
