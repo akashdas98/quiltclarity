@@ -3,6 +3,84 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-08.
+- ads.txt publication authorized2026-10-08: owner says go ahead after explicit
+  proposal to publish the prepared record, then recheck approval/message delivery.
+  Scope is static ads.txt and task readiness records, not an ad loader or serving.
+  Direct parent model demand is bounded release/account judgment; medium effort
+  for exact isolated gates, hosted publication and safe bounded delivery recheck.
+  Acceptance: correct public plain-text record, hosted CI/Cloudflare receipt,
+  installed-browser release gate, no ad runtime/serving, preserved unrelated work;
+  synthetic provider recheck keeps all ad/lookup/quality requests blocked.
+- ads.txt/experiment preparation2026-10-08: owner says ok do that after proposal
+  to prepare ads.txt and disable automatic placement experiments while waiting.
+  Direct parent model demand is bounded account/source judgment using existing
+  browser/build tools; low effort for one static file and one saved setting.
+  Acceptance: exact account publisher record, root static output/plain text,
+  Auto optimise OFF and Auto ads still OFF after saved readback; no runtime
+  loader, ad units/serving or unrelated dirty-work changes. File prepared locally;
+  preparation does not assume a new source-publication approval.
+  Completed: public/ads.txt contains the official Google DIRECT record for
+  pub-4803184576327262 with certificationf08c47fec0942fa0. Isolated44-page build
+  PASS and exact source/dist record match PASS. Auto optimise OFF and auto-apply
+  winner OFF saved via Apply to site, then reopened and read back; site table
+  confirms Auto optimise OFF/Auto ads OFF. Receipt:
+  tmp/auto-optimise-disabled-status.yml. No runtime tag/unit/serving changes,
+  no task-owned process remains. ads.txt remains local, not committed/published;
+  public ads.txt status cannot change until its separately approved publication.
+- Ad readiness continuation2026-10-08: owner says continue after next-step list
+  covering actual CMP settings, consent/refusal/withdrawal, protected project
+  data and widened-page mockups. Serving remains off. Parent model demand is
+  interacting account/privacy/runtime judgment; medium effort for dependency
+  tracing and configuration evidence. Sol-medium owns local mockup revalidation
+  using existing audit helpers; no production changes or duplicate parent work.
+  Acceptance: inspect current partners/regions/shared settings, preserve draft
+  until supported runtime/privacy gate is concretely reviewable, no unauthorized
+  requests/impressions, synthetic data only, no weakening project privacy,
+  affected mockup desktop/mobile/print evidence and task-server cleanup.
+  Owner explicitly keeps common partners. EU198 automatically included and
+  US334 active partners retained; per-partner deep audits are not a requirement.
+  Parent corrected the overstated Google-only rationale: narrower scope is an
+  optional demand/privacy tradeoff, not a browser isolation guarantee. Saved
+  EU maximise-message-coverage OFF because fallback bypasses the explicit draft's
+  decline/optimization choices; other EU settings unchanged. Google states its
+  fallback has Consent/Manage options and uses optimization by default.
+  Saved/reopened US draft QuiltClarity US privacy choices, English en-US,
+  quiltclarity.com, opt-out ON, all current/future supported US states (20 current);
+  initially OFF. Receipts: tmp/consent-review-*.yml and
+  tmp/consent-us-draft-status.yml. Account settings do not install a website tag.
+  Widened-page mockup PASS96 cases in installed Chrome/Edge,12 route classes at
+  320/390/1440/1920px; preserved frame bounds/locked slot counts, no overlap,
+  overflow/external request, representative print hides mocks. Widened1216px
+  Contact/Privacy fits paired300x250 rails at1920px, none1440/mobile. Receipt:
+  tmp/ad-layout/width-recheck.json. Servers4332/4333 stopped; no owner process
+  touched. Local preview upstream now optionally configurable, default4322.
+  Sol-high preparing synthetic real-origin CMP audit; all ad/creative endpoints
+  must be blocked before network. Actual runtime remains untested pending
+  message availability and safe harness review; no provider loader on production.
+  After positive controls passed and the parent reviewed interception, published
+  both EU/US account configurations for isolated testing without a production
+  tag. Current details supersede earlier draft status in
+  ../launch/postlaunch-ads-review.md, Consent configuration and widened-layout
+  recheck. US missing-site validation traced to unused logo required by default;
+  disabling it permitted publication. Readback Published for both; site Getting
+  ready, ads.txt Not found. First real-origin discovery loaded exact provider
+  scripts but no CMP resources/message/APIs; all ad/lookup/quality endpoints
+  blocked, no observed synthetic sentinel transfer or planner-key read. This
+  cannot establish consent lifecycle or privacy compatibility. No standalone
+  consent-only tag is documented for this AdSense setup. One narrow head-tag
+  recheck after propagation is justified; no broad rerun or ad endpoint release.
+  That single recheck completed with matching top-level head tag and expected
+  origin Referrer in Chrome/Edge. Loader/implementation200, controls pass; ad,
+  lookup, quality and analytics remain blocked. No CMP resource/message/API;
+  lifecycle remains unverified, with no causal conclusion about propagation,
+  pending site review or blocked dependencies. Two instrumentation errors in
+  blocked child frames were corrected with a top-frame guard afterward, without
+  another provider run; do not claim an error-free final provider audit.
+  tmp/consent-runtime/discover-receipt.json and README own exact evidence.
+  Workers/task servers complete; production HTML reconfirmed verification meta
+  only, no runtime tag. Next safe observation after publication propagation
+  (Google allows up to an hour) or meaningful account-state change; no guessed
+  tag URL or release of blocked ad requests. Runtime/serving remains off.
 - Website release complete2026-10-08: owner says continue after verified
   article/link-spacing/Contact/email Feedback corrections. Parent interpreted
   this as resuming publication, but automatic approval review requires explicit

@@ -31,8 +31,8 @@ new work. Routed owners retain detailed evidence.
   hosted CI/Cloudflare and live Chrome/Edge/print pass (40 indexable routes).
   /corrections/ stays noindex/outside sitemap; full Feedback form remains V2.
 - Contact delivery works per owner (October8). Privacy page/footer links live;
-  verify/local Chrome/Edge/print pass. Selected Google CMP draft
-  saved. Provider-data compatibility unresolved; see project status.
+  verify/local Chrome/Edge/print pass. EU/US CMP published in account; partners
+  kept, no site tag/ads. Consent/privacy runtime gate open; see project status.
 - Docs/ZIP audit/catalog complete October1. Ads placements/sizes finalized;
   October7 updated mockup Chrome168/Edge28 checks pass, including narrow fallbacks
   and print. Rail density halved; AdSense meta7434e05 live; review pending; privacy/consent/rollout pending.
@@ -139,8 +139,8 @@ new work. Routed owners retain detailed evidence.
    authorized print/PDF release are complete. Evidence is in project status.
 2. Ad sizes/fallbacks are finalized and updated mockup browser/print gates pass.
    AdSense meta live; review requested. Contact delivery confirmed by owner.
-   Google CMP draft saved; article/Contact/Feedback/Privacy updates published.
-   Next consent/runtime/privacy gates; no live ads.
+   Google CMP account messages published; common partners retained. Site updates live.
+   ads.txt local, Auto optimise OFF. Consent/privacy gates open; ads OFF.
    Evidence and approval limits are in project status.
 3. After ad work: analytics rate limiting, Cloudflare rule audit and tested
    security headers. Sequence/evidence: project status and continuation roadmap.

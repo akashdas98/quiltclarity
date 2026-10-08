@@ -724,6 +724,81 @@ do not add a global provider loader to every BaseLayout page.
 
 ### Implementation, checks and rollout
 
+#### ads.txt and automatic experiments preparation, 2026-10-08
+
+Owner authorizes preparing ads.txt and disabling automatic placement experiments
+while consent propagation/site review remain open. Added local `public/ads.txt`:
+
+```text
+google.com, pub-4803184576327262, DIRECT, f08c47fec0942fa0
+```
+
+The publisher ID matches account/source verification. The [Google ads.txt guide](https://support.google.com/adsense/answer/12171612?hl=en)
+specifies this format and root location. Isolated build44 pages PASS; source and
+`dist/ads.txt` match exactly. No ad runtime/units are added; file publication is
+separate from preparation and AdSense crawl status can lag after publication.
+
+Saved Auto optimise OFF and auto-apply experiment winner OFF for quiltclarity.com.
+Reopened editor readback confirms both false; By site table confirms Auto ads
+still OFF. Receipt: `tmp/auto-optimise-disabled-status.yml`. This preserves the
+owner's explicit placements against automatic format experiments; it does not
+replace consent/privacy/runtime acceptance. [Google's experiment settings](https://support.google.com/adsense/answer/15876143?hl=en)
+describe the separate controls. No commit/push/deploy in this preparation task.
+
+#### Consent configuration and widened-layout recheck, 2026-10-08
+
+The owner explicitly keeps Google's common partners. Retained the EU automatic
+common list (198 at inspection) and US active partners (334). An individual
+in-depth investigation of every selected vendor is not an acceptance requirement;
+Google's CMP populates its partner disclosure and consent controls. This does not
+prove isolation from saved project data.
+
+European maximise-message-coverage is now OFF. Its fallback can use a two-button
+Consent/Manage options message and its own optimization, bypassing the prepared
+first-screen decline and optimization-OFF choices. Other EU account settings
+remain as inspected. See [Google's fallback guidance](https://support.google.com/adsense/answer/17341119?hl=en).
+
+Both messages are now Published in the AdSense account for isolated testing:
+`QuiltClarity privacy choices` (English en, 32 listed European regions, decline
+and close-to-decline ON, optimization OFF) and `QuiltClarity US privacy choices`
+(English en-US, opt-out ON, all current/future supported states, 20 currently
+listed). Optional logo OFF on both. The US first publication attempt failed
+because the default header required an absent logo; disabling that unused logo
+resolved the actual validation failure. Readbacks:
+`tmp/consent-{eu,us}-published-status.yml`. Publication is account configuration;
+production still has no AdSense runtime tag, no units, Auto ads OFF, and no ads.
+Site approval is still Getting ready; ads.txt Not found at fresh inspection.
+
+The widened local mockup passes 96 installed Chrome/Edge checks across12 routes
+and320/390/1440/1920px. Frame bounds, locked slots, control clearance, overflow,
+rail/creative containment and representative print checks pass. Contact/Privacy
+now fit paired300x250 rails at1920px with no rails at1440/mobile. No placement
+rule changed. Receipt: `tmp/ad-layout/width-recheck.json`. Temporary servers
+stopped; untracked preview accepts an optional upstream URL, default still4322.
+
+The prepared isolated runtime test uses fresh Chrome/Edge profiles and the real
+HTTPS site origin with first-party bytes fulfilled from the verified static build.
+Only synthetic project text is seeded. Its positive control detects a deliberate
+planner-key read and blocks ad/sentinel-bearing requests before network. The
+initial authorized discovery loaded the exact loader/versioned implementations,
+with all ad/lookup/quality requests blocked; no CMP resource or message arrived,
+and googlefc/TCF APIs were undefined. No observed sentinel transfer establishes
+only this bounded observation. Publication can take up to an hour; propagation
+and dependency on blocked requests remain unresolved. Do not permit ad endpoints
+or guess a direct Funding Choices URL to force a result. Official guidance uses
+the ordinary AdSense tag; the explicit Privacy & messaging tag is for ad-block
+recovery, not a documented standalone consent-only deployment for this setup.
+See [Google's troubleshooting](https://support.google.com/adsense/answer/14660912?hl=en)
+and [API documentation](https://developers.google.com/funding-choices/fc-api-docs).
+Receipts and reproducible gate: `tmp/consent-runtime/README.md`. Actual pending/
+accept/refuse/withdraw/reload/failure lifecycle and project-data compatibility
+remain unverified; provider serving stays off until those gates pass.
+One later head-tag recheck confirmed matching publisher, top-level document and
+origin Referrer in Chrome/Edge; the same absence of CMP resources/message/APIs
+remained. No further provider run followed. Two test-instrumentation errors in
+blocked child frames were corrected afterward with a top-frame guard; the saved
+provider receipt still contains those errors. Production HTML remains untagged.
+
 #### Selected Google CMP setup, 2026-10-08
 
 The owner selected Google's built-in Privacy & messaging CMP and authorized
