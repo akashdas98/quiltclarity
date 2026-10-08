@@ -745,6 +745,26 @@ owner's explicit placements against automatic format experiments; it does not
 replace consent/privacy/runtime acceptance. [Google's experiment settings](https://support.google.com/adsense/answer/15876143?hl=en)
 describe the separate controls. No commit/push/deploy in this preparation task.
 
+Publication was separately authorized and completed October8: release
+`27f9e4d`, hosted CI `37751829673` and Cloudflare build
+`b8ee278f-7943-463f-9ed7-24957fd9975b` PASS. Portable verify (237 tests,
+44 pages) and installed Chrome/Edge smoke (40 indexable routes, print/PDF) PASS.
+Public `/ads.txt` returns200 `text/plain` with the exact record above; HTTP apex
+and HTTPS www redirect to HTTPS apex preserving the file path. Public Privacy
+still contains verification meta only, without an ad/CMP runtime loader.
+AdSense still reports Getting ready/ads.txt Not found with October7 crawl time;
+site detail exposes no check-for-updates control. Recognition is pending.
+
+The authorized08:45UTC synthetic consent discovery uses corrected top-frame
+instrumentation: Chrome/Edge controls PASS, no page errors, loader/implementation
+HTTP200. Ad, lookup, quality and analytics requests remain blocked. No CMP
+resource, message or API appeared; no synthetic marker transfer or planner-key
+read was observed. This does not establish lifecycle/privacy compatibility.
+Accept, decline, withdrawal, reload and failure cases remain unverified. Receipts:
+`tmp/consent-runtime/discover-receipt.json`, prior run preserved as
+`discover-receipt-before-ads-txt.json`. Ads/automatic experiments remain OFF;
+next bounded observation requires completed propagation or account-state change.
+
 #### Consent configuration and widened-layout recheck, 2026-10-08
 
 The owner explicitly keeps Google's common partners. Retained the EU automatic

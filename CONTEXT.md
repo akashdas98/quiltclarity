@@ -140,7 +140,7 @@ new work. Routed owners retain detailed evidence.
 2. Ad sizes/fallbacks are finalized and updated mockup browser/print gates pass.
    AdSense meta live; review requested. Contact delivery confirmed by owner.
    Google CMP account messages published; common partners retained. Site updates live.
-   ads.txt local, Auto optimise OFF. Consent/privacy gates open; ads OFF.
+   ads.txt live27f9e4d, Auto optimise OFF. Consent/privacy gates open; ads OFF.
    Evidence and approval limits are in project status.
 3. After ad work: analytics rate limiting, Cloudflare rule audit and tested
    security headers. Sequence/evidence: project status and continuation roadmap.

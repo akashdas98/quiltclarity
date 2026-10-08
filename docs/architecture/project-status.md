@@ -11,6 +11,23 @@
   Acceptance: correct public plain-text record, hosted CI/Cloudflare receipt,
   installed-browser release gate, no ad runtime/serving, preserved unrelated work;
   synthetic provider recheck keeps all ad/lookup/quality requests blocked.
+  Completed: release27f9e4d pushed; hosted CI37751829673 and Cloudflare build
+  b8ee278f-7943-463f-9ed7-24957fd9975b PASS. Isolated npm run verify PASS
+  (231 app +6 report tests,44 pages); installed Chrome/Edge smoke PASS with
+  40 indexable routes and complete print/PDF checks. Public ads.txt returns200,
+  text/plain, exact source record; HTTPS www and HTTP apex redirect to HTTPS
+  apex preserving /ads.txt. Public Privacy retains verification meta only,
+  no ad/CMP runtime loader. Existing owner/V2/preview changes preserved.
+  Synthetic discovery08:45UTC PASS controls/no page errors in both browsers;
+  loader/implementation200, all ad/lookup/quality and analytics blocked. No CMP
+  resource/message/API, synthetic marker transfer or planner-key read observed.
+  This bounded observation does not prove privacy compatibility or lifecycle;
+  accept/decline/withdrawal/reload/failure remain unverified. Account still
+  Getting ready, ads.txt Not found (last crawl October7); no check-for-updates
+  control exposed in the site detail. Auto ads/optimise remain OFF. No more
+  provider runs until propagation completes or meaningful account-state change.
+  Receipt: tmp/consent-runtime/discover-receipt.json; previous receipt preserved
+  as discover-receipt-before-ads-txt.json. Task browser processes exited.
 - ads.txt/experiment preparation2026-10-08: owner says ok do that after proposal
   to prepare ads.txt and disable automatic placement experiments while waiting.
   Direct parent model demand is bounded account/source judgment using existing
@@ -25,8 +42,8 @@
   winner OFF saved via Apply to site, then reopened and read back; site table
   confirms Auto optimise OFF/Auto ads OFF. Receipt:
   tmp/auto-optimise-disabled-status.yml. No runtime tag/unit/serving changes,
-  no task-owned process remains. ads.txt remains local, not committed/published;
-  public ads.txt status cannot change until its separately approved publication.
+  no task-owned process remains. That preparation was local; the separately
+  approved publication and fresh public receipts are recorded above.
 - Ad readiness continuation2026-10-08: owner says continue after next-step list
   covering actual CMP settings, consent/refusal/withdrawal, protected project
   data and widened-page mockups. Serving remains off. Parent model demand is
