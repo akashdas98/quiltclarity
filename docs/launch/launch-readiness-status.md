@@ -92,10 +92,10 @@ diagnostics D01-D05. Older G01-G27 and V1 baseline language is historical.
   [hosting decision](../decisions/cloudflare-static-hosting.md) and README setup.
 - Feedback System is deferred to V2 under the
   [owner-approved decision](../decisions/v1.1-feedback-system-deferral.md).
-  The live `/corrections/` page currently conveys coming-soon availability.
-  Owner amendment2026-10-08 authorizes local email Feedback/Contact changes to
-  `contact@quiltclarity.com`, whose delivery the owner confirms. Publication is
-  paused; requested layout/content fixes pass local Chrome/Edge/static/print checks.
+  The live `/corrections/` page invites email Feedback under owner amendment
+  2026-10-08, with Contact/Privacy pages and layout/content fixes published42712a9.
+  `contact@quiltclarity.com` delivery is owner-confirmed. Local Chrome/Edge/static/
+  print and hosted CI/Cloudflare checks pass.
   The full form/service remains V2;
   current Feedback noindex/sitemap exclusion is preserved.
 - Public GitHub repository is pushed, hosted CI passes, and Cloudflare Builds

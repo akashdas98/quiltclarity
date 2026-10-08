@@ -3,8 +3,10 @@
 ## Resume Checkpoint
 
 - Updated: 2026-10-08.
-- Website publication resumed2026-10-08: owner says continue after verified
-  article/link-spacing/Contact/email Feedback corrections. Scope is the prepared
+- Website release complete2026-10-08: owner says continue after verified
+  article/link-spacing/Contact/email Feedback corrections. Parent interpreted
+  this as resuming publication, but automatic approval review requires explicit
+  production approval after the earlier pause. Scope is the prepared
   website and its governing records; Google CMP remains Draft, no provider loader
   or ad serving authorized by this continuation. Existing V2 filename replacement
   and ad-preview scripts remain excluded. Direct parent model demand is bounded
@@ -12,6 +14,21 @@
   medium covers exact-release checks and live receipt. Acceptance: isolated full
   verify, prior complete Chrome/Edge local smoke plus targeted final sentence,
   hosted CI/deployment and live Chrome/Edge checks; owner dev retained.
+  Exact isolated verify PASS: typecheck/lint/format,231 application tests,six
+  report tests and44-page build. Local commit42712a9 contains only task-owned
+  website/records. Initial push stalled; retry rejected by automatic approval
+  review because continue was insufficient explicit production authorization.
+  Task-owned stalled processes cancelled. Owner then explicitly says approved;
+  push42712a9 succeeded using existing gh authentication without config changes.
+  Hosted CI37741954753 and Cloudflare Build686f3d20-47d1-4dd5-b9e4-e237edd022cd
+  PASS. Public Privacy route200, footer Contact destination and absence of ad/
+  consent loaders confirmed. Full public Chrome/Edge smoke PASS:40 indexable
+  routes, new article-width/static-link spacing, planner/calculators, persistence,
+  analytics, accessibility, performance, mobile and clean print/PDF checks.
+  Task-owned processes complete; owner dev process untouched. No consent/ad activation.
+  Parent effort reassessed low for final checkpoint; model capability retained
+  for bounded publication-scope judgment. Next: actual consent settings and
+  real-origin denial/withdrawal/project-privacy gate before provider serving.
 - How it works follow-up2026-10-08: owner found the missing space before
   measurement guides. Astro removed the newline-only anchor boundary; added an
   explicit space and the exact sentence to the no-JavaScript smoke regression.

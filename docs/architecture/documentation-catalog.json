@@ -421,147 +421,147 @@
           "heading": "Resume Checkpoint"
         },
         {
-          "line": 1457,
+          "line": 1474,
           "heading": "QuiltClarity source activation — 2026-10-01"
         },
         {
-          "line": 1479,
+          "line": 1496,
           "heading": "Continuation-document reconciliation — 2026-09-30"
         },
         {
-          "line": 1521,
+          "line": 1538,
           "heading": "Feedback deferral checkpoint — 2026-09-30"
         },
         {
-          "line": 1533,
+          "line": 1550,
           "heading": "Agent Workflow Revision — 2026-09-09"
         },
         {
-          "line": 1564,
+          "line": 1581,
           "heading": "Current Status"
         },
         {
-          "line": 1614,
+          "line": 1631,
           "heading": "Post-M10 Guides/help checkpoint"
         },
         {
-          "line": 1646,
+          "line": 1663,
           "heading": "Known Issues"
         },
         {
-          "line": 1658,
+          "line": 1675,
           "heading": "Historical issue and repair log through 2026-08-31"
         },
         {
-          "line": 1697,
+          "line": 1714,
           "heading": "Next Checks"
         },
         {
-          "line": 1706,
+          "line": 1723,
           "heading": "Milestone Divergence Reviews"
         },
         {
-          "line": 1708,
+          "line": 1725,
           "heading": "Launch Preparation"
         },
         {
-          "line": 1748,
+          "line": 1765,
           "heading": "Milestone 0"
         },
         {
-          "line": 1786,
+          "line": 1803,
           "heading": "Milestone 1"
         },
         {
-          "line": 1827,
+          "line": 1844,
           "heading": "Milestone 2"
         },
         {
-          "line": 1867,
+          "line": 1884,
           "heading": "Milestone 3"
         },
         {
-          "line": 1909,
+          "line": 1926,
           "heading": "Milestone 4"
         },
         {
-          "line": 1952,
+          "line": 1969,
           "heading": "Milestone 5"
         },
         {
-          "line": 1994,
+          "line": 2011,
           "heading": "Milestone 6"
         },
         {
-          "line": 2038,
+          "line": 2055,
           "heading": "Milestone 7"
         },
         {
-          "line": 2082,
+          "line": 2099,
           "heading": "Milestone 8"
         },
         {
-          "line": 2124,
+          "line": 2141,
           "heading": "Milestone 9"
         },
         {
-          "line": 2166,
+          "line": 2183,
           "heading": "Milestone 10"
         },
         {
-          "line": 2217,
+          "line": 2234,
           "heading": "Domain Correctness Remediation"
         },
         {
-          "line": 2255,
+          "line": 2272,
           "heading": "Production UX, Content, and SEO"
         },
         {
-          "line": 2302,
+          "line": 2319,
           "heading": "V1.1 Milestone M0"
         },
         {
-          "line": 2346,
+          "line": 2363,
           "heading": "V1.1 Milestone M1"
         },
         {
-          "line": 2390,
+          "line": 2407,
           "heading": "V1.1 Milestone M2"
         },
         {
-          "line": 2439,
+          "line": 2456,
           "heading": "V1.1 Milestone M3"
         },
         {
-          "line": 2486,
+          "line": 2503,
           "heading": "V1.1 Milestone M4"
         },
         {
-          "line": 2533,
+          "line": 2550,
           "heading": "V1.1 Milestone M5"
         },
         {
-          "line": 2582,
+          "line": 2599,
           "heading": "V1.1 Milestone M6"
         },
         {
-          "line": 2631,
+          "line": 2648,
           "heading": "V1.1 Milestone M7"
         },
         {
-          "line": 2680,
+          "line": 2697,
           "heading": "V1.1 Milestone M8"
         },
         {
-          "line": 2728,
+          "line": 2745,
           "heading": "V1.1 M9 Automated Regression Checkpoint"
         },
         {
-          "line": 2791,
+          "line": 2808,
           "heading": "V1.1 Milestone M10"
         },
         {
-          "line": 2877,
+          "line": 2894,
           "heading": "Cloudflare analytics exception review � 2026-10-02"
         }
       ]
@@ -7701,11 +7701,11 @@
           "heading": "Current baseline"
         },
         {
-          "line": 22,
+          "line": 21,
           "heading": "Required planning before implementation"
         },
         {
-          "line": 30,
+          "line": 29,
           "heading": "Completion criteria"
         }
       ]
